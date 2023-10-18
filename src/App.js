@@ -5,6 +5,7 @@ function App() {
     <div className="App">
         <h2>welcome to ecole front end</h2> 
         <Home/>
+        <h1>hey</h1>
     </div>
   );
 }
