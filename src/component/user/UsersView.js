@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa';
+import {Link, link} from 'react-router-dom';
 
 const UsersView = () => {
 const [users, setUsers] = useState([]);
@@ -15,7 +17,7 @@ const [users, setUsers] = useState([]);
 
   return (
     <section>
-        <table className='table table-bordered table-hover'>
+        <table className='table table-bordered table-hover shadow'>
             <thead>
                <tr className='text-center'>
                 <th>ID</th>
@@ -42,13 +44,13 @@ const [users, setUsers] = useState([]);
                      <td>{user.role}</td>
                      <td>{user.student.name}</td>
                      <td className='mx-2'>
-                        <button className='btn btn-info'>View</button>
+                        <Link to={`/user-profile/${user.id}`} className='btn btn-info'><FaEye /></Link>
                         </td>
                      <td className='max-2'>
-                     <button className='btn btn-warning'>Update</button>
+                     <Link to={`/edit-user/${user.id}`} className='btn btn-warning'><FaEdit /></Link>
                      </td>
                      <td className='max-2'>
-                     <button className='btn btn-danger'>Delete</button>
+                     <button className='btn btn-danger'><FaTrashAlt /></button>
                      </td>
                  </tr>
                 ))}
