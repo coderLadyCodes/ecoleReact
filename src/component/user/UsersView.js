@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa';
-import {Link, link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import SearchUser from '../common/SearchUser';
 
 const UsersView = () => {
 const [users, setUsers] = useState([]);
+const[search, setSearch] = useState("");
     useEffect(() =>{
         loadUsers();
     }, []);
@@ -15,8 +17,14 @@ const [users, setUsers] = useState([]);
             setUsers(result.data);   
     };
 
+    const handleDelete = async(id) => {
+        await axios.delete(`http://localhost:8080/user/delete/${id}`);
+        loadUsers();
+    }
+
   return (
     <section>
+        <SearchUser  search={search} setSearch={setSearch}/>
         <table className='table table-bordered table-hover shadow'>
             <thead>
                <tr className='text-center'>
@@ -31,8 +39,9 @@ const [users, setUsers] = useState([]);
                </tr>
             </thead>
 
-            <tbody className='textècenter'>
-                {users.map((user, index)=>(
+            <tbody className='text-center'>
+                {users.filter((usr) => usr.name.toLowerCase().includes(search))
+                .map((user, index)=>(
                  <tr key={user.id}>
                     <th scope="row" key={index}>
                         {index + 1}
@@ -50,7 +59,7 @@ const [users, setUsers] = useState([]);
                      <Link to={`/edit-user/${user.id}`} className='btn btn-warning'><FaEdit /></Link>
                      </td>
                      <td className='max-2'>
-                     <button className='btn btn-danger'><FaTrashAlt /></button>
+                     <button className='btn btn-danger' onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>
                      </td>
                  </tr>
                 ))}

@@ -6,6 +6,8 @@ import UsersView from './component/user/UsersView';
 import NavBar from './component/common/NavBar';
 import { BrowserRouter  as Router, Routes, Route} from 'react-router-dom';
 import AddUser from './component/user/AddUser';
+import EditUser from './component/user/EditUser';
+import UserProfile from './component/user/UserProfile';
 
 function App() {
   return (
@@ -18,6 +20,10 @@ function App() {
         <Route exact path="/view-users" element={<UsersView />}></Route>
 
         <Route exact path="/add-users" element={<AddUser />}></Route>
+
+        <Route exact path="/edit-user/:id" element={<EditUser />}></Route>
+
+        <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
       </Routes>
     </Router>
     </main>

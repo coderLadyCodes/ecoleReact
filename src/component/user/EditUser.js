@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, {useEffect, useState } from 'react';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
-const AddUser = () => {
+const EditUser = () => {
+
   let navigate = useNavigate();
+  const {id} = useParams();
+
   const[user, setUser] = useState({
     name : '',
     email : '',
@@ -15,19 +18,29 @@ const AddUser = () => {
     student : '',
   });
   const{name, email, phone, password, profileImage, role, postList, student} = user;
+
+  useEffect(() =>{
+    loadUser();
+}, []);
+
+const loadUser = async () =>{
+    const result = await axios.get(`http://localhost:8080/user/${id}`);
+        setUser(result.data);   
+};
+
   const handleInputChange = (e) =>{
     setUser({...user, [e.target.name] : e.target.value})
   };
-  const saveUser = async (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/user", user);           // NOT SURE  USERS IN LINK
+    await axios.put(`http://localhost:8080/user/update/${id}`, user);           // NOT SURE  USERS IN LINK
     navigate("/view-users");
 };
 
   return (
     <div className='col-sm-8 py-2 px-5'>
-      <h2 className='mt-5'>Add User</h2>
-      <from onSubmit={(e) => saveUser(e)}>
+        <h2 className='mt-5'>Edit User</h2>
+      <form onSubmit={(e) => updateUser(e)}>
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Name</label>
           <input className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => handleInputChange(e)}/>
@@ -50,7 +63,7 @@ const AddUser = () => {
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='photo'>Photo</label>
-          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required value={profileImage} onChange={(e) => handleInputChange(e)}/>
+          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required /*value={profileImage}*/ onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
@@ -76,10 +89,10 @@ const AddUser = () => {
             <Link to={"/view-users"} type='submit' className='btn btn-outline-warning btn-lg'>Cancel</Link>
           </div>
         </div>
-      </from>
+      </form>
       
     </div>
   );
 }
 
-export default AddUser
+export default EditUser
