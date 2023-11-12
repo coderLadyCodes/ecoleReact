@@ -1,4 +1,4 @@
-import React from 'react'
+{/*import React from 'react'
 
 const SearchUser = (search, setSearch) => {
   return (
@@ -11,4 +11,4 @@ const SearchUser = (search, setSearch) => {
   )
 }
 
-export default SearchUser
+export default SearchUser*/}
