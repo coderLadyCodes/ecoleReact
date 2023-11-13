@@ -8,22 +8,25 @@ import { BrowserRouter  as Router, Routes, Route} from 'react-router-dom';
 import AddUser from './component/user/AddUser';
 import EditUser from './component/user/EditUser';
 import UserProfile from './component/user/UserProfile';
+import HideShowComponents from './component/common/HideShowComponents';
 
 function App() {
   return (
-    <main className="container">
+    <main className="container ">
     <Router>
-     {/*<NavBar />*/}
+    <HideShowComponents>
+    <NavBar />
+    </HideShowComponents>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
 
-{/*        <Route exact path="/view-users" element={<UsersView />}></Route>
+        <Route exact path="/view-users" element={<UsersView />}></Route>
 
         <Route exact path="/add-users" element={<AddUser />}></Route>
 
         <Route exact path="/edit-user/:id" element={<EditUser />}></Route>
 
-  <Route exact path="/user-profile/:id" element={<UserProfile />}></Route> */}
+        <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
       </Routes>
     </Router>
     </main>

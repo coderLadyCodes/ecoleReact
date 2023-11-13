@@ -1,4 +1,4 @@
-{/*import React, {useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
@@ -63,7 +63,7 @@ const loadUser = async () =>{
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='photo'>Photo</label>
-          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required value={profileImage} onChange={(e) => handleInputChange(e)}/>
+          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required /*value={profileImage}*/ onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
@@ -96,5 +96,3 @@ const loadUser = async () =>{
 }
 
 export default EditUser
-*/}
-/*value={profileImage}*/
