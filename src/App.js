@@ -12,7 +12,7 @@ import HideShowComponents from './component/common/HideShowComponents';
 
 function App() {
   return (
-    <main className="container ">
+    <main> {/*  className="container-fluid"*/}
     <Router>
     <HideShowComponents>
     <NavBar />

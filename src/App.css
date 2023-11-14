@@ -1,5 +1,15 @@
-.App {
+.h2home:hover{
+  color: #ffffff;
+  font-style: normal;
+  text-shadow: 0 0 5px #ffffff;
+  background-color: rgba(249, 248, 248, 0.1);
+}
+
+/*.App {
   text-align: center;
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -36,3 +46,4 @@
     transform: rotate(360deg);
   }
 }
+*/
