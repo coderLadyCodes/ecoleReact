@@ -10,8 +10,6 @@ const AddUser = () => {
     phone : '',
     password : '',
     profileImage : '',
-    role : '',
-    postList : '',
     student : '',
   });
   const{name, email, phone, password, profileImage, role, postList, student} = user;
@@ -53,7 +51,7 @@ const AddUser = () => {
           <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required value={profileImage} onChange={(e) => handleInputChange(e)}/>
         </div>
 
-        <div className='input-group mb-5'>
+       {/* <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='role'>Role</label>
           <input className='form-control col-sm-6' type='role' name='role' id='role' required value={role} onChange={(e) => handleInputChange(e)}/>
         </div>
@@ -61,7 +59,7 @@ const AddUser = () => {
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='postList'>Posts</label>
           <input className='form-control col-sm-6' type='postList' name='postList' id='postList' required value={postList} onChange={(e) => handleInputChange(e)}/>
-        </div>
+          </div>*/}
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='student'>Student</label>

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
+import cute from '../../images/cute.jpg';
 
 const UserProfile = () => {
     const {id} = useParams();
@@ -35,10 +36,10 @@ const UserProfile = () => {
                 <div className="card mb-4">
                     <div className="card-body text-center">
                         <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            src={cute}
                             alt="avatar"
                             className="rounded-circle img-fluid"
-                            style={{ width: 150 }}
+                            style={{ width: 120, height: 120 }}
                         />
                         <h5 className="my-3">
                             {`${user.name}`}

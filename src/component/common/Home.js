@@ -4,7 +4,7 @@ import homeBackground from '../../images/homeBackground.jpg';
 function Home() {
   return (
     <div style={{display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-      <h1  style={{position:'absolute', top:'2.2%',fontFamily:'Splash, cursive', fontSize:'2.2rem', fontWeight:'bolder', color:'magenta'}}>Bienvenue à l'école Stuart Mill</h1> 
+      <h1  style={{position:'absolute', top:'2.2%',fontFamily:'Splash, cursive', fontSize:'2.2rem', fontWeight:'bolder', color:'magenta'}}>Ecole Stuart Mill</h1> 
       <img className='img-fluid'
       src={homeBackground}
       style={{width: '100%', height:'100vh', backgroundSize:'cover', backgroundRepeat: 'no-repeat',backgroundPosition: 'center'}}
