@@ -74,8 +74,7 @@ const AddUser = () => {
             <Link to={"/view-users"} type='submit' className='btn btn-outline-warning btn-lg'>Cancel</Link>
           </div>
         </div>
-      </from>
-      
+      </from>   
     </div>
   );
 }
