@@ -12,7 +12,7 @@ const AddUser = () => {
     profileImage : '',
     student : '',
   });
-  const{name, email, phone, password, profileImage, role, postList, student} = user;
+  const{name, email, phone, password, profileImage,student} = user;
   const handleInputChange = (e) =>{
     setUser({...user, [e.target.name] : e.target.value})
   };
