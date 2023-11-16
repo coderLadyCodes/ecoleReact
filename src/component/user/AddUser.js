@@ -20,6 +20,33 @@ const AddUser = () => {
     e.preventDefault();
     await axios.post("http://localhost:8080/user", user);           // NOT SURE  USERS IN LINK
     navigate("/view-users");
+
+    function formValidation(){
+      // NAME
+      if(name.length == 0){
+        alert('le Nom est obligatoire')
+      }
+
+      // EMAIL
+      if(email.length == 0){
+        alert('l email est obligatoire');
+      }
+
+      // PHONE NUMBER
+      if(phone.length == 0){
+        alert('Le numéro de télephone est obligatoire');
+      }
+
+      // STUDENT
+      if(student.length == 0){
+        alert('le Nom de votre enfant est obligatoire');
+      }
+
+      // PASSWORD
+      if(password.length < 8){
+        alert('Le mot de passe doit avoir au minimum 8 characteres');
+      }
+    }
 };
 
   return (
