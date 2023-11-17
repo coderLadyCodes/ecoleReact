@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
@@ -6,6 +6,7 @@ import SearchUser from '../common/SearchUser';
 
 const UsersView = () => {
 const [users, setUsers] = useState([]);
+
 const[search, setSearch] = useState("");
     useEffect(() =>{
         loadUsers();
@@ -33,8 +34,7 @@ const[search, setSearch] = useState("");
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Profile Image</th>
-                <th>Role</th>
-                <th>Student ID</th>
+                <th>Students</th>
                 <th colSpan='3'>Actions</th>
                </tr>
             </thead>
@@ -50,8 +50,17 @@ const[search, setSearch] = useState("");
                      <td>{user.email}</td>
                      <td>{user.phone}</td>
                      <td>{user.profileImage}</td>
-                     <td>{user.role}</td>
-                     <td>{user.student.name}</td>
+                     <td>
+                        {[user.student].map((stud) => (
+                        <ul key={stud.id} style={{listStyle:'none'}}>
+                            <li>Nom : {stud.name}</li>
+                            <li> Image: {stud.profileImage}</li>
+                            <li> Birthday : {stud.birthday}</li>
+                            <li>Présence : {stud.presence.toString()}</li>
+                            <li>Cantine : {stud.cantine.toString()}</li>
+                        </ul>
+                        ))}
+                     </td>
                      <td className='mx-2'>
                         <Link to={`/user-profile/${user.id}`} className='btn btn-info'><FaEye /></Link>
                         </td>

@@ -62,7 +62,7 @@ const loadUser = async () =>{
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='photo'>Photo</label>
           <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required /*value={profileImage}*/ onChange={(e) => handleInputChange(e)}/>
-        </div>
+         </div>
 
         {/*<div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='role'>Role</label>
@@ -76,7 +76,7 @@ const loadUser = async () =>{
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='student'>Student</label>
-          <input className='form-control col-sm-6' type='student' name='student' id='student' required value={student} onChange={(e) => handleInputChange(e)}/>
+          <input className='form-control col-sm-6' type='student' name='student' id='student' required value={student.name} onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='row mb-5'>

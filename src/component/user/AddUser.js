@@ -33,8 +33,9 @@ const AddUser = () => {
       }
 
       // PHONE NUMBER
-      if(phone.length == 0){
-        alert('Le numéro de télephone est obligatoire');
+      const pattern = new RegExp(/^\d{1,10}$/);
+      if(phone.length == 0 || !phone.match(pattern)){
+        alert('Le numéro de télephone est obligatoire et correct');
       }
 
       // STUDENT
@@ -55,22 +56,22 @@ const AddUser = () => {
       <from onSubmit={(e) => saveUser(e)}>
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Name</label>
-          <input className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => handleInputChange(e)}/>
+          <input placeholder='Nom' className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='email'>Email</label>
-          <input className='form-control col-sm-6' type='email' name='email' id='email' required value={email} onChange={(e) => handleInputChange(e)}/>
+          <input placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' required value={email} onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='pnone'>Phone Number</label>
-          <input className='form-control col-sm-6' type='number' name='phone' id='phone' required value={phone} onChange={(e) => handleInputChange(e)}/>
+          <input placeholder='Numéro de Téléphone' className='form-control col-sm-6' type='number' name='phone' id='phone' required value={phone} onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='password'>Password</label>
-          <input className='form-control col-sm-6' type='password' name='password' id='password' required value={password} onChange={(e) => handleInputChange(e)}/>
+          <input placeholder='Mot de Passe' className='form-control col-sm-6' type='password' name='password' id='password' required value={password} onChange={(e) => handleInputChange(e)}/>
         </div>
 
         <div className='input-group mb-5'>
@@ -89,9 +90,29 @@ const AddUser = () => {
           </div>*/}
 
         <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='student'>Student</label>
-          <input className='form-control col-sm-6' type='student' name='student' id='student' required value={student} onChange={(e) => handleInputChange(e)}/>
+          <label  className='input-group-text' htmlFor='student'>Nom de L'Enfant</label>
+          <input  placeholder='Nom de Votre Enfant' className='form-control col-sm-6' type='student' name='student' id='student' required value={student.name} onChange={(e) => handleInputChange(e)}/>
         </div>
+
+       {/* <div className='input-group mb-5'>
+          <label  className='input-group-text' htmlFor='student'>Photo de l'Enfant</label>
+          <input  placeholder='photo' className='form-control col-sm-6' type='file' name='student' id='student' required value={student.profileImage} onChange={(e) => handleInputChange(e)}/>
+        </div>
+
+        <div className='input-group mb-5'>
+          <label  className='input-group-text' htmlFor='student'>Date de Naissance de l'Enfant</label>
+          <input  placeholder='photo' className='form-control col-sm-6' type='date' name='student' id='student' required value={student.birthday} onChange={(e) => handleInputChange(e)}/>
+        </div>
+
+        <div className='input-group mb-5'>
+          <label  className='input-group-text' htmlFor='student'>Présence de l'Enfant</label>
+          <input  placeholder='photo' className='form-control col-sm-6' type='radio' name='student' id='student' required value={student.presence} onChange={(e) => handleInputChange(e)}/>
+        </div>
+
+        <div className='input-group mb-5'>
+          <label  className='input-group-text' htmlFor='student'>Cantine</label>
+          <input  placeholder='photo' className='form-control col-sm-6' type='radio' name='student' id='student' required value={student.cantine} onChange={(e) => handleInputChange(e)}/>
+        </div>*/}
 
         <div className='row mb-5'>
           <div className='col-sm-2'>
