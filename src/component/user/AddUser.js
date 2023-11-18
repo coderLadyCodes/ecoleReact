@@ -18,7 +18,8 @@ const AddUser = () => {
   };
   const saveUser = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/user", user);           // NOT SURE  USERS IN LINK
+    //formValidation();
+    await axios.post("http://localhost:8080/user", user);
     navigate("/view-users");
 
     function formValidation(){
@@ -75,7 +76,7 @@ const AddUser = () => {
         </div>
 
         <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='photo'>Photo</label>
+          <label className='input-group-text' htmlFor='profileImage'>Photo</label>
           <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required value={profileImage} onChange={(e) => handleInputChange(e)}/>
         </div>
 

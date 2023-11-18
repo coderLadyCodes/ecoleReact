@@ -34,7 +34,8 @@ const UserProfile = () => {
                 <div className="card mb-4">
                     <div className="card-body text-center">
                         <img
-                            src={cute}
+                            src={user.profileImage}
+                            //src={cute}
                             alt="avatar"
                             className="rounded-circle img-fluid"
                             style={{ width: 120, height: 120 }}
@@ -46,7 +47,7 @@ const UserProfile = () => {
                             <button
                                 type="button"
                                 className="btn btn-outline-primary">
-                                   <a href={user.phone}></a>                 {/*CHECK IF IT CALLS FROM PHONE NUMBER*/}
+                                   <a href={user.phone}></a>                 {/*CHECK IF IT CALLS FROM PHONE NUMBER  WITH LINKTO */}
                                 Appel
                             </button>
                             <button
