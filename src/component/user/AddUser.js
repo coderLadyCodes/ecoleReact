@@ -19,7 +19,9 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     //formValidation();
-    await axios.post("http://localhost:8080/user", user);
+    await axios.post("http://localhost:8080/user", {user})
+    .then(Response => console.log("response"))
+    .catch(err => console.log("err"));
     navigate("/view-users");
 
     function formValidation(){
