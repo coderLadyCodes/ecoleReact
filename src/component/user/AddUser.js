@@ -19,12 +19,12 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     //formValidation();
-    await axios.post("http://localhost:8080/user", {user})
-    .then(Response => console.log("response"))
-    .catch(err => console.log("err"));
+    await axios.post("http://localhost:8080/user", user);
+    //.then(Response => console.log("response"))
+    //.catch(err => console.log("err"));
     navigate("/view-users");
 
-    function formValidation(){
+   /* function formValidation(){
       // NAME
       if(name.length == 0){
         alert('le Nom est obligatoire')
@@ -50,13 +50,13 @@ const AddUser = () => {
       if(password.length < 8){
         alert('Le mot de passe doit avoir au minimum 8 characteres');
       }
-    }
+    } */
 };
 
   return (
     <div className='col-sm-8 py-2 px-5'>
       <h2 className='mt-5'>Add User</h2>
-      <from onSubmit={(e) => saveUser(e)}>
+      <form onSubmit={(e) => saveUser(e)}>
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Name</label>
           <input placeholder='Nom' className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => handleInputChange(e)}/>
@@ -125,7 +125,7 @@ const AddUser = () => {
             <Link to={"/view-users"} type='submit' className='btn btn-outline-warning btn-lg'>Cancel</Link>
           </div>
         </div>
-      </from>   
+      </form>   
     </div>
   );
 }
