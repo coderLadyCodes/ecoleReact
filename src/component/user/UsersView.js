@@ -13,10 +13,13 @@ const[search, setSearch] = useState("");
     }, []);
 
     const loadUsers = async () =>{
+        try{
         const result = await axios.get("http://localhost:8080/users");
         
             setUsers(result.data);   
-    };
+    } catch (error) {
+        console.error("error : ", error);
+    }};
 
     const handleDelete = async(id) => {
         await axios.delete(`http://localhost:8080/user/delete/${id}`);
