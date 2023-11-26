@@ -83,7 +83,7 @@ const AddUser = () => {
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='profileImage'>Photo</label>
-          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required value={profileImage} onChange={(e) => handleInputChange(e)}/>
+          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' accept="image/png, image/jpeg" required value={profileImage} onChange={(e) => handleInputChange(e)}/>
         </div>
 
        {/* <div className='input-group mb-5'>
