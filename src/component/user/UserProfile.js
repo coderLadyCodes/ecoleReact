@@ -34,8 +34,8 @@ const UserProfile = () => {
                 <div className="card mb-4">
                     <div className="card-body text-center">
                         <img
-                            src={user.profileImage}
-                            //src={cute}
+                            //src={user.profileImage}
+                            src={cute}
                             alt="avatar"
                             className="rounded-circle img-fluid"
                             style={{ width: 120, height: 120 }}
