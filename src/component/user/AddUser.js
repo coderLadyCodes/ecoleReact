@@ -17,8 +17,9 @@ const[name, setName] = useState("");
 const[email, setEmail] = useState("");
 const[phone, setPhone] = useState("");
 const[password, setPassword] = useState("");
-const[profileImage, setProfileImage] = useState("");
+const[profileImage, setProfileImage] = React.useState(null);
 //const[student, setStudent] = useState("");
+
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
@@ -30,20 +31,21 @@ const handleFormSubmit = async (e) =>{
   formData.append("profileImage", profileImage);
   //formData.append("student", student);
   try {
-    const response = await axios.post("http://localhost:8080/user", formData);
+    const response = await axios.post("http://localhost:8080/user", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json"
+      }
+    });
     console.log("user created : ", response.data);
     navigate("/view-users");
   } catch (error) {
     console.error("ERROR TRYONG TO CREATE THE USER  : ", error);
   }
-
-{/*  const resp = await axios.post("http://localhost:8080/user", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      //Accept: "application/json"
-    },
-  }).catch((err) => {console.log(err)});*/}
-};
+}
+const handleImage = (e) => {
+  setProfileImage(e.target.files[0])
+}
 
 
 /* function formValidation(){
@@ -86,10 +88,6 @@ const handleFormSubmit = async (e) =>{
 
       <form onSubmit={handleFormSubmit} encType="multipart/form-data">  {/* (e) => saveUser(e)*/} 
 
-      <div className='input-group mb-5'>
-          {/*<label className='input-group-text' htmlFor='profileImage'>Photo</label>*/}
-          <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image/*" required value={profileImage} onChange={(e) => setProfileImage(e.target.files[1])}/>
-        </div>
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
           <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => setName(e.target.value)}/>
@@ -108,6 +106,10 @@ const handleFormSubmit = async (e) =>{
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='password'>Mot de Passe</label>
           <input placeholder='Mot de Passe' className='form-control col-sm-6' type='password' name='password' id='password' required value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+        <div className='input-group mb-5'>
+          <label className='input-group-text' htmlFor='profileImage'>Choisir une Photo</label>
+          <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image" /*required value={profileImage}*/ onChange={handleImage}/>
         </div>
 
        {/* <div className='input-group mb-5'>
