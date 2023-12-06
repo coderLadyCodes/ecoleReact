@@ -23,6 +23,7 @@ const[profileImage, setProfileImage] = React.useState(null);
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
+
   const formData = new FormData();
   formData.append("name", name);
   formData.append("email", email);
@@ -31,12 +32,7 @@ const handleFormSubmit = async (e) =>{
   formData.append("profileImage", profileImage);
   //formData.append("student", student);
   try {
-    const response = await axios.post("http://localhost:8080/user", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Accept: "application/json"
-      }
-    });
+    const response = await axios.post("http://localhost:8080/user", formData);
     console.log("user created : ", response.data);
     navigate("/view-users");
   } catch (error) {
