@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+{/*import { useParams, Link } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 import cute from '../../images/cute.jpg';
@@ -47,13 +47,13 @@ const UserProfile = () => {
                             <button
                                 type="button"
                                 className="btn btn-outline-primary">
-                                   <a href={user.phone}></a>                 {/*CHECK IF IT CALLS FROM PHONE NUMBER  WITH LINKTO */}
+                                   <a href={user.phone}></a>            }
                                 Appel
                             </button>
                             <button
                                 type="button"
                                 className="btn btn-outline-warning ms-1">
-                                Chat                                         {/*RELATE IT TO THE CHAT LATER ON*/}
+                                Chat                                        }
                             </button>
                         </div>
                     </div>
@@ -120,15 +120,7 @@ const UserProfile = () => {
                         <div className="col-sm-9">
                             <p className="text-muted mb-0">
                               <Link to="/addStudent"> {user.student.name} </Link>
-                            {/*[user.student].map((stud) => (
-                        <ul key={stud.id} style={{listStyle:'none'}}>
-                            <li>Nom : {stud.name}</li>
-                            <li> Image: {stud.profileImage}</li>
-                            <li> Birthday : {stud.birthday}</li>
-                            <li>Présence : {String(stud.presence)}</li>
-                            <li>Cantine : {String(stud.cantine)}</li>
-                        </ul>
-                            ))*/}
+                 
                             </p>
                         </div>
                       </div>
@@ -144,3 +136,12 @@ const UserProfile = () => {
 }
 
 export default UserProfile
+*/}           {/*[user.student].map((stud) => (
+                        <ul key={stud.id} style={{listStyle:'none'}}>
+                            <li>Nom : {stud.name}</li>
+                            <li> Image: {stud.profileImage}</li>
+                            <li> Birthday : {stud.birthday}</li>
+                            <li>Présence : {String(stud.presence)}</li>
+                            <li>Cantine : {String(stud.cantine)}</li>
+                        </ul>
+                            ))*/}

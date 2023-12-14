@@ -19,14 +19,13 @@ function App() {
     </HideShowComponents>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
-
-        <Route exact path="/view-users" element={<UsersView />}></Route>
-
         <Route exact path="/add-users" element={<AddUser />}></Route>
+{/*
+        <Route exact path="/view-users" element={<UsersView />}></Route>
 
         <Route exact path="/edit-user/:id" element={<EditUser />}></Route>
 
-        <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
+  <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>*/}
       </Routes>
     </Router>
     </main>

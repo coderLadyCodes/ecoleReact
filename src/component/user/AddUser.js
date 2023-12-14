@@ -30,18 +30,20 @@ const handleFormSubmit = async (e) =>{
   formData.append("phone", phone);
   formData.append("password", password);
   formData.append("profileImage", profileImage);
-  //formData.append("student", student);
+
   try {
-    const response = await axios.post("http://localhost:8080/user", formData);
+    const response =  await axios.post('http://localhost:8080/user' , formData, {
+    headers:  {  "Content-Type": "multipart/form-data"}, 
+  });
     console.log("user created : ", response.data);
-    navigate("/view-users");
+    navigate("/"); //view-users
   } catch (error) {
     console.error("ERROR TRYONG TO CREATE THE USER  : ", error);
   }
-}
+};
 const handleImage = (e) => {
   setProfileImage(e.target.files[0])
-}
+};
 
 
 /* function formValidation(){
@@ -105,19 +107,13 @@ const handleImage = (e) => {
         </div>
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='profileImage'>Choisir une Photo</label>
-          <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image" /*required value={profileImage}*/ onChange={handleImage}/>
+          <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image/*" /*required value={profileImage}*/ onChange={handleImage}/>
         </div>
 
        {/* <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='role'>Role</label>
           <input className='form-control col-sm-6' type='role' name='role' id='role' required value={role} onChange={(e) => handleInputChange(e)}/>
-        </div>
-
-        <div className='input-group mb-5'>
-          <label  className='input-group-text' htmlFor='student'>Nom et Prénom de L'Enfant</label>
-          <input  placeholder='Nom et Prénom de Votre Enfant' className='form-control col-sm-6' type='student' name='student' id='student' required value={student} onChange={(e) => setStudent(e.target.value)}/>
-          </div>*/}
-
+        </div>*/}
 
         <div className='row mb-5'>
           <div className='col-sm-6 p-4'>
