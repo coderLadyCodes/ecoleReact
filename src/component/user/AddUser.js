@@ -3,23 +3,12 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const AddUser = () => {
-  let navigate = useNavigate();
-/* const[user, setUser] = useState({
-    name : '',
-    email : '',
-    phone : '',
-    password : '',
-    profileImage : '',
-    student : {name : ''},
-  }); */
+let navigate = useNavigate();
 
 const[name, setName] = useState("");
 const[email, setEmail] = useState("");
 const[phone, setPhone] = useState("");
-const[password, setPassword] = useState("");
 const[profileImage, setProfileImage] = React.useState(null);
-//const[student, setStudent] = useState("");
-
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
@@ -28,11 +17,10 @@ const handleFormSubmit = async (e) =>{
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
-  formData.append("password", password);
   formData.append("profileImage", profileImage);
 
   try {
-    const response =  await axios.post('http://localhost:8080/user' , formData, {
+    const response =  await axios.post('http://localhost:8080/users' , formData, {
     headers:  {  "Content-Type": "multipart/form-data"}, 
   });
     console.log("user created : ", response.data);
@@ -101,10 +89,7 @@ const handleImage = (e) => {
           <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' required value={phone} onChange={(e) => setPhone(e.target.value)}/>
         </div>
 
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='password'>Mot de Passe</label>
-          <input placeholder='Mot de Passe' className='form-control col-sm-6' type='password' name='password' id='password' required value={password} onChange={(e) => setPassword(e.target.value)}/>
-        </div>
+        
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='profileImage'>Choisir une Photo</label>
           <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image/*" /*required value={profileImage}*/ onChange={handleImage}/>
