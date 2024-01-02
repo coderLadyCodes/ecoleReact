@@ -8,30 +8,40 @@ let navigate = useNavigate();
 const[name, setName] = useState("");
 const[email, setEmail] = useState("");
 const[phone, setPhone] = useState("");
-const[profileImage, setProfileImage] = React.useState(null);
+const[multipartFile, setMultipartFile] = useState([]);
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
-
   const formData = new FormData();
+  formData.append("userDTO", JSON.stringify({ name, email, phone })); 
+  formData.append("multipartFile", multipartFile);
+
+  {/*const formData = new FormData();
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
-  formData.append("profileImage", profileImage);
+  formData.append("multipartFile", multipartFile);*/}
 
   try {
     const response =  await axios.post('http://localhost:8080/users' , formData, {
-    headers:  {  "Content-Type": "multipart/form-data"}, 
-  });
-    console.log("user created : ", response.data);
+      headers: { ... },
+    }); 
     navigate("/"); //view-users
+
   } catch (error) {
-    console.error("ERROR TRYONG TO CREATE THE USER  : ", error);
-  }
+    if (error.response){
+      console.log('Server Error:', error.response.data);   
+  } else if (error.request) {
+    console.error('No Response from Server:', error.request);
+  } else {
+    console.error('Request Setup Error:', error.message);
+  }}
 };
 const handleImage = (e) => {
-  setProfileImage(e.target.files[0])
+  console.log(e.target.files);
+  setMultipartFile(e.target.files[0])
 };
+
 
 
 /* function formValidation(){
@@ -72,7 +82,7 @@ const handleImage = (e) => {
 
       <h2 className='mb-5'>Add User</h2>
 
-      <form onSubmit={handleFormSubmit} encType="multipart/form-data">  {/* (e) => saveUser(e)*/} 
+      <form onSubmit={handleFormSubmit} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
@@ -91,8 +101,8 @@ const handleImage = (e) => {
 
         
         <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='profileImage'>Choisir une Photo</label>
-          <input className='form-control col-sm-6'  type='file' name='profileImage' id='profileImage' accept="image/*" /*required value={profileImage}*/ onChange={handleImage}/>
+          <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
+          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" /*required value={profileImage}*/ onChange={(e)=>handleImage(e)}/>
         </div>
 
        {/* <div className='input-group mb-5'>
@@ -105,7 +115,7 @@ const handleImage = (e) => {
             <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
           </div>
           <div className='col-sm-4 p-4'>
-            <Link to={"/view-users"} type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link>
+            <Link to={"/"} /*view-users */ type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link> 
           </div>
         </div>
       </form>   
