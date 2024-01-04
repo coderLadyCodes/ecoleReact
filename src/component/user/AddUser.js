@@ -8,23 +8,30 @@ let navigate = useNavigate();
 const[name, setName] = useState("");
 const[email, setEmail] = useState("");
 const[phone, setPhone] = useState("");
-const[multipartFile, setMultipartFile] = useState([]);
+const[multipartFile, setMultipartFile] = useState(null);
+
+const handleImage = (e) => {
+  console.log(e.target.files);
+  setMultipartFile(e.target.files[0])
+};
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
-  const formData = new FormData();
+{/*  const formData = new FormData();
   formData.append("userDTO", JSON.stringify({ name, email, phone })); 
   formData.append("multipartFile", multipartFile);
+   console.log(formData);*/}
 
-  {/*const formData = new FormData();
+  const formData = new FormData();
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
-  formData.append("multipartFile", multipartFile);*/}
+  formData.append("multipartFile", multipartFile);
+  console.log(formData);
 
   try {
     const response =  await axios.post('http://localhost:8080/users' , formData, {
-      headers: { ... },
+      headers: {"Content-Type": "multipart/form-data"}
     }); 
     navigate("/"); //view-users
 
@@ -37,11 +44,6 @@ const handleFormSubmit = async (e) =>{
     console.error('Request Setup Error:', error.message);
   }}
 };
-const handleImage = (e) => {
-  console.log(e.target.files);
-  setMultipartFile(e.target.files[0])
-};
-
 
 
 /* function formValidation(){
@@ -82,7 +84,7 @@ const handleImage = (e) => {
 
       <h2 className='mb-5'>Add User</h2>
 
-      <form onSubmit={handleFormSubmit} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
+      <form onSubmit={(e) => handleFormSubmit(e)} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
