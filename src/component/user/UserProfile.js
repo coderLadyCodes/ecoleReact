@@ -1,4 +1,4 @@
-{/*import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 import cute from '../../images/cute.jpg';
@@ -136,7 +136,7 @@ const UserProfile = () => {
 }
 
 export default UserProfile
-*/}           {/*[user.student].map((stud) => (
+           {/*[user.student].map((stud) => (
                         <ul key={stud.id} style={{listStyle:'none'}}>
                             <li>Nom : {stud.name}</li>
                             <li> Image: {stud.profileImage}</li>

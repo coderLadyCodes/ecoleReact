@@ -5,10 +5,17 @@ import axios from 'axios';
 const AddUser = () => {
 let navigate = useNavigate();
 
-const[name, setName] = useState("");
-const[email, setEmail] = useState("");
-const[phone, setPhone] = useState("");
-const[multipartFile, setMultipartFile] = useState(null);
+const[name, setName] = useState('');
+const[email, setEmail] = useState('');
+const[phone, setPhone] = useState('');
+const[multipartFile, setMultipartFile] = useState();
+
+const [error, setErrors] = useState({
+  name:'',
+  email:'',
+  phone:'',
+  multipartFile:''
+})
 
 const handleImage = (e) => {
   console.log(e.target.files);
@@ -17,7 +24,7 @@ const handleImage = (e) => {
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
-{/*  const formData = new FormData();
+  {/*const formData = new FormData();
   formData.append("userDTO", JSON.stringify({ name, email, phone })); 
   formData.append("multipartFile", multipartFile);
    console.log(formData);*/}
@@ -27,13 +34,14 @@ const handleFormSubmit = async (e) =>{
   formData.append("email", email);
   formData.append("phone", phone);
   formData.append("multipartFile", multipartFile);
-  console.log(formData);
+  console.log(formData.data);
 
   try {
     const response =  await axios.post('http://localhost:8080/users' , formData, {
       headers: {"Content-Type": "multipart/form-data"}
     }); 
     navigate("/"); //view-users
+    console.log(response.data);
 
   } catch (error) {
     if (error.response){
@@ -44,35 +52,6 @@ const handleFormSubmit = async (e) =>{
     console.error('Request Setup Error:', error.message);
   }}
 };
-
-
-/* function formValidation(){
-      // NAME
-      if(name.length == 0){
-        alert('le Nom est obligatoire')
-      }
-
-      // EMAIL
-      if(email.length == 0){
-        alert('l email est obligatoire');
-      }
-
-      // PHONE NUMBER
-      const pattern = new RegExp(/^\d{1,10}$/);
-      if(phone.length == 0 || !phone.match(pattern)){
-        alert('Le numéro de télephone est obligatoire et correct');
-      }
-
-      // STUDENT
-      if(student.length == 0){
-        alert('le Nom de votre enfant est obligatoire');
-      }
-
-      // PASSWORD
-      if(password.length < 8){
-        alert('Le mot de passe doit avoir au minimum 8 characteres');
-      }
-    } */
 
   return (
     <div className="container">
