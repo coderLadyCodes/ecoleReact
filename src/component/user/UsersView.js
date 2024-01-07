@@ -5,23 +5,8 @@ import {Link} from 'react-router-dom';
 import SearchUser from '../common/SearchUser';
 
 const UsersView = () => {
-    const dummyData = [
-        {
-            "id":1,
-            "name": "myname",
-            "email": "myemail",
-            "phone": "phone",
-            "multipartFile": "multipartfile"
-        },
-         {
-            "id":2,
-            "name": "myname2",
-            "email": "myemail2",
-            "phone": "phone2",
-            "multipartFile": "multipartfile2"
-        }
-    ]
-const [users, setUsers] = useState([]);
+ 
+const [userDTO, setUserDTO] = useState([]);
 
 const[search, setSearch] = useState("");
     useEffect(() =>{
@@ -32,13 +17,13 @@ const[search, setSearch] = useState("");
         try{
         const result = await axios.get("http://localhost:8080/users");
         
-            setUsers(result.data);   
+        setUserDTO(result.data);   
     } catch (error) {
         console.error("error : ", error);
     }};
 
     const handleDelete = async(id) => {
-        await axios.delete(`http://localhost:8080/user/delete/${id}`);
+        await axios.delete(`http://localhost:8080/users/${id}`);
         loadUsers();
     }
 
@@ -58,7 +43,7 @@ const[search, setSearch] = useState("");
             </thead>
 
             <tbody className='text-center'>
-                {dummyData.filter((usr) => usr.name.toLowerCase().includes(search))
+                {userDTO.filter((usr) => usr.name.toLowerCase().includes(search))
                 .map((user, index)=>(
                  <tr key={user.id}>
                     <th scope="row" key={index}>

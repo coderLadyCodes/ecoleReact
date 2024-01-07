@@ -8,9 +8,10 @@ let navigate = useNavigate();
 const[name, setName] = useState('');
 const[email, setEmail] = useState('');
 const[phone, setPhone] = useState('');
-const[multipartFile, setMultipartFile] = useState();
+const[multipartFile, setMultipartFile] = useState(null);
+const userDTO = {name, email, phone, multipartFile}; 
 
-const [error, setErrors] = useState({
+const [errors, setErrors] = useState({
   name:'',
   email:'',
   phone:'',
@@ -18,18 +19,31 @@ const [error, setErrors] = useState({
 })
 
 const handleImage = (e) => {
-  console.log(e.target.files);
-  setMultipartFile(e.target.files[0])
+const selectedFile = e.target.files[0];
+setMultipartFile(selectedFile);
+console.log(selectedFile);
 };
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
-  {/*const formData = new FormData();
-  formData.append("userDTO", JSON.stringify({ name, email, phone })); 
-  formData.append("multipartFile", multipartFile);
-   console.log(formData);*/}
-
   const formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  //formData.append("userDTO", JSON.stringify({ name, email, phone })); 
+  if(multipartFile){
+    formData.append("multipartFile", multipartFile);
+  }
+   console.log(formData.data);
+    const response = await fetch('http://localhost:8080/users', {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+   });
+
+ /*const formData = new FormData();
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
@@ -37,10 +51,10 @@ const handleFormSubmit = async (e) =>{
   console.log(formData.data);
 
   try {
-    const response =  await axios.post('http://localhost:8080/users' , formData, {
-      headers: {"Content-Type": "multipart/form-data"}
+    const response =  await axios.post('http://localhost:8080/users' , formData,  {
+      headers: {"Content-Type": "multipart/form-data",}
     }); 
-    navigate("/"); //view-users
+    navigate("/view-users"); 
     console.log(response.data);
 
   } catch (error) {
@@ -50,8 +64,35 @@ const handleFormSubmit = async (e) =>{
     console.error('No Response from Server:', error.request);
   } else {
     console.error('Request Setup Error:', error.message);
-  }}
+  }}*/
 };
+
+/*function validateForm(){
+  let valid = true;
+  const errorsCopy = {...errors};
+
+  if(name.trim()){
+    errorsCopy.name = '';
+  }else {
+    errorsCopy.name = 'Le Nom est Obligatoire';
+    valid = false;
+  }
+
+  if(email.trim()){
+    errorsCopy.email = '';
+  }else {
+    errorsCopy.email = 'Email est Obligatoire';
+    valid = false;
+  }
+
+  if(phone.trim()){
+    errorsCopy.phone = '';
+  }else {
+    errorsCopy.phone = 'Le Numéro de Tél est Obligatoire';
+    valid = false;
+  }
+  return valid;
+}*/
 
   return (
     <div className="container">
@@ -83,10 +124,10 @@ const handleFormSubmit = async (e) =>{
         
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" /*required value={profileImage}*/ onChange={(e)=>handleImage(e)}/>
+          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" required  onChange={(e)=>handleImage(e)}/>
         </div>
 
-       {/* <div className='input-group mb-5'>
+      {/*  <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='role'>Role</label>
           <input className='form-control col-sm-6' type='role' name='role' id='role' required value={role} onChange={(e) => handleInputChange(e)}/>
         </div>*/}
@@ -96,7 +137,7 @@ const handleFormSubmit = async (e) =>{
             <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
           </div>
           <div className='col-sm-4 p-4'>
-            <Link to={"/"} /*view-users */ type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link> 
+            <Link to={"/view-users"}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link> 
           </div>
         </div>
       </form>   
@@ -109,4 +150,4 @@ const handleFormSubmit = async (e) =>{
   );
 }
 
-export default AddUser
+export default AddUser;
