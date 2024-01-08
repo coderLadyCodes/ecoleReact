@@ -9,7 +9,7 @@ const[name, setName] = useState('');
 const[email, setEmail] = useState('');
 const[phone, setPhone] = useState('');
 const[multipartFile, setMultipartFile] = useState(null);
-const userDTO = {name, email, phone, multipartFile}; 
+//const userDTO = {name, email, phone, multipartFile}; 
 
 const [errors, setErrors] = useState({
   name:'',
@@ -30,28 +30,25 @@ const handleFormSubmit = async (e) =>{
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
-  //formData.append("userDTO", JSON.stringify({ name, email, phone })); 
+  //formData.append("userDTO", JSON.stringify({ name, email, phone, multipartFile })); 
   if(multipartFile){
     formData.append("multipartFile", multipartFile);
   }
-   console.log(formData.data);
-    const response = await fetch('http://localhost:8080/users', {
+  let userdto = JSON.stringify(formData);
+  console.log(userdto);
+   //console.log(formData.data);
+    /* const response = await fetch('http://localhost:8080/users', {
     method: 'POST',
-    body: JSON.stringify(formData),
+    body:  formData,
     headers: {
     'Content-Type': 'multipart/form-data',
   },
    });
-
- /*const formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("multipartFile", multipartFile);
-  console.log(formData.data);
+   console.log(response);
+*/
 
   try {
-    const response =  await axios.post('http://localhost:8080/users' , formData,  {
+    const response =  await axios.post('http://localhost:8080/users' , userdto,  {
       headers: {"Content-Type": "multipart/form-data",}
     }); 
     navigate("/view-users"); 
@@ -64,7 +61,7 @@ const handleFormSubmit = async (e) =>{
     console.error('No Response from Server:', error.request);
   } else {
     console.error('Request Setup Error:', error.message);
-  }}*/
+  }}
 };
 
 /*function validateForm(){
