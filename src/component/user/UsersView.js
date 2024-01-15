@@ -23,7 +23,7 @@ const[search, setSearch] = useState("");
     }};
 
     const handleDelete = async(id) => {
-        await axios.delete(`http://localhost:8080/users/${id}`);
+        await axios.delete(`/users/${id}`);
         loadUsers();
     }
 

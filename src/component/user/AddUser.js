@@ -9,7 +9,6 @@ const[name, setName] = useState('');
 const[email, setEmail] = useState('');
 const[phone, setPhone] = useState('');
 const[multipartFile, setMultipartFile] = useState(null);
-//const userDTO = {name, email, phone, multipartFile}; 
 
 const [errors, setErrors] = useState({
   name:'',
@@ -19,9 +18,8 @@ const [errors, setErrors] = useState({
 })
 
 const handleImage = (e) => {
-const selectedFile = e.target.files[0];
-setMultipartFile(selectedFile);
-console.log(selectedFile);
+console.log(e.target.files[0]);
+setMultipartFile(e.target.files[0]);
 };
 
 const handleFormSubmit = async (e) =>{
@@ -30,25 +28,29 @@ const handleFormSubmit = async (e) =>{
   formData.append("name", name);
   formData.append("email", email);
   formData.append("phone", phone);
-  //formData.append("userDTO", JSON.stringify({ name, email, phone, multipartFile })); 
   if(multipartFile){
     formData.append("multipartFile", multipartFile);
   }
-  let userdto = JSON.stringify(formData);
-  console.log(userdto);
-   //console.log(formData.data);
-    /* const response = await fetch('http://localhost:8080/users', {
-    method: 'POST',
-    body:  formData,
-    headers: {
-    'Content-Type': 'multipart/form-data',
-  },
-   });
-   console.log(response);
-*/
+  /*try{
+    const response = await fetch("http://localhost:8080/users", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {'Content-Type': 'multipart/form-data'},
+    });
+    if (response.ok){
+      console.log("file ok");
+    }else {
+      console.log("error");
+    }
+  } catch(error){
+    console.log(error);
+  }*/
+
+   let userdto = JSON.stringify(formData);
+    console.log("userDTO : " + userdto);
 
   try {
-    const response =  await axios.post('http://localhost:8080/users' , userdto,  {
+    const response =  await axios.post("http://localhost:8080/users" , userdto,  {
       headers: {"Content-Type": "multipart/form-data",}
     }); 
     navigate("/view-users"); 
@@ -101,7 +103,7 @@ const handleFormSubmit = async (e) =>{
 
       <h2 className='mb-5'>Add User</h2>
 
-      <form onSubmit={(e) => handleFormSubmit(e)} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
+      <form onSubmit={handleFormSubmit} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
@@ -121,7 +123,7 @@ const handleFormSubmit = async (e) =>{
         
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" required  onChange={(e)=>handleImage(e)}/>
+          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" required  onChange={handleImage}/>
         </div>
 
       {/*  <div className='input-group mb-5'>
