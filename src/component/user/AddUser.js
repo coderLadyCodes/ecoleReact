@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const AddUser = () => {
+
 let navigate = useNavigate();
 
 const[name, setName] = useState('');
@@ -17,6 +18,7 @@ const [errors, setErrors] = useState({
   multipartFile:''
 })
 
+
 const handleImage = (e) => {
 console.log(e.target.files[0]);
 setMultipartFile(e.target.files[0]);
@@ -24,6 +26,7 @@ setMultipartFile(e.target.files[0]);
 
 const handleFormSubmit = async (e) =>{
   e.preventDefault();
+ 
   const formData = new FormData();
   formData.append("name", name);
   formData.append("email", email);
@@ -31,30 +34,16 @@ const handleFormSubmit = async (e) =>{
   if(multipartFile){
     formData.append("multipartFile", multipartFile);
   }
-  /*try{
-    const response = await fetch("http://localhost:8080/users", {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {'Content-Type': 'multipart/form-data'},
-    });
-    if (response.ok){
-      console.log("file ok");
-    }else {
-      console.log("error");
-    }
-  } catch(error){
-    console.log(error);
-  }*/
-
-   let userdto = JSON.stringify(formData);
-    console.log("userDTO : " + userdto);
+  //let userdto = new Blob([JSON.stringify(formData)], {type: "application/json"});
+  console.log(formData.data);
+  //let userDTO = JSON.stringify(formData);
 
   try {
-    const response =  await axios.post("http://localhost:8080/users" , userdto,  {
-      headers: {"Content-Type": "multipart/form-data",}
-    }); 
+    const response =  await axios.post("http://localhost:8080/users" , formData/*, {
+      headers: {"Content-Type": "multipart/form-data"} 
+    }*/); 
     navigate("/view-users"); 
-    console.log(response.data);
+    console.log(response);
 
   } catch (error) {
     if (error.response){
@@ -107,23 +96,23 @@ const handleFormSubmit = async (e) =>{
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-          <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => setName(e.target.value)}/>
+          <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name'  value={name} onChange={(e) => setName(e.target.value)}/>
         </div>
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='email'>Email</label>
-          <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' required value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email'  value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
 
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
-          <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' required value={phone} onChange={(e) => setPhone(e.target.value)}/>
+          <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone'  value={phone} onChange={(e) => setPhone(e.target.value)}/>
         </div>
 
         
         <div className='input-group mb-5'>
           <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" required  onChange={handleImage}/>
+          <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*"   onChange={handleImage}/>
         </div>
 
       {/*  <div className='input-group mb-5'>
