@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
 const AddUser = () => {
 
   let navigate = useNavigate();
-  
+
+  const [userDTO, setUserDTO] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+
   const [errors, setErrors] = useState({
     name:'',
     email:'',
     phone:'',
     multipartFile:''
   })
-  const [userDTO, setUserDTO] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
 
   const [file, setFile] = useState(null);
 
@@ -31,8 +33,8 @@ const AddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
+    if(validateForm){
+         try {
       const formData = new FormData();
       formData.append('userDTO', JSON.stringify(userDTO));
       formData.append('multipartFile', file);
@@ -48,8 +50,10 @@ const AddUser = () => {
     } catch (error) {
       console.error('Error:', error);
     }
+    }
+  }
   
-  /*function validateForm(){
+  function validateForm(){
     let valid = true;
     const errorsCopy = {...errors};
   
@@ -73,9 +77,16 @@ const AddUser = () => {
       errorsCopy.phone = 'Le Numéro de Tél est Obligatoire';
       valid = false;
     }
+
+    if(multipartFile){
+      errorsCopy.multipartFile ='';
+    }else {
+      errorsCopy.multipartFile = 'La Photo est Obligatoire';
+    }
+    setErrors(errorsCopy);
     return valid;
-  }*/
-};
+  }
+
     return (
       <div className="container">
         <div className="row">
@@ -90,7 +101,8 @@ const AddUser = () => {
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
+            <input autoComplete="name" placeholder='Nom et Prénom' className={`form-control  ${errors.name ? 'is-valid': ''}`} type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
+            {errors.name && <div className='invalid-feedback'>{errors.name}</div>}
           </div>
   
           <div className='input-group mb-5'>
@@ -108,6 +120,7 @@ const AddUser = () => {
             <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
             <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*"   onChange={handleFileChange}/>
           </div>
+          <p className="info-message">taille max du fichier : 1MB</p>
   
         {/*  <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='role'>Role</label>
