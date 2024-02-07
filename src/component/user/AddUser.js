@@ -12,12 +12,13 @@ const AddUser = () => {
     phone: '',
   });
 
-  const [errors, setErrors] = useState({
+  const [error, setError] = useState(false);
+ /* const [errors, setErrors] = useState({
     name:'',
     email:'',
     phone:'',
     multipartFile:''
-  })
+  })*/
 
   const [file, setFile] = useState(null);
 
@@ -30,10 +31,13 @@ const AddUser = () => {
     setFile(e.target.files[0]);
     console.log(e.target.files[0]);
   };
+  const formValidation = () =>{
+    
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(validateForm){
+   // if(validateForm){
          try {
       const formData = new FormData();
       formData.append('userDTO', JSON.stringify(userDTO));
@@ -50,10 +54,10 @@ const AddUser = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-    }
+  //  }
   }
   
-  function validateForm(){
+  /*function validateForm(){
     let valid = true;
     const errorsCopy = {...errors};
   
@@ -85,7 +89,7 @@ const AddUser = () => {
     }
     setErrors(errorsCopy);
     return valid;
-  }
+  }*/
 
     return (
       <div className="container">
@@ -95,14 +99,15 @@ const AddUser = () => {
         <div className="card">
         <div className="card-body text-center">
   
-        <h2 className='mb-5'>Add User</h2>
+        <h2 className='mb-5'>Ajouter un utilisateur</h2>
   
         <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
             <input autoComplete="name" placeholder='Nom et Prénom' className={`form-control  ${errors.name ? 'is-valid': ''}`} type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
-            {errors.name && <div className='invalid-feedback'>{errors.name}</div>}
+            {/*errors.name && <div className='invalid-feedback'>{errors.name}</div>*/}
+            <p className='error-message'>{error}</p>
           </div>
   
           <div className='input-group mb-5'>
@@ -120,7 +125,7 @@ const AddUser = () => {
             <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
             <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*"   onChange={handleFileChange}/>
           </div>
-          <p className="info-message">taille max du fichier : 1MB</p>
+          <p className="info-message">taille max du fichier : 320px</p>
   
         {/*  <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='role'>Role</label>
