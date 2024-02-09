@@ -31,13 +31,35 @@ const AddUser = () => {
     setFile(e.target.files[0]);
     console.log(e.target.files[0]);
   };
+
   const formValidation = () =>{
-    
-  }
+    const MAX_FILE_SIZE = 1024; //1MB
+    const FILE_SIZE = setFile.size / MAX_FILE_SIZE;
+    if(FILE_SIZE > 1){
+      setError("Le fichier est trop volumineux");
+      alert("fichier volumineux")
+      return
+    }
+
+    if(userDTO.name.trim()){
+      setError("Ce champs est obligatoire");
+      return
+    }
+
+    if(userDTO.email.trim()){
+      setError("Ce champs est obligatoire");
+      return
+    }
+
+    if(userDTO.phone.trim()){
+      setError("Ce champs est obligatoire");
+      return
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   // if(validateForm){
+    if(formValidation){
          try {
       const formData = new FormData();
       formData.append('userDTO', JSON.stringify(userDTO));
@@ -54,7 +76,8 @@ const AddUser = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  //  }
+    }
+
   }
   
   /*function validateForm(){
@@ -105,7 +128,7 @@ const AddUser = () => {
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className={`form-control  ${errors.name ? 'is-valid': ''}`} type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
+            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
             {/*errors.name && <div className='invalid-feedback'>{errors.name}</div>*/}
             <p className='error-message'>{error}</p>
           </div>
@@ -113,17 +136,20 @@ const AddUser = () => {
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='email'>Email</label>
             <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email'  onChange={handleInputChange} value={userDTO.email}/>
+            <p className='error-message'>{error}</p>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
             <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone'  onChange={handleInputChange} value={userDTO.phone}/>
+            <p className='error-message'>{error}</p>
           </div>
   
           
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
             <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*"   onChange={handleFileChange}/>
+            <p className='error-message'>{error}</p>
           </div>
           <p className="info-message">taille max du fichier : 320px</p>
   
