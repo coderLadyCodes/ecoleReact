@@ -23,9 +23,9 @@ function App() {
 
         <Route exact path="/view-users" element={<UsersView />}></Route>
 
-      {/*  <Route exact path="/edit-user/:id" element={<EditUser />}></Route> */}
+        <Route exact path="/edit-user/:id" element={<EditUser />}></Route> 
 
-  <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
+        <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
       </Routes>
     </Router>
     </main>

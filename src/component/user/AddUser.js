@@ -12,14 +12,6 @@ const AddUser = () => {
     phone: '',
   });
 
-  const [error, setError] = useState(false);
- /* const [errors, setErrors] = useState({
-    name:'',
-    email:'',
-    phone:'',
-    multipartFile:''
-  })*/
-
   const [file, setFile] = useState(null);
 
   const handleInputChange = (e) => {
@@ -32,34 +24,20 @@ const AddUser = () => {
     console.log(e.target.files[0]);
   };
 
-  const formValidation = () =>{
-    const MAX_FILE_SIZE = 1024; //1MB
-    const FILE_SIZE = setFile.size / MAX_FILE_SIZE;
-    if(FILE_SIZE > 1){
-      setError("Le fichier est trop volumineux");
-      alert("fichier volumineux")
-      return
-    }
-
-    if(userDTO.name.trim()){
-      setError("Ce champs est obligatoire");
-      return
-    }
-
-    if(userDTO.email.trim()){
-      setError("Ce champs est obligatoire");
-      return
-    }
-
-    if(userDTO.phone.trim()){
-      setError("Ce champs est obligatoire");
-      return
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(formValidation){
+    if(!userDTO.name || !userDTO.email || !userDTO.phone) {
+      alert("Completez tout les champs");
+      return;
+    }
+    if (!userDTO.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      alert('Adresse mail invalide');
+      return;
+    }
+    if (!userDTO.phone.match(/^\d{10}$/)) {
+      alert('Please enter a valid phone number');
+      return;
+    }
          try {
       const formData = new FormData();
       formData.append('userDTO', JSON.stringify(userDTO));
@@ -76,43 +54,7 @@ const AddUser = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-    }
-
   }
-  
-  /*function validateForm(){
-    let valid = true;
-    const errorsCopy = {...errors};
-  
-    if(name.trim()){
-      errorsCopy.name = '';
-    }else {
-      errorsCopy.name = 'Le Nom est Obligatoire';
-      valid = false;
-    }
-  
-    if(email.trim()){
-      errorsCopy.email = '';
-    }else {
-      errorsCopy.email = 'Email est Obligatoire';
-      valid = false;
-    }
-  
-    if(phone.trim()){
-      errorsCopy.phone = '';
-    }else {
-      errorsCopy.phone = 'Le Numéro de Tél est Obligatoire';
-      valid = false;
-    }
-
-    if(multipartFile){
-      errorsCopy.multipartFile ='';
-    }else {
-      errorsCopy.multipartFile = 'La Photo est Obligatoire';
-    }
-    setErrors(errorsCopy);
-    return valid;
-  }*/
 
     return (
       <div className="container">
@@ -124,39 +66,29 @@ const AddUser = () => {
   
         <h2 className='mb-5'>Ajouter un utilisateur</h2>
   
-        <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>  {/* (e) => saveUser(e)*/} 
+        <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name'  onChange={handleInputChange} value={userDTO.name} />
-            {/*errors.name && <div className='invalid-feedback'>{errors.name}</div>*/}
-            <p className='error-message'>{error}</p>
+            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='email'>Email</label>
-            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email'  onChange={handleInputChange} value={userDTO.email}/>
-            <p className='error-message'>{error}</p>
+            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
-            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone'  onChange={handleInputChange} value={userDTO.phone}/>
-            <p className='error-message'>{error}</p>
+            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
           </div>
   
           
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*"   onChange={handleFileChange}/>
-            <p className='error-message'>{error}</p>
+            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" onChange={handleFileChange}/>
           </div>
           <p className="info-message">taille max du fichier : 320px</p>
-  
-        {/*  <div className='input-group mb-5'>
-            <label className='input-group-text' htmlFor='role'>Role</label>
-            <input className='form-control col-sm-6' type='role' name='role' id='role' required value={role} onChange={(e) => handleInputChange(e)}/>
-          </div>*/}
   
           <div className='row mb-5'>
             <div className='col-sm-6 p-4'>

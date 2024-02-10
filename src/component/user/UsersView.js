@@ -23,9 +23,13 @@ const[search, setSearch] = useState("");
     }};
 
     const handleDelete = async(id) => {
-        await axios.delete(`/users/${id}`);
+      let userChoice = window.confirm("Voulez vous supprimer ce contacte?");
+      if(userChoice){
+        await axios.delete(`http://localhost:8080/users/${id}`);
         loadUsers();
+      }
     }
+
 
   return (
     <section>

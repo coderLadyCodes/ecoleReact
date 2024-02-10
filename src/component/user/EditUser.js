@@ -1,81 +1,122 @@
-{/*import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
-const EditUser = () => {
+const AddUser = () => {
 
   let navigate = useNavigate();
   const {id} = useParams();
 
-  const[user, setUser] = useState({
-    name : '',
-    email : '',
-    phone : '',
-    password : '',
-    profileImage : '',
-    student : '',
+  const [userDTO, setUserDTO] = useState({
+    name: '',
+    email: '',
+    phone: '',
   });
-  const{name, email, phone, password, profileImage, role, postList, student} = user;
 
   useEffect(() =>{
     loadUser();
 }, []);
 
 const loadUser = async () =>{
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
-        setUser(result.data);   
+  const result = await axios.get(`http://localhost:8080/users/${id}`);
+      setUserDTO(result.data);   
 };
 
-  const handleInputChange = (e) =>{
-    setUser({...user, [e.target.name] : e.target.value})
+  const [file, setFile] = useState(null);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDTO((prevUserDTO) => ({ ...prevUserDTO, [name]: value }));
   };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
+
   const updateUser = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/user/update/${id}`, user);           // NOT SURE  USERS IN LINK
-    navigate("/view-users");
-};
 
-  return (
-    <div className='col-sm-8 py-2 px-5'>
-        <h2 className='mt-5'>Edit User</h2>
-      <form onSubmit={(e) => updateUser(e)}>
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='name'>Name</label>
-          <input className='form-control col-sm-6' type='text' name='name' id='name' required value={name} onChange={(e) => handleInputChange(e)}/>
-        </div>
+    if(!userDTO.name || !userDTO.email || !userDTO.phone) {
+      alert("Completez tout les champs");
+      return;
+    }
+    if (!userDTO.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      alert('Adresse mail invalide');
+      return;
+    }
+    if (!userDTO.phone.match(/^\d{10}$/)) {
+      alert('Please enter a valid phone number');
+      return;
 
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='email'>Email</label>
-          <input className='form-control col-sm-6' type='email' name='email' id='email' required value={email} onChange={(e) => handleInputChange(e)}/>
-        </div>
+    }try {
+      const formData = new FormData();
+      formData.append('userDTO', JSON.stringify(userDTO));
+      formData.append('multipartFile', file);
+      console.log(formData);
+      const response = await axios.put(`http://localhost:8080/users/${id}`,userDTO, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      navigate("/view-users");
 
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='pnone'>Phone Number</label>
-          <input className='form-control col-sm-6' type='number' name='phone' id='phone' required value={phone} onChange={(e) => handleInputChange(e)}/>
-        </div>
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='password'>Password</label>
-          <input className='form-control col-sm-6' type='password' name='password' id='password' required value={password} onChange={(e) => handleInputChange(e)}/>
-        </div>
-
-        <div className='input-group mb-5'>
-          <label className='input-group-text' htmlFor='photo'>Photo</label>
-          <input className='form-control col-sm-6' type='file' name='profileImage' id='profileImage' required  onChange={(e) => handleInputChange(e)}/>
-         </div>
-
-        <div className='row mb-5'>
-          <div className='col-sm-2'>
-            <button type='submit' className='btn btn-outline-success btn-lg'>Save</button>
+    return (
+      <div className="container">
+        <div className="row">
+      <div className="d-flex justify-content-center">
+      <div className="lg-4">
+        <div className="card">
+        <div className="card-body text-center">
+  
+        <h2 className='mb-5'>Ajouter un utilisateur</h2>
+  
+        <form onSubmit={updateUser} encType="multipart/form-data" method='post'>
+  
+          <div className='input-group mb-5'>
+            <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
+            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>
           </div>
-          <div className='col-sm-2'>
-            <Link to={"/view-users"} type='submit' className='btn btn-outline-warning btn-lg'>Cancel</Link>
+  
+          <div className='input-group mb-5'>
+            <label className='input-group-text' htmlFor='email'>Email</label>
+            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
           </div>
-        </div>
-      </form>
-      
-    </div>
-  );
-}
-
-export default EditUser*/}
+  
+          <div className='input-group mb-5'>
+            <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
+            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
+          </div>
+  
+          
+          <div className='input-group mb-5'>
+            <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
+            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" onChange={handleFileChange}/>
+          </div>
+          <p className="info-message">taille max du fichier : 320px</p>
+  
+          <div className='row mb-5'>
+            <div className='col-sm-6 p-4'>
+              <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
+            </div>
+            <div className='col-sm-4 p-4'>
+              <Link to={"/view-users"}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link> 
+            </div>
+          </div>
+        </form>   
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    );
+  };
+  
+  export default AddUser;
