@@ -4,23 +4,28 @@ import axios from 'axios';
 import cute from '../../images/cute.jpg';
 
 const UserProfile = () => {
+
     const {id} = useParams();
-    const[user, setUser] = useState({
+
+    const[userDTO, setUserDTO] = useState({
         name : '',
         email : '',
         phone : '',
-        password : '',
-        profileImage : '',
-        student : '',
+        multipartFile: '',
       });
 
       useEffect(() =>{
         loadUser();
     }, []);
 
+
       const loadUser = async () =>{
-        const result = await axios.get(`http://localhost:8080/user/${id}`);
-            setUser(result.data);   
+        try {
+        const result = await axios.get(`http://localhost:8080/users/${id}`);
+        setUserDTO(result.data);  
+    } catch (error) {
+        console.error('Error:', error);
+      }
     };
 
   return(
@@ -34,26 +39,26 @@ const UserProfile = () => {
                 <div className="card mb-4">
                     <div className="card-body text-center">
                         <img
-                            //src={user.profileImage}
-                            src={cute}
-                            alt="avatar"
+                            src={userDTO.multipartFile}
+                            //src={cute}
+                            alt="photo"
                             className="rounded-circle img-fluid"
                             style={{ width: 120, height: 120 }}
                         />
                         <h5 className="my-3">
-                            {`${user.name}`}
+                            {`${userDTO.name}`}
                         </h5>
                         <div className="d-flex justify-content-center mb-2">
                             <button
                                 type="button"
                                 className="btn btn-outline-primary">
-                                   <a href={user.phone}></a>            }
+                                   <a href={userDTO.phone}></a>            
                                 Appel
                             </button>
                             <button
                                 type="button"
                                 className="btn btn-outline-warning ms-1">
-                                Chat                                        }
+                                Chat                                        
                             </button>
                         </div>
                     </div>
@@ -68,13 +73,13 @@ const UserProfile = () => {
                         <div className="row">
                             <div className="col-sm-3">
                                 <h5 className="mb-0">
-                                    Name
+                                    Nom et Prénom
                                 </h5>
                             </div>
 
                             <div className="col-sm-9">
                                 <p className="text-muted mb-0">
-                                    {user.name}
+                                    {userDTO.name}
                                 </p>
                             </div>
                         </div>
@@ -90,7 +95,7 @@ const UserProfile = () => {
 
                             <div className="col-sm-9">
                                 <p className="text-muted mb-0">
-                                    {user.email}
+                                    {userDTO.email}
                                 </p>
                             </div>
                         </div>
@@ -99,13 +104,13 @@ const UserProfile = () => {
                         <div className="row">
                             <div className="col-sm-3">
                                 <h5 className="mb-0">
-                                    Phone Number
+                                    Numéro de télephone
                                 </h5>
                             </div>
 
                         <div className="col-sm-9">
                             <p className="text-muted mb-0">
-                                {user.phone}
+                                {userDTO.phone}
                             </p>
                         </div>
                       </div>
@@ -113,13 +118,13 @@ const UserProfile = () => {
                       <div className="row">
                             <div className="col-sm-3">
                                 <h5 className="mb-0">
-                                    Kid'
+                                    Enfant : 
                                 </h5>
                             </div>
 
                         <div className="col-sm-9">
                             <p className="text-muted mb-0">
-                              <Link to="/addStudent"> {user.student.name} </Link>
+                              <Link to="/addStudent"> {userDTO.student} </Link>
                  
                             </p>
                         </div>

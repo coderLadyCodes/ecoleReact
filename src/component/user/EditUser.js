@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
-const AddUser = () => {
+const EditUser = () => {
 
   let navigate = useNavigate();
   const {id} = useParams();
 
-  const [userDTO, setUserDTO] = useState({
+  const [userDetails, setUserDetails] = useState({
     name: '',
     email: '',
     phone: '',
@@ -19,46 +19,48 @@ const AddUser = () => {
 
 const loadUser = async () =>{
   const result = await axios.get(`http://localhost:8080/users/${id}`);
-      setUserDTO(result.data);   
+      setUserDetails(result.data);   
 };
 
   const [file, setFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserDTO((prevUserDTO) => ({ ...prevUserDTO, [name]: value }));
+    setUserDetails((prevUserDetails) => ({ ...prevUserDetails, [name]: value }));
   };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
   };
 
   const updateUser = async (e) => {
     e.preventDefault();
 
-    if(!userDTO.name || !userDTO.email || !userDTO.phone) {
+    if(!userDetails.name || !userDetails.email || !userDetails.phone) {
       alert("Completez tout les champs");
       return;
     }
-    if (!userDTO.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    if (!userDetails.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
       alert('Adresse mail invalide');
       return;
     }
-    if (!userDTO.phone.match(/^\d{10}$/)) {
+    if (!userDetails.phone.match(/^\d{10}$/)) {
       alert('Please enter a valid phone number');
       return;
 
     }try {
       const formData = new FormData();
-      formData.append('userDTO', JSON.stringify(userDTO));
+      formData.append('userDetails', JSON.stringify(userDetails));
       formData.append('multipartFile', file);
       console.log(formData);
-      const response = await axios.put(`http://localhost:8080/users/${id}`,userDTO, formData, {
+      const response = await axios.put(`http://localhost:8080/users/${id}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      setUserDetails(response.data);
+      console.log('Response:', response.data);
+      
       navigate("/view-users");
 
       console.log('Response:', response.data);
@@ -81,17 +83,17 @@ const loadUser = async () =>{
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>
+            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDetails.name} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='email'>Email</label>
-            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
+            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDetails.email} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
-            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
+            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDetails.phone} required/>
           </div>
   
           
@@ -119,4 +121,4 @@ const loadUser = async () =>{
     );
   };
   
-  export default AddUser;
+  export default EditUser;

@@ -48,9 +48,9 @@ const AddUser = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+   
       navigate("/view-users");
 
-      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error:', error);
     }
