@@ -7,8 +7,8 @@ import SearchUser from '../common/SearchUser';
 const UsersView = () => {
  
 const [userDTO, setUserDTO] = useState([]);
-
 const[search, setSearch] = useState("");
+
     useEffect(() =>{
         loadUsers();
     }, []);
@@ -56,7 +56,11 @@ const[search, setSearch] = useState("");
                      <td>{user.name}</td>
                      <td>{user.email}</td>
                      <td>{user.phone}</td>
-                     <td>{user.profileImage}</td>
+                     <td>{user.profileImage !== null ? (
+                                        <img src={user.profileImage} alt="img" style={{ width: '20px', height: '20px' }} />
+                                    ) : (
+                                        <span>No image</span>
+                                    )}</td>
                      <td className='mx-2'>
                         <Link to={`/user-profile/${user.id}`} className='btn btn-info'><FaEye /></Link>
                         </td>

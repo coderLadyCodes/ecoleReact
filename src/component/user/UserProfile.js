@@ -43,7 +43,7 @@ const UserProfile = () => {
                             //src={cute}
                             alt="photo"
                             className="rounded-circle img-fluid"
-                            style={{ width: 120, height: 120 }}
+                            style={{ width: 60, height: 60}}
                         />
                         <h5 className="my-3">
                             {`${userDTO.name}`}

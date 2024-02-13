@@ -48,7 +48,7 @@ const AddUser = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-   
+
       navigate("/view-users");
 
     } catch (error) {
