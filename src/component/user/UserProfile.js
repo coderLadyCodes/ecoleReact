@@ -39,7 +39,7 @@ const UserProfile = () => {
                 <div className="card mb-4">
                     <div className="card-body text-center">
                         <img
-                            src={userDTO.multipartFile}
+                            src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
                             //src={cute}
                             alt="photo"
                             className="rounded-circle img-fluid"

@@ -17,7 +17,8 @@ const[search, setSearch] = useState("");
         try{
         const result = await axios.get("http://localhost:8080/users");
         
-        setUserDTO(result.data);   
+        setUserDTO(result.data);
+
     } catch (error) {
         console.error("error : ", error);
     }};
@@ -49,6 +50,7 @@ const[search, setSearch] = useState("");
             <tbody className='text-center'>
                 {userDTO.filter((usr) => usr.name.toLowerCase().includes(search))
                 .map((user, index)=>(
+                
                  <tr key={user.id}>
                     <th scope="row" key={index}>
                         {index + 1}
@@ -56,11 +58,15 @@ const[search, setSearch] = useState("");
                      <td>{user.name}</td>
                      <td>{user.email}</td>
                      <td>{user.phone}</td>
-                     <td>{user.profileImage !== null ? (
-                                        <img src={user.profileImage} alt="img" style={{ width: '20px', height: '20px' }} />
-                                    ) : (
-                                        <span>No image</span>
-                                    )}</td>
+                     <td> {user.profileImage ? (
+                          <img
+                          src={`http://localhost:8080/images/${user.id}/${user.profileImage}`}
+                          alt="profile image"
+                          style={{ width: '100px', height: '100px' }}
+                          />
+                            ) : (
+                                  <span>No image</span>
+                            )}</td>
                      <td className='mx-2'>
                         <Link to={`/user-profile/${user.id}`} className='btn btn-info'><FaEye /></Link>
                         </td>
