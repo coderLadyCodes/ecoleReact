@@ -20,8 +20,15 @@ const AddUser = () => {
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+    const selectedFile = e.target.files[0]; //setFile(e.target.files[0]);
+    const maxSizeInBytes = 0.5 * 1024 * 1024;
+
+    if (selectedFile && selectedFile.size > maxSizeInBytes) {
+      alert("La taille du fichier excede 500KB, veuillez reduire le volume svp");
+      setFile(null);
+    } else {
+      setFile(selectedFile);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -86,9 +93,9 @@ const AddUser = () => {
           
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept="image/*" onChange={handleFileChange}/>
+            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange}/>
           </div>
-          <p className="info-message">taille max du fichier : 320px</p>
+          <p className="info-message">taille max du fichier : 500KB</p>
   
           <div className='row mb-5'>
             <div className='col-sm-6 p-4'>
