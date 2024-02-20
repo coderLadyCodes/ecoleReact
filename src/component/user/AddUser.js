@@ -14,11 +14,6 @@ const AddUser = () => {
 
   const [file, setFile] = useState(null);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserDTO((prevUserDTO) => ({ ...prevUserDTO, [name]: value }));
-  };
-
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]; //setFile(e.target.files[0]);
     const maxSizeInBytes = 0.5 * 1024 * 1024;
@@ -29,6 +24,11 @@ const AddUser = () => {
     } else {
       setFile(selectedFile);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDTO((prevUserDTO) => ({ ...prevUserDTO, [name]: value }));
   };
 
   const handleSubmit = async (e) => {

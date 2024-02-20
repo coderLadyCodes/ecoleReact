@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
-import cute from '../../images/cute.jpg';
 import {FaEdit} from 'react-icons/fa';
 
 const UserProfile = () => {
@@ -135,7 +134,7 @@ const UserProfile = () => {
                       <button
                         type="button"
                         className="btn warning ms-2">
-                        <Link to={`/edit-user/${userDTO.id}`} className='btn btn-warning'><FaEdit />Modifier Mon Profil</Link>                                       
+                        <Link to={`/edit-user/${userDTO.id}`} className='btn btn-warning'><FaEdit />Modifier</Link>                                       
                        </button>
                        </div>
                     </div>

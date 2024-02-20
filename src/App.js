@@ -19,7 +19,8 @@ function App() {
     </HideShowComponents>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/add-users" element={<AddUser />}></Route>
+        
+        <Route exact path="/add-user" element={<AddUser />}></Route>
 
         <Route exact path="/view-users" element={<UsersView />}></Route>
 
