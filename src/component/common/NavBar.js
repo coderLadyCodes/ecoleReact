@@ -12,7 +12,7 @@ const NavBar = () => {
         <a className='nav-link dropdown-toggle' href="#" role='button' data-bs-toggle='dropdown'>SECTION PARENTS</a>
         <ul className='dropdown-menu'>
           <li className='dropdown-item'><Link className="nav-link active" aria-current="page" to={"/view-users"}>Liste des Parents</Link></li>
-          <li className='dropdown-item'><Link className="nav-link" to={"/add-users"}>Ajouter un Parent</Link></li>
+          <li className='dropdown-item'><Link className="nav-link" to={"/add-user"}>Ajouter un Parent</Link></li>
         </ul>
       </li>
 

@@ -39,10 +39,10 @@ const[search, setSearch] = useState("");
             <thead>
                <tr className='text-center'>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Profile Image</th>
+                <th>Tél</th>
+                <th>Photo</th>
                 <th colSpan='3'>Actions</th>
                </tr>
             </thead>
