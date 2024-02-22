@@ -65,13 +65,13 @@ const AddUser = () => {
 
     return (
       <div className="container">
-        <div className="row">
+      <div className="row">
       <div className="d-flex justify-content-center">
       <div className="lg-4">
         <div className="card">
         <div className="card-body text-center">
   
-        <h2 className='mb-5'>Ajouter un utilisateur</h2>
+        <h2 className='mb-5'>Ajouter un Parent</h2>
   
         <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>
   

@@ -4,6 +4,10 @@
   text-shadow: 0 0 5px #ffffff;
   background-color: rgba(249, 248, 248, 0.1);
 }
+.input-group-text{
+  height:2.4rem ;
+  cursor: pointer;
+}
 
 /*.App {
   text-align: center;

@@ -8,7 +8,7 @@ const NavBar = () => {
     <Link className="navbar-brand" to={"/"}>Ecole S.M</Link>
 
     <div className="collapse navbar-collapse" id="navbarNav">
-      <li className='nav-item dropdown'  style={{listStyle:'none'}}>
+      <li className='nav-item dropdown'  style={{listStyle:'none', marginLeft:'2rem'}}>
         <a className='nav-link dropdown-toggle' href="#" role='button' data-bs-toggle='dropdown'>SECTION PARENTS</a>
         <ul className='dropdown-menu'>
           <li className='dropdown-item'><Link className="nav-link active" aria-current="page" to={"/view-users"}>Liste des Parents</Link></li>
@@ -16,6 +16,13 @@ const NavBar = () => {
         </ul>
       </li>
 
+      <li className='nav-item dropdown'  style={{listStyle:'none', marginLeft:'2rem'}}>
+        <a className='nav-link dropdown-toggle' href="#" role='button' data-bs-toggle='dropdown'>SECTION ELEVES</a>
+        <ul className='dropdown-menu'>
+          <li className='dropdown-item'><Link className="nav-link active" aria-current="page" to={"/view-students"}>Liste des Eleves</Link></li>
+          <li className='dropdown-item'><Link className="nav-link" to={"/add-student"}>Ajouter un Eleve</Link></li>
+        </ul>
+      </li>
     </div>
   </div>
 </nav>

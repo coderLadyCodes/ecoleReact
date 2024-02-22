@@ -8,6 +8,8 @@ import { BrowserRouter  as Router, Routes, Route} from 'react-router-dom';
 import AddUser from './component/user/AddUser';
 import EditUser from './component/user/EditUser';
 import UserProfile from './component/user/UserProfile';
+import AddStudent from './component/student/AddStudent';
+import StudentsView from './component/student/StudentsView';
 import HideShowComponents from './component/common/HideShowComponents';
 
 function App() {
@@ -27,6 +29,10 @@ function App() {
         <Route exact path="/edit-user/:id" element={<EditUser />}></Route> 
 
         <Route exact path="/user-profile/:id" element={<UserProfile />}></Route>
+
+        <Route exact path="/add-student" element={<AddStudent />}></Route>
+
+        <Route exact path="/view-students" element={<StudentsView />}></Route>
       </Routes>
     </Router>
     </main>
