@@ -92,7 +92,7 @@ const AddUser = () => {
   
           
           <div className='input-group mb-5'>
-            <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
+            {/*<label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>*/}
             <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange}/>
           </div>
           <p className="info-message">taille max du fichier : 500KB</p>

@@ -6,16 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {FaCalendarAlt} from 'react-icons/fa';
 
 const AddStudent = () => {
-  function CustumInputDate({value, onClick}){
-    return(
-      <div className='input-group'>
-        <input type="text" className='form-control' value={value} onClick={onClick} readOnly/>
-        <div className='input-group-append'>
-           <span className='input-group-text'><FaCalendarAlt/></span>
-           </div>
-      </div>
-    )
-  }
 
     let navigate = useNavigate()
 
@@ -25,6 +15,7 @@ const AddStudent = () => {
         presence: false,
         cantine: false,
     })
+
     const [birthday, setBirthday] = useState(null)
 
     const [file, setFile] = useState(null)
@@ -77,21 +68,21 @@ const AddStudent = () => {
 
   <div className="mb-4 p-4">
     <label for="name" className="form-label">Nom et Prénom</label>
-    <input type="text" className="form-control" id="name"/>
+    <input type="text" className="form-control" id="name" onChange={handleInputChange} value={studentDTO.name} required/>
   </div>
 
   <fieldset className="row mb-4 m-3">
     <legend className="col-form-label col-sm-2 pt-0">Cantine</legend>
     <div className="col-sm-10">
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked/>
-        <label className="form-check-label" for="gridRadios1">
+        <input className="form-check-input" type="radio" name="cantine" id="cantine" value="option1" />
+        <label className="form-check-label" for="cantine">
           Oui
         </label>
       </div>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"/>
-        <label className="form-check-label" for="gridRadios2">
+        <input className="form-check-input" type="radio" name="cantine" id="cantine" value="option2"/>
+        <label className="form-check-label" for="cantine">
           Non
         </label>
       </div>
@@ -102,22 +93,31 @@ const AddStudent = () => {
     <legend className="col-form-label col-sm-2 pt-0">Présence</legend>
     <div className="col-sm-10">
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked/>
-        <label className="form-check-label" for="gridRadios1">
+        <input className="form-check-input" type="radio" name="presence" id="presence" value="option1"/>
+        <label className="form-check-label" for="presence">
           Présent
         </label>
       </div>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"/>
-        <label className="form-check-label" for="gridRadios2">
+        <input className="form-check-input" type="radio" name="presence" id="presence" value="option2"/>
+        <label className="form-check-label" for="presence">
           Absent
         </label>
       </div>
       </div>
   </fieldset>
-  <div div className='row mb-4 m-3'>
-  <label for="birthday" className="form-label">Date De Naissance<DatePicker selected={birthday} onChange={(date) => setBirthday(date)} customInput={<CustumInputDate/>}/></label>
+
+  <div div className='m-4'>
+  <label for="birthday" className="form-label">Date De Naissance</label>
+    <DatePicker className="m-2 text-center" selected={birthday} onChange={(date) => setBirthday(date)} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown value={setStudentDTO.birthday} required/> 
   </div>
+
+  <div className='mb-4 p-4'>
+  
+  <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange} required/>
+  </div>
+     <p className="info-message text-center">taille max du fichier : 500KB</p>
+
   <div className='d-flex justify-content-center p-4'>
             <div className='p-4'>
               <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
