@@ -77,17 +77,17 @@ const AddUser = () => {
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>
+            <input autoComplete="name" className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='email'>Email</label>
-            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
+            <input autoComplete="email" className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
           </div>
   
           <div className='input-group mb-5'>
             <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
-            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
+            <input autoComplete="tel" className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
           </div>
   
           

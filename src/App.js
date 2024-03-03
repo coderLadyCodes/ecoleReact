@@ -32,7 +32,8 @@ function App() {
 
         <Route exact path="/add-student" element={<AddStudent />}></Route>
 
-        <Route exact path="/view-students" element={<StudentsView />}></Route>
+        {/*<Route exact path="/view-students" element={<StudentsView />}></Route>*/}
+
       </Routes>
     </Router>
     </main>
