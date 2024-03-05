@@ -58,8 +58,8 @@ const AddStudent = () => {
           },
         });
    
-        //navigate('/view-students');
-        navigate('/');
+        navigate('/view-students');
+    
   
       } catch (error) {
         console.error('Error:', error);
@@ -131,8 +131,7 @@ const AddStudent = () => {
               <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
             </div>
             <div className='p-4'>
-              {/*<Link to={'/view-students'}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link> */}
-              <Link to={'/'}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link>
+              <Link to={'/view-students'}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link>
             </div>
           </div>
   </form>

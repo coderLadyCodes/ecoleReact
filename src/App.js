@@ -10,6 +10,7 @@ import EditUser from './component/user/EditUser';
 import UserProfile from './component/user/UserProfile';
 import AddStudent from './component/student/AddStudent';
 import StudentsView from './component/student/StudentsView';
+import StudentProfile from './component/student/StudentProfile';
 import HideShowComponents from './component/common/HideShowComponents';
 
 function App() {
@@ -32,7 +33,9 @@ function App() {
 
         <Route exact path="/add-student" element={<AddStudent />}></Route>
 
-        {/*<Route exact path="/view-students" element={<StudentsView />}></Route>*/}
+        <Route exact path="/view-students" element={<StudentsView />}></Route>
+
+        <Route exact path="/student-profile/:id" element={<StudentProfile />}></Route>
 
       </Routes>
     </Router>

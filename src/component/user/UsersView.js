@@ -78,10 +78,8 @@ const[search, setSearch] = useState("");
                      </td>
                  </tr>
                 ))}
-            
             </tbody>
         </table>
-      
     </section>
   );
 };
