@@ -31,38 +31,38 @@ const UserProfile = () => {
   return(
 
 <section
-    className="d-flex flex-column ">
+    className="d-flex flex-column">
     <div className="d-flex justify-content-center">
-        <div className="column">
-            <div className="d-flex justify-content-center">
-                <div className="card mb-4" style={{width: '40rem'}}>
-                    <div className="card-body text-center">
-                        <img
-                            src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
-                            alt="photo"
-                            className="rounded-circle img-fluid"
-                            style={{ width: 120, height: 120}}
-                        />
-                        <h5 className="my-3">
-                            {`${userDTO.name}`}
-                        </h5>
-                                          {/* BUTTONS ARE NOT CONNECTED YET */}
-                        <div className="d-flex justify-content-center ms-6">
-                            <button
-                                type="button"
-                                className="btn btn-outline-primary">
-                                   <a href={userDTO.phone}></a>            
-                                Appel
-                            </button>
-                            <button
-                                type="button"
-                                className="btn btn-outline-warning ms-2">
-                                Chat                                        
-                            </button>
-                        
-                        </div>
-                    </div>
-                </div>
+    <div className="column">
+        <div className="d-flex justify-content-center">
+        <div className="card mb-4" style={{width: '40rem'}}>
+            <div className="card-body text-center">
+            <img
+                src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
+                alt="photo"
+                className="rounded-circle img-fluid"
+                style={{ width: 120, height: 120}}
+            />
+            <h5 className="my-3">
+                {`${userDTO.name}`}
+            </h5>
+                        {/* BUTTONS ARE NOT CONNECTED YET */}
+            <div className="d-flex justify-content-center ms-6">
+            <button
+                type="button"
+                className="btn btn-outline-primary">
+                    <a href={userDTO.phone}></a>            
+                Appel
+            </button>
+            <button
+                type="button"
+                className="btn btn-outline-warning ms-2">
+                Chat                                        
+            </button>
+                    
+            </div>
+            </div>
+            </div>
             </div>
 
             <div className="card-body">
@@ -72,9 +72,9 @@ const UserProfile = () => {
 
                         <div className="column d-flex justify-content-center">
                             <div className="col-sm-2">
-                                <h5 className="mb-0">
-                                    Nom et Prénom
-                                </h5>
+                            <h5 className="mb-0">
+                                Nom et Prénom
+                            </h5>
                             </div>
 
                             <div className="col-sm-9">

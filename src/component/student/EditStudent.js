@@ -1,20 +1,35 @@
-import React, { useState } from 'react'
-import {Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import {FaCalendarAlt} from 'react-icons/fa'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const AddStudent = () => {
-
+const EditStudent = () => {
     let navigate = useNavigate()
+    const {id} = useParams()
 
-    const [studentDTO, setStudentDTO] = useState({
+    const [studentDetails, setStudentDetails] = useState({
         name: '',
         birthday: new Date(),
-        presence: false,
-        cantine: false,
+        presence:true ,
+        cantine: true,
     })
+
+    useEffect(() =>{
+        loadStudent();
+    }, []);
+    
+    const loadStudent = async () =>{
+      try {
+        const result = await axios.get(`http://localhost:8080/students/${id}`);
+        const { name, birthday, presence, cantine } = result.data;
+        const parsedBirthday = new Date(birthday); // Parse the birthday string into a Date object
+        setStudentDetails({ name, birthday: parsedBirthday, presence, cantine });
+      } catch (error) {
+        console.error('Error loading student:', error);
+      }
+      //const result = await axios.get(`http://localhost:8080/students/${id}`)
+      //setStudentDetails(result.data)   
+    }
 
     const [file, setFile] = useState(null)
     
@@ -34,29 +49,32 @@ const AddStudent = () => {
       //setStudentDTO({...studentDTO, [e.target.name]: e.target.value})
       const { name, value } = e.target
       const newValue = e.target.type === 'radio' ? (value === 'true') : value
-      setStudentDTO({ ...studentDTO, [name]: newValue })
+      setStudentDetails({ ...studentDetails, [name]: newValue })
       //setStudentDTO({ ...studentDTO, [name]: value === 'true' ? true : false })
     }
 
     const handleBirthdayChange = (date) => {
-      setStudentDTO({ ...studentDTO, birthday: date });
+        setStudentDetails({ ...studentDetails, birthday: date });
     }
 
-    const handleSubmit = async (e) => {
+    const updateStudent = async (e) => {
       e.preventDefault()
 
-      const formattedBirthday = studentDTO.birthday.toLocaleDateString('fr-FR')
+      const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
   
            try {
         const formData = new FormData();
-        formData.append('studentDTO', JSON.stringify({ ...studentDTO, birthday: formattedBirthday }))
+        formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
         formData.append('multipartFile', file)
         console.log(formData);
-        const response = await axios.post('http://localhost:8080/students', formData, {
+        const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        });
+        })
+
+        setStudentDetails(response.data);
+         console.log('Response:', response.data);
    
         navigate('/view-students');
     
@@ -72,24 +90,24 @@ const AddStudent = () => {
   <div className='card' style={{width:'50%'}}>
   <h2 className='mb-6 p-4 text-center'>Ajouter un Elève</h2>
 
-  <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
+  <form onSubmit={updateStudent} encType='multipart/form-data' method='post'>
 
   <div className='mb-4 p-4'>
     <label htmlFor='name' className='form-label'>Nom et Prénom</label>
-    <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDTO.name}/>
+    <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
   </div>
 
   <fieldset className='row mb-4 m-3'>
     <legend className='col-form-label col-sm-2 pt-0'>Présence</legend>
     <div className='col-sm-10'>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='presence' id='presence-true' value='true' checked={studentDTO.presence === true} onChange={handleInputChange}/>
+        <input className='form-check-input' type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='presence-true'>
           Présent
         </label>
       </div>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='presence' id='presence-false' value='false' checked={studentDTO.presence === false} onChange={handleInputChange}/>
+        <input className='form-check-input' type='radio' name='presence' id='presence-false' value='false' checked={studentDetails.presence === false} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='presence-false'>
           Absent
         </label>
@@ -101,13 +119,13 @@ const AddStudent = () => {
     <legend className='col-form-label col-sm-2 pt-0'>Cantine</legend>
     <div className='col-sm-10'>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='cantine' id='cantine-true' value='true' checked={studentDTO.cantine === true} onChange={handleInputChange}/>
+        <input className='form-check-input' type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='cantine-true'>
           Oui
         </label>
       </div>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='cantine' id='cantine-false' value='false' checked={studentDTO.cantine === false} onChange={handleInputChange}/>
+        <input className='form-check-input' type='radio' name='cantine' id='cantine-false' value='false' checked={studentDetails.cantine === false} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='cantine-false'>
           Non
         </label>
@@ -117,7 +135,7 @@ const AddStudent = () => {
 
   <div div className='m-4'>
   <label htmlFor="birthday" className="form-label">Date De Naissance</label>
-    <DatePicker id='birthday' className='m-2 text-center' selected={studentDTO.birthday} onChange={handleBirthdayChange} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown required/> 
+    <DatePicker id='birthday' className='m-2 text-center' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 
   <div className='mb-4 p-4'>
@@ -141,4 +159,4 @@ const AddStudent = () => {
   )
 }
 
-export default AddStudent
+export default EditStudent

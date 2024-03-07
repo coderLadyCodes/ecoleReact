@@ -31,6 +31,7 @@ const handleDelete = async(id) => {
     <table className='table table-bordered table-hover shadow'>
       <thead>
         <tr className='text-center'>
+            <th>ID</th>
             <th>Nom et Prénom</th>
             <th>Date de naissance</th>
             <th>Présence</th>
