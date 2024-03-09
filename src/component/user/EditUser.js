@@ -19,7 +19,7 @@ const EditUser = () => {
 
 const loadUser = async () =>{
   const result = await axios.get(`http://localhost:8080/users/${id}`);
-      setUserDetails(result.data);   
+  setUserDetails(result.data);   
 };
 
   const [file, setFile] = useState(null);
@@ -30,7 +30,7 @@ const loadUser = async () =>{
   };
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0]; //setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
     const maxSizeInBytes = 0.5 * 1024 * 1024;
 
     if (selectedFile && selectedFile.size > maxSizeInBytes) {

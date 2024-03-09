@@ -15,27 +15,26 @@ const EditStudent = () => {
     })
 
     useEffect(() =>{
-        loadStudent();
-    }, []);
+        loadStudent()
+    }, [])
     
     const loadStudent = async () =>{
-      try {
-        const result = await axios.get(`http://localhost:8080/students/${id}`);
-        const { name, birthday, presence, cantine } = result.data;
-        const parsedBirthday = new Date(birthday); // Parse the birthday string into a Date object
-        setStudentDetails({ name, birthday: parsedBirthday, presence, cantine });
+      try{
+        const result = await axios.get(`http://localhost:8080/students/${id}`)
+        const studentData = { ...result.data, birthday: new Date(result.data.birthday) }
+        setStudentDetails(studentData)
       } catch (error) {
-        console.error('Error loading student:', error);
+        console.error('ERROR FETCHING STUDENT DETAILS :', error)
       }
-      //const result = await axios.get(`http://localhost:8080/students/${id}`)
-      //setStudentDetails(result.data)   
+      
+      //setStudentDetails(result.data)  
     }
 
     const [file, setFile] = useState(null)
     
     const handleFileChange = (e) => {
-      const selectedFile = e.target.files[0]
-      const maxSizeInBytes = 0.5 * 1024 * 1024
+    const selectedFile = e.target.files[0]
+    const maxSizeInBytes = 0.5 * 1024 * 1024
   
       if (selectedFile && selectedFile.size > maxSizeInBytes) {
         alert('La taille du fichier excede 500KB, veuillez reduire le volume svp')
@@ -46,37 +45,35 @@ const EditStudent = () => {
     }
 
     const handleInputChange = (e) => {
-      //setStudentDTO({...studentDTO, [e.target.name]: e.target.value})
       const { name, value } = e.target
       const newValue = e.target.type === 'radio' ? (value === 'true') : value
-      setStudentDetails({ ...studentDetails, [name]: newValue })
-      //setStudentDTO({ ...studentDTO, [name]: value === 'true' ? true : false })
+      setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
     }
 
     const handleBirthdayChange = (date) => {
-        setStudentDetails({ ...studentDetails, birthday: date });
+    setStudentDetails({ ...studentDetails, birthday: date})
     }
 
     const updateStudent = async (e) => {
       e.preventDefault()
 
-      const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
+     // const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
+      const formattedBirthday = `${studentDetails.birthday.getDate().toString().padStart(2, '0')}/${(studentDetails.birthday.getMonth() + 1).toString().padStart(2, '0')}/${studentDetails.birthday.getFullYear()}`
   
-           try {
-        const formData = new FormData();
-        formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
-        formData.append('multipartFile', file)
-        console.log(formData);
-        const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
+      try {
+       const formData = new FormData()
+       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
+       formData.append('multipartFile', file)
+       const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
 
-        setStudentDetails(response.data);
-         console.log('Response:', response.data);
+        setStudentDetails(response.data)
+         console.log('Response:', response.data)
    
-        navigate('/view-students');
+        navigate('/view-students')
     
   
       } catch (error) {
@@ -84,11 +81,12 @@ const EditStudent = () => {
       }
     }
 
+
   return (
   <div className='container'>
   <div className='d-flex justify-content-center'>
   <div className='card' style={{width:'50%'}}>
-  <h2 className='mb-6 p-4 text-center'>Ajouter un Elève</h2>
+  <h2 className='mb-6 p-4 text-center'>Modifier L'Elève</h2>
 
   <form onSubmit={updateStudent} encType='multipart/form-data' method='post'>
 
@@ -140,7 +138,7 @@ const EditStudent = () => {
 
   <div className='mb-4 p-4'>
   
-  <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} required/>
+  <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} />
   </div>
      <p className='info-message text-center'>taille max du fichier : 500KB</p>
 
