@@ -9,7 +9,7 @@ const EditStudent = () => {
 
     const [studentDetails, setStudentDetails] = useState({
         name: '',
-        birthday: new Date(),
+        birthday: null,
         presence:true ,
         cantine: true,
     })
@@ -19,15 +19,8 @@ const EditStudent = () => {
     }, [])
     
     const loadStudent = async () =>{
-      try{
-        const result = await axios.get(`http://localhost:8080/students/${id}`)
-        const studentData = { ...result.data, birthday: new Date(result.data.birthday) }
-        setStudentDetails(studentData)
-      } catch (error) {
-        console.error('ERROR FETCHING STUDENT DETAILS :', error)
-      }
-      
-      //setStudentDetails(result.data)  
+      const result = await axios.get(`http://localhost:8080/students/${id}`)
+      setStudentDetails(result.data)
     }
 
     const [file, setFile] = useState(null)
@@ -49,20 +42,20 @@ const EditStudent = () => {
       const newValue = e.target.type === 'radio' ? (value === 'true') : value
       setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
     }
-
+  
     const handleBirthdayChange = (date) => {
-    setStudentDetails({ ...studentDetails, birthday: date})
+    setStudentDetails({ ...studentDetails, birthday: date })
     }
 
     const updateStudent = async (e) => {
       e.preventDefault()
 
-     // const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
-      const formattedBirthday = `${studentDetails.birthday.getDate().toString().padStart(2, '0')}/${(studentDetails.birthday.getMonth() + 1).toString().padStart(2, '0')}/${studentDetails.birthday.getFullYear()}`
-  
+     const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
+     //const formattedBirthday = `${studentDetails.birthday.getDate().toString().padStart(2, '0')}/${(studentDetails.birthday.getMonth() + 1).toString().padStart(2, '0')}/${studentDetails.birthday.getFullYear()}`
+    
       try {
        const formData = new FormData()
-       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
+       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday })) //
        formData.append('multipartFile', file)
        const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
@@ -133,7 +126,7 @@ const EditStudent = () => {
 
   <div div className='m-4'>
   <label htmlFor="birthday" className="form-label">Date De Naissance</label>
-    <DatePicker id='birthday' className='m-2 text-center' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
+    <DatePicker id='birthday' className='m-2 text-center' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 
   <div className='mb-4 p-4'>

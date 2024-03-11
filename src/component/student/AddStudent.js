@@ -31,11 +31,9 @@ const AddStudent = () => {
     }
 
     const handleInputChange = (e) => {
-      //setStudentDTO({...studentDTO, [e.target.name]: e.target.value})
       const { name, value } = e.target
       const newValue = e.target.type === 'radio' ? (value === 'true') : value
       setStudentDTO({ ...studentDTO, [name]: newValue })
-      //setStudentDTO({ ...studentDTO, [name]: value === 'true' ? true : false })
     }
 
     const handleBirthdayChange = (date) => {
