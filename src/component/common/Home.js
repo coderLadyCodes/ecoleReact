@@ -1,5 +1,6 @@
 import React from 'react';
 import homeBackground from '../../images/homeBackground.jpg';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -12,7 +13,9 @@ function Home() {
 
       <section style={{width:'100%', position:'absolute', display:'flex',flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
       <h2 style={{fontFamily:'Bad Script, cursive', color:'magenta'}}>Moyenne Section</h2>
-      <h2 className='h2home' style={{fontFamily:'Sulphur Point', color:'white', padding:'12px', border:'1px solid', borderRadius:'2%', cursor:'pointer'}}>Connexion/Inscription</h2>
+      <h2 className='h2home' style={{fontFamily:'Sulphur Point', color:'white', padding:'12px', border:'1px solid', borderRadius:'2%', cursor:'pointer'}}>
+        <Link to ="/signup" style={{textDecoration:'none', color:'white'}}>Connexion/Inscription</Link> 
+      </h2>
       </section>
     </div>
   )

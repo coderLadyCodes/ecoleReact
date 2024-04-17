@@ -28,9 +28,10 @@ const handleDelete = async(id) => {
 
   return (
     <section>
-    <table className='table table-bordered table-hover shadow'>
+    <h2>Liste des Eleves</h2>
+    <table>
       <thead>
-        <tr className='text-center'>
+        <tr>
             <th>ID</th>
             <th>Nom et Prénom</th>
             <th>Date de naissance</th>
@@ -40,7 +41,7 @@ const handleDelete = async(id) => {
             <th colSpan='3'>Actions</th>
         </tr>
       </thead>
-      <tbody className='text-center'>
+      <tbody>
         {studentDTO.filter((student) => student.name.toLowerCase())
         .map((student, index)=>(
          <tr key={student.id}>
@@ -58,14 +59,14 @@ const handleDelete = async(id) => {
             ) : (
             <span>No image</span>
             )}</td>
-         <td className='mx-2'>
-         <Link to={`/student-profile/${student.id}`} className='btn btn-info'><FaEye /></Link>
+         <td>
+         <Link to={`/student-profile/${student.id}`}><FaEye /></Link>
          </td>
-         <td className='max-2'>
-         <Link to={`/edit-student/${student.id}`} className='btn btn-warning'><FaEdit /></Link>
+         <td>
+         <Link to={`/edit-student/${student.id}`}><FaEdit /></Link>
          </td>
-         <td className='max-2'>
-         <button className='btn btn-danger' onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
+         <td>
+         <button onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
          </td>
         </tr>
         ))}

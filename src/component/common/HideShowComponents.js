@@ -1,16 +1,16 @@
-import React, { useEffect, useState} from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState} from 'react'
+import { useLocation } from 'react-router-dom'
 
 const HideShowComponents = ({children}) => {
-    const location = useLocation();
-    const [showNavBar, setShowNavBar] = useState(false);
+    const location = useLocation()
+    const [showNavBar, setShowNavBar] = useState(false)
     useEffect(() => {
-        if(location.pathname === '/'){
-            setShowNavBar(false);
+        if(location.pathname === '/', '/signup'){
+            setShowNavBar(false)
         }else {
-            setShowNavBar(true);
+            setShowNavBar(true)
         }
-    }, [location]);
+    }, [location])
 
   return (
     <div>{showNavBar && children}</div>

@@ -76,21 +76,21 @@ const EditStudent = () => {
 
 
   return (
-  <div className='container'>
-  <div className='d-flex justify-content-center'>
-  <div className='card' style={{width:'50%'}}>
-  <h2 className='mb-6 p-4 text-center'>Modifier L'Elève</h2>
+  <div>
+  <div>
+  <div style={{width:'50%'}}>
+  <h2>Modifier L'Elève</h2>
 
   <form onSubmit={updateStudent} encType='multipart/form-data' method='post'>
 
-  <div className='mb-4 p-4'>
+  <div>
     <label htmlFor='name' className='form-label'>Nom et Prénom</label>
     <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
   </div>
 
-  <fieldset className='row mb-4 m-3'>
-    <legend className='col-form-label col-sm-2 pt-0'>Présence</legend>
-    <div className='col-sm-10'>
+  <fieldset>
+    <legend>Présence</legend>
+    <div>
       <div className='form-check'>
         <input className='form-check-input' type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='presence-true'>
@@ -106,9 +106,9 @@ const EditStudent = () => {
       </div>
   </fieldset>
 
-  <fieldset className='row mb-4 m-3'>
-    <legend className='col-form-label col-sm-2 pt-0'>Cantine</legend>
-    <div className='col-sm-10'>
+  <fieldset>
+    <legend>Cantine</legend>
+    <div>
       <div className='form-check'>
         <input className='form-check-input' type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
         <label className='form-check-label' htmlFor='cantine-true'>
@@ -117,30 +117,30 @@ const EditStudent = () => {
       </div>
       <div className='form-check'>
         <input className='form-check-input' type='radio' name='cantine' id='cantine-false' value='false' checked={studentDetails.cantine === false} onChange={handleInputChange}/>
-        <label className='form-check-label' htmlFor='cantine-false'>
+        <label htmlFor='cantine-false'>
           Non
         </label>
       </div>
       </div>
   </fieldset>
 
-  <div div className='m-4'>
+  <div>
   <label htmlFor="birthday" className="form-label">Date De Naissance</label>
-    <DatePicker id='birthday' className='m-2 text-center' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
+    <DatePicker id='birthday' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 
-  <div className='mb-4 p-4'>
+  <div>
   
-  <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} />
+  <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} />
   </div>
-     <p className='info-message text-center'>taille max du fichier : 500KB</p>
+     <p>taille max du fichier : 500KB</p>
 
-  <div className='d-flex justify-content-center p-4'>
-            <div className='p-4'>
-              <button type='submit' className='btn btn-outline-success btn-ls'>Save</button>
+  <div>
+            <div>
+              <button type='submit'>Save</button>
             </div>
-            <div className='p-4'>
-              <Link to={'/view-students'}  type='submit' className='btn btn-outline-warning btn-ls'>Cancel</Link>
+            <div>
+              <Link to={'/view-students'}  type='submit'>Cancel</Link>
             </div>
           </div>
   </form>

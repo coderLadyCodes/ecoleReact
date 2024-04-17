@@ -1,10 +1,8 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '/node_modules/bootstrap/dist/js/bootstrap.min.js'
 import './App.css'
 import Home from './component/common/Home'
 import UsersView from './component/user/UsersView'
 import NavBar from './component/common/NavBar'
-import { BrowserRouter  as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter  as Router, Routes, Route, useParams, Link} from 'react-router-dom'
 import AddUser from './component/user/AddUser'
 import EditUser from './component/user/EditUser'
 import UserProfile from './component/user/UserProfile'
@@ -13,37 +11,70 @@ import StudentsView from './component/student/StudentsView'
 import StudentProfile from './component/student/StudentProfile'
 import EditStudent from './component/student/EditStudent'
 import HideShowComponents from './component/common/HideShowComponents'
+import ViewUser from './component/user/ViewUser'
+import AddPost from './component/post/AddPost'
+import PostView from './component/post/PostView'
+import Signup from './component/common/Signup'
+import Dashboard from './component/common/Dashboard'
+import Activation from './component/common/Activation'
+
 
 function App() {
+ 
   return (
     <main> {/*  className="container-fluid"*/}
     <Router>
-    <HideShowComponents>
+   <HideShowComponents>
     <NavBar />
-    </HideShowComponents>
+    </HideShowComponents> 
+
       <Routes>
-        <Route exact path='/' element={<Home />}></Route>
+        <Route  path='/' element={<Home />} />
+
+        <Route  path='/signup' element={<Signup />}/>
+
+        <Route  path='/activation' element={<Activation />}/>
+
+        <Route path = '/dashboard' element={<Dashboard/>}/>
         
-        <Route exact path='/add-user' element={<AddUser />}></Route>
+        {/*<Route  path='/add-user' element={<AddUser />}></Route>*/}
 
-        <Route exact path='/view-users' element={<UsersView />}></Route>
+        <Route  path='/view-user/:id' element={<ViewUser />}></Route>
 
-        <Route exact path='/edit-user/:id' element={<EditUser />}></Route> 
+        <Route  path='/view-users' element={<UsersView />}> </Route>
+
+        <Route  path='/edit-user/:id' element={<EditUser />}></Route> 
 
         <Route exact path='/user-profile/:id' element={<UserProfile />}></Route>
 
-        <Route exact path='/add-student' element={<AddStudent />}></Route>
+        <Route  path='/add-student/:userId' element={<AddStudent />}></Route>
 
-        <Route exact path='/view-students' element={<StudentsView />}></Route>
+        <Route  path='/view-students' element={<StudentsView />}></Route>
 
-        <Route exact path='/student-profile/:id' element={<StudentProfile />}></Route>
+        <Route  path='/student-profile/:userId' element={<StudentProfile />}></Route>
 
-        <Route exact path='/edit-student/:id' element={< EditStudent/>}></Route>
+        <Route  path='/edit-student/:id' element={< EditStudent/>}></Route>
 
+        <Route  path='/add-post' element={< AddPost/>}></Route>
+
+        <Route  path='/post-view/:userId' element={< PostView/>}></Route>
+     
       </Routes>
     </Router>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
+
+        {/*<Route  path='/' element={<Home />}></Route>
+        <Route  path='add-user' element={<AddUser />}>
+        <Route  path='view-user/:id' element={<ViewUser />}/>
+        <Route  path='view-users' element={<UsersView />}/>
+        <Route  path='edit-user/:id' element={<EditUser />}/>
+        </Route>
+        <Route  path='/add-student/:userId' element={<AddStudent />}>
+        <Route  path='student-profile/:userId' element={<StudentProfile />}/>
+        <Route  path='view-students' element={<StudentsView />}/>
+        <Route  path='edit-student/:id' element={< EditStudent/>}/>
+        </Route>*/}
