@@ -1,17 +1,19 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from './AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
-    const {userId} = useParams()
-    let navigate = useNavigate()
+  const navigate = useNavigate()
+  const auth = useAuth()
 
-    const handleLogout = () => {
-        navigate('/')
-    }
+  const handleLogout = () => {
+    auth.logout()
+    navigate('/')
+  }
   return (
     <div>
-        <h2>Bienvenue {userId} </h2>
-        <button type='button' onClick={handleLogout}>Déconnexion</button>
+      <h1>Bienvenue {auth.user?.username}</h1>
+      <button onClick={handleLogout}>Deconnexion</button>
     </div>
   )
 }

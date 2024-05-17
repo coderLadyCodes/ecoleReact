@@ -1,19 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import profil from '../../images/profil.jpg'
 
 const Signup = () => {
-    let navigate = useNavigate()
-    const {userId} = useParams()
-
-    const [action, setAction] = useState('Inscription')
-
-  const [userDTO, setUserDTO] = useState({
+let navigate = useNavigate()
+const {userId} = useParams()
+const [userDTO, setUserDTO] = useState({
     name: '',
     email: '',
     password: '',
     phone: '',
+    role:'PARENT',
   })
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -86,10 +84,6 @@ const Signup = () => {
         },
       })
       console.log('response is : ', response)
-    /* const email = userDTO.email
-     const password = userDTO.password
-      const repense = await axios.post('http://localhost:8080/signin', {email, password})
-      console.log('Connexion reussit', repense.data) */
 
       const userId = response.data.id
       navigate('/activation')
@@ -102,22 +96,24 @@ const Signup = () => {
  
   return (
     <div>
-        <h2>{action}</h2>
+        <h2>Inscription</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>
 
           <div className='inputs'>
 
-          {action ==='Connexion'?<div></div>: <div>
+          <div>
           <label htmlFor='multipartFile' className='avatar-input'> 
             {previewImage?<img src={previewImage}  alt='profile image' className='profileImage' /> :<img src={profil} alt='profile image' className='profileImage'/>}
             <input type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange} style={{display:'none'}}/>
           </label>
-          <p>Telechargez la photo</p></div>}
+          <p>Telechargez la photo</p>
+          </div>
 
-            {action ==='Connexion'?<div></div>:<div>
+           
+          <div>
             <label htmlFor='name'>Nom et Prénom</label>
             <input placeholder='Nom et Prénom' type="text"  name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>   
-          </div>}
+          </div>
 
           <div>
             <label htmlFor='email'>Email</label>
@@ -126,29 +122,24 @@ const Signup = () => {
 
           <div>
             <label htmlFor='password'>Mot de Passe</label>
-            <input placeholder='mot de passe' type='password' name='password' id='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required/>
+            <input placeholder='mot de passe' type='password' name='password' id='password' onChange={handleInputChange} value={userDTO.password}  required/>
           </div>
 
-          {action ==='Connexion'?<div></div>: <div>
+          <div>
             <label htmlFor='password'>Confirmer le mot de passe</label>
-            <input placeholder='Confirmer le mot de passe' type='password' name='password' id='password' onChange={handleInputChange} value={userDTO.password} required/>
-          </div>}
-
+            <input placeholder='Confirmer le mot de passe' type='password' name='password' id='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required/>
+          </div>
           
-            {action ==='Connexion'?<div></div>: <div>
+          <div>
             <label htmlFor='phone'>Numéro de Téléphone</label>
             <input placeholder='Téléphone' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
-          </div>}  
+          </div>
 
           </div>
 
-        {action ==='Inscription'?<div></div>: <div>
-          Mot de passe oublié ? <span>Click ici</span>
-        </div>}
-
         <div>
-            <div className={action==='Connexion'?'submit gray':'submit'} onClick={()=>{setAction('Inscription')}}><button  type='submit'>Inscription</button></div>
-            <div type='submit' className={action==='Inscription'?'submit gray':'submit'} onClick={()=>{setAction('Connexion')}}><button  type='submit'>Connexion</button></div>
+          <button  type='submit'>Inscription</button>
+          Vous avez un compte? <Link to={'/connexion'}  type='submit'>Connectez Vous </Link>
         </div>
         </form>
     </div>

@@ -20,9 +20,8 @@ const Activation = () => {
             },
           })
         console.log(response.data)
-        navigate('/dashboard')
+        navigate('/identification')
     } catch (error) {
-        // Handle error (e.g., show error message)
         console.error('Error:', error);
     }
     }

@@ -15,8 +15,14 @@ import ViewUser from './component/user/ViewUser'
 import AddPost from './component/post/AddPost'
 import PostView from './component/post/PostView'
 import Signup from './component/common/Signup'
-import Dashboard from './component/common/Dashboard'
 import Activation from './component/common/Activation'
+import Connexion from './component/common/Connexion'
+import Logout from './component/common/Logout'
+import Identification from './component/common/Identification'
+import Dashboard from './component/common/Dashboard'
+import PasswordRefresh from './component/common/PasswordRefresh'
+import AuthProvider from './component/common/AuthProvider'
+import PrivateRoute from './component/common/PrivateRoute'
 
 
 function App() {
@@ -24,10 +30,10 @@ function App() {
   return (
     <main> {/*  className="container-fluid"*/}
     <Router>
+    <AuthProvider>
    <HideShowComponents>
     <NavBar />
     </HideShowComponents> 
-
       <Routes>
         <Route  path='/' element={<Home />} />
 
@@ -35,7 +41,17 @@ function App() {
 
         <Route  path='/activation' element={<Activation />}/>
 
+        <Route path = '/identification' element={<Identification/>}/>
+           
+        <Route path = '/connexion' element={<Connexion/>}/>
+        
+        <Route element={<PrivateRoute />}>                                               
+        <Route path = '/passwordRefresh' element={<PasswordRefresh/>}/>
+        </Route>                             {/* ENGLOBE ALL PRIVATE ROUTES THIS MUST BE AT THE BUTTOM */}
+
         <Route path = '/dashboard' element={<Dashboard/>}/>
+
+        <Route path = '/logout' element={<Logout/>}/>
         
         {/*<Route  path='/add-user' element={<AddUser />}></Route>*/}
 
@@ -60,21 +76,10 @@ function App() {
         <Route  path='/post-view/:userId' element={< PostView/>}></Route>
      
       </Routes>
+      </AuthProvider>
     </Router>
     </main>
   )
 }
 
 export default App
-
-        {/*<Route  path='/' element={<Home />}></Route>
-        <Route  path='add-user' element={<AddUser />}>
-        <Route  path='view-user/:id' element={<ViewUser />}/>
-        <Route  path='view-users' element={<UsersView />}/>
-        <Route  path='edit-user/:id' element={<EditUser />}/>
-        </Route>
-        <Route  path='/add-student/:userId' element={<AddStudent />}>
-        <Route  path='student-profile/:userId' element={<StudentProfile />}/>
-        <Route  path='view-students' element={<StudentsView />}/>
-        <Route  path='edit-student/:id' element={< EditStudent/>}/>
-        </Route>*/}
