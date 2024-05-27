@@ -11,7 +11,6 @@ const [userDTO, setUserDTO] = useState({
     email: '',
     password: '',
     phone: '',
-    role:'PARENT',
   })
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -83,7 +82,6 @@ const [userDTO, setUserDTO] = useState({
           'Content-Type': 'multipart/form-data',
         },
       })
-      console.log('response is : ', response)
 
       const userId = response.data.id
       navigate('/activation')

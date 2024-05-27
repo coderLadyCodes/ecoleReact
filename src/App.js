@@ -36,23 +36,16 @@ function App() {
     </HideShowComponents> 
       <Routes>
         <Route  path='/' element={<Home />} />
-
         <Route  path='/signup' element={<Signup />}/>
-
         <Route  path='/activation' element={<Activation />}/>
-
-        <Route path = '/identification' element={<Identification/>}/>
-           
-        <Route path = '/connexion' element={<Connexion/>}/>
-        
-        <Route element={<PrivateRoute />}>                                               
-        <Route path = '/passwordRefresh' element={<PasswordRefresh/>}/>
-        </Route>                             {/* ENGLOBE ALL PRIVATE ROUTES THIS MUST BE AT THE BUTTOM */}
-
-        <Route path = '/dashboard' element={<Dashboard/>}/>
-
-        <Route path = '/logout' element={<Logout/>}/>
-        
+        <Route path = '/identification' element={<Identification/>}/> 
+        <Route path = '/connexion' element={<Connexion/>}/> 
+    
+        {/*<Route element={<PrivateRoute />}> */}
+        <Route path = '/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}/>                                     
+        <Route  path = '/passwordRefresh' element={<PrivateRoute><PasswordRefresh/></PrivateRoute>}/>
+        <Route  path = '/logout' element={<PrivateRoute><Logout/></PrivateRoute>}/> 
+        {/*</Route>   */}                          
         {/*<Route  path='/add-user' element={<AddUser />}></Route>*/}
 
         <Route  path='/view-user/:id' element={<ViewUser />}></Route>

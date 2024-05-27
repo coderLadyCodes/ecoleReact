@@ -27,7 +27,9 @@ const Activation = () => {
     }
   return (
     <div>
-        <h2>Activer votre compte</h2>
+        <h1>Activer votre compte</h1>
+        <h2>Vous allez recevoir un Email avec le code de vérification</h2>
+        <p>Consultez aussi vos courriers indésirables :)</p>
         <form onSubmit={handleSubmit}>
         <label htmlFor='code'>Code</label>
             <input placeholder='code' type="text"  name='code' id='code' onChange={handleChange} value={activation.code} required/> 

@@ -1,14 +1,11 @@
 import React from 'react'
 import { useAuth } from './AuthProvider'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, Route } from 'react-router-dom'
 
-const PrivateRoute = () => {
-    const user = useAuth()
-
-    if (!user.token) return <Navigate to="/connexion" />
-
-  return 
-     <Outlet />    
+const PrivateRoute = ({children}) => {
+    const {user} = useAuth()
+   return  user ? children :  <Navigate to="/connexion" replace/>
+     //<Outlet />    
 }
 
 export default PrivateRoute
