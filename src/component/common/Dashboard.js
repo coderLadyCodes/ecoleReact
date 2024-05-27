@@ -4,12 +4,16 @@ import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const {logout, userName, user, role} = useAuth()
+  const {logout, userName, user, role,authentificationDTO} = useAuth()
  
   const handleLogout = async () => {
     try{
-      await logout()
-    // navigate('/') 
+      let userChoise = window.confirm('Voulez-vous vous déconnecter ?')
+      if(userChoise){
+        await logout()
+        authentificationDTO.username =""
+        authentificationDTO.password = ""
+      }
     } catch (error) {
       console.error("Logout failed:", error)
     }  

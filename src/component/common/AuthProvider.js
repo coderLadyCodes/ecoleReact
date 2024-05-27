@@ -139,7 +139,7 @@ export const AuthProvider = ({children}) => {
                 setUser(null)
                 setToken(null)
                 cookies.remove('token',token, { path: '/' })
-                navigate('/connexion')
+                navigate('/')
                 
             }catch(error) {
                 console.error(error)
