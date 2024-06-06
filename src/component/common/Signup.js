@@ -18,7 +18,7 @@ const [userDTO, setUserDTO] = useState({
     if (userId) {
       setUserDTO(prevUserDTO => ({ ...prevUserDTO, userId }))
     } 
-  }, [userId])
+  }, [])
  
 
   const [file, setFile] = useState(null)
@@ -31,6 +31,8 @@ const [userDTO, setUserDTO] = useState({
     if (selectedFile && selectedFile.size > maxSizeInBytes) {
       alert("La taille du fichier excede 500KB, veuillez reduire le volume svp")
       setFile(null)
+    }else if (!selectedFile){
+      console.log("no file selected")
     } else {
       setFile(selectedFile)
       setPreviewImage(URL.createObjectURL(selectedFile))
@@ -39,7 +41,7 @@ const [userDTO, setUserDTO] = useState({
   useEffect(() => {
     return () => {
       if (previewImage) {
-        URL.revokeObjectURL(previewImage);
+        URL.revokeObjectURL(previewImage)
       }
     }
   }, [previewImage]);
@@ -82,8 +84,6 @@ const [userDTO, setUserDTO] = useState({
           'Content-Type': 'multipart/form-data',
         },
       })
-
-      const userId = response.data.id
       navigate('/activation')
       
     } catch (error) {

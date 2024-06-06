@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import {Link, useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import { useAuth } from '../common/AuthProvider';
 
 const EditUser = () => {
 
   let navigate = useNavigate()
-  const {id} = useParams()
-
+  const {userId} = useAuth()
   const [userDetails, setUserDetails] = useState({
     name: '',
     email: '',
@@ -18,7 +18,7 @@ const EditUser = () => {
 }, [])
 
 const loadUser = async () =>{
-  const result = await axios.get(`http://localhost:8080/users/${id}`)
+  const result = await axios.get(`http://localhost:8080/users/${userId}`)
   setUserDetails(result.data)   
 };
 
@@ -62,7 +62,7 @@ const loadUser = async () =>{
       formData.append('userDetails', JSON.stringify(userDetails))
       formData.append('multipartFile', file)
       console.log(formData)
-      const response = await axios.put(`http://localhost:8080/users/${id}`,formData, {
+      const response = await axios.put(`http://localhost:8080/users/${userId}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -70,7 +70,7 @@ const loadUser = async () =>{
       setUserDetails(response.data)
       console.log('Response:', response.data)
       
-      navigate(`/view-user/${id}`)
+      navigate('/dashboard')
 
       console.log('Response:', response.data)
     } catch (error) {
@@ -117,7 +117,7 @@ const loadUser = async () =>{
               <button type='submit'>Save</button>
             </div>
             <div>
-              <Link to={`/view-user/${id}`}  type='submit'>Cancel</Link> 
+              <Link to={'/dashboard'}  type='submit'>Cancel</Link> 
             </div>
           </div>
         </form>   

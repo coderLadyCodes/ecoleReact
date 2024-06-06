@@ -1,26 +1,34 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams} from 'react-router-dom'
+import profil from '../../images/profil.jpg'
+import { useAuth } from '../common/AuthProvider'
+
 
 const StudentProfile = () => {
-
-  const {userId} = useParams()
+  const {user} = useAuth()
+  const {id} = useParams()
+  const navigate = useNavigate()
   const [studentDTO, setStudentDTO] = useState({
     name : '',
     birthday : null,
+    classe:'',
     presence : false,
     cantine : false,
     multipartFile: '',
   })
 
   useEffect(() =>{
+    if (!user){
+     navigate('/connexion')
+    }
     loadStudent()
-  }, [])
+  }, [user,id])
 
   const loadStudent = async () =>{
     try{
-      const result = await axios.get(`http://localhost:8080/students/${userId}`)
+      const result = await axios.get(`http://localhost:8080/students/${id}`, {withCredentials: true})
       setStudentDTO(result.data)
     }catch (error) {
       console.error('Error: ', error)
@@ -29,21 +37,18 @@ const StudentProfile = () => {
   return (
   
   <section className='d-flex flex-column'>
-    <h2 className='mb-5 text-center'>Enfant</h2>
+    <h2 className='mb-5 text-center'>Enfant : {studentDTO.name}</h2>
   <div className='d-flex justify-content-center'>
     <div className='column'>
   <div className='card' style={{width: '40rem'}}>
   <div className='card-body text-center'>
+    {studentDTO.profileImage?
   <img
-    src={`http://localhost:8080/images/${studentDTO.userId}/${studentDTO.profileImage}`}
+    src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
     alt="photo"
-    className="rounded-circle img-fluid"
     style={{ width: 120, height: 120}}
-    />
-    <h5 className="my-3">
-      {`${studentDTO.name}`}
-    </h5>
-                      {/* CONNECT BUTTON TO EDIT LINK */}
+    /> : <img src={profil} style={{width: 60, height: 60}}/> }
+               
   <div>
  
   <div>
@@ -67,6 +72,16 @@ const StudentProfile = () => {
   </div>
   <div>
    <p>{studentDTO.birthday}</p>
+  </div>
+  </div>
+  <hr />
+
+  <div>
+  <div>
+  <h5>Classe</h5>
+  </div>
+  <div>
+   <p>{studentDTO.classe}</p>
   </div>
   </div>
   <hr />

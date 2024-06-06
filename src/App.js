@@ -2,10 +2,8 @@ import './App.css'
 import Home from './component/common/Home'
 import UsersView from './component/user/UsersView'
 import NavBar from './component/common/NavBar'
-import { BrowserRouter  as Router, Routes, Route, useParams, Link} from 'react-router-dom'
-import AddUser from './component/user/AddUser'
+import { BrowserRouter  as Router, Routes, Route, Navigate} from 'react-router-dom'
 import EditUser from './component/user/EditUser'
-import UserProfile from './component/user/UserProfile'
 import AddStudent from './component/student/AddStudent'
 import StudentsView from './component/student/StudentsView'
 import StudentProfile from './component/student/StudentProfile'
@@ -20,57 +18,71 @@ import Connexion from './component/common/Connexion'
 import Logout from './component/common/Logout'
 import Identification from './component/common/Identification'
 import Dashboard from './component/common/Dashboard'
-import PasswordRefresh from './component/common/PasswordRefresh'
-import AuthProvider from './component/common/AuthProvider'
-import PrivateRoute from './component/common/PrivateRoute'
+import ChangePassword from './component/common/ChangePassword'
+import AuthProvider, { useAuth } from './component/common/AuthProvider'
+import PrivateRoutes from './component/common/PrivateRoutes'
+import NewPassword from './component/common/NewPassword'
+import Accueil from './component/common/Accueil'
 
 
 function App() {
- 
+const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SUPER ADMIN, ADMIN, PARENT "SEE IF IT WORKS, TEST IT !!"
   return (
-    <main> {/*  className="container-fluid"*/}
+    
+    <main>
     <Router>
-    <AuthProvider>
+    <AuthProvider> 
    <HideShowComponents>
     <NavBar />
     </HideShowComponents> 
       <Routes>
+  
         <Route  path='/' element={<Home />} />
         <Route  path='/signup' element={<Signup />}/>
         <Route  path='/activation' element={<Activation />}/>
         <Route path = '/identification' element={<Identification/>}/> 
         <Route path = '/connexion' element={<Connexion/>}/> 
-    
-        {/*<Route element={<PrivateRoute />}> */}
-        <Route path = '/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}/>                                     
-        <Route  path = '/passwordRefresh' element={<PrivateRoute><PasswordRefresh/></PrivateRoute>}/>
-        <Route  path = '/logout' element={<PrivateRoute><Logout/></PrivateRoute>}/> 
-        {/*</Route>   */}                          
-        {/*<Route  path='/add-user' element={<AddUser />}></Route>*/}
+        <Route path='*' element={<Navigate to='/' />}></Route>
+        <Route  path = '/change-password' element={<ChangePassword />} />
+        <Route  path = '/new-password' element={<NewPassword />} />
+        
+        <Route element={<PrivateRoutes />}>  
+        <Route  path = '/dashboard' element={<Dashboard />} exact/>                            
+        <Route  path = '/logout' element={<Logout />} exact/>
+        <Route path='/edit-user' element={<EditUser />} />
+        <Route path='/add-student' element={<AddStudent />} />
+        <Route path='/student-profile/:id' element={<StudentProfile />} />
+        <Route path='/accueil' element={<Accueil />} />
+        <Route  path='/edit-student/:id' element={< EditStudent/>} />
+        <Route  path='/view-students' element={<StudentsView />} />
 
-        <Route  path='/view-user/:id' element={<ViewUser />}></Route>
-
-        <Route  path='/view-users' element={<UsersView />}> </Route>
-
-        <Route  path='/edit-user/:id' element={<EditUser />}></Route> 
-
-        <Route exact path='/user-profile/:id' element={<UserProfile />}></Route>
-
-        <Route  path='/add-student/:userId' element={<AddStudent />}></Route>
-
-        <Route  path='/view-students' element={<StudentsView />}></Route>
-
-        <Route  path='/student-profile/:userId' element={<StudentProfile />}></Route>
-
-        <Route  path='/edit-student/:id' element={< EditStudent/>}></Route>
-
-        <Route  path='/add-post' element={< AddPost/>}></Route>
-
-        <Route  path='/post-view/:userId' element={< PostView/>}></Route>
-     
+        {role === 'SUPER_ADMIN' && (
+          <>
+          <Route path='/view-users' element={<UsersView />} />  
+          <Route  path='/view-user/:id' element={<ViewUser />} />  
+          <Route  path='/add-post' element={< AddPost/>} />
+          <Route  path='/post-view/:userId' element={< PostView/>} />
+          </>
+        )}
+        {role === 'ADMIN' && (
+          <>
+          <Route path='/view-users' element={<UsersView />} />
+          <Route  path='/view-user/:id' element={<ViewUser />} />
+          <Route  path='/add-post' element={< AddPost/>} />
+          <Route  path='/post-view/:userId' element={< PostView/>} />
+          </>
+        )}
+          {role === 'PARENT' && (
+                <>
+                  <Route path='/view-students' element={<StudentsView />} />
+                  <Route path='/edit-student/:id' element={<EditStudent />} />
+                </>
+              )}
+        </Route>  
       </Routes>
       </AuthProvider>
     </Router>
+    
     </main>
   )
 }

@@ -12,19 +12,20 @@ export const AuthProvider = ({children}) => {
       })
     const [user, setUser] = useState(null)
     const [role, setRole] = useState('')
-    const [token, setToken] = useState(null)
     const [userName, setUserName] = useState(null)
+    const [userId, setUserId] = useState('')
     const navigate = useNavigate()
 
      // Axios interceptor to include the token in all requests
      useEffect(() => {
         const requestInterceptor = axios.interceptors.request.use(
           (config) => {
-            const token = cookies.get('token')
-            if (token) {
-              config.headers.Authorization = `Bearer ${token}`
-            }
-            return config
+            //const token = cookies.get('token')
+            // if (token) {
+             // config.headers.Authorization = `Bearer ${token}`
+            //}
+            config.withCredentials = true
+            return config 
           },
           (error) => {
             return Promise.reject(error)
@@ -37,14 +38,15 @@ export const AuthProvider = ({children}) => {
             if (error.response.status === 401 && !originalRequest._retry) {
               originalRequest._retry = true
               try{
-                const newToken = await refreshToken()
-                axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
-                originalRequest.headers['Authorization'] = `Bearer ${newToken}`
+                //const newToken = await refreshToken()
+                await refreshToken()
+                //axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
+                //originalRequest.headers['Authorization'] = `Bearer ${newToken}`
                 return axios(originalRequest)
               }catch (err) {
                 console.error('Token refresh failed:', err)
                 setUser(null)
-                setToken(null)
+                //setToken(null)
                 navigate("/connexion")
                 return Promise.reject(err)
               }
@@ -57,7 +59,7 @@ export const AuthProvider = ({children}) => {
           axios.interceptors.request.eject(requestInterceptor)
           axios.interceptors.response.eject(responseInterseptor)
         }
-      }, [token, navigate])
+      }, [navigate])
       
         // end of interceptor
 
@@ -85,27 +87,42 @@ export const AuthProvider = ({children}) => {
               })
 
               setUser(JSON.parse(response.config.data).username)
-              const token = response.data.bearer
-              setToken(token)
-              cookies.set('token', token, {httpOnly:true, secure:true, path: '/' }) 
+              //const token = response.data.bearer
+              //setToken(token)
+              //cookies.set('token', token, {httpOnly:true, secure:true, path: '/' }) 
 
               const role = response.data.role
               setRole(role)
 
-              //DECODE TOKEN TO EXTRACT THE NAME OF THE USER
-              const decodeToken = parseJwt(token)
-              const userName = decodeToken.name
+              const userId = response.data.id
+              setUserId(userId)
+
+              const userName = response.data.userName
               setUserName(userName)
-              navigate('/dashboard')  
+              navigate('/dashboard')
+
+              //DECODE TOKEN TO EXTRACT INFOS OF THE USER
+{/*              const token = cookies.get('token')
+              console.log('Token retrieved from cookies:', token)
+              if (token) {
+                const decodeToken = parseJwt(token)
+              if (decodeToken) {
+                const userName = decodeToken.name
+                setUserName(userName)
+                navigate('/dashboard')
+              } else {
+                throw new Error("Failed to decode token")
+              }} else {
+                throw new Error("Token not found after login")
+              }*/}      
            
         } catch (error){
             console.error("error is : ", error)
             alert("Login failed. Please check your credentials.")
         }
         }
-
          //DECODE TOKEN TO EXTRACT THE NAME OF THE USER
-          const parseJwt = (token) => {
+{/*          const parseJwt = (token) => {
             try{
           const base64Url = token.split('.')[1]
           const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
@@ -117,16 +134,17 @@ export const AuthProvider = ({children}) => {
               console.error("Invalid JWT token", e)
               return null
             }
-        }
+        }*/}
 
         const refreshToken = async () => {
           try {
             const response = await axios.post('http://localhost:8080/refresh-token',{}, {
               withCredentials: true,
             })  
-            const newToken = response.data.refresh  
-            cookies.set('token', newToken, { path: '/' })    
-            return newToken 
+            return response.data.refresh
+            //const newToken = response.data.refresh  
+           // cookies.set('token', newToken, { path: '/' })    
+            //return newToken 
           }catch (error) {
             console.error("Error refreshing access token:", error)
             throw error
@@ -137,8 +155,8 @@ export const AuthProvider = ({children}) => {
             try{
                 const res = await axios.post('http://localhost:8080/deconnexion',{},{withCredentials: true})
                 setUser(null)
-                setToken(null)
-                cookies.remove('token',token, { path: '/' })
+                //setToken(null)
+                cookies.remove('token', { path: '/' })
                 navigate('/')
                 
             }catch(error) {
@@ -149,7 +167,7 @@ export const AuthProvider = ({children}) => {
         
 
         return (
-        <AuthContext.Provider value={{user, setUser, login, token, setToken, logout, handleInputChange, authentificationDTO, setAuthentificationDTO, refreshToken, userName, setUserName, role, setRole}}>
+        <AuthContext.Provider value={{user, setUser, login, logout, handleInputChange, authentificationDTO, setAuthentificationDTO, refreshToken, userName, setUserName, role, setRole, userId, setUserId}}>
             {children}
         </AuthContext.Provider> )
    

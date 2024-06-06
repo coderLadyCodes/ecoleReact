@@ -15,7 +15,7 @@ const {login, authentificationDTO, handleInputChange} = useAuth()
       <div>
             <label htmlFor='password'>Mot de Passe</label>
             <input placeholder='mot de passe' type='password' name='password' onChange={handleInputChange} value={authentificationDTO.password} required/>
-            <p><Link to={'/passwordRefresh'}  type='submit'>Mot de passe oublié?</Link></p>
+            <p><Link to={'/change-password'}  type='submit'>Mot de passe oublié? réinitialiser le mot de passe</Link></p>
       </div>
       <div>
               <button type='submit'>Connecter</button>

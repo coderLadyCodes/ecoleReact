@@ -2,14 +2,17 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from '../common/AuthProvider'
 
 const EditStudent = () => {
     let navigate = useNavigate()
+    //const {token} = useAuth()
     const {id} = useParams()
 
     const [studentDetails, setStudentDetails] = useState({
         name: '',
         birthday: null,
+        classe:'',
         presence:true ,
         cantine: true,
     })
@@ -50,23 +53,22 @@ const EditStudent = () => {
     const updateStudent = async (e) => {
       e.preventDefault()
 
-     const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR')
+     const formattedBirthday = new Date(studentDetails.birthday).toLocaleDateString('fr-FR')
      //const formattedBirthday = `${studentDetails.birthday.getDate().toString().padStart(2, '0')}/${(studentDetails.birthday.getMonth() + 1).toString().padStart(2, '0')}/${studentDetails.birthday.getFullYear()}`
     
       try {
        const formData = new FormData()
-       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday })) //
+       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
        formData.append('multipartFile', file)
        const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            //'Authorization': `Bearer ${token}`
           },
         })
 
         setStudentDetails(response.data)
-         console.log('Response:', response.data)
-   
-        navigate('/view-students')
+        navigate(`/student-profile/${id}`)
     
   
       } catch (error) {
@@ -125,12 +127,21 @@ const EditStudent = () => {
   </fieldset>
 
   <div>
-  <label htmlFor="birthday" className="form-label">Date De Naissance</label>
-    <DatePicker id='birthday' selected={new Date()} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
+  <label htmlFor="birthday">Date De Naissance</label>
+    <DatePicker id='birthday' selected={studentDetails.birthday} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 
   <div>
-  
+      <label htmlFor='classe'>Classe</label>
+      <select name='classe' id='classe' value={studentDetails.classe} onChange={handleInputChange}>
+        <option defaultValue='none'>Select an Option</option>
+        <option value='Petite Section'>Petite Section</option>
+        <option value='Moyenne Section'>Moyenne Section</option>
+        <option value='Grande Section'>Grande Section</option>
+      </select>
+  </div>
+
+  <div>
   <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} />
   </div>
      <p>taille max du fichier : 500KB</p>
@@ -140,7 +151,7 @@ const EditStudent = () => {
               <button type='submit'>Save</button>
             </div>
             <div>
-              <Link to={'/view-students'}  type='submit'>Cancel</Link>
+              <button><Link to={`/student-profil/${id}`}  type='submit'>Annuler</Link></button>
             </div>
           </div>
   </form>
