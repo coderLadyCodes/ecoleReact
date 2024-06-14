@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { FaCalendarAlt } from 'react-icons/fa'
 import { useAuth } from '../common/AuthProvider'
 
 const AddStudent = () => {
@@ -59,7 +58,7 @@ const AddStudent = () => {
         withCredentials: true
 
       })
-       console.log("response data add studend from backend : ", response)
+       //console.log("response data add studend from backend : ", response)
 
       if (response.data && response.data.id) {
         const id = response.data.id

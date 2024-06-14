@@ -5,7 +5,8 @@ const HideShowComponents = ({children}) => {
     const location = useLocation()
     const [showNavBar, setShowNavBar] = useState(false)
     useEffect(() => {
-        if(location.pathname === '/', '/signup'){
+        if(location.pathname === '/' || location.pathname === '/signup' || location.pathname ==='/connexion'
+          || location.pathname === '/activation' || location.pathname ==='/identification'){
             setShowNavBar(false)
         }else {
             setShowNavBar(true)

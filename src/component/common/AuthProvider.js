@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Cookies from "universal-cookie"
 
+
 const AuthContext = createContext()
 const cookies = new Cookies()
 export const AuthProvider = ({children}) => {
@@ -16,14 +17,9 @@ export const AuthProvider = ({children}) => {
     const [userId, setUserId] = useState('')
     const navigate = useNavigate()
 
-     // Axios interceptor to include the token in all requests
      useEffect(() => {
         const requestInterceptor = axios.interceptors.request.use(
           (config) => {
-            //const token = cookies.get('token')
-            // if (token) {
-             // config.headers.Authorization = `Bearer ${token}`
-            //}
             config.withCredentials = true
             return config 
           },
@@ -38,15 +34,12 @@ export const AuthProvider = ({children}) => {
             if (error.response.status === 401 && !originalRequest._retry) {
               originalRequest._retry = true
               try{
-                //const newToken = await refreshToken()
                 await refreshToken()
-                //axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
-                //originalRequest.headers['Authorization'] = `Bearer ${newToken}`
                 return axios(originalRequest)
               }catch (err) {
                 console.error('Token refresh failed:', err)
                 setUser(null)
-                //setToken(null)
+                localStorage.removeItem('user')
                 navigate("/connexion")
                 return Promise.reject(err)
               }
@@ -60,8 +53,21 @@ export const AuthProvider = ({children}) => {
           axios.interceptors.response.eject(responseInterseptor)
         }
       }, [navigate])
-      
-        // end of interceptor
+
+{/*      useEffect(() => {
+        const storedUser = localStorage.getItem('user')
+        if (storedUser) {
+          const userData = JSON.parse(storedUser)
+          console.log("Stored user data found: ", userData)
+          setUser(userData.username)
+          setRole(userData.role)
+          setUserName(userData.userName)
+          setUserId(userData.userId)
+        } else {
+          console.log("No stored user data found")
+        }
+      }, [])*/}
+ 
 
     const handleInputChange = (e) => {
     const {name, value} = e.target
@@ -69,6 +75,7 @@ export const AuthProvider = ({children}) => {
     }
     const login = async (e) => {
      e.preventDefault()
+     
         if(!authentificationDTO.username || !authentificationDTO.password){
             alert('Completez Tout Les Champs')
             return
@@ -85,11 +92,9 @@ export const AuthProvider = ({children}) => {
                 },
                 withCredentials: true
               })
-
-              setUser(JSON.parse(response.config.data).username)
-              //const token = response.data.bearer
-              //setToken(token)
-              //cookies.set('token', token, {httpOnly:true, secure:true, path: '/' }) 
+              
+              const user = JSON.parse(response.config.data).username
+              setUser(user)
 
               const role = response.data.role
               setRole(role)
@@ -99,52 +104,29 @@ export const AuthProvider = ({children}) => {
 
               const userName = response.data.userName
               setUserName(userName)
-              navigate('/dashboard')
 
-              //DECODE TOKEN TO EXTRACT INFOS OF THE USER
-{/*              const token = cookies.get('token')
-              console.log('Token retrieved from cookies:', token)
-              if (token) {
-                const decodeToken = parseJwt(token)
-              if (decodeToken) {
-                const userName = decodeToken.name
-                setUserName(userName)
-                navigate('/dashboard')
-              } else {
-                throw new Error("Failed to decode token")
-              }} else {
-                throw new Error("Token not found after login")
-              }*/}      
+             {/* const userData = {
+                username: user,
+                role,
+                userId,
+                userName,
+              }
+              localStorage.setItem('user', JSON.stringify(userData))*/}
+              navigate('/dashboard')     
            
         } catch (error){
             console.error("error is : ", error)
             alert("Login failed. Please check your credentials.")
         }
         }
-         //DECODE TOKEN TO EXTRACT THE NAME OF THE USER
-{/*          const parseJwt = (token) => {
-            try{
-          const base64Url = token.split('.')[1]
-          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-          const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-          }).join(''))
-          return JSON.parse(jsonPayload)
-            } catch (e) {
-              console.error("Invalid JWT token", e)
-              return null
-            }
-        }*/}
 
         const refreshToken = async () => {
           try {
             const response = await axios.post('http://localhost:8080/refresh-token',{}, {
               withCredentials: true,
-            })  
+            }) 
+            cookies.set('token', response.data.refresh, { path: '/' })
             return response.data.refresh
-            //const newToken = response.data.refresh  
-           // cookies.set('token', newToken, { path: '/' })    
-            //return newToken 
           }catch (error) {
             console.error("Error refreshing access token:", error)
             throw error
@@ -154,9 +136,11 @@ export const AuthProvider = ({children}) => {
         const logout = async () => {
             try{
                 const res = await axios.post('http://localhost:8080/deconnexion',{},{withCredentials: true})
-                setUser(null)
-                //setToken(null)
+                setUser(null) 
+                localStorage.removeItem('user')  
                 cookies.remove('token', { path: '/' })
+                cookies.remove('refresh', { path: '/' })
+                setAuthentificationDTO({username: '', password: ''})
                 navigate('/')
                 
             }catch(error) {

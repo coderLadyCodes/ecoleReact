@@ -8,7 +8,7 @@ import discussion from '../../images/discussion.png'
 
 const Dashboard = () => {
 
-  const {logout, user, role,authentificationDTO, userId} = useAuth()
+  const {logout, user, role, userId} = useAuth()
 
   const [userDTO, setUserDTO] = useState({
     name:'',
@@ -16,14 +16,12 @@ const Dashboard = () => {
     phone:'',
     multipartFile:'',
   })
- 
+  //localStorage.setItem('userDTO', JSON.stringify(userDTO))
   const handleLogout = async () => {
     try{
       let userChoise = window.confirm('Voulez-vous vous déconnecter ?')
       if(userChoise){
         await logout()
-        authentificationDTO.username =""
-        authentificationDTO.password = ""
       }
     } catch (error) {
       console.error("Logout failed:", error)
@@ -31,6 +29,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
+    // ***********************CONFIGURER TOUT CA DANS LE COIN A DROITE ' MON COMPTE ' AVEC L'IMAGE DE PROFIL***************************
     const fetchData = async () => {
       try{
         const response = await axios.get(`http://localhost:8080/users/${userId}`)
@@ -42,10 +41,17 @@ const Dashboard = () => {
     fetchData()
   }, [userId])
 
+{/*  useEffect(() => { 
+    const storedUserDTO = localStorage.getItem('userDTO')
+    setUserDTO(JSON.parse(storedUserDTO))
+    console.log("stored user data in local storage : ", JSON.parse(storedUserDTO))
+
+  }, [])*/}
+
   return (
 
     <section>
-      <p>** Bienvenue "Email": {user}, "Role" : {role} **</p> 
+      {user && <p>** Bienvenue, Email: {user}, Role: {role} **</p>}
       
       <div style={{width: '8rem'}}>
         {userDTO.profileImage?<img src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}

@@ -27,15 +27,16 @@ import Accueil from './component/common/Accueil'
 
 function App() {
 const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SUPER ADMIN, ADMIN, PARENT "SEE IF IT WORKS, TEST IT !!"
+
   return (
     
     <main>
     <Router>
-    <AuthProvider> 
-   <HideShowComponents>
-    <NavBar />
+    <AuthProvider>         
+    <HideShowComponents>
+    <NavBar />                 
     </HideShowComponents> 
-      <Routes>
+      <Routes> 
   
         <Route  path='/' element={<Home />} />
         <Route  path='/signup' element={<Signup />}/>
@@ -46,7 +47,7 @@ const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SU
         <Route  path = '/change-password' element={<ChangePassword />} />
         <Route  path = '/new-password' element={<NewPassword />} />
         
-        <Route element={<PrivateRoutes />}>  
+        <Route element={<PrivateRoutes />}>                            
         <Route  path = '/dashboard' element={<Dashboard />} exact/>                            
         <Route  path = '/logout' element={<Logout />} exact/>
         <Route path='/edit-user' element={<EditUser />} />

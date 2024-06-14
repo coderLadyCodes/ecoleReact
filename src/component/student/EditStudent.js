@@ -69,7 +69,6 @@ const EditStudent = () => {
 
         setStudentDetails(response.data)
         navigate(`/student-profile/${id}`)
-    
   
       } catch (error) {
         console.error('Error:', error);

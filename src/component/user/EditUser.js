@@ -67,12 +67,8 @@ const loadUser = async () =>{
           'Content-Type': 'multipart/form-data',
         },
       })
-      setUserDetails(response.data)
-      console.log('Response:', response.data)
-      
+      setUserDetails(response.data)  
       navigate('/dashboard')
-
-      console.log('Response:', response.data)
     } catch (error) {
       console.error('Error:', error)
     }

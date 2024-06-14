@@ -19,3 +19,19 @@
   border-radius: 50%;
   cursor:pointer;
 }
+
+/* NAVBAR*/
+.mainNave{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+ul{
+  display: flex;
+}
+li{
+  padding: 1rem;
+}
+
