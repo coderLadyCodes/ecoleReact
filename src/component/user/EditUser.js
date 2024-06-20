@@ -18,7 +18,7 @@ const EditUser = () => {
 }, [])
 
 const loadUser = async () =>{
-  const result = await axios.get(`http://localhost:8080/users/${userId}`)
+  const result = await axios.get(`http://localhost:8080/users/${userId}`,{withCredentials: true})
   setUserDetails(result.data)   
 };
 
@@ -65,7 +65,7 @@ const loadUser = async () =>{
       const response = await axios.put(`http://localhost:8080/users/${userId}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-        },
+        }, withCredentials: true
       })
       setUserDetails(response.data)  
       navigate('/dashboard')

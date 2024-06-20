@@ -2,16 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useAuth } from '../common/AuthProvider'
 
 const EditStudent = () => {
     let navigate = useNavigate()
-    //const {token} = useAuth()
     const {id} = useParams()
 
     const [studentDetails, setStudentDetails] = useState({
         name: '',
-        birthday: null,
+        birthday: new Date(),
         classe:'',
         presence:true ,
         cantine: true,
@@ -19,12 +17,21 @@ const EditStudent = () => {
 
     useEffect(() =>{
         loadStudent()
-    }, [])
+    }, [id])
     
     const loadStudent = async () =>{
-      const result = await axios.get(`http://localhost:8080/students/${id}`)
-      setStudentDetails(result.data)
+      try{
+      const result = await axios.get(`http://localhost:8080/students/${id}`, { withCredentials: true })
+{/*      const parsedBirthday = result.data.birthday ? new Date(result.data.birthday): new Date()
+      console.log('parsed birthday from get request : ', parsedBirthday)
+      setStudentDetails({...result.data, birthday: parsedBirthday})
+      console.log('result.data :', result.data)*/}
+      setStudentDetails({...result.data, birthday: new Date()})
+      console.log('birthday from getrequest : ', result.data)
+   } catch (error) {
+      console.error('Error loading student details:', error)
     }
+  }
 
     const [file, setFile] = useState(null)
     
@@ -41,33 +48,35 @@ const EditStudent = () => {
     }
 
     const handleInputChange = (e) => {
-      const { name, value } = e.target
-      const newValue = e.target.type === 'radio' ? (value === 'true') : value
+      const { name, value, type } = e.target
+      const newValue = type === 'radio' ? (value === 'true') : value
       setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
     }
   
     const handleBirthdayChange = (date) => {
-    setStudentDetails({ ...studentDetails, birthday: date })
-    }
+    setStudentDetails({...studentDetails, birthday : date})
+    console.log('handlebirthdaychange : ', date)
+}
+
 
     const updateStudent = async (e) => {
       e.preventDefault()
-
-     const formattedBirthday = new Date(studentDetails.birthday).toLocaleDateString('fr-FR')
-     //const formattedBirthday = `${studentDetails.birthday.getDate().toString().padStart(2, '0')}/${(studentDetails.birthday.getMonth() + 1).toString().padStart(2, '0')}/${studentDetails.birthday.getFullYear()}`
-    
+        const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR') 
+        console.log('formatedbirthday edit : ', formattedBirthday)
+          
       try {
        const formData = new FormData()
-       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
-       formData.append('multipartFile', file)
+      formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
+       formData.append('studentDetails', studentDetails)
+       formData.append('multipartFile', file)    
        const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            //'Authorization': `Bearer ${token}`
-          },
+          }, withCredentials: true
         })
 
         setStudentDetails(response.data)
+        console.log('edit student response data put:' , response.data)
         navigate(`/student-profile/${id}`)
   
       } catch (error) {
@@ -127,7 +136,7 @@ const EditStudent = () => {
 
   <div>
   <label htmlFor="birthday">Date De Naissance</label>
-    <DatePicker id='birthday' selected={studentDetails.birthday} onChange={handleBirthdayChange} dateFormat ='yyyy-MM-dd' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
+    <DatePicker id='birthday' selected={studentDetails.birthday} onChange={handleBirthdayChange} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 
   <div>
@@ -150,7 +159,7 @@ const EditStudent = () => {
               <button type='submit'>Save</button>
             </div>
             <div>
-              <button><Link to={`/student-profil/${id}`}  type='submit'>Annuler</Link></button>
+              <button><Link to={`/student-profile/${id}`}  type='submit'>Annuler</Link></button>
             </div>
           </div>
   </form>

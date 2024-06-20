@@ -12,7 +12,7 @@ useEffect(() => {
 
 const loadStudents = async () =>{
     try{
-        const result = await axios.get('http://localhost:8080/students')
+        const result = await axios.get('http://localhost:8080/students',{withCredentials: true})
         setStudentDTO(result.data)
     } catch (error) {
         console.error("error : ", error)
@@ -21,7 +21,7 @@ const loadStudents = async () =>{
 const handleDelete = async(id) => {
     let studentChoice = window.confirm('Voulez vous supprimer cet Elève ?')
     if (studentChoice){
-        await axios.delete(`http://localhost:8080/students/${id}`)
+        await axios.delete(`http://localhost:8080/students/${id}`,{withCredentials: true})
         loadStudents()
     }
 }

@@ -5,12 +5,11 @@ import { useAuth } from './AuthProvider'
 const NavBar = () => {
   return (
   <nav>
-    <Link to={'/'}><p>Ecole S.M</p></Link>
-    <Link to='/accueil'>Accueil</Link>
+    <Link to={'/accueil'}><p>Accueil</p></Link>
     <div className='mainNave'>
     <div>
         <ul>
-          <li><Link  to='/view-users'>Liste des Parents</Link></li>
+          <li><Link  to='/users-view'>Liste des Parents</Link></li>
           <li><Link to='/view-students'>Liste des Eleves</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
         </ul>

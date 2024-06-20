@@ -15,7 +15,7 @@ const [userDTO, setUserDTO] = useState([])
 
     const loadUsers = async () =>{
         try{
-        const result = await axios.get("http://localhost:8080/users")
+        const result = await axios.get("http://localhost:8080/users",{withCredentials: true})
         
         setUserDTO(result.data)
 
@@ -26,7 +26,7 @@ const [userDTO, setUserDTO] = useState([])
     const handleDelete = async(id) => {
       let userChoice = window.confirm("Voulez vous supprimer ce contacte?")
       if(userChoice){
-        await axios.delete(`http://localhost:8080/users/${id}`)
+        await axios.delete(`http://localhost:8080/users/${id}`,{withCredentials: true})
         loadUsers()
       }
     }
@@ -69,10 +69,10 @@ const [userDTO, setUserDTO] = useState([])
                                   <span>No image</span>
                             )}</td>
                      <td>
-                        <Link to={`/view-user/${user.id}`}><FaEye /></Link>
+                        <Link to={'/dashboard'}><FaEye /></Link>
                         </td>
                      <td className='max-2'>
-                     <Link to={`/edit-user/${user.id}`}><FaEdit /></Link>
+                     <Link to={'/edit-user'}><FaEdit /></Link>
                      </td>
                      <td>
                      <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>

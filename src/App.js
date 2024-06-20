@@ -56,10 +56,10 @@ const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SU
         <Route path='/accueil' element={<Accueil />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
         <Route  path='/view-students' element={<StudentsView />} />
+        <Route path='/users-view' element={<UsersView />} /> 
 
         {role === 'SUPER_ADMIN' && (
-          <>
-          <Route path='/view-users' element={<UsersView />} />  
+          <> 
           <Route  path='/view-user/:id' element={<ViewUser />} />  
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/post-view/:userId' element={< PostView/>} />

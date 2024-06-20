@@ -129,7 +129,7 @@ const AddStudent = () => {
 
             <div>
               <label htmlFor="birthday" >Date De Naissance</label>
-              <DatePicker id='birthday'  selected={new Date()} onChange={handleBirthdayChange} dateFormat='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown required />
+              <DatePicker id='birthday'  selected={studentDTO.birthday} onChange={handleBirthdayChange} dateFormat='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown required />
             </div>
 
             <div>
@@ -144,7 +144,7 @@ const AddStudent = () => {
             </div>
 
             <div>
-              <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} required />
+              <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>
             </div>
             <p>taille max du fichier : 500KB</p>
 
