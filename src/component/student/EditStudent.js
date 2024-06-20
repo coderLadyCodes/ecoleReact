@@ -22,10 +22,6 @@ const EditStudent = () => {
     const loadStudent = async () =>{
       try{
       const result = await axios.get(`http://localhost:8080/students/${id}`, { withCredentials: true })
-{/*      const parsedBirthday = result.data.birthday ? new Date(result.data.birthday): new Date()
-      console.log('parsed birthday from get request : ', parsedBirthday)
-      setStudentDetails({...result.data, birthday: parsedBirthday})
-      console.log('result.data :', result.data)*/}
       setStudentDetails({...result.data, birthday: new Date()})
       console.log('birthday from getrequest : ', result.data)
    } catch (error) {
