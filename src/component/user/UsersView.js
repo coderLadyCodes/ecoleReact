@@ -2,12 +2,13 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import axios from 'axios'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import { useAuth } from '../common/AuthProvider'
 //import SearchUser from '../common/SearchUser'
 
 const UsersView = () => {
+const {role} = useAuth()
  
 const [userDTO, setUserDTO] = useState([])
-//const[search, setSearch] = useState("")
 
     useEffect(() =>{
         loadUsers()
@@ -33,8 +34,9 @@ const [userDTO, setUserDTO] = useState([])
 
 
   return (
-    <section>
-        {/*<SearchUser  search={search} setSearch={setSearch}/>*/}
+    <>
+      { role == 'ADMIN' && (
+        <section>
         <h2>Liste des Parents</h2>
         <table>
             <thead>
@@ -49,7 +51,7 @@ const [userDTO, setUserDTO] = useState([])
             </thead>
 
             <tbody>
-                {userDTO.filter((usr) => usr.name.toLowerCase())/*.includes(search)*/
+                {userDTO.filter((usr) => usr.name.toLowerCase())
                 .map((user, index)=>(
                 
                  <tr key={user.id}>
@@ -81,8 +83,62 @@ const [userDTO, setUserDTO] = useState([])
                 ))}
             </tbody>
         </table>
-    </section>
+        </section>
+      ) }
+      {role == 'SUPER_ADMIN' && (
+       <section>
+       <h2>Liste des Parents</h2>
+       <table>
+           <thead>
+              <tr>
+               <th>ID</th>
+               <th>Nom</th>
+               <th>Email</th>
+               <th>Tél</th>
+               <th>Photo</th>
+               <th colSpan='3'>Actions</th>
+              </tr>
+           </thead>
+
+           <tbody>
+               {userDTO.filter((usr) => usr.name.toLowerCase())
+               .map((user, index)=>(
+               
+                <tr key={user.id}>
+                   <th scope="row" key={index}>
+                       {index + 1}
+                   </th>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td> {user.profileImage ? (
+                         <img
+                         src={`http://localhost:8080/images/${user.id}/${user.profileImage}`}
+                         alt="profile image"
+                         style={{ width: '100px', height: '100px' }}
+                         />
+                           ) : (
+                                 <span>No image</span>
+                           )}</td>
+                    <td>
+                       <Link to={'/dashboard'}><FaEye /></Link>
+                       </td>
+                    <td className='max-2'>
+                    <Link to={'/edit-user'}><FaEdit /></Link>
+                    </td>
+                    <td>
+                    <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>
+                    </td>
+                </tr>
+               ))}
+           </tbody>
+       </table>
+       </section> 
+      )}
+        
+     </>
   )
+ 
 }
 
 export default UsersView

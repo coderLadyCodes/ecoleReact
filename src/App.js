@@ -2,7 +2,7 @@ import './App.css'
 import Home from './component/common/Home'
 import UsersView from './component/user/UsersView'
 import NavBar from './component/common/NavBar'
-import { BrowserRouter  as Router, Routes, Route, Navigate} from 'react-router-dom'
+import { BrowserRouter  as Router, Routes, Route, Navigate, useOutletContext} from 'react-router-dom'
 import EditUser from './component/user/EditUser'
 import AddStudent from './component/student/AddStudent'
 import StudentsView from './component/student/StudentsView'
@@ -19,20 +19,20 @@ import Logout from './component/common/Logout'
 import Identification from './component/common/Identification'
 import Dashboard from './component/common/Dashboard'
 import ChangePassword from './component/common/ChangePassword'
-import AuthProvider, { useAuth } from './component/common/AuthProvider'
 import PrivateRoutes from './component/common/PrivateRoutes'
 import NewPassword from './component/common/NewPassword'
 import Accueil from './component/common/Accueil'
+import AuthProvider, { useAuth } from './component/common/AuthProvider'
+
 
 
 function App() {
-const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SUPER ADMIN, ADMIN, PARENT "SEE IF IT WORKS, TEST IT !!"
-
+  const {role} = useAuth()
   return (
-    
-    <main>
-    <Router>
-    <AuthProvider>         
+ 
+    <main> 
+     
+       
     <HideShowComponents>
     <NavBar />                 
     </HideShowComponents> 
@@ -46,7 +46,7 @@ const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SU
         <Route path='*' element={<Navigate to='/' />}></Route>
         <Route  path = '/change-password' element={<ChangePassword />} />
         <Route  path = '/new-password' element={<NewPassword />} />
-        
+              
         <Route element={<PrivateRoutes />}>                            
         <Route  path = '/dashboard' element={<Dashboard />} exact/>                            
         <Route  path = '/logout' element={<Logout />} exact/>
@@ -56,35 +56,36 @@ const {role} = useAuth         // CHECK THE ROLE BASED ROUTES FOR ALL USERS : SU
         <Route path='/accueil' element={<Accueil />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
         <Route  path='/view-students' element={<StudentsView />} />
-        <Route path='/users-view' element={<UsersView />} /> 
-
-        {role === 'SUPER_ADMIN' && (
+        
+       { role == 'SUPER_ADMIN' && (
           <> 
+          <Route path='/users-view' element={<UsersView />} /> 
           <Route  path='/view-user/:id' element={<ViewUser />} />  
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/post-view/:userId' element={< PostView/>} />
           </>
         )}
-        {role === 'ADMIN' && (
+        { role == 'ADMIN' && (
           <>
-          <Route path='/view-users' element={<UsersView />} />
+          <Route path='/users-view' element={<UsersView />} /> 
           <Route  path='/view-user/:id' element={<ViewUser />} />
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/post-view/:userId' element={< PostView/>} />
           </>
         )}
-          {role === 'PARENT' && (
-                <>
-                  <Route path='/view-students' element={<StudentsView />} />
-                  <Route path='/edit-student/:id' element={<EditStudent />} />
-                </>
-              )}
-        </Route>  
+        { role == 'PARENT' && (
+          <>
+            <Route path='/view-students' element={<StudentsView />} />
+            <Route path='/edit-student/:id' element={<EditStudent />} />
+          </>
+        )}
+      </Route>  
       </Routes>
-      </AuthProvider>
-    </Router>
-    
+
+
+  
     </main>
+    
   )
 }
 

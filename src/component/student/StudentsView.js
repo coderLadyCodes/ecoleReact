@@ -2,8 +2,10 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import React, { useEffect, useState } from 'react'
+import { useAuth } from '../common/AuthProvider'
 
 const StudentsView = () => {
+const {userId} = useAuth()
 const [studentDTO, setStudentDTO] = useState([])
 
 useEffect(() => {
@@ -14,6 +16,7 @@ const loadStudents = async () =>{
     try{
         const result = await axios.get('http://localhost:8080/students',{withCredentials: true})
         setStudentDTO(result.data)
+        console.log('userId in student: ', result.data.userId)
     } catch (error) {
         console.error("error : ", error)
     }}

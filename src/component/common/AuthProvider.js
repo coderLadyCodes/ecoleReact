@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Cookies from "universal-cookie"
 
-
 const AuthContext = createContext()
 const cookies = new Cookies()
 export const AuthProvider = ({children}) => {
@@ -156,9 +155,10 @@ export const AuthProvider = ({children}) => {
         </AuthContext.Provider> )
    
     }
+    export const useAuth = () =>{
+      return useContext(AuthContext)
+  }
 
 export default AuthProvider
 
-export const useAuth = () =>{
-    return useContext(AuthContext)
-}
+

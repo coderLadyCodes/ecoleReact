@@ -23,7 +23,6 @@ const EditStudent = () => {
       try{
       const result = await axios.get(`http://localhost:8080/students/${id}`, { withCredentials: true })
       setStudentDetails({...result.data, birthday: new Date()})
-      console.log('birthday from getrequest : ', result.data)
    } catch (error) {
       console.error('Error loading student details:', error)
     }
@@ -51,28 +50,25 @@ const EditStudent = () => {
   
     const handleBirthdayChange = (date) => {
     setStudentDetails({...studentDetails, birthday : date})
-    console.log('handlebirthdaychange : ', date)
 }
 
 
     const updateStudent = async (e) => {
       e.preventDefault()
         const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR') 
-        console.log('formatedbirthday edit : ', formattedBirthday)
           
       try {
        const formData = new FormData()
       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
-       formData.append('studentDetails', studentDetails)
-       formData.append('multipartFile', file)    
-       const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
+      formData.append('studentDetails', studentDetails)
+      formData.append('multipartFile', file)    
+      const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           }, withCredentials: true
         })
 
         setStudentDetails(response.data)
-        console.log('edit student response data put:' , response.data)
         navigate(`/student-profile/${id}`)
   
       } catch (error) {

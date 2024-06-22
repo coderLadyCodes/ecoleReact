@@ -16,7 +16,7 @@ const Dashboard = () => {
     phone:'',
     multipartFile:'',
   })
-  //localStorage.setItem('userDTO', JSON.stringify(userDTO))
+  
   const handleLogout = async () => {
     try{
       let userChoise = window.confirm('Voulez-vous vous déconnecter ?')
@@ -40,13 +40,6 @@ const Dashboard = () => {
     }
     fetchData()
   }, [userId])
-
-{/*  useEffect(() => { 
-    const storedUserDTO = localStorage.getItem('userDTO')
-    setUserDTO(JSON.parse(storedUserDTO))
-    console.log("stored user data in local storage : ", JSON.parse(storedUserDTO))
-
-  }, [])*/}
 
   return (
 
