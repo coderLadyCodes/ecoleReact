@@ -46,14 +46,13 @@ const [userDTO, setUserDTO] = useState([])
                 <th>Email</th>
                 <th>Tél</th>
                 <th>Photo</th>
-                <th colSpan='3'>Actions</th>
+                <th>Actions</th>
                </tr>
             </thead>
 
             <tbody>
-                {userDTO.filter((usr) => usr.name.toLowerCase())
+                {userDTO.filter((usr) => usr.name.toLowerCase() && usr.role !== 'SUPER_ADMIN')
                 .map((user, index)=>(
-                
                  <tr key={user.id}>
                     <th scope="row" key={index}>
                         {index + 1}
@@ -69,15 +68,13 @@ const [userDTO, setUserDTO] = useState([])
                           />
                             ) : (
                                   <span>No image</span>
-                            )}</td>
+                            )}
+                     </td>
                      <td>
                         <Link to={'/dashboard'}><FaEye /></Link>
                         </td>
                      <td className='max-2'>
                      <Link to={'/edit-user'}><FaEdit /></Link>
-                     </td>
-                     <td>
-                     <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>
                      </td>
                  </tr>
                 ))}
@@ -87,7 +84,7 @@ const [userDTO, setUserDTO] = useState([])
       ) }
       {role == 'SUPER_ADMIN' && (
        <section>
-       <h2>Liste des Parents</h2>
+       <h2>Liste des USERS</h2>
        <table>
            <thead>
               <tr>
@@ -96,7 +93,7 @@ const [userDTO, setUserDTO] = useState([])
                <th>Email</th>
                <th>Tél</th>
                <th>Photo</th>
-               <th colSpan='3'>Actions</th>
+               <th>Actions</th>
               </tr>
            </thead>
 
@@ -125,10 +122,12 @@ const [userDTO, setUserDTO] = useState([])
                        </td>
                     <td className='max-2'>
                     <Link to={'/edit-user'}><FaEdit /></Link>
-                    </td>
-                    <td>
-                    <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>
-                    </td>
+                    </td>                 
+                     <td>
+                      { user.role !== 'SUPER_ADMIN' && (
+                        <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>
+                      )}
+                    </td>                    
                 </tr>
                ))}
            </tbody>

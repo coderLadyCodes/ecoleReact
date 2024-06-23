@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../common/AuthProvider'
 
 const StudentsView = () => {
-const {userId} = useAuth()
+const {userId, role} = useAuth()
 const [studentDTO, setStudentDTO] = useState([])
 
 useEffect(() => {
@@ -16,7 +16,6 @@ const loadStudents = async () =>{
     try{
         const result = await axios.get('http://localhost:8080/students',{withCredentials: true})
         setStudentDTO(result.data)
-        console.log('userId in student: ', result.data.userId)
     } catch (error) {
         console.error("error : ", error)
     }}
@@ -41,7 +40,7 @@ const handleDelete = async(id) => {
             <th>Présence</th>
             <th>Cantine</th>
             <th>Photo</th>
-            <th colSpan='3'>Actions</th>
+            <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -68,9 +67,17 @@ const handleDelete = async(id) => {
          <td>
          <Link to={`/edit-student/${student.id}`}><FaEdit /></Link>
          </td>
-         <td>
+         { role == 'ADMIN' && (
+          <td>
          <button onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
          </td>
+         )}
+          { role == 'SUPER_ADMIN' && (
+          <td>
+         <button onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
+         </td>
+         )}
+         
         </tr>
         ))}
       </tbody>  
