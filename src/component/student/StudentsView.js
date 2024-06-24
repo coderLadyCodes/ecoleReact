@@ -23,8 +23,12 @@ const loadStudents = async () =>{
 const handleDelete = async(id) => {
     let studentChoice = window.confirm('Voulez vous supprimer cet Elève ?')
     if (studentChoice){
+      try {
         await axios.delete(`http://localhost:8080/students/${id}`,{withCredentials: true})
         loadStudents()
+      } catch (error){
+         console.error("Error deleting student:", error)
+      }   
     }
 }
 
