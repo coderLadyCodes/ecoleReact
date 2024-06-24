@@ -12,20 +12,20 @@ const NavBar = () => {
       { role == 'ADMIN' && (
         <ul>
           <li><Link  to='/users-view'>Liste des Parents</Link></li>
-          <li><Link to='/view-students'>Liste des Eleves</Link></li>
+          <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
         </ul>
       )}
             { role == 'SUPER_ADMIN' && (
         <ul>
           <li><Link  to='/users-view'>Liste des Parents</Link></li>
-          <li><Link to='/view-students'>Liste des Eleves</Link></li>
+          <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
         </ul>
       )}
             { role == 'PARENT' && (
         <ul>
-          <li><Link to='/view-students'>Liste des Eleves</Link></li>
+          <li><Link to='/kids-parent'>Liste des Eleves</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
         </ul>
       )}       

@@ -79,7 +79,7 @@ const Dashboard = () => {
       <button><Link to={'/edit-user'}>Modifier profile</Link></button> 
       <button><Link to={'/add-student'}>Ajouter un Enfant</Link></button> 
       <button><Link to={'/accueil'}>Retour à la Page d'Accueil</Link></button> 
-      <button><Link to={'/view-students'}>Voir les profils des enfants</Link></button> 
+      <button><Link to={'/kids-parent'}>Voir les profils des enfants</Link></button> 
     </section>
   )
 }

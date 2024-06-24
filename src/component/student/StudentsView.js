@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../common/AuthProvider'
 
 const StudentsView = () => {
-const {userId, role} = useAuth()
+const {role} = useAuth()
 const [studentDTO, setStudentDTO] = useState([])
 
 useEffect(() => {
@@ -67,17 +67,9 @@ const handleDelete = async(id) => {
          <td>
          <Link to={`/edit-student/${student.id}`}><FaEdit /></Link>
          </td>
-         { role == 'ADMIN' && (
           <td>
          <button onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
-         </td>
-         )}
-          { role == 'SUPER_ADMIN' && (
-          <td>
-         <button onClick={()=> handleDelete(student.id)}><FaTrashAlt /></button>
-         </td>
-         )}
-         
+         </td>      
         </tr>
         ))}
       </tbody>  

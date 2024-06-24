@@ -28,7 +28,7 @@ const StudentProfile = () => {
 
   const loadStudent = async () =>{
     try{
-      const result = await axios.get(`http://localhost:8080/students/${id}`, {withCredentials: true})
+      const result = await axios.get(`http://localhost:8080/students/student/${id}`, {withCredentials: true})
       setStudentDTO(result.data)
     }catch (error) {
       console.error('Error: ', error)

@@ -53,12 +53,10 @@ const AddStudent = () => {
       const response = await axios.post('http://localhost:8080/students', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          //'Authorization': `Bearer ${token}`
         },
         withCredentials: true
 
       })
-       //console.log("response data add studend from backend : ", response)
 
       if (response.data && response.data.id) {
         const id = response.data.id

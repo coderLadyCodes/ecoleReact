@@ -22,7 +22,8 @@ import ChangePassword from './component/common/ChangePassword'
 import PrivateRoutes from './component/common/PrivateRoutes'
 import NewPassword from './component/common/NewPassword'
 import Accueil from './component/common/Accueil'
-import AuthProvider, { useAuth } from './component/common/AuthProvider'
+import { useAuth } from './component/common/AuthProvider'
+import KidsParent from './component/student/KidsParent'
 
 
 
@@ -54,13 +55,13 @@ function App() {
         <Route path='/add-student' element={<AddStudent />} />
         <Route path='/student-profile/:id' element={<StudentProfile />} />
         <Route path='/accueil' element={<Accueil />} />
-        <Route  path='/edit-student/:id' element={< EditStudent/>} />
-        <Route  path='/view-students' element={<StudentsView />} />
+        <Route  path='/edit-student/:id' element={< EditStudent/>} />   
         
        { role == 'SUPER_ADMIN' && (
           <> 
           <Route path='/users-view' element={<UsersView />} /> 
-          <Route  path='/view-user/:id' element={<ViewUser />} />  
+          <Route  path='/view-user/:id' element={<ViewUser />} /> 
+          <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/post-view/:userId' element={< PostView/>} />
           </>
@@ -69,13 +70,15 @@ function App() {
           <>
           <Route path='/users-view' element={<UsersView />} /> 
           <Route  path='/view-user/:id' element={<ViewUser />} />
+          <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/post-view/:userId' element={< PostView/>} />
           </>
         )}
         { role == 'PARENT' && (
           <>
-            <Route path='/view-students' element={<StudentsView />} />
+            <Route path='/student-profile/:id' element={<StudentProfile />} />
+            <Route path='/kids-parent' element={<KidsParent />} />
             <Route path='/edit-student/:id' element={<EditStudent />} />
           </>
         )}
