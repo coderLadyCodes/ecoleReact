@@ -24,6 +24,7 @@ import NewPassword from './component/common/NewPassword'
 import Accueil from './component/common/Accueil'
 import { useAuth } from './component/common/AuthProvider'
 import KidsParent from './component/student/KidsParent'
+import EditPost from './component/post/EditPost'
 
 
 
@@ -55,7 +56,8 @@ function App() {
         <Route path='/add-student' element={<AddStudent />} />
         <Route path='/student-profile/:id' element={<StudentProfile />} />
         <Route path='/accueil' element={<Accueil />} />
-        <Route  path='/edit-student/:id' element={< EditStudent/>} />   
+        <Route  path='/edit-student/:id' element={< EditStudent/>} />
+        <Route  path='/post-view/:id' element={< PostView/>} />
         
        { role == 'SUPER_ADMIN' && (
           <> 
@@ -63,7 +65,7 @@ function App() {
           <Route  path='/view-user/:id' element={<ViewUser />} /> 
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/add-post' element={< AddPost/>} />
-          <Route  path='/post-view/:userId' element={< PostView/>} />
+          <Route  path='/edit-post/:id' element={< EditPost/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
@@ -72,7 +74,7 @@ function App() {
           <Route  path='/view-user/:id' element={<ViewUser />} />
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/add-post' element={< AddPost/>} />
-          <Route  path='/post-view/:userId' element={< PostView/>} />
+          <Route  path='/edit-post/:id' element={< EditPost/>} />
           </>
         )}
         { role == 'PARENT' && (

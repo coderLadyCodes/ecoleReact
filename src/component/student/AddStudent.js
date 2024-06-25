@@ -138,7 +138,6 @@ const AddStudent = () => {
                 <option value='Moyenne Section'>Moyenne Section</option>
                 <option value='Grande Section'>Grande Section</option>
               </select>
-              {/*input autoComplete="classe" type='text'  name='classe' id='classe' required onChange={handleInputChange} value={studentDTO.classe} />*/}
             </div>
 
             <div>
