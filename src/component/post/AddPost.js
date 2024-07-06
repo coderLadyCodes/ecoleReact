@@ -43,14 +43,14 @@ const AddPost = () => {
               'Content-Type': 'multipart/form-data',
             }, withCredentials: true
           })
-          if (response.data && response.data.id) {
+          //if (response.data && response.data.id) {
             const id = response.data.id
             console.log('response data from add post : ', response.data.id)
             navigate(`/post-view/${id}`) 
-          }else {
-            console.error('Invalid response from server:', response)
-            alert('Error: Failed to create student.')
-          }
+          //}else {
+          //  console.error('Invalid response from server:', response)
+          //  alert('Error: Failed to create student.')
+         // }
         } catch(error) {
           console.error('Error:', error)
         }
@@ -76,11 +76,6 @@ const AddPost = () => {
        <label htmlFor='postContent' className='form-label'>Message</label>
        <textarea className='form-control' id='postContent'  name='postContent' required onChange={handleInputChange} value={postDTO.postContent}></textarea>
       </div>
-
-     {/* <div>
-       <label htmlFor='localDateTime' className='form-label'>LocalDateTime</label>
-       <input className='form-control' id='localDateTime' name='localDateTime' required onChange={handleInputChange} value={new Date()}></input>
-      </div>*/}
 
       <div> 
        <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>

@@ -32,7 +32,7 @@ const PostView = () => {
     }
   return (
     <section>
-     <h2>Contenu de l'article</h2>
+     <h2>{postDTO.title}</h2>
       <div>
       <div>
       <div style={{width: '40rem'}}>
@@ -46,7 +46,6 @@ const PostView = () => {
         <div>
  
     <div>
-        <p className='text-muted mb-0'>{postDTO.title}</p>
     </div>
     <div>
         <p>{postDTO.postContent}</p>
