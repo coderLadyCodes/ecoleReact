@@ -15,7 +15,7 @@ const NavBar = () => {
           <li><Link  to='/users-view'>Liste des Parents</Link></li>
           <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/add-post'>Ecrire du Contenu</Link></li>
-          <li><Link to='/post-view/:id'>Voir le contenu</Link></li>
+          <li><Link to='/posts'>Voir les Posts</Link></li>
         </ul>
       )}
             { role == 'SUPER_ADMIN' && (
@@ -24,13 +24,14 @@ const NavBar = () => {
           <li><Link  to='/users-view'>Liste des Parents</Link></li>
           <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/add-post'>Ecrire du Contenu</Link></li>
-          <li><Link to='/post-view/:id'>Voir le contenu</Link></li>
+          <li><Link to='/posts'>Voir les Posts</Link></li>
         </ul>
       )}
             { role == 'PARENT' && (
         <ul>
           <li><Link to='/kids-parent'>Liste des Eleves</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
+          <li><Link to='/posts'>Voir les Posts</Link></li>
         </ul>
       )}       
       </div>

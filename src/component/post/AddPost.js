@@ -43,14 +43,13 @@ const AddPost = () => {
               'Content-Type': 'multipart/form-data',
             }, withCredentials: true
           })
-          //if (response.data && response.data.id) {
+          if (response.data && response.data.id) {
             const id = response.data.id
-            console.log('response data from add post : ', response.data.id)
-            navigate(`/post-view/${id}`) 
-          //}else {
-          //  console.error('Invalid response from server:', response)
-          //  alert('Error: Failed to create student.')
-         // }
+            navigate('/posts') 
+          }else {
+            console.error('Invalid response from server:', response)
+            alert('Error: Failed to create student.')
+          }
         } catch(error) {
           console.error('Error:', error)
         }

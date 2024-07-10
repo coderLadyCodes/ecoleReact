@@ -16,7 +16,7 @@ const [userDTO, setUserDTO] = useState([])
 
     const loadUsers = async () =>{
         try{
-        const result = await axios.get("http://localhost:8080/users",{withCredentials: true})
+        const result = await axios.get('http://localhost:8080/users',{withCredentials: true})
         
         setUserDTO(result.data)
 
@@ -25,7 +25,7 @@ const [userDTO, setUserDTO] = useState([])
     }}
 
     const handleDelete = async(id) => {
-      let userChoice = window.confirm("Voulez vous supprimer ce contacte?")
+      let userChoice = window.confirm('Voulez vous supprimer ce contacte?')
       if(userChoice){
         await axios.delete(`http://localhost:8080/users/${id}`,{withCredentials: true})
         loadUsers()

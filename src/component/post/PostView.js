@@ -24,7 +24,7 @@ const PostView = () => {
 
     const loadPost = async () => {
         try {
-            const result = await axios.get(`http://localhost:8080/posts/${id}`)
+            const result = await axios.get(`http://localhost:8080/posts/post/${id}`)
             setPostDTO(result.data)
         }catch (error){
             console.error('Error: ', error)

@@ -25,6 +25,7 @@ import Accueil from './component/common/Accueil'
 import { useAuth } from './component/common/AuthProvider'
 import KidsParent from './component/student/KidsParent'
 import EditPost from './component/post/EditPost'
+import Posts from './component/post/Posts'
 
 
 
@@ -57,6 +58,7 @@ function App() {
         <Route path='/student-profile/:id' element={<StudentProfile />} />
         <Route path='/accueil' element={<Accueil />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
+        <Route  path='/posts' element={< Posts/>} />
         <Route  path='/post-view/:id' element={< PostView/>} />
         
        { role == 'SUPER_ADMIN' && (
