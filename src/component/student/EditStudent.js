@@ -21,7 +21,7 @@ const EditStudent = () => {
     
     const loadStudent = async () =>{
       try{
-      const result = await axios.get(`http://localhost:8080/students/${id}`, { withCredentials: true })
+      const result = await axios.get(`http://localhost:8080/students/student/${id}`, { withCredentials: true })
       setStudentDetails({...result.data, birthday: new Date()})
    } catch (error) {
       console.error('Error loading student details:', error)

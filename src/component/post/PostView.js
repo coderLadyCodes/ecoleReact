@@ -6,7 +6,7 @@ import { useAuth } from '../common/AuthProvider'
 
 const PostView = () => {
     const {id} = useParams()
-    const {user} = useAuth()
+    const {user, userId} = useAuth()
     const navigate = useNavigate()
     const [postDTO, setPostDTO] = useState({
         title: '',
@@ -24,11 +24,13 @@ const PostView = () => {
 
     const loadPost = async () => {
         try {
-            const result = await axios.get(`http://localhost:8080/posts/post/${id}`)
+            const result = await axios.get(`http://localhost:8080/posts/post/${id}`, {withCredentials: true})
             setPostDTO(result.data)
+            console.log("result data : ", result.data)
         }catch (error){
             console.error('Error: ', error)
         }
+        console.log('image post :', postDTO.imagePost)
     }
   return (
     <section>
@@ -38,7 +40,7 @@ const PostView = () => {
       <div style={{width: '40rem'}}>
      <div>
      <img
-        src={`http://localhost:8080/images/${postDTO.id}/${postDTO.imagePost}`} alt="photo"
+        src={`http://localhost:8080/images/${id}/${postDTO.imagePost}`} alt="photo"
         style={{ width: 200, height: 200}}/>
 
         <div>
