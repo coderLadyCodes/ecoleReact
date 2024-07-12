@@ -26,22 +26,20 @@ const PostView = () => {
         try {
             const result = await axios.get(`http://localhost:8080/posts/post/${id}`, {withCredentials: true})
             setPostDTO(result.data)
-            console.log("result data : ", result.data)
         }catch (error){
             console.error('Error: ', error)
         }
-        console.log('image post :', postDTO.imagePost)
     }
   return (
     <section>
      <h2>{postDTO.title}</h2>
       <div>
       <div>
-      <div style={{width: '40rem'}}>
+      <div style={{width: '20rem', height:'40rem'}}>
      <div>
-     <img
-        src={`http://localhost:8080/images/${id}/${postDTO.imagePost}`} alt="photo"
-        style={{ width: 200, height: 200}}/>
+     {postDTO.imagePost?<img
+         src={`http://localhost:8080/images/${id}/${postDTO.imagePost}`} alt="photo"
+        style={{ width: '16rem', height: '20rem'}}/> : <></> }
 
         <div>
         <div>

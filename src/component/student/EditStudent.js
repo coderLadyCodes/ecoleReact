@@ -58,7 +58,7 @@ const EditStudent = () => {
         const formattedBirthday = studentDetails.birthday.toLocaleDateString('fr-FR') 
           
       try {
-       const formData = new FormData()
+      const formData = new FormData()
       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
       formData.append('studentDetails', studentDetails)
       formData.append('multipartFile', file)    
@@ -86,22 +86,22 @@ const EditStudent = () => {
   <form onSubmit={updateStudent} encType='multipart/form-data' method='post'>
 
   <div>
-    <label htmlFor='name' className='form-label'>Nom et Prénom</label>
-    <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
+    <label htmlFor='name'>Nom et Prénom</label>
+    <input autoComplete='name' type='text'  name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
   </div>
 
   <fieldset>
     <legend>Présence</legend>
     <div>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
-        <label className='form-check-label' htmlFor='presence-true'>
+        <input type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
+        <label htmlFor='presence-true'>
           Présent
         </label>
       </div>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='presence' id='presence-false' value='false' checked={studentDetails.presence === false} onChange={handleInputChange}/>
-        <label className='form-check-label' htmlFor='presence-false'>
+        <input  type='radio' name='presence' id='presence-false' value='false' checked={studentDetails.presence === false} onChange={handleInputChange}/>
+        <label  htmlFor='presence-false'>
           Absent
         </label>
       </div>
@@ -112,13 +112,13 @@ const EditStudent = () => {
     <legend>Cantine</legend>
     <div>
       <div className='form-check'>
-        <input className='form-check-input' type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
-        <label className='form-check-label' htmlFor='cantine-true'>
+        <input type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
+        <label htmlFor='cantine-true'>
           Oui
         </label>
       </div>
-      <div className='form-check'>
-        <input className='form-check-input' type='radio' name='cantine' id='cantine-false' value='false' checked={studentDetails.cantine === false} onChange={handleInputChange}/>
+      <div >
+        <input  type='radio' name='cantine' id='cantine-false' value='false' checked={studentDetails.cantine === false} onChange={handleInputChange}/>
         <label htmlFor='cantine-false'>
           Non
         </label>
@@ -127,7 +127,7 @@ const EditStudent = () => {
   </fieldset>
 
   <div>
-  <label htmlFor="birthday">Date De Naissance</label>
+  <label htmlFor='birthday'>Date De Naissance</label>
     <DatePicker id='birthday' selected={studentDetails.birthday} onChange={handleBirthdayChange} dateFormat ='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown /> 
   </div>
 

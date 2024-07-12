@@ -67,17 +67,17 @@ const AddPost = () => {
       <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
 
       <div>
-     <label htmlFor='title' className='form-label'>Titre</label>
-     <input autoComplete="title" type='text' className='form-control' name='title' id='title' required onChange={handleInputChange} value={postDTO.title}/>
+     <label htmlFor='title'>Titre</label>
+     <input autoComplete="title" type='text' name='title' id='title' required onChange={handleInputChange} value={postDTO.title}/>
       </div>
 
       <div>
-       <label htmlFor='postContent' className='form-label'>Message</label>
-       <textarea className='form-control' id='postContent'  name='postContent' required onChange={handleInputChange} value={postDTO.postContent}></textarea>
+       <label htmlFor='postContent'>Message</label>
+       <textarea  id='postContent'  name='postContent' required onChange={handleInputChange} value={postDTO.postContent}></textarea>
       </div>
 
       <div> 
-       <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>
+       <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>
       </div>
         <p>taille max du fichier : 500KB</p>
       <div>
