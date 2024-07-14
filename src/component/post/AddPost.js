@@ -84,7 +84,7 @@ const AddPost = () => {
          <button type='submit'>Save</button>
       </div>
       <div>
-          <Link to={'/accueil'}  type='submit'>Cancel</Link> {/* change the link for cancel */}
+          <Link to={'/accueil'}  type='submit'>Cancel</Link>
       </div>
       </form>
             

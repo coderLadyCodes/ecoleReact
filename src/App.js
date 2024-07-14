@@ -64,7 +64,7 @@ function App() {
        { role == 'SUPER_ADMIN' && (
           <> 
           <Route path='/users-view' element={<UsersView />} /> 
-          <Route  path='/view-user/:id' element={<ViewUser />} /> 
+          {/*<Route  path='/view-user/:id' element={<ViewUser />} /> */}
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
@@ -73,7 +73,7 @@ function App() {
         { role == 'ADMIN' && (
           <>
           <Route path='/users-view' element={<UsersView />} /> 
-          <Route  path='/view-user/:id' element={<ViewUser />} />
+          {/*<Route  path='/view-user/:id' element={<ViewUser />} /> */}
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />

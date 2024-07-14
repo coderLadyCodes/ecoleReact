@@ -59,7 +59,6 @@ const [file, setFile] = useState(null)
               }, withCredentials: true
             })
             setPostDetails(response.data)
-            console.log('response data edit post', response.data)
             navigate(`/post-view/${id}`)
           } catch(error) {
             console.error('Error:', error)

@@ -70,15 +70,27 @@ const Posts = () => {
                    </td>
                    <td>
                       <Link to={`/post-view/${post.id}`}><FaEye /></Link>
-                      </td>
-                   <td className='max-2'>
-                   <Link to={`/edit-post/${post.id}`}><FaEdit /></Link>
+                   </td>
+                   <td>
+                    { role == 'ADMIN' && (
+                      <Link to={`/edit-post/${post.id}`}><FaEdit /></Link>
+                    )}  
                    </td>
                    <td>
                       { role == 'ADMIN' && (
                         <button onClick={()=> handleDelete(post.id)}><FaTrashAlt /></button>
                       )}
                     </td> 
+                    <td>
+                    { role == 'SUPER_ADMIN' && (
+                      <Link to={`/edit-post/${post.id}`}><FaEdit /></Link>
+                    )}  
+                   </td>
+                   <td>
+                      { role == 'SUPER_ADMIN' && (
+                        <button onClick={()=> handleDelete(post.id)}><FaTrashAlt /></button>
+                      )}
+                    </td>
                </tr>
               ))}
           </tbody>

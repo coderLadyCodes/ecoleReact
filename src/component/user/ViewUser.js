@@ -1,4 +1,4 @@
-import axios from 'axios'
+{/*import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {FaEdit} from 'react-icons/fa'
@@ -36,7 +36,7 @@ const ViewUser = () => {
             <h5>
                 {`${userDTO.name}`}
             </h5>
-                        {/* BUTTONS ARE NOT CONNECTED YET */}
+                      
             <div>
              <button
               type="button">
@@ -112,4 +112,4 @@ const ViewUser = () => {
   )
 }
 
-export default ViewUser
+export default ViewUser*/}
