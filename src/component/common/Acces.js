@@ -7,7 +7,7 @@ const Acces = () => {
   let navigate = useNavigate()
   const {role, userId} = useAuth()
   const [classroom, setClassroom] =  useState({
-    grade:'',
+    grade:'PETITE_SECTION',
     userId:userId,
     classroomCode:'',
   })
@@ -32,14 +32,26 @@ const Acces = () => {
   }
 }
   return (
-    <div>
+    <>
+
       { role == 'PARENT' && (<Link to='/accesscode'>Accéder à la classe de votre enfant</Link>)}
       { role == 'ADMIN' && (
-      <h1>Creer une Classe</h1>
+
+
+      
+    <form onSubmit={handleSubmit}>
+        <label htmlFor='grade'>Classe</label>
+        <select name='grade' id='grade' value={classroom.classe} onChange={handleChange}>
+          <option value='PETITE_SECTION'>Petite Section</option>
+          <option value='MOYENNE_SECTION'>Moyenne Section</option>
+          <option value='GRANDE_SECTION'>Grande Section</option>
+        </select>
+        <button type='submit'>Save</button>
+    </form>
+         
       )}
-      
-      
-    </div>
+  
+  </>    
     
   )
 }
