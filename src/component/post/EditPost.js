@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useAuth } from '../common/AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 
 const EditPost = () => {
   const {id} = useParams()

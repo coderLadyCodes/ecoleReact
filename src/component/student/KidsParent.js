@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import { useAuth } from '../common/AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 

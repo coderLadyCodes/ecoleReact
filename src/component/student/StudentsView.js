@@ -2,7 +2,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../common/AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 
 const StudentsView = () => {
 const {role} = useAuth()

@@ -1,12 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { useAuth } from './AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 
 const NavBar = () => {
   const {role} = useAuth()
   return (
   <nav>
-    <Link to={'/accueil'}><p>Accueil</p></Link>
     <div className='mainNave'>
     <div>
       { role == 'ADMIN' && (

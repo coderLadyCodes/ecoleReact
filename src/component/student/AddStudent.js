@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useAuth } from '../common/AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 
 const AddStudent = () => {
   const {user} =  useAuth()

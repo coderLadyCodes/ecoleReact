@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth } from './AuthProvider'
-import { Link, useNavigate } from 'react-router-dom'
+
+import { Link} from 'react-router-dom'
 import axios from 'axios'
 import profil from '../../images/profil.jpg'
-import cahierdeliaison from '../../images/cahierdeliaison.png'
 import discussion from '../../images/discussion.png'
-
+import cahierdeliaison from '../../images/cahierdeliaison.png'
+import { useAuth } from './AuthProvider'
 const Dashboard = () => {
 
   const {logout, user, role, userId} = useAuth()
@@ -78,7 +78,7 @@ const Dashboard = () => {
 
       <button><Link to={'/edit-user'}>Modifier profile</Link></button> 
       <button><Link to={'/add-student'}>Ajouter un Enfant</Link></button> 
-      <button><Link to={'/accueil'}>Retour à la Page d'Accueil</Link></button> 
+      <button><Link to={'/acces'}>Acceder aux classes</Link></button> 
 
     </section>
   )

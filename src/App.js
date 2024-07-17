@@ -9,7 +9,6 @@ import StudentsView from './component/student/StudentsView'
 import StudentProfile from './component/student/StudentProfile'
 import EditStudent from './component/student/EditStudent'
 import HideShowComponents from './component/common/HideShowComponents'
-import ViewUser from './component/user/ViewUser'
 import AddPost from './component/post/AddPost'
 import PostView from './component/post/PostView'
 import Signup from './component/common/Signup'
@@ -17,15 +16,16 @@ import Activation from './component/common/Activation'
 import Connexion from './component/common/Connexion'
 import Logout from './component/common/Logout'
 import Identification from './component/common/Identification'
-import Dashboard from './component/common/Dashboard'
+import Dashboard from './component/user/Dashboard'
 import ChangePassword from './component/common/ChangePassword'
 import PrivateRoutes from './component/common/PrivateRoutes'
 import NewPassword from './component/common/NewPassword'
-import Accueil from './component/common/Accueil'
-import { useAuth } from './component/common/AuthProvider'
+import { useAuth } from './component/user/AuthProvider'
 import KidsParent from './component/student/KidsParent'
 import EditPost from './component/post/EditPost'
 import Posts from './component/post/Posts'
+import Acces from './component/common/Acces'
+import { AccessCode } from './component/common/AccessCode'
 
 
 
@@ -56,10 +56,11 @@ function App() {
         <Route path='/edit-user' element={<EditUser />} />
         <Route path='/add-student' element={<AddStudent />} />
         <Route path='/student-profile/:id' element={<StudentProfile />} />
-        <Route path='/accueil' element={<Accueil />} />
+        <Route path='/acces' element={<Acces />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
         <Route  path='/posts' element={< Posts/>} />
         <Route  path='/post-view/:id' element={< PostView/>} />
+        <Route  path='/accesscode' element={< AccessCode/>} />
         
        { role == 'SUPER_ADMIN' && (
           <> 

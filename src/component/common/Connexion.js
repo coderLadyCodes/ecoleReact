@@ -1,5 +1,5 @@
 import { Link} from 'react-router-dom'
-import { useAuth } from './AuthProvider'
+import { useAuth } from '../user/AuthProvider'
 
 const Connexion = () => {
 const {login, authentificationDTO, handleInputChange} = useAuth()
