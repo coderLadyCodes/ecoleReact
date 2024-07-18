@@ -78,7 +78,7 @@ const Dashboard = () => {
 
       <button><Link to={'/edit-user'}>Modifier profile</Link></button> 
       <button><Link to={'/add-student'}>Ajouter un Enfant</Link></button> 
-      <button><Link to={'/acces'}>Acceder aux classes</Link></button> 
+      { role !== 'PARENT' && (<button><Link to={'/acces'}>creer aux classes (admin/superadmin)</Link></button>)}
 
     </section>
   )
