@@ -22,7 +22,7 @@ export const AccessCode = () => {
               'Content-Type': 'application/json',
             },
           })
-        navigate('/classroom')
+        navigate('/classrooms')
     } catch (error) {
       alert('Veuillez fournir le bon code')
       console.error('Error:', error)

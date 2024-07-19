@@ -120,7 +120,7 @@ const [userDTO, setUserDTO] = useState([])
                     <td>
                        <Link to={'/dashboard'}><FaEye /></Link>
                        </td>
-                    <td className='max-2'>
+                    <td>
                     <Link to={'/edit-user'}><FaEdit /></Link>
                     </td>                 
                      <td>

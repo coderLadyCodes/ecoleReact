@@ -5,7 +5,7 @@ import { useAuth } from '../user/AuthProvider'
 import { Link } from 'react-router-dom'
 
 const Posts = () => {
-  const {role, userId} = useAuth()
+  const {role, userId, user} = useAuth()
   const [postDTO, setPostDTO] = useState([])
 
   useEffect(() => {
@@ -13,6 +13,7 @@ const Posts = () => {
   }, [])
 
   const loadPosts = async () => {
+   
     try{
       const results = await axios.get(`http://localhost:8080/posts/user/${userId}`,{withCredentials: true})
       setPostDTO(results.data)

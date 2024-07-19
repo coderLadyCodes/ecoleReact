@@ -33,8 +33,6 @@ const Acces = () => {
 }
   return (
     <>
-
-      { role == 'PARENT' && (<Link to='/accesscode'>Accéder à la classe de votre enfant</Link>)}
       { role == 'ADMIN' && (  
     <form onSubmit={handleSubmit}>
         <label htmlFor='grade'>Classe</label>

@@ -43,6 +43,7 @@ const AddPost = () => {
               'Content-Type': 'multipart/form-data',
             }, withCredentials: true
           })
+  
           if (response.data && response.data.id) {
             const id = response.data.id
             navigate('/posts') 

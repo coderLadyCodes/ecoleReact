@@ -11,22 +11,22 @@ import EditStudent from './component/student/EditStudent'
 import HideShowComponents from './component/common/HideShowComponents'
 import AddPost from './component/post/AddPost'
 import PostView from './component/post/PostView'
-import Signup from './component/common/Signup'
-import Activation from './component/common/Activation'
-import Connexion from './component/common/Connexion'
-import Logout from './component/common/Logout'
-import Identification from './component/common/Identification'
+import Signup from './component/security/Signup'
+import Activation from './component/security/Activation'
+import Connexion from './component/security/Connexion'
+import Logout from './component/security/Logout'
+import Identification from './component/security/Identification'
 import Dashboard from './component/user/Dashboard'
-import ChangePassword from './component/common/ChangePassword'
-import PrivateRoutes from './component/common/PrivateRoutes'
-import NewPassword from './component/common/NewPassword'
+import ChangePassword from './component/security/ChangePassword'
+import PrivateRoutes from './component/security/PrivateRoutes'
+import NewPassword from './component/security/NewPassword'
 import { useAuth } from './component/user/AuthProvider'
 import KidsParent from './component/student/KidsParent'
 import EditPost from './component/post/EditPost'
 import Posts from './component/post/Posts'
-import Acces from './component/common/Acces'
-import { Classroom } from './component/common/Classroom'
-import { AccessCode } from './component/common/AccessCode'
+import Acces from './component/classroom/Acces'
+import Classrooms from './component/classroom/Classrooms'
+import { AccessCode } from './component/classroom/AccessCode'
 
 
 
@@ -70,7 +70,7 @@ function App() {
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
-          <Route  path='/classroom' element={< Classroom/>} /> 
+          <Route  path='/classrooms' element={< Classrooms/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
@@ -80,7 +80,7 @@ function App() {
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />
-          <Route  path='/classroom' element={< Classroom/>} />
+          <Route  path='/classrooms' element={< Classrooms/>} />
           </>
         )}
         { role == 'PARENT' && (
@@ -88,7 +88,7 @@ function App() {
             <Route path='/student-profile/:id' element={<StudentProfile />} />
             <Route path='/kids-parent' element={<KidsParent />} />
             <Route path='/edit-student/:id' element={<EditStudent />} />
-            <Route  path='/classroom' element={< Classroom/>} />
+            <Route  path='/classrooms' element={< Classrooms/>} />
           </>
         )}
       </Route>  
