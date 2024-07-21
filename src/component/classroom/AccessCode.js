@@ -12,7 +12,10 @@ export const AccessCode = () => {
     })
     const handleChange = (e) => {
         const { name, value } = e.target
-        setActivation({ ...activation, [name]: value })
+        const noWhiteSpaceValue = value.replace(/\s/g, '')
+        setActivation(prevState => ({
+          ...prevState, [name] : noWhiteSpaceValue
+        }))
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -23,9 +26,26 @@ export const AccessCode = () => {
             },
           })
         navigate('/classrooms')
+
     } catch (error) {
-      alert('Veuillez fournir le bon code')
-      console.error('Error:', error)
+
+      if (error.reponse) {
+
+        if (error.response.status === 400){
+          console.error('Bad Request:', error.response.data.message)
+          alert(`Error: ${error.response.data.message}`)
+        } else {
+          console.error('Error:', error.response.data)
+          alert(`Error: ${error.response.data.message}`)
+        }
+
+      } else if (error.request){
+        console.error('No response received:', error.request)
+        alert('No response received from the server.')
+      } else {
+        console.error('Error:', error.message)
+        alert(`Error: ${error.message}`)
+      }
     }
     }
   return (

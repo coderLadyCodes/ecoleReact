@@ -9,7 +9,10 @@ const Activation = () => {
     })
     const handleChange = (e) => {
         const { name, value } = e.target
-        setActivation({ ...activation, [name]: value })
+        const noWhiteSpace = value.replace(/\s/g, '')
+        setActivation(prevActivation => ({
+          ...prevActivation, [name] : noWhiteSpace
+        }))
     }
     const handleSubmit = async (e) => {
         e.preventDefault()

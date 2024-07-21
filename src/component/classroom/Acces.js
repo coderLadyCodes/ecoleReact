@@ -40,6 +40,11 @@ const Acces = () => {
           <option value='PETITE_SECTION'>Petite Section</option>
           <option value='MOYENNE_SECTION'>Moyenne Section</option>
           <option value='GRANDE_SECTION'>Grande Section</option>
+          <option value='CP'>CP</option>
+          <option value='CE1'>CE1</option>
+          <option value='CE2'>CE2</option>
+          <option value='CM1'>CM1</option>
+          <option value='CM2'>CM2</option>
         </select>
         <button type='submit'>Save</button>
     </form>
@@ -52,6 +57,11 @@ const Acces = () => {
           <option value='PETITE_SECTION'>Petite Section</option>
           <option value='MOYENNE_SECTION'>Moyenne Section</option>
           <option value='GRANDE_SECTION'>Grande Section</option>
+          <option value='CP'>CP</option>
+          <option value='CE1'>CE1</option>
+          <option value='CE2'>CE2</option>
+          <option value='CM1'>CM1</option>
+          <option value='CM2'>CM2</option>
         </select>
         <button type='submit'>Save</button>
     </form>

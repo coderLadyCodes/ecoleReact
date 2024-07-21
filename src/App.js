@@ -27,6 +27,8 @@ import Posts from './component/post/Posts'
 import Acces from './component/classroom/Acces'
 import Classrooms from './component/classroom/Classrooms'
 import { AccessCode } from './component/classroom/AccessCode'
+import EditClassroom from './component/classroom/EditClassroom'
+import Classroom from './component/classroom/Classroom'
 
 
 
@@ -71,6 +73,8 @@ function App() {
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
           <Route  path='/classrooms' element={< Classrooms/>} /> 
+          <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
+          <Route  path='/classroom/:id' element={< Classroom/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
@@ -81,6 +85,8 @@ function App() {
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />
           <Route  path='/classrooms' element={< Classrooms/>} />
+          <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
+          <Route  path='/classroom/:id' element={< Classroom/>} /> 
           </>
         )}
         { role == 'PARENT' && (
@@ -89,6 +95,7 @@ function App() {
             <Route path='/kids-parent' element={<KidsParent />} />
             <Route path='/edit-student/:id' element={<EditStudent />} />
             <Route  path='/classrooms' element={< Classrooms/>} />
+            <Route  path='/classroom/:id' element={< Classroom/>} /> 
           </>
         )}
       </Route>  
