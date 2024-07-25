@@ -26,7 +26,7 @@ const Acces = () => {
     },
     withCredentials : true
     })
- navigate('/accesscode')
+  navigate('/accesscode')
   } catch (error) {
     console.error('Error:', error)
   }

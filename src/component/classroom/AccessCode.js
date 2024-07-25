@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 
 export const AccessCode = () => {
@@ -8,8 +8,16 @@ export const AccessCode = () => {
     let navigate = useNavigate()
     const [activation, setActivation] = useState({
         classroomCode:'',
-        userId: userId,
+        userId:userId,
     })
+    useEffect(() => {
+      if (userId) {
+        setActivation(prevState => ({
+            ...prevState, userId: userId
+        }))
+    }
+    }, [userId])
+
     const handleChange = (e) => {
         const { name, value } = e.target
         const noWhiteSpaceValue = value.replace(/\s/g, '')
@@ -25,7 +33,14 @@ export const AccessCode = () => {
               'Content-Type': 'application/json',
             },
           })
-        navigate('/classrooms')
+
+        const {classroomId, classroomCode, userId} = response.data
+        if (classroomId) {
+          navigate(`/classroom/${classroomId}`, { state: { classroomCode} })
+      } else {
+          console.error('No classroom ID returned')
+          alert('Error: No classroom ID returned')
+      }
 
     } catch (error) {
 

@@ -62,6 +62,9 @@ const EditClassroom = () => {
         <option value='CM2'>CM2</option>
       </select>
       <button type='submit'>Save</button>
+      <div>
+          <Link to={'/classrooms'}  type='submit'>Cancel</Link>
+      </div>
   </form>
        
     )}

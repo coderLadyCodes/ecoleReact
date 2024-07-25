@@ -74,7 +74,7 @@ function App() {
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
           <Route  path='/classrooms' element={< Classrooms/>} /> 
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
-          <Route  path='/classroom/:id' element={< Classroom/>} /> 
+          <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
@@ -84,9 +84,8 @@ function App() {
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />
-          <Route  path='/classrooms' element={< Classrooms/>} />
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
-          <Route  path='/classroom/:id' element={< Classroom/>} /> 
+          <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
           </>
         )}
         { role == 'PARENT' && (
@@ -94,8 +93,7 @@ function App() {
             <Route path='/student-profile/:id' element={<StudentProfile />} />
             <Route path='/kids-parent' element={<KidsParent />} />
             <Route path='/edit-student/:id' element={<EditStudent />} />
-            <Route  path='/classrooms' element={< Classrooms/>} />
-            <Route  path='/classroom/:id' element={< Classroom/>} /> 
+            <Route path='/classroom/:classroomId' element={< Classroom/>} /> 
           </>
         )}
       </Route>  
