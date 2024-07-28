@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
+import AddPost from '../post/AddPost'
 
 const Classroom = () => {
   const location = useLocation()
@@ -25,7 +26,7 @@ const Classroom = () => {
           ...prevState,
           ...result.data,
       }))
-        console.log('result classroom : ', result)
+
       }catch (error) {
         console.error('Error: ', error)
       }
@@ -34,6 +35,7 @@ const Classroom = () => {
   return (
     <div>
       <h1>Classe de {classroom.grade}</h1>
+      <h2><Link to={'/add-post'}>Créer un post</Link></h2>
       <p>Classroom Code: {classroom.classroomCode}</p>
       <p>User ID: {classroom.userId}</p>
     </div>

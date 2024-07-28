@@ -36,7 +36,7 @@ export const AccessCode = () => {
 
         const {classroomId, classroomCode, userId} = response.data
         if (classroomId) {
-          navigate(`/classroom/${classroomId}`, { state: { classroomCode} })
+        navigate(`/classroom/${classroomId}`, { state: {classroomCode} })
       } else {
           console.error('No classroom ID returned')
           alert('Error: No classroom ID returned')
