@@ -1,16 +1,28 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 
 const AddPost = () => {
     let navigate = useNavigate()
-    const {user} = useAuth()
+    const { classroomId } = useParams()
+    const {user, userId} = useAuth()
     const [postDTO, setPostDTO] = useState({
         title: '',
         postContent: '',
+        classroomId: '',
         local_date_time: '',
+        userId:'',
     })
+
+    useEffect(() => {
+      if (classroomId) {
+          setPostDTO(prevState => ({ ...prevState, classroomId: classroomId }))
+      }
+      if (userId) {
+        setPostDTO(prevState => ({ ...prevState, userId: userId }))
+    }
+  }, [classroomId, userId])
 
     const [file, setFile] = useState(null)
     const handleFileChange = (e) => {
@@ -44,9 +56,9 @@ const AddPost = () => {
             }, withCredentials: true
           })
   
-          if (response.data && response.data.id) {
-            const id = response.data.id
-            navigate('/posts') 
+          if (response.data && response.data.classroomId) {
+            const classroomId = response.data.classroomId
+            navigate(`/classroom/${classroomId}`) 
           }else {
             console.error('Invalid response from server:', response)
             alert('Error: Failed to create student.')
@@ -85,7 +97,7 @@ const AddPost = () => {
          <button type='submit'>Save</button>
       </div>
       <div>
-          <Link to={'/accueil'}  type='submit'>Cancel</Link>
+          <Link to={`/classroom/${classroomId}`}  type='button'>Cancel</Link>
       </div>
       </form>
             

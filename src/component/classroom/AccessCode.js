@@ -8,6 +8,7 @@ export const AccessCode = () => {
     let navigate = useNavigate()
     const [activation, setActivation] = useState({
         classroomCode:'',
+        teacher:'',
         userId:userId,
     })
     useEffect(() => {
@@ -33,10 +34,9 @@ export const AccessCode = () => {
               'Content-Type': 'application/json',
             },
           })
-
-        const {classroomId, classroomCode, userId} = response.data
+        const {classroomId, classroomCode} = response.data
         if (classroomId) {
-        navigate(`/classroom/${classroomId}`, { state: {classroomCode} })
+        navigate(`/classroom/${classroomId}`, { state: {classroomCode, teacher: activation.teacher} })
       } else {
           console.error('No classroom ID returned')
           alert('Error: No classroom ID returned')

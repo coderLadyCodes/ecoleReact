@@ -61,16 +61,15 @@ function App() {
         <Route path='/student-profile/:id' element={<StudentProfile />} />
         <Route path='/acces' element={<Acces />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
-        <Route  path='/posts' element={< Posts/>} />
+        <Route  path='/posts/classroom/:classroomId' element={< Posts/>} />
         <Route  path='/post-view/:id' element={< PostView/>} />
         <Route  path='/accesscode' element={< AccessCode/>} />
         
        { role == 'SUPER_ADMIN' && (
           <> 
           <Route path='/users-view' element={<UsersView />} /> 
-          {/*<Route  path='/view-user/:id' element={<ViewUser />} /> */}
           <Route  path='/students-view' element={<StudentsView />} /> 
-          <Route  path='/add-post' element={< AddPost/>} />
+          <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
           <Route  path='/classrooms' element={< Classrooms/>} /> 
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
@@ -82,7 +81,7 @@ function App() {
           <Route path='/users-view' element={<UsersView />} /> 
           {/*<Route  path='/view-user/:id' element={<ViewUser />} /> */}
           <Route  path='/students-view' element={<StudentsView />} />
-          <Route  path='/add-post' element={< AddPost/>} />
+          <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
           <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 

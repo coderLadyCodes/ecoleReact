@@ -10,6 +10,7 @@ const EditPost = () => {
   const [postDetails, setPostDetails] = useState({
     title: '',
     postContent: '',
+    classroomId: '',
     local_date_time: '',
 })
 
@@ -48,7 +49,7 @@ const [file, setFile] = useState(null)
           e.preventDefault()
           const currentDateTime = new Date().toLocaleString('fr-FR')
           const modifiedPost = {...postDetails, local_date_time: currentDateTime}
-          console.log('modifiedPost :', modifiedPost)
+
           try {
             const formData = new FormData()
             formData.append('postDetails', JSON.stringify(modifiedPost))
@@ -59,7 +60,7 @@ const [file, setFile] = useState(null)
               }, withCredentials: true
             })
             setPostDetails(response.data)
-            navigate(`/post-view/${id}`)
+            navigate(`/classroom/${postDetails.classroomId}`)
           } catch(error) {
             console.error('Error:', error)
           }
@@ -93,7 +94,7 @@ const [file, setFile] = useState(null)
          <button type='submit'>Save</button>
       </div>
       <div>
-          <Link to={'/posts'}  type='submit'>Cancel</Link> {/* change the link for cancel */}
+          <Link to={`/classroom/${postDetails.classroomId}`}  type='button'>Cancel</Link>
       </div>
       </form>
             

@@ -2,9 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const Posts = () => {
+  const {classroomId} = useParams()
   const {role, userId, user} = useAuth()
   const [postDTO, setPostDTO] = useState([])
 
@@ -15,7 +16,7 @@ const Posts = () => {
   const loadPosts = async () => {
    
     try{
-      const results = await axios.get(`http://localhost:8080/posts/${userId}`,{withCredentials: true})
+      const results = await axios.get(`http://localhost:8080/posts/classroom/${classroomId}`,{withCredentials: true})
       setPostDTO(results.data)
     }catch (error) {
       console.error("error : ", error)
@@ -37,65 +38,37 @@ const Posts = () => {
   return (
     <>
       <section>
-      <h2>Liste des Posts</h2>
-      <table>
-          <thead>
-             <tr>
-              <th>ID</th>
-              <th>Titre</th>
-              <th>Contenu du Poste</th>
-              <th>Date</th>
-              <th>Image</th>
-              <th>Actions</th>
-             </tr>
-          </thead>
-
-          <tbody>
-              {postDTO.map((post, index)=>(
-               <tr key={post.id}>
-                  <th scope="row" key={index}>
-                      {index + 1}
-                  </th>
-                   <td>{post.title}</td>
-                   <td>{post.postContent}</td>
-                   <td>{post.local_date_time}</td>
-                   <td> {post.imagePost ? (
-                        <img
-                        src={`http://localhost:8080/images/${post.id}/${post.imagePost}`}
-                        alt='post image content'
-                        style={{ width: '100px', height: '100px' }}
-                        />
-                          ) : (
-                                <span>No image</span>
-                          )}
-                   </td>
-                   <td>
-                      <Link to={`/post-view/${post.id}`}><FaEye /></Link>
-                   </td>
-                   <td>
-                    { role == 'ADMIN' && (
-                      <Link to={`/edit-post/${post.id}`}><FaEdit /></Link>
-                    )}  
-                   </td>
-                   <td>
-                      { role == 'ADMIN' && (
-                        <button onClick={()=> handleDelete(post.id)}><FaTrashAlt /></button>
-                      )}
-                    </td> 
-                    <td>
-                    { role == 'SUPER_ADMIN' && (
-                      <Link to={`/edit-post/${post.id}`}><FaEdit /></Link>
-                    )}  
-                   </td>
-                   <td>
-                      { role == 'SUPER_ADMIN' && (
-                        <button onClick={()=> handleDelete(post.id)}><FaTrashAlt /></button>
-                      )}
-                    </td>
-               </tr>
-              ))}
-          </tbody>
-      </table>
+        <h2>Liste des Posts</h2>
+        {postDTO.map((post) => (
+          <div key={post.id} style={{ border: '1px solid #ccc', padding: '1.2rem', marginBottom: '1.2rem' }}>
+            <h3>{post.title}</h3>
+            {post.imagePost ? (
+              <img
+                src={`http://localhost:8080/images/${post.id}/${post.imagePost}`}
+                alt='post image content'
+                style={{ width: '10rem', height: 'auto' }}
+              />
+            ) : (
+              <span>No image</span>
+            )}
+            <p>{post.postContent}</p>
+            <p><small>{post.local_date_time}</small></p>
+            <div>
+              {role === 'ADMIN' && (
+                <>
+                  <Link to={`/edit-post/${post.id}`} style={{ marginRight: '10px' }}><FaEdit /></Link>
+                  <button onClick={() => handleDelete(post.id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaTrashAlt /></button>
+                </>
+              )}
+              {role === 'SUPER_ADMIN' && (
+                <>
+                  <Link to={`/edit-post/${post.id}`} style={{ marginRight: '10px' }}><FaEdit /></Link>
+                  <button onClick={() => handleDelete(post.id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaTrashAlt /></button>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
       </section>
     </>
   )

@@ -10,6 +10,7 @@ const Acces = () => {
     grade:'PETITE_SECTION',
     userId:userId,
     classroomCode:'',
+    teacher:'',
   })
 
   const handleChange = (e) => {
@@ -26,6 +27,7 @@ const Acces = () => {
     },
     withCredentials : true
     })
+    
   navigate('/accesscode')
   } catch (error) {
     console.error('Error:', error)
