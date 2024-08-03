@@ -105,10 +105,11 @@ const StudentProfile = () => {
   </div>
   </div>
   <hr />
-   <button
-    type="button"
-    className="btn warning ms-2">
+   <button type="button">
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
+  </button>
+  <button type="button">
+    <Link to={'/kids-parent'}>annuler</Link>                                       
   </button>
 
   </div> 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import AddPost from '../post/AddPost'
 import Posts from '../post/Posts'
 
 const Classroom = () => {
+  let navigate = useNavigate()
   const location = useLocation()
   const {classroomId} = useParams()
     const {userId, role, user, userName} = useAuth()
@@ -16,6 +17,13 @@ const Classroom = () => {
       classroomCode: classroomCode || '',
       teacher: teacher,
     })
+
+    useEffect(() => {
+      const classroomId = localStorage.getItem('classroomId')
+      if (!classroomId) {
+          navigate('/accesscode')
+      }
+  }, [navigate])
 
     useEffect(() => {
       loadClassroom()

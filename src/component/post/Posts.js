@@ -17,9 +17,11 @@ const Posts = () => {
    
     try{
       const results = await axios.get(`http://localhost:8080/posts/classroom/${classroomId}`,{withCredentials: true})
-      setPostDTO(results.data)
+      const sortedPosts = results.data.sort((a, b) => new Date(b.local_date_time) - new Date(a.local_date_time))
+      setPostDTO(sortedPosts)
+
     }catch (error) {
-      console.error("error : ", error)
+      console.error('error : ', error)
   }
   }
   
@@ -38,8 +40,11 @@ const Posts = () => {
   return (
     <>
       <section>
+
         <h2>Liste des Posts</h2>
+      
         {postDTO.map((post) => (
+
           <div key={post.id} style={{ border: '1px solid #ccc', padding: '1.2rem', marginBottom: '1.2rem' }}>
             <h3>{post.title}</h3>
             {post.imagePost ? (
