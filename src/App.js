@@ -29,6 +29,7 @@ import Classrooms from './component/classroom/Classrooms'
 import { AccessCode } from './component/classroom/AccessCode'
 import EditClassroom from './component/classroom/EditClassroom'
 import Classroom from './component/classroom/Classroom'
+import UsersByClassroomId from './component/user/UsersByClassroomId'
 
 
 
@@ -68,6 +69,7 @@ function App() {
        { role == 'SUPER_ADMIN' && (
           <> 
           <Route path='/users-view' element={<UsersView />} /> 
+          <Route path='/users-classroom' element={<UsersByClassroomId />} />
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
@@ -78,8 +80,7 @@ function App() {
         )}
         { role == 'ADMIN' && (
           <>
-          <Route path='/users-view' element={<UsersView />} /> 
-          {/*<Route  path='/view-user/:id' element={<ViewUser />} /> */}
+          <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} /> 
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />

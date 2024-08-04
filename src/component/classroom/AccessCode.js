@@ -19,15 +19,15 @@ export const AccessCode = () => {
     }
     }, [userId])
 
-    useEffect(() => {
+{/*   useEffect(() => {
       const classroomId = localStorage.getItem('classroomId')
       const classroomCode = localStorage.getItem('classroomCode')
       const teacher = localStorage.getItem('teacher')
 
-      if (classroomId) {
+      if (classroomId && classroomCode && teacher) {
           navigate(`/classroom/${classroomId}`, { state: { classroomCode, teacher } })
       }
-  }, [navigate])
+  }, [navigate])*/}
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -47,9 +47,9 @@ export const AccessCode = () => {
 
         const {classroomId, classroomCode, teacher} = response.data
         if (classroomId) {
-        localStorage.setItem('classroomId', classroomId)
+        {/*localStorage.setItem('classroomId', classroomId)
         localStorage.setItem('classroomCode', classroomCode)
-        localStorage.setItem('teacher', teacher)
+        localStorage.setItem('teacher', teacher)*/}
 
         navigate(`/classroom/${classroomId}`, { state: {classroomCode, teacher} })
       } else {
@@ -78,10 +78,10 @@ export const AccessCode = () => {
       }
     }
     }
+
   return (
     <div>
         <h1>Acceder à la classe</h1>
-
         <form onSubmit={handleSubmit}>
         <label htmlFor='classroomCode'>Code</label>
             <input placeholder='code' type="text"  name='classroomCode' id='classroomCode' onChange={handleChange} value={activation.classroomCode} required/> 

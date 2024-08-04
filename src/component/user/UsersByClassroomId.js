@@ -1,11 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import axios from 'axios'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { useAuth } from './AuthProvider'
 
-const UsersView = () => {
+const UsersByClassroomId = () => {
 const {role} = useAuth()
+const {classroomId} = useParams()
  
 const [userDTO, setUserDTO] = useState([])
 
@@ -15,7 +16,7 @@ const [userDTO, setUserDTO] = useState([])
 
     const loadUsers = async () =>{
         try{
-        const result = await axios.get('http://localhost:8080/users',{withCredentials: true})
+        const result = await axios.get(`http://localhost:8080/classroom/${classroomId}/users`,{withCredentials: true})
         
         setUserDTO(result.data)
 
@@ -36,11 +37,12 @@ const [userDTO, setUserDTO] = useState([])
     <>
       { role == 'ADMIN' && (
         <section>
-        <h2>Liste des Parents</h2>
+        <h2>Liste des Parent d'élèves</h2>
         <table>
             <thead>
                <tr>
                 <th>ID</th>
+                <th>classroomId</th>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Tél</th>
@@ -56,6 +58,7 @@ const [userDTO, setUserDTO] = useState([])
                     <th scope="row" key={index}>
                         {index + 1}
                     </th>
+                     <td>{classroomId}</td>
                      <td>{user.name}</td>
                      <td>{user.email}</td>
                      <td>{user.phone}</td>
@@ -83,11 +86,12 @@ const [userDTO, setUserDTO] = useState([])
       ) }
       {role == 'SUPER_ADMIN' && (
        <section>
-       <h2>Liste des USERS</h2>
+       <h2>Liste des Parent d'élèves</h2>
        <table>
            <thead>
               <tr>
                <th>ID</th>
+               <th>classroomId</th>
                <th>Nom</th>
                <th>Email</th>
                <th>Tél</th>
@@ -104,6 +108,7 @@ const [userDTO, setUserDTO] = useState([])
                    <th scope="row" key={index}>
                        {index + 1}
                    </th>
+                   <td>{classroomId}</td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
@@ -139,4 +144,4 @@ const [userDTO, setUserDTO] = useState([])
  
 }
 
-export default UsersView
+export default UsersByClassroomId

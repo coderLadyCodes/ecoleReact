@@ -140,6 +140,7 @@ export const AuthProvider = ({children}) => {
                 cookies.remove('token', { path: '/' })
                 cookies.remove('refresh', { path: '/' })
                 setAuthentificationDTO({username: '', password: ''})
+               
                 navigate('/')
                 
             }catch(error) {

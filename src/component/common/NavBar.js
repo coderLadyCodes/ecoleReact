@@ -11,8 +11,6 @@ const NavBar = () => {
       { role == 'ADMIN' && (
         <ul>
           <li><Link to='/dashboard'>Profil</Link></li>
-          <li><Link  to='/users-view'>Liste des Parents</Link></li>
-          <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/accesscode'>Acceder à la classe</Link></li>
         </ul>
       )}
@@ -27,7 +25,7 @@ const NavBar = () => {
       )}
             { role == 'PARENT' && (
         <ul>
-          <li><Link to='/kids-parent'>Liste des Eleves</Link></li>
+          <li><Link to='/kids-parent'>Mes enfants</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>
           <li><Link to='/accesscode'>Acceder à la classe</Link></li>
         </ul>

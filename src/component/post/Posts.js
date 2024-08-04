@@ -54,7 +54,7 @@ const Posts = () => {
                 style={{ width: '10rem', height: 'auto' }}
               />
             ) : (
-              <span>No image</span>
+              <span></span>
             )}
             <p>{post.postContent}</p>
             <p><small>{post.local_date_time}</small></p>

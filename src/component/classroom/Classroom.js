@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
-import AddPost from '../post/AddPost'
 import Posts from '../post/Posts'
 
 const Classroom = () => {
@@ -17,13 +16,6 @@ const Classroom = () => {
       classroomCode: classroomCode || '',
       teacher: teacher,
     })
-
-    useEffect(() => {
-      const classroomId = localStorage.getItem('classroomId')
-      if (!classroomId) {
-          navigate('/accesscode')
-      }
-  }, [navigate])
 
     useEffect(() => {
       loadClassroom()
@@ -44,9 +36,11 @@ const Classroom = () => {
 
   return (
     <div>
-      <h1>Classe de {classroom.grade}</h1>
+      <h1>Classe : {classroom.grade}</h1>
       <h2>Bienvenue Dans La Classe de : {classroom.teacher}</h2>
       <p>Le Code de la classe : {classroom.classroomCode}</p>
+      { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`}>Liste des Parents d'élèves</Link></h2>)}
+      { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
     
