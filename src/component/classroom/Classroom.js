@@ -41,6 +41,8 @@ const Classroom = () => {
       <p>Le Code de la classe : {classroom.classroomCode}</p>
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`}>Liste des Parents d'élèves</Link></h2>)}
+      { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
+      { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
     

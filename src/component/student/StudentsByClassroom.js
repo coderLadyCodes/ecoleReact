@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const StudentsByClassroom = () => {
     const {role} = useAuth()
+    const {classroomId} =  useParams()
     const[studentDTO, setStudentDTO] = useState([])
 
     useEffect(() => {
@@ -16,8 +17,7 @@ const StudentsByClassroom = () => {
         try{
             const result = await axios.get(`http://localhost:8080/students/classroom/${classroomId}`, { withCredentials: true })
             setStudentDTO(result.data)
-            
-            const classroomId = result.data.classroomId
+
         } catch(error) {
             console.error("Error:", error)
         }

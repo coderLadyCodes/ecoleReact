@@ -30,7 +30,7 @@ import { AccessCode } from './component/classroom/AccessCode'
 import EditClassroom from './component/classroom/EditClassroom'
 import Classroom from './component/classroom/Classroom'
 import UsersByClassroomId from './component/user/UsersByClassroomId'
-import StudentsByClassroom from './component/student/studentsByClassroom'
+import StudentsByClassroom from './component/student/StudentsByClassroom'
 
 
 
