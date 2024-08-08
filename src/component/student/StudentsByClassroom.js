@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
+import React, { useEffect } from 'react'
+import {FaEdit, FaEye} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const KidsParent = () => {
-    const {role, userId} = useAuth()
-    const [studentDTO, setStudentDTO] = useState([])
+const StudentsByClassroom = () => {
+    const {role} = useAuth()
+    const[studentDTO, setStudentDTO] = useState([])
 
     useEffect(() => {
-        if(role == 'PARENT') {
-            loadParentStudents()
-        }
-    }, [role])
+        loadStudentsByClassroom()
+    }, [])
 
-    const loadParentStudents =  async () => {
-        try {
-            const result = await axios.get(`http://localhost:8080/students/user/${userId}`, { withCredentials: true })
+    const loadStudentsByClassroom = async () => {
+        try{
+            const result = await axios.get(`http://localhost:8080/students/classroom/${classroomId}`, { withCredentials: true })
             setStudentDTO(result.data)
-        } catch (error) {
-        console.error("Error:", error)
-      }
-    } 
-
+            
+            const classroomId = result.data.classroomId
+        } catch(error) {
+            console.error("Error:", error)
+        }
+    }
   return (
     <section>
-    <h2>Mes Enfants</h2>
+    <h2>Les Eleves</h2>
     <table>
       <thead>
         <tr>
@@ -71,4 +70,4 @@ const KidsParent = () => {
   )
 }
 
-export default KidsParent
+export default StudentsByClassroom

@@ -30,6 +30,7 @@ import { AccessCode } from './component/classroom/AccessCode'
 import EditClassroom from './component/classroom/EditClassroom'
 import Classroom from './component/classroom/Classroom'
 import UsersByClassroomId from './component/user/UsersByClassroomId'
+import StudentsByClassroom from './component/student/studentsByClassroom'
 
 
 
@@ -86,6 +87,7 @@ function App() {
           <Route  path='/edit-post/:id' element={< EditPost/>} />
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
           <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
+          <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} /> 
           </>
         )}
         { role == 'PARENT' && (
