@@ -13,8 +13,8 @@ const AddStudent = () => {
     name: '',
     birthday: new Date(),
     classe:'',
-    presence: false,
-    cantine: false,
+    //presence: false,
+    //cantine: false,
   })
 
   const [file, setFile] = useState(null)
@@ -33,8 +33,9 @@ const AddStudent = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    const newValue = e.target.type === 'radio' ? (value === 'true') : value
-    setStudentDTO({ ...studentDTO, [name]: newValue })
+    //const newValue = e.target.type === 'radio' ? (value === 'true') : value
+    //setStudentDTO({ ...studentDTO, [name]: newValue })
+    setStudentDTO({ ... studentDTO, [name] : value})
   }
 
   const handleBirthdayChange = (date) => {
@@ -89,7 +90,7 @@ const AddStudent = () => {
               <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDTO.name} />
             </div>
 
-            <fieldset>
+           {/* <fieldset>
               <legend>Présence</legend>
               <div>
                 <div>
@@ -123,7 +124,7 @@ const AddStudent = () => {
                   </label>
                 </div>
               </div>
-            </fieldset>
+            </fieldset> */}
 
             <div>
               <label htmlFor="birthday" >Date De Naissance</label>
@@ -133,10 +134,15 @@ const AddStudent = () => {
             <div>
               <label htmlFor='classe'>Classe</label>
               <select name='classe' id='classe' value={studentDTO.classe} onChange={handleInputChange}>
-                <option defaultValue='none'>Select an Option</option>
+                <option defaultValue='none'>Choisir la Classe</option>
                 <option value='Petite Section'>Petite Section</option>
                 <option value='Moyenne Section'>Moyenne Section</option>
                 <option value='Grande Section'>Grande Section</option>
+                <option value='CP'>CP</option>
+                <option value='CE1'>CE1</option>
+                <option value='CE2'>CE2</option>
+                <option value='CM1'>CM1</option>
+                <option value='CM2'>CM2</option>
               </select>
             </div>
 

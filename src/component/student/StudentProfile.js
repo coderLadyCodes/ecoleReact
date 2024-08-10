@@ -14,8 +14,8 @@ const StudentProfile = () => {
     name : '',
     birthday : null,
     classe:'',
-    presence : false,
-    cantine : false,
+    //presence : false,
+    //cantine : false,
     multipartFile: '',
   })
 
@@ -86,7 +86,7 @@ const StudentProfile = () => {
   </div>
   <hr />
 
-  <div>
+{/*  <div>
   <div>
   <h5>Présence</h5>
   </div>
@@ -104,7 +104,7 @@ const StudentProfile = () => {
    <p>{studentDTO.cantine.toString()}</p>
   </div>
   </div>
-  <hr />
+  <hr />*/}
    <button type="button">
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>

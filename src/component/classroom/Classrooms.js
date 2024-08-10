@@ -5,7 +5,7 @@ import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Classrooms = () => {
-  const {user, userId, userName} = useAuth()
+  const {role, user, userId, userName} = useAuth()
   const [classroom, setClassroom] = useState([])
    useEffect(() => {
     loadRooms()
@@ -30,6 +30,8 @@ const Classrooms = () => {
     }
 }
   return (
+    <>
+    { role == 'SUPER_ADMIN' && (
     <section>
     <h2>Liste des Eleves</h2>
     <table>
@@ -47,7 +49,7 @@ const Classrooms = () => {
          <tr key={classroom.id}>
            <th scope='row' key={index}>{index + 1}</th>
            <td>{classroom.grade}</td>
-           <td>{userName}</td>
+           <td>{classroom.teacher}</td>
            <td>{classroom.classroomCode}</td>
          <td>
          <Link to={`/classroom/${classroom.id}`}><FaEye /></Link>
@@ -63,6 +65,8 @@ const Classrooms = () => {
       </tbody>  
     </table>
     </section>
+    )}
+    </>
   )
 }
 

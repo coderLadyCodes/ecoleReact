@@ -19,16 +19,6 @@ export const AccessCode = () => {
     }
     }, [userId])
 
-{/*   useEffect(() => {
-      const classroomId = localStorage.getItem('classroomId')
-      const classroomCode = localStorage.getItem('classroomCode')
-      const teacher = localStorage.getItem('teacher')
-
-      if (classroomId && classroomCode && teacher) {
-          navigate(`/classroom/${classroomId}`, { state: { classroomCode, teacher } })
-      }
-  }, [navigate])*/}
-
     const handleChange = (e) => {
         const { name, value } = e.target
         const noWhiteSpaceValue = value.replace(/\s/g, '')
@@ -47,10 +37,6 @@ export const AccessCode = () => {
 
         const {classroomId, classroomCode, teacher} = response.data
         if (classroomId) {
-        {/*localStorage.setItem('classroomId', classroomId)
-        localStorage.setItem('classroomCode', classroomCode)
-        localStorage.setItem('teacher', teacher)*/}
-
         navigate(`/classroom/${classroomId}`, { state: {classroomCode, teacher} })
       } else {
           console.error('No classroom ID returned')

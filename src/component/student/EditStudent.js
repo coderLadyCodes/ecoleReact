@@ -11,8 +11,8 @@ const EditStudent = () => {
         name: '',
         birthday: new Date(),
         classe:'',
-        presence:true ,
-        cantine: true,
+        //presence:true ,
+        //cantine: true,
     })
 
     useEffect(() =>{
@@ -44,8 +44,9 @@ const EditStudent = () => {
 
     const handleInputChange = (e) => {
       const { name, value, type } = e.target
-      const newValue = type === 'radio' ? (value === 'true') : value
-      setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
+      //const newValue = type === 'radio' ? (value === 'true') : value
+      //setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
+      setStudentDetails({ ... studentDetails, [name]: value})
     }
   
     const handleBirthdayChange = (date) => {
@@ -90,16 +91,16 @@ const EditStudent = () => {
     <input autoComplete='name' type='text'  name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
   </div>
 
-  <fieldset>
+ {/* <fieldset>
     <legend>Présence</legend>
     <div>
-      <div className='form-check'>
+      <div>
         <input type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
         <label htmlFor='presence-true'>
           Présent
         </label>
       </div>
-      <div className='form-check'>
+      <div>
         <input  type='radio' name='presence' id='presence-false' value='false' checked={studentDetails.presence === false} onChange={handleInputChange}/>
         <label  htmlFor='presence-false'>
           Absent
@@ -111,7 +112,7 @@ const EditStudent = () => {
   <fieldset>
     <legend>Cantine</legend>
     <div>
-      <div className='form-check'>
+      <div>
         <input type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
         <label htmlFor='cantine-true'>
           Oui
@@ -124,7 +125,7 @@ const EditStudent = () => {
         </label>
       </div>
       </div>
-  </fieldset>
+  </fieldset> */}
 
   <div>
   <label htmlFor='birthday'>Date De Naissance</label>
@@ -138,6 +139,11 @@ const EditStudent = () => {
         <option value='Petite Section'>Petite Section</option>
         <option value='Moyenne Section'>Moyenne Section</option>
         <option value='Grande Section'>Grande Section</option>
+        <option value='CP'>CP</option>
+        <option value='CE1'>CE1</option>
+        <option value='CE2'>CE2</option>
+        <option value='CM1'>CM1</option>
+        <option value='CM2'>CM2</option>
       </select>
   </div>
 

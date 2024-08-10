@@ -31,8 +31,8 @@ const StudentsByClassroom = () => {
           <th>ID</th>
           <th>Nom et Prénom</th>
           <th>Date de naissance</th>
-          <th>Présence</th>
-          <th>Cantine</th>
+          {/*<th>Présence</th>
+          <th>Cantine</th>*/}
           <th>Photo</th>
           <th>Actions</th>
         </tr>
@@ -43,8 +43,8 @@ const StudentsByClassroom = () => {
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
             <td>{student.birthday}</td>
-            <td>{student.presence.toString()}</td>
-            <td>{student.cantine.toString()}</td>
+            {/*<td>{student.presence.toString()}</td>
+            <td>{student.cantine.toString()}</td>*/}
             <td>
               {student.profileImage ? (
                 <img
@@ -53,7 +53,7 @@ const StudentsByClassroom = () => {
                   style={{ width: '100px', height: '100px' }}
                 />
               ) : (
-                <span>No image</span>
+                <span>No Image</span>
               )}
             </td>
             <td>
