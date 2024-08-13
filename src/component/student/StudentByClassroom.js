@@ -16,15 +16,12 @@ const StudentByClassroom = () => {
     })
 
     useEffect(() => {
-      console.log("Student ID:", id)
-      console.log("Classroom ID:", classroomId)
-      console.log("User:", user)
- {/*       if (!user){
+        if (!user){
             navigate('/connexion')
         }else {
           loadStudentByClassroom()
-      }*/}
-      loadStudentByClassroom()
+      }
+     
 
     }, [user, id, classroomId])
 
@@ -32,7 +29,7 @@ const StudentByClassroom = () => {
         try{
             const result = await axios.get(`http://localhost:8080/students/${id}/classroom/${classroomId}`, { withCredentials: true })
             setStudentDTO(result.data)
-        console.log('srudent by classroom : ', result.data)
+
         } catch(error) {
             console.error("Error:", error)
             if (error.response && error.response.status === 401) {

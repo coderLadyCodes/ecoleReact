@@ -40,7 +40,7 @@ const StudentsByClassroom = () => {
       </thead>
       <tbody>
         {studentDTO.map((student, index) => (
-          <tr key={student.id} onClick={() => navigate(`classroom/${classroomId}/student/${student.id}`)} style={{ cursor: 'pointer' }}>
+          <tr key={student.id} onClick={() => navigate(`/classroom/${classroomId}/student/${student.id}`)} style={{ cursor: 'pointer' }}>
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
            {/* <td><Link to={`classroom/${classroomId}/student/${student.id}`}>{student.name}</Link></td>*/}
