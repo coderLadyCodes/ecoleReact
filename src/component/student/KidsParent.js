@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
+import {FaEdit, FaExternalLinkAlt, FaEye, FaTrashAlt} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const KidsParent = () => {
     const {role, userId} = useAuth()
     const [studentDTO, setStudentDTO] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         if(role == 'PARENT') {
             loadParentStudents()
@@ -32,6 +32,7 @@ const KidsParent = () => {
           <th>ID</th>
           <th>Nom et Prénom</th>
           <th>Date de naissance</th>
+          <th>classe</th>
           {/*<th>Présence</th>
           <th>Cantine</th>*/}
           <th>Photo</th>
@@ -40,11 +41,12 @@ const KidsParent = () => {
       </thead>
       <tbody>
         {studentDTO.map((student, index) => (
-          <tr key={student.id}>
+          <tr key={student.id} onClick={() => navigate(`/student-profile/${student.id}`)} style={{ cursor: 'pointer' }}>
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
             <td>{student.birthday}</td>
-            {/*<td>{student.presence.toString()}</td>
+            <td>{student.classe}</td>
+            {/*<td>{student.presence.}</td>
             <td*>{student.cantine.toString()}</td*/}
             <td>
               {student.profileImage ? (
@@ -58,10 +60,10 @@ const KidsParent = () => {
               )}
             </td>
             <td>
-              <Link to={`/student-profile/${student.id}`}><FaEye /></Link>
+            {/*<Link to={`/student-profile/${student.id}`}><FaEye /></Link>*/}
             </td>
             <td>
-              <Link to={`/edit-student/${student.id}`}><FaEdit /></Link>
+              {/*<Link to={`/edit-student/${student.id}`}><FaEdit /></Link>*/}
             </td>
           </tr>
         ))}

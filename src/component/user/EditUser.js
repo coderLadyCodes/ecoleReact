@@ -61,7 +61,7 @@ const loadUser = async () =>{
       const formData = new FormData()
       formData.append('userDetails', JSON.stringify(userDetails))
       formData.append('multipartFile', file)
-      console.log(formData)
+      
       const response = await axios.put(`http://localhost:8080/users/${userId}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

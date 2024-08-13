@@ -30,7 +30,9 @@ import { AccessCode } from './component/classroom/AccessCode'
 import EditClassroom from './component/classroom/EditClassroom'
 import Classroom from './component/classroom/Classroom'
 import UsersByClassroomId from './component/user/UsersByClassroomId'
+import StudentByClassroom from './component/student/StudentByClassroom'
 import StudentsByClassroom from './component/student/StudentsByClassroom'
+import UserProfil from './component/user/UserProfil'
 
 
 
@@ -55,12 +57,12 @@ function App() {
         <Route  path = '/change-password' element={<ChangePassword />} />
         <Route  path = '/new-password' element={<NewPassword />} />
               
-        <Route element={<PrivateRoutes />}>                            
-        <Route  path = '/dashboard' element={<Dashboard />} exact/>                            
+        <Route element={<PrivateRoutes />}> 
+        <Route  path = '/dashboard' element={<Dashboard />} exact/>                                                         
         <Route  path = '/logout' element={<Logout />} exact/>
         <Route path='/edit-user' element={<EditUser />} />
         <Route path='/add-student' element={<AddStudent />} />
-        <Route path='/student-profile/:id' element={<StudentProfile />} />
+        <Route path='/student-profile/:id' element={<StudentProfile />} /> {/*MOVE IT TO ADMIN SUPERADMIN PARENT*/}
         <Route path='/acces' element={<Acces />} />
         <Route  path='/edit-student/:id' element={< EditStudent/>} />
         <Route  path='/posts/classroom/:classroomId' element={< Posts/>} />
@@ -69,25 +71,31 @@ function App() {
         
        { role == 'SUPER_ADMIN' && (
           <> 
+          <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} />     
           <Route path='/users-view' element={<UsersView />} /> 
+          <Route path='/user-profile/:userId' element={<UserProfil />} /> 
           <Route path='/users-classroom' element={<UsersByClassroomId />} />
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} /> 
           <Route  path='/classrooms' element={< Classrooms/>} /> 
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
-          <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
+          <Route  path='/classroom/:classroomId' element={< Classroom/>} />
+          <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} />
+          <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
           <>
           <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} /> 
+          <Route path='/user-profile/:userId' element={<UserProfil />} />
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />
           <Route  path='/edit-classroom/:id' element={< EditClassroom/>} /> 
           <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
           <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} /> 
+          <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           </>
         )}
         { role == 'PARENT' && (

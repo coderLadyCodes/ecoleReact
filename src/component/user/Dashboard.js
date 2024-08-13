@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { Link} from 'react-router-dom'
+import { Link, useParams} from 'react-router-dom'
 import axios from 'axios'
 import profil from '../../images/profil.jpg'
 import discussion from '../../images/discussion.png'
 import cahierdeliaison from '../../images/cahierdeliaison.png'
 import { useAuth } from './AuthProvider'
 const Dashboard = () => {
-
   const {logout, user, role, userId} = useAuth()
 
   const [userDTO, setUserDTO] = useState({
@@ -42,7 +41,6 @@ const Dashboard = () => {
   }, [userId])
 
   return (
-
     <section>
       {user && <p>** Bienvenue, Email: {user}, Role: {role} **</p>}
       

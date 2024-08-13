@@ -95,7 +95,7 @@ const [userDTO, setUserDTO] = useState({
   return (
     <div>
         <h2>Inscription</h2>
-        <form onSubmit={handleSubmit} encType="multipart/form-data" method='post'>
+        <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
 
           <div className='inputs'>
 

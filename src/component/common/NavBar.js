@@ -17,7 +17,7 @@ const NavBar = () => {
             { role == 'SUPER_ADMIN' && (
         <ul>
           <li><Link to='/dashboard'>Profil</Link></li>
-          <li><Link  to='/users-view'>Liste des Parents</Link></li>
+          <li><Link  to='/users-view'>Liste des Utilisateurs</Link></li>
           <li><Link to='/students-view'>Liste des Eleves</Link></li>
           <li><Link to='/accesscode'>Acceder à la classe</Link></li>
           <li><Link to='/classrooms'>Acceder aux Classes</Link></li>

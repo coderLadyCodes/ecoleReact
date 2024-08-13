@@ -36,12 +36,12 @@ const StudentProfile = () => {
   }
   return (
   
-  <section className='d-flex flex-column'>
-    <h2 className='mb-5 text-center'>Enfant : {studentDTO.name}</h2>
-  <div className='d-flex justify-content-center'>
-    <div className='column'>
-  <div className='card' style={{width: '40rem'}}>
-  <div className='card-body text-center'>
+  <section>
+    <h2>Enfant : {studentDTO.name}</h2>
+  <div>
+    <div>
+  <div style={{width: '40rem'}}>
+  <div>
     {studentDTO.profileImage?
   <img
     src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
@@ -109,7 +109,7 @@ const StudentProfile = () => {
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
   <button type="button">
-    <Link to={'/kids-parent'}>annuler</Link>                                       
+    <Link to={'/kids-parent'}>annuler</Link>   {/*TO BE CHECKED */}                                   
   </button>
 
   </div> 

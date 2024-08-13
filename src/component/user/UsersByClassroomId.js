@@ -1,13 +1,15 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import axios from 'axios'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import {Link, useParams} from 'react-router-dom'
+import {Link, useLocation, useNavigate, useParams} from 'react-router-dom'
 import { useAuth } from './AuthProvider'
 
 const UsersByClassroomId = () => {
 const {role} = useAuth()
 const {classroomId} = useParams()
- 
+const navigate = useNavigate()
+const location = useLocation()
+const { teacher } = location.state || {}
 const [userDTO, setUserDTO] = useState([])
 
     useEffect(() =>{
@@ -32,12 +34,12 @@ const [userDTO, setUserDTO] = useState([])
       }
     }
 
-
   return (
     <>
       { role == 'ADMIN' && (
         <section>
         <h2>Liste des Parent d'élèves</h2>
+        <h3>L'enseignant(e) : {teacher} </h3>
         <table>
             <thead>
                <tr>
@@ -47,17 +49,14 @@ const [userDTO, setUserDTO] = useState([])
                 <th>Email</th>
                 <th>Tél</th>
                 <th>Photo</th>
-                <th>Actions</th>
                </tr>
             </thead>
 
             <tbody>
-                {userDTO.filter((usr) => usr.name.toLowerCase() && usr.role !== 'SUPER_ADMIN')
+                {userDTO.filter((usr) => usr.name.toLowerCase() && usr.role !== 'SUPER_ADMIN' && usr.role !== 'ADMIN')
                 .map((user, index)=>(
-                 <tr key={user.id}>
-                    <th scope="row" key={index}>
-                        {index + 1}
-                    </th>
+                <tr key={user.id} onClick={() => navigate(`/user-profile/${user.id}`)} style={{ cursor: 'pointer' }}>
+                 <th scope='row'>{index + 1}</th>
                      <td>{classroomId}</td>
                      <td>{user.name}</td>
                      <td>{user.email}</td>
@@ -65,7 +64,7 @@ const [userDTO, setUserDTO] = useState([])
                      <td> {user.profileImage ? (
                           <img
                           src={`http://localhost:8080/images/${user.id}/${user.profileImage}`}
-                          alt="profile image"
+                          alt='profile image'
                           style={{ width: '100px', height: '100px' }}
                           />
                             ) : (
@@ -73,10 +72,10 @@ const [userDTO, setUserDTO] = useState([])
                             )}
                      </td>
                      <td>
-                        <Link to={'/dashboard'}><FaEye /></Link>
+                        {/*<Link to={'/dashboard'}><FaEye /></Link>*/}
                         </td>
                      <td className='max-2'>
-                     <Link to={'/edit-user'}><FaEdit /></Link>
+                    {/*<Link to={'/edit-user'}><FaEdit /></Link>*/}
                      </td>
                  </tr>
                 ))}
@@ -87,6 +86,7 @@ const [userDTO, setUserDTO] = useState([])
       {role == 'SUPER_ADMIN' && (
        <section>
        <h2>Liste des Parent d'élèves</h2>
+       <h3>L'enseignant(e) : {teacher} </h3>
        <table>
            <thead>
               <tr>
@@ -104,8 +104,8 @@ const [userDTO, setUserDTO] = useState([])
                {userDTO.filter((usr) => usr.name.toLowerCase())
                .map((user, index)=>(
                
-                <tr key={user.id}>
-                   <th scope="row" key={index}>
+                <tr key={user.id} onClick={() => navigate(`/user-profile/${user.id}`)} style={{ cursor: 'pointer' }}>
+                   <th scope='row' key={index}>
                        {index + 1}
                    </th>
                    <td>{classroomId}</td>
@@ -115,17 +115,17 @@ const [userDTO, setUserDTO] = useState([])
                     <td> {user.profileImage ? (
                          <img
                          src={`http://localhost:8080/images/${user.id}/${user.profileImage}`}
-                         alt="profile image"
+                         alt='profile image'
                          style={{ width: '100px', height: '100px' }}
                          />
                            ) : (
                                  <span>No image</span>
                            )}</td>
                     <td>
-                       <Link to={'/dashboard'}><FaEye /></Link>
+                       {/*<Link to={'/dashboard'}><FaEye /></Link>*/}
                        </td>
                     <td>
-                    <Link to={'/edit-user'}><FaEdit /></Link>
+                    {/*<Link to={'/edit-user'}><FaEdit /></Link>*/}
                     </td>                 
                      <td>
                       { user.role !== 'SUPER_ADMIN' && (
