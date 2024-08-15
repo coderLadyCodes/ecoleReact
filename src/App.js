@@ -32,7 +32,8 @@ import Classroom from './component/classroom/Classroom'
 import UsersByClassroomId from './component/user/UsersByClassroomId'
 import StudentByClassroom from './component/student/StudentByClassroom'
 import StudentsByClassroom from './component/student/StudentsByClassroom'
-import UserProfil from './component/user/UserProfil'
+import UserProfile from './component/user/UserProfile'
+import EditUserProfileById from './component/user/EditUserProfileById'
 
 
 
@@ -73,7 +74,7 @@ function App() {
           <> 
           <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} />     
           <Route path='/users-view' element={<UsersView />} /> 
-          <Route path='/user-profile/:userId' element={<UserProfil />} /> 
+          <Route path='/user-profile/:userId' element={<UserProfile />} /> 
           <Route path='/users-classroom' element={<UsersByClassroomId />} />
           <Route  path='/students-view' element={<StudentsView />} /> 
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
@@ -83,12 +84,13 @@ function App() {
           <Route  path='/classroom/:classroomId' element={< Classroom/>} />
           <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} />
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
+          <Route  path='/edit-user/:userId' element={< EditUserProfileById/>} /> 
           </>
         )}
         { role == 'ADMIN' && (
           <>
           <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} /> 
-          <Route path='/user-profile/:userId' element={<UserProfil />} />
+          <Route path='/user-profile/:userId' element={<UserProfile />} />
           <Route  path='/students-view' element={<StudentsView />} />
           <Route  path='/classroom/:classroomId/add-post' element={< AddPost/>} />
           <Route  path='/edit-post/:id' element={< EditPost/>} />

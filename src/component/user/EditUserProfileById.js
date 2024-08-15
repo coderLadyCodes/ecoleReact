@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import { useAuth } from './AuthProvider'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const EditUser = () => {
+const EditUserProfileById = () => {
+  const { userId } = useParams()
+  const navigate = useNavigate()
+    const [userDetails, setUserDetails] = useState({
+        name: '',
+        email: '',
+        phone: '',
+      })
 
-  let navigate = useNavigate()
-  const {userId} = useAuth()
-  const [userDetails, setUserDetails] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  })
-
-  useEffect(() =>{
-    loadUser()
-}, [])
-
-const loadUser = async () =>{
-  const result = await axios.get(`http://localhost:8080/users/${userId}`,{withCredentials: true})
-  setUserDetails(result.data)   
-}
-
+      useEffect(() => {
+        loadUser()
+      }, [])
+      const loadUser = async () => {
+        try{
+            const result = await axios.get(`http://localhost:8080/users/${userId}`,{withCredentials: true})
+            setUserDetails(result.data)
+        }catch (error) {
+            console.error('Error fetching user data:', error)
+            }
+      }       
   const [file, setFile] = useState(null)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setUserDetails((prevUserDetails) => ({ ...prevUserDetails, [name]: value }))
-  };
-
+  }
+     
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]
     const maxSizeInBytes = 0.5 * 1024 * 1024
@@ -46,7 +46,7 @@ const loadUser = async () =>{
     e.preventDefault()
 
     if(!userDetails.name || !userDetails.email || !userDetails.phone) {
-      alert("Completez tout les champs");
+      alert("Completez tout les champs")
       return
     }
     if (!userDetails.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
@@ -68,14 +68,13 @@ const loadUser = async () =>{
         }, withCredentials: true
       })
       setUserDetails(response.data)  
-      navigate('/dashboard')
+      navigate('/users-view')
     } catch (error) {
       console.error('Error:', error)
     }
-  }
-
-    return (
-      <div>
+}
+  return (
+    <div>
         <div>
       <div>
       <div>
@@ -113,7 +112,7 @@ const loadUser = async () =>{
               <button type='submit'>Save</button>
             </div>
             <div>
-              <Link to={'/dashboard'}  type='submit'>Cancel</Link> 
+              <Link to={'/users-view'}  type='submit'>Cancel</Link> 
             </div>
           </div>
         </form>   
@@ -123,7 +122,7 @@ const loadUser = async () =>{
       </div>
       </div>
       </div>
-    )
-  }
-  
-  export default EditUser
+  )
+}
+
+export default EditUserProfileById

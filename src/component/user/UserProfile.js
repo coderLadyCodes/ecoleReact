@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import profil from '../../images/profil.jpg'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-const UserProfil = () => {
+const UserProfile = () => {
     const {userId} = useParams()
     const [userDTO, setUserDTO] = useState({
         name:'',
@@ -52,9 +52,11 @@ const UserProfil = () => {
     <div>
       <p>{userDTO.phone}</p>
     </div>
+    <button><Link to={`/edit-user/${userId}`}>Modifier profile</Link></button> 
+    <button><Link to={'/users-view'}>Annuler</Link></button> 
 
   </section>
   )
 }
 
-export default UserProfil
+export default UserProfile

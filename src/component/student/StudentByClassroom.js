@@ -111,7 +111,7 @@ const StudentByClassroom = () => {
     {/*<Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link> */}                                      
   </button>
   <button type="button">
-    <Link to={`/classroom/${classroomId}/students`}>annuler</Link>                                      
+    <Link to={`/classroom/${classroomId}/students`}>Retour</Link>                                      
   </button>
 
   </div> 

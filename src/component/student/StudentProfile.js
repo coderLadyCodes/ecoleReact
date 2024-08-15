@@ -7,7 +7,7 @@ import { useAuth } from '../user/AuthProvider'
 
 
 const StudentProfile = () => {
-  const {user} = useAuth()
+  const {user, role} = useAuth()
   const {id} = useParams()
   const navigate = useNavigate()
   const [studentDTO, setStudentDTO] = useState({
@@ -108,9 +108,18 @@ const StudentProfile = () => {
    <button type="button">
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
-  <button type="button">
+  { role == 'SUPER_ADMIN' && (
+     <button type="button">
+     <Link to={'/students-view'}>annuler</Link>                                  
+   </button>
+  )}
+
+  { role == 'PARENT' && (
+    <button type="button">
     <Link to={'/kids-parent'}>annuler</Link>   {/*TO BE CHECKED */}                                   
   </button>
+  )}
+  
 
   </div> 
   </div>
