@@ -45,7 +45,7 @@ const KidsParent = () => {
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
             <td>{student.birthday}</td>
-            <td>{student.classe}</td>
+            <td>{student.grade}</td>
             {/*<td>{student.presence.}</td>
             <td*>{student.cantine.toString()}</td*/}
             <td>

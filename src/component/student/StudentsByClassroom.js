@@ -45,7 +45,7 @@ const StudentsByClassroom = () => {
             <td>{student.name}</td>
            {/* <td><Link to={`classroom/${classroomId}/student/${student.id}`}>{student.name}</Link></td>*/}
             <td>{student.birthday}</td>
-            <td>{student.classe}</td>
+            <td>{student.grade}</td>
             {/*<td>{student.presence.toString()}</td>
             <td>{student.cantine.toString()}</td>*/}
             <td>

@@ -10,9 +10,7 @@ const EditStudent = () => {
     const [studentDetails, setStudentDetails] = useState({
         name: '',
         birthday: new Date(),
-        classe:'',
-        //presence:true ,
-        //cantine: true,
+        grade:'PETITE_SECTION',
     })
 
     useEffect(() =>{
@@ -133,12 +131,12 @@ const EditStudent = () => {
   </div>
 
   <div>
-      <label htmlFor='classe'>Classe</label>
-      <select name='classe' id='classe' value={studentDetails.classe} onChange={handleInputChange}>
+      <label htmlFor='grade'>Classe</label>
+      <select name='grade' id='grade' value={studentDetails.grade} onChange={handleInputChange}>
         <option defaultValue='none'>Select an Option</option>
-        <option value='Petite Section'>Petite Section</option>
-        <option value='Moyenne Section'>Moyenne Section</option>
-        <option value='Grande Section'>Grande Section</option>
+        <option value='PETITE_SECTION'>Petite Section</option>
+        <option value='MOYENNE_SECTION'>Moyenne Section</option>
+        <option value='GRANDE_SECTION'>Grande Section</option>
         <option value='CP'>CP</option>
         <option value='CE1'>CE1</option>
         <option value='CE2'>CE2</option>

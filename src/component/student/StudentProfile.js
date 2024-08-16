@@ -13,7 +13,7 @@ const StudentProfile = () => {
   const [studentDTO, setStudentDTO] = useState({
     name : '',
     birthday : null,
-    classe:'',
+    grade:'',
     //presence : false,
     //cantine : false,
     multipartFile: '',
@@ -81,7 +81,7 @@ const StudentProfile = () => {
   <h5>Classe</h5>
   </div>
   <div>
-   <p>{studentDTO.classe}</p>
+   <p>{studentDTO.grade}</p>
   </div>
   </div>
   <hr />

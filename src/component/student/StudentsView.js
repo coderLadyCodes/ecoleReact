@@ -41,6 +41,7 @@ const handleDelete = async(id) => {
             <th>ID</th>
             <th>Nom et Prénom</th>
             <th>Date de naissance</th>
+            <th>classe</th>
             {/*<th>Présence</th>
             <th>Cantine</th>*/}
             <th>Photo</th>
@@ -54,6 +55,7 @@ const handleDelete = async(id) => {
            <th scope='row' key={index}>{index + 1}</th>
            <td>{student.name}</td>
            <td>{student.birthday}</td>
+           <td>{student.grade}</td>
           {/* <td>{student.presence.toString()}</td>
            <td>{student.cantine.toString()}</td>*/}
            <td>{student.profileImage ? (
