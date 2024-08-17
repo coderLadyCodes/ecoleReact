@@ -38,7 +38,7 @@ const Acces = () => {
       { role == 'ADMIN' && (  
     <form onSubmit={handleSubmit}>
         <label htmlFor='grade'>Classe</label>
-        <select name='grade' id='grade' value={classroom.classe} onChange={handleChange}>
+        <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>
           <option value='PETITE_SECTION'>Petite Section</option>
           <option value='MOYENNE_SECTION'>Moyenne Section</option>
           <option value='GRANDE_SECTION'>Grande Section</option>
@@ -55,7 +55,7 @@ const Acces = () => {
       { role == 'SUPER_ADMIN' && (  
     <form onSubmit={handleSubmit}>
         <label htmlFor='grade'>Classe</label>
-        <select name='grade' id='grade' value={classroom.classe} onChange={handleChange}>
+        <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>
           <option value='PETITE_SECTION'>Petite Section</option>
           <option value='MOYENNE_SECTION'>Moyenne Section</option>
           <option value='GRANDE_SECTION'>Grande Section</option>
