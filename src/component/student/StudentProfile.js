@@ -14,8 +14,6 @@ const StudentProfile = () => {
     name : '',
     birthday : null,
     grade:'',
-    //presence : false,
-    //cantine : false,
     multipartFile: '',
   })
 
@@ -30,12 +28,14 @@ const StudentProfile = () => {
     try{
       const result = await axios.get(`http://localhost:8080/students/student/${id}`, {withCredentials: true})
       setStudentDTO(result.data)
+  
     }catch (error) {
       console.error('Error: ', error)
     }
   }
   return (
-  
+    <>
+    <button type='button'><Link to={`/regular-updates/${studentDTO.id}`} state ={{name: studentDTO.name}}>Absence, Cantine, Garderie</Link></button>
   <section>
     <h2>Enfant : {studentDTO.name}</h2>
   <div>
@@ -128,6 +128,7 @@ const StudentProfile = () => {
   </div>
   </div>
   </section>
+  </>
 
   )
 }

@@ -1,31 +1,39 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from '../user/AuthProvider'
+import ReactDatePicker from 'react-datepicker'
 
 const RegularUpdates = () => {
+  const {role} = useAuth()
   const navigate = useNavigate()
+  const {studentId} = useParams()
+  const location = useLocation()
+  const {name} = location.state || {}
     const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
       studentId:'',
       userId:'',
       local_date_time:'', 
+      local_date:new Date(), 
       isAbsent:'', 
       hasCantine:'', 
-      garderie:'PETITE_SECTION', 
+      garderie:'PAS_DE_GARDERIE', 
     })
-
-    useEffect(() => {
-
-    }, [])
 
     const handleInputChange = (e) => {
     const {name, value} = e.target
     const newValue = e.target.type === 'radio' ? (value === 'true') : value
     setRegularUpdatesDTO({... regularUpdatesDTO, [name]: newValue})
-
+ }
+ const handleDayChange = (date) => {
+  setRegularUpdatesDTO({ ...regularUpdatesDTO, local_date: date })
+}
     const handleSubmit = async (e) => {
       e.preventDefault()
       const currentDateTime =  new Date().toLocaleString('fr-FR')
-      const createdRegularUpdates = {...regularUpdatesDTO,local_date_time: currentDateTime}
+      const formatedDate = regularUpdatesDTO.local_date.toLocaleDateString('fr-FR')
+      const createdRegularUpdates = {...regularUpdatesDTO,local_date_time: currentDateTime, local_date: formatedDate}
       try{
         const response = await axios.post(`http://localhost:8080/updates/${studentId}`, createdRegularUpdates,{
       headers: {
@@ -33,28 +41,35 @@ const RegularUpdates = () => {
     },
     withCredentials : true
     })
+
+   navigate(`/show-regular-updates/${studentId}`)
+
       }catch (error) {
         console.error('Error:', error)
       }
     }
-  }
+ 
   return (
     <div>
-      <h2>Cantine, Présence, Gardeire</h2>
+      <h2> Absence, Cantine, Garderie pour : {name}</h2>
     <form onSubmit={handleSubmit}>
+    <div>
+      <label htmlFor="local_date" >Date :</label>
+      <DatePicker id='local_date'  selected={regularUpdatesDTO.local_date} onChange={handleDayChange} dateFormat='dd/MM/yyyy'  showYearDropdown scrollableMonthYearDropdown required />
+    </div>
     <fieldset>
               <legend>Présence</legend>
               <div>
                 <div>
                   <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} />
                   <label htmlFor='isAbsent-true'>
-                    Présent
+                    Absent
                   </label>
                 </div>
                 <div>
                   <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDTO.isAbsent === false} onChange={handleInputChange} />
                   <label htmlFor='isAbsent-false'>
-                    Absent
+                    Present
                   </label>
                 </div>
               </div>
@@ -77,18 +92,19 @@ const RegularUpdates = () => {
                 </div>
               </div>
             </fieldset>
-        <label htmlFor='grade'>Classe</label>
-        <select name='grade' id='grade' value={regularUpdatesDTO.grade} onChange={handleChange}>
-          <option value='PETITE_SECTION'>Petite Section</option>
-          <option value='MOYENNE_SECTION'>Moyenne Section</option>
-          <option value='GRANDE_SECTION'>Grande Section</option>
-          <option value='CP'>CP</option>
-          <option value='CE1'>CE1</option>
-          <option value='CE2'>CE2</option>
-          <option value='CM1'>CM1</option>
-          <option value='CM2'>CM2</option>
+        <label htmlFor='garderie'>Classe</label>
+        <select name='garderie' id='garderie' value={regularUpdatesDTO.garderie} onChange={handleInputChange}>
+          <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
+          <option value='MATIN'>Matin</option>
+          <option value='SOIR'>Soir</option>
+          <option value='MATIN_ET_SOIR'>Matin et Soir</option>
         </select>
         <button type='submit'>Save</button>
+        { role == 'PARENT' && (
+    <button type="button">
+    <Link to={`/student-profile/${studentId}`}>annuler</Link>                                
+  </button>
+  )}
     </form>
     </div>
   )
