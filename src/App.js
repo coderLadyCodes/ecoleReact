@@ -88,7 +88,7 @@ function App() {
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           <Route  path='/edit-user/:userId' element={< EditUserProfileById/>} />
           <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} />
-          <Route path='/show-regular-updates/:studentId' element={< ShowRegularUpdates/>} />   
+          <Route path='/show-regular-updates/:studentId/ruId' element={< ShowRegularUpdates/>} />   
           </>
         )}
         { role == 'ADMIN' && (
@@ -111,7 +111,7 @@ function App() {
             <Route path='/edit-student/:id' element={<EditStudent />} />
             <Route path='/classroom/:classroomId' element={< Classroom/>} /> 
             <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} /> 
-            <Route path='/show-regular-updates/:studentId' element={< ShowRegularUpdates/>} /> 
+            <Route path='/show-regular-updates/:studentId/:ruId' element={< ShowRegularUpdates/>} /> 
           </>
         )}
       </Route>  

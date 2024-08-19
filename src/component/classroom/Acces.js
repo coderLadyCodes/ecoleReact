@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Acces = () => {
   let navigate = useNavigate()
-  const {role, userId} = useAuth()
+  const {role, userId, user} = useAuth()
   const [classroom, setClassroom] =  useState({
     grade:'PETITE_SECTION',
     userId:userId,
@@ -32,6 +32,11 @@ const Acces = () => {
   } catch (error) {
     console.error('Error:', error)
   }
+}
+
+if (!user) {
+  navigate('/connexion')
+  return <p>Vous devez etre connecter a votre compte</p>
 }
   return (
     <>

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Classrooms = () => {
+  const navigate = useNavigate()
   const {role, user, userId, userName} = useAuth()
   const [classroom, setClassroom] = useState([])
    useEffect(() => {
@@ -28,6 +29,10 @@ const Classrooms = () => {
          console.error("Error deleting classroom:", error)
       }   
     }
+}
+if (!user) {
+  navigate('/connexion')
+  return <p>Vous devez etre connecter a votre compte</p>
 }
   return (
     <>

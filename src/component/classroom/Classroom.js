@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import Posts from '../post/Posts'
 
 
 const Classroom = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const {classroomCode, teacher} = location.state || {}
   const {classroomId} = useParams()
@@ -32,6 +33,10 @@ const Classroom = () => {
       }catch (error) {
         console.error('Error: ', error)
       }
+    }
+    if (!user) {
+      navigate('/connexion')
+      return <p>Vous devez etre connecter a votre compte</p>
     }
 
   return (

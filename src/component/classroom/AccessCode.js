@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 
 export const AccessCode = () => {
-    const {userId} = useAuth()
+    const {userId, user} = useAuth()
     let navigate = useNavigate()
     const [activation, setActivation] = useState({
         classroomCode:'',
@@ -63,6 +63,10 @@ export const AccessCode = () => {
         alert(`Error: ${error.message}`)
       }
     }
+    }
+    if (!user) {
+      navigate('/connexion')
+      return <p>Vous devez etre connecter a votre compte</p>
     }
 
   return (

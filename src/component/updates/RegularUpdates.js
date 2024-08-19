@@ -6,12 +6,13 @@ import { useAuth } from '../user/AuthProvider'
 import ReactDatePicker from 'react-datepicker'
 
 const RegularUpdates = () => {
+  const {user} = useAuth()
   const {role} = useAuth()
   const navigate = useNavigate()
   const {studentId} = useParams()
   const location = useLocation()
   const {name} = location.state || {}
-    const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
+  const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
       studentId:'',
       userId:'',
       local_date_time:'', 
@@ -41,12 +42,16 @@ const RegularUpdates = () => {
     },
     withCredentials : true
     })
-
-   navigate(`/show-regular-updates/${studentId}`)
+    const ruId = response.data.id
+   navigate(`/show-regular-updates/${studentId}/${ruId}`)
 
       }catch (error) {
         console.error('Error:', error)
       }
+    }
+    if (!user) {
+      navigate('/connexion')
+      return <p>Vous devez etre connecter a votre compte</p>
     }
  
   return (
@@ -61,13 +66,13 @@ const RegularUpdates = () => {
               <legend>Présence</legend>
               <div>
                 <div>
-                  <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} />
+                  <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} required/>
                   <label htmlFor='isAbsent-true'>
                     Absent
                   </label>
                 </div>
                 <div>
-                  <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDTO.isAbsent === false} onChange={handleInputChange} />
+                  <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDTO.isAbsent === false} onChange={handleInputChange} required/>
                   <label htmlFor='isAbsent-false'>
                     Present
                   </label>
@@ -79,13 +84,13 @@ const RegularUpdates = () => {
               <legend>Cantine</legend>
               <div>
                 <div>
-                  <input type='radio' name='hasCantine' id='hasCantine-true' value='true' checked={regularUpdatesDTO.hasCantine === true} onChange={handleInputChange} />
+                  <input type='radio' name='hasCantine' id='hasCantine-true' value='true' checked={regularUpdatesDTO.hasCantine === true} onChange={handleInputChange} required/>
                   <label  htmlFor='hasCantine-true'>
                     Oui
                   </label>
                 </div>
                 <div>
-                  <input type='radio' name='hasCantine' id='hasCantine-false' value='false' checked={regularUpdatesDTO.hasCantine === false} onChange={handleInputChange} />
+                  <input type='radio' name='hasCantine' id='hasCantine-false' value='false' checked={regularUpdatesDTO.hasCantine === false} onChange={handleInputChange} required/>
                   <label htmlFor='hasCantine-false'>
                     Non
                   </label>
@@ -93,7 +98,7 @@ const RegularUpdates = () => {
               </div>
             </fieldset>
         <label htmlFor='garderie'>Classe</label>
-        <select name='garderie' id='garderie' value={regularUpdatesDTO.garderie} onChange={handleInputChange}>
+        <select name='garderie' id='garderie' value={regularUpdatesDTO.garderie} onChange={handleInputChange} required>
           <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
           <option value='MATIN'>Matin</option>
           <option value='SOIR'>Soir</option>

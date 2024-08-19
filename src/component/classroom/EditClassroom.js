@@ -4,6 +4,7 @@ import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 
 const EditClassroom = () => {
+  const {user} = useAuth()
     const {id} = useParams()
     let navigate = useNavigate()
     const {role, userId} = useAuth()
@@ -44,7 +45,10 @@ const EditClassroom = () => {
         }catch(error) {
             console.error('Error:', error)
           }}
-        
+          if (!user) {
+            navigate('/connexion')
+            return <p>Vous devez etre connecter a votre compte</p>
+          }
       
   return (
     <>
