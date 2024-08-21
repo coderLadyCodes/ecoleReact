@@ -88,7 +88,7 @@ const ShowRegularUpdates = () => {
 
   { role == 'PARENT' && (
     <button type="button">
-    <Link to={'/kids-parent'}>annuler</Link>                               
+    <Link to={`/student-profile/${studentId}`}>Retour</Link>                               
   </button>
   )}
   
