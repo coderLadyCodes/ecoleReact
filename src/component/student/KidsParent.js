@@ -4,7 +4,7 @@ import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
-const KidsParent = () => {
+const KidsParent = ({ onSelectKid }) => {
     const {role, userId} = useAuth()
     const [studentDTO, setStudentDTO] = useState([])
     const navigate = useNavigate()
@@ -23,12 +23,22 @@ const KidsParent = () => {
       }
     } 
 
+    const handleKidSelect = (kidId) => {
+      if (onSelectKid){
+        onSelectKid(kidId)
+      } else {
+        navigate(`/student-profile/${kidId}`)
+      }
+      
+  }
+
   return (
     <section>
     <h2>Mes Enfants</h2>
     <table>
       <thead>
         <tr>
+        {onSelectKid && <th>Select</th>}
           <th>ID</th>
           <th>Nom et Prénom</th>
           <th>Date de naissance</th>
@@ -36,18 +46,28 @@ const KidsParent = () => {
           {/*<th>Présence</th>
           <th>Cantine</th>*/}
           <th>Photo</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         {studentDTO.map((student, index) => (
-          <tr key={student.id} onClick={() => navigate(`/student-profile/${student.id}`)} style={{ cursor: 'pointer' }}>
+          <tr key={student.id}
+          onClick={() => !onSelectKid && handleKidSelect(student.id)}
+                            style={{ cursor: onSelectKid ? 'default' : 'pointer' }}
+                        >
+                            {onSelectKid && (
+            <td>
+                <input
+                    type="radio"
+                    name="selectedKid"
+                    value={student.id}
+                    onChange={() => handleKidSelect(student.id)}
+                />
+            </td>
+              )}
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
             <td>{student.birthday}</td>
             <td>{student.grade}</td>
-            {/*<td>{student.presence.}</td>
-            <td*>{student.cantine.toString()}</td*/}
             <td>
               {student.profileImage ? (
                 <img

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
+import KidsParent from '../student/KidsParent'
 
 export const AccessCode = () => {
     const {userId, user} = useAuth()
@@ -10,6 +11,7 @@ export const AccessCode = () => {
         classroomCode:'',
         teacher:'',
         userId:userId,
+        kidId:''
     })
     useEffect(() => {
       if (userId) {
@@ -25,6 +27,12 @@ export const AccessCode = () => {
         setActivation(prevState => ({
           ...prevState, [name] : noWhiteSpaceValue
         }))
+    }
+
+    const handleKidSelect = (kidId) => {
+      setActivation(prevState =>({
+        ...prevState, kidId: kidId
+      }))
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -72,10 +80,24 @@ export const AccessCode = () => {
   return (
     <div>
         <h1>Acceder à la classe</h1>
+
+        < KidsParent onSelectKid={handleKidSelect}/>
+        
         <form onSubmit={handleSubmit}>
         <label htmlFor='classroomCode'>Code</label>
             <input placeholder='code' type="text"  name='classroomCode' id='classroomCode' onChange={handleChange} value={activation.classroomCode} required/> 
-        <button type='submit'>Activer</button>
+
+            <label htmlFor='teacher'>Nom de l'enseignant</label>
+                <input
+                    placeholder="Nom de l'enseignant"
+                    type="text"
+                    name='teacher'
+                    id='teacher'
+                    onChange={handleChange}
+                    value={activation.teacher}
+                    required
+                />
+        <button type='submit' disabled={!activation.kidId}>Activer</button>
         </form>
     </div>
   )
