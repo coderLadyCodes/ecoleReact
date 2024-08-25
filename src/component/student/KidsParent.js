@@ -28,8 +28,7 @@ const KidsParent = ({ onSelectKid }) => {
         onSelectKid(kidId)
       } else {
         navigate(`/student-profile/${kidId}`)
-      }
-      
+      }   
   }
 
   return (

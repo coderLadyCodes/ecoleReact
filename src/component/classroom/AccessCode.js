@@ -5,7 +5,7 @@ import { useAuth } from '../user/AuthProvider'
 import KidsParent from '../student/KidsParent'
 
 export const AccessCode = () => {
-    const {userId, user} = useAuth()
+    const {userId, user, role} = useAuth()
     let navigate = useNavigate()
     const [activation, setActivation] = useState({
         classroomCode:'',
@@ -13,6 +13,7 @@ export const AccessCode = () => {
         userId:userId,
         kidId:''
     })
+    const [error, setError] = useState('')
     useEffect(() => {
       if (userId) {
         setActivation(prevState => ({
@@ -22,10 +23,10 @@ export const AccessCode = () => {
     }, [userId])
 
     const handleChange = (e) => {
-        const { name, value } = e.target
-        const noWhiteSpaceValue = value.replace(/\s/g, '')
+      const { name, value } = e.target
+      const theValue = name === 'classroomCode' ? value.replace(/\s/g, '') : value
         setActivation(prevState => ({
-          ...prevState, [name] : noWhiteSpaceValue
+          ...prevState, [name] : theValue
         }))
     }
 
@@ -36,6 +37,7 @@ export const AccessCode = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setError('')
         try {
         const response = await axios.post('http://localhost:8080/classroom/activation', activation,{
             headers: {
@@ -53,24 +55,22 @@ export const AccessCode = () => {
 
     } catch (error) {
 
-      if (error.reponse) {
-
-        if (error.response.status === 400){
-          console.error('Bad Request:', error.response.data.message)
-          alert(`Error: ${error.response.data.message}`)
+      if (error.response) {
+        if (error.response.status === 400) {
+            setError(`${error.response.data.message}`)
+        } else if (error.response.status === 404) {
+            setError(`${error.response.data.message}`)
+        } else if (error.response.status === 403) {
+            setError(`${error.response.data.message}`)
         } else {
-          console.error('Error:', error.response.data)
-          alert(`Error: ${error.response.data.message}`)
+            setError(`Error: ${error.response.data.message}`)
         }
-
-      } else if (error.request){
-        console.error('No response received:', error.request)
-        alert('No response received from the server.')
-      } else {
-        console.error('Error:', error.message)
-        alert(`Error: ${error.message}`)
-      }
+    } else if (error.request) {
+        setError('No response received from the server.')
+    } else {
+        setError(`Error: ${error.message}`)
     }
+}
     }
     if (!user) {
       navigate('/connexion')
@@ -80,25 +80,52 @@ export const AccessCode = () => {
   return (
     <div>
         <h1>Acceder à la classe</h1>
-
-        < KidsParent onSelectKid={handleKidSelect}/>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        { role == 'PARENT' && (
+          <>
+          < KidsParent onSelectKid={handleKidSelect}/>
+        
+          <form onSubmit={handleSubmit}>
+          <label htmlFor='classroomCode'>Code</label>
+              <input 
+              placeholder='code' 
+              type="text"  
+              name='classroomCode' 
+              id='classroomCode' 
+              onChange={handleChange} 
+              value={activation.classroomCode} 
+              required/> 
+  
+              <label htmlFor='teacher'>Nom de l'enseignant</label>
+                  <input
+                      placeholder="Nom de l'enseignant"
+                      type="text"
+                      name='teacher'
+                      id='teacher'
+                      onChange={handleChange}
+                      value={activation.teacher}
+                      required
+                  />
+          <button type='submit' disabled={!activation.kidId}>Activer</button>
+          </form>
+          </>
+        )}
+        { (role == 'ADMIN' || role =='SUPER_ADMIN') && (
         
         <form onSubmit={handleSubmit}>
         <label htmlFor='classroomCode'>Code</label>
-            <input placeholder='code' type="text"  name='classroomCode' id='classroomCode' onChange={handleChange} value={activation.classroomCode} required/> 
-
-            <label htmlFor='teacher'>Nom de l'enseignant</label>
-                <input
-                    placeholder="Nom de l'enseignant"
-                    type="text"
-                    name='teacher'
-                    id='teacher'
-                    onChange={handleChange}
-                    value={activation.teacher}
-                    required
-                />
-        <button type='submit' disabled={!activation.kidId}>Activer</button>
-        </form>
+            <input 
+            placeholder='code' 
+            type="text"  
+            name='classroomCode' 
+            id='classroomCode' 
+            onChange={handleChange} 
+            value={activation.classroomCode} 
+            required/>         
+        <button type='submit'>Activer</button>
+        </form> 
+        )}
+     
     </div>
   )
 }

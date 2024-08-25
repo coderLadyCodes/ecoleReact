@@ -132,7 +132,6 @@ const AddStudent = () => {
             <div>
               <label htmlFor='grade'>Classe</label>
               <select name='grade' id='grade' value={studentDTO.grade} onChange={handleInputChange}>
-                <option defaultValue='none'>Choisir la Classe</option>
                 <option value='PETITE_SECTION'>Petite Section</option>
                 <option value='MOYENNE_SECTION'>Moyenne Section</option>
                 <option value='GRANDE_SECTION'>Grande Section</option>
