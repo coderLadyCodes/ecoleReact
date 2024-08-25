@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import { Link, useNavigate, useParams} from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams} from 'react-router-dom'
 import profil from '../../images/profil.jpg'
 import { useAuth } from '../user/AuthProvider'
 
@@ -86,25 +86,6 @@ const StudentProfile = () => {
   </div>
   <hr />
 
-{/*  <div>
-  <div>
-  <h5>Présence</h5>
-  </div>
-  <div>
-   <p>{studentDTO.presence.toString()}</p>
-  </div>
-  </div>
-  <hr />
-
-  <div>
-  <div>
-  <h5>Cantine</h5>
-  </div>
-  <div>
-   <p>{studentDTO.cantine.toString()}</p>
-  </div>
-  </div>
-  <hr />*/}
    <button type="button">
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
@@ -120,7 +101,6 @@ const StudentProfile = () => {
   </button>
   )}
   
-
   </div> 
   </div>
   </div>

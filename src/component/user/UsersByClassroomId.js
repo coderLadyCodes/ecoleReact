@@ -55,7 +55,7 @@ const [userDTO, setUserDTO] = useState([])
             <tbody>
                 {userDTO.filter((usr) => usr.name.toLowerCase() && usr.role !== 'SUPER_ADMIN' && usr.role !== 'ADMIN')
                 .map((user, index)=>(
-                <tr key={user.id} onClick={() => navigate(`/user-profile/${user.id}`)} style={{ cursor: 'pointer' }}>
+                <tr key={user.id} onClick={() => navigate(`/user-profile/${user.id}`, {state: {classroomId} })} style={{ cursor: 'pointer' }}>
                  <th scope='row'>{index + 1}</th>
                      <td>{classroomId}</td>
                      <td>{user.name}</td>

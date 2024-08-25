@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import profil from '../../images/profil.jpg'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 const UserProfile = () => {
+  const location = useLocation()
+  const {classroomId} = location.state || {}
     const {userId} = useParams()
     const [userDTO, setUserDTO] = useState({
         name:'',
@@ -52,9 +54,11 @@ const UserProfile = () => {
     <div>
       <p>{userDTO.phone}</p>
     </div>
+    {!classroomId && (
+      <div > 
     <button><Link to={`/edit-user/${userId}`}>Modifier profile</Link></button> 
     <button><Link to={'/users-view'}>Annuler</Link></button> 
-
+    </div> )}
   </section>
   )
 }
