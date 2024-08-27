@@ -15,7 +15,8 @@ const RegularUpdates = () => {
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
       studentId:'',
       userId:'',
-      local_date_time:'', 
+      local_date_time:'',
+      modified_at:null,
       local_date:new Date(), 
       isAbsent:'', 
       hasCantine:'', 
@@ -23,7 +24,7 @@ const RegularUpdates = () => {
     })
 
     const handleInputChange = (e) => {
-    const {name, value} = e.target
+    const {name, value, type} = e.target
     const newValue = e.target.type === 'radio' ? (value === 'true') : value
     setRegularUpdatesDTO({... regularUpdatesDTO, [name]: newValue})
  }
@@ -53,7 +54,7 @@ const RegularUpdates = () => {
       navigate('/connexion')
       return <p>Vous devez etre connecter a votre compte</p>
     }
- 
+ const formValid = regularUpdatesDTO.isAbsent !== '' && regularUpdatesDTO.hasCantine !== '' && regularUpdatesDTO.garderie !== '' &&  regularUpdatesDTO.local_date !== ''
   return (
     <div>
       <h2> Absence, Cantine, Garderie pour : {name}</h2>
@@ -63,7 +64,7 @@ const RegularUpdates = () => {
       <DatePicker id='local_date'  selected={regularUpdatesDTO.local_date} onChange={handleDayChange} dateFormat='dd/MM/yyyy'  showYearDropdown scrollableMonthYearDropdown required />
     </div>
     <fieldset>
-              <legend>Présence</legend>
+              <legend>Absence</legend>
               <div>
                 <div>
                   <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} required/>
@@ -97,14 +98,14 @@ const RegularUpdates = () => {
                 </div>
               </div>
             </fieldset>
-        <label htmlFor='garderie'>Classe</label>
+        <label htmlFor='garderie'>Garderie</label>
         <select name='garderie' id='garderie' value={regularUpdatesDTO.garderie} onChange={handleInputChange} required>
           <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
           <option value='MATIN'>Matin</option>
           <option value='SOIR'>Soir</option>
           <option value='MATIN_ET_SOIR'>Matin et Soir</option>
         </select>
-        <button type='submit'>Save</button>
+        <button type='submit' disabled={!formValid}>Save</button>
         { role == 'PARENT' && (
     <button type="button">
     <Link to={`/student-profile/${studentId}`}>annuler</Link>                                

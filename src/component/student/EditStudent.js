@@ -41,9 +41,7 @@ const EditStudent = () => {
     }
 
     const handleInputChange = (e) => {
-      const { name, value, type } = e.target
-      //const newValue = type === 'radio' ? (value === 'true') : value
-      //setStudentDetails((prevStudentDetails) => ({ ...prevStudentDetails, [name]: newValue }))
+      const { name, value } = e.target
       setStudentDetails({ ... studentDetails, [name]: value})
     }
   
@@ -71,7 +69,7 @@ const EditStudent = () => {
         navigate(`/student-profile/${id}`)
   
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error)
       }
     }
 
@@ -88,42 +86,6 @@ const EditStudent = () => {
     <label htmlFor='name'>Nom et Prénom</label>
     <input autoComplete='name' type='text'  name='name' id='name' required onChange={handleInputChange} value={studentDetails.name}/>
   </div>
-
- {/* <fieldset>
-    <legend>Présence</legend>
-    <div>
-      <div>
-        <input type='radio' name='presence' id='presence-true' value='true' checked={studentDetails.presence === true} onChange={handleInputChange}/>
-        <label htmlFor='presence-true'>
-          Présent
-        </label>
-      </div>
-      <div>
-        <input  type='radio' name='presence' id='presence-false' value='false' checked={studentDetails.presence === false} onChange={handleInputChange}/>
-        <label  htmlFor='presence-false'>
-          Absent
-        </label>
-      </div>
-      </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>Cantine</legend>
-    <div>
-      <div>
-        <input type='radio' name='cantine' id='cantine-true' value='true' checked={studentDetails.cantine === true} onChange={handleInputChange}/>
-        <label htmlFor='cantine-true'>
-          Oui
-        </label>
-      </div>
-      <div >
-        <input  type='radio' name='cantine' id='cantine-false' value='false' checked={studentDetails.cantine === false} onChange={handleInputChange}/>
-        <label htmlFor='cantine-false'>
-          Non
-        </label>
-      </div>
-      </div>
-  </fieldset> */}
 
   <div>
   <label htmlFor='birthday'>Date De Naissance</label>

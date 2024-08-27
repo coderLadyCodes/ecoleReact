@@ -12,6 +12,7 @@ const ShowRegularUpdates = () => {
     studentId:'',
     userId:'',
     local_date_time:'', 
+    modified_at:'',
     local_date:null, 
     isAbsent:'', 
     hasCantine:'', 
@@ -39,7 +40,7 @@ const ShowRegularUpdates = () => {
     <section>
     <h2>Enfant : </h2>
   <div>
-  <h5>Présence</h5>
+  <h5>Absence</h5>
   </div>
   <div>
    <p>{regularUpdatesDTO.isAbsent.toString()}</p>
@@ -74,11 +75,15 @@ const ShowRegularUpdates = () => {
   <h5>Date et Heure :</h5>
   </div>
   <div>
-   <p>{regularUpdatesDTO.local_date_time}</p>
+
+   <p>crée le :{regularUpdatesDTO.local_date_time}</p>
+
+   <p>modifié le:{regularUpdatesDTO.modified_at}</p>
+
   </div>
 
    <button type="button">
-    <Link to={`/edit-student/${regularUpdatesDTO.ruId}`}><FaEdit />Modifier</Link>                                       
+    <Link to={`/regular-updates/${studentId}/${ruId}`}><FaEdit />Modifier</Link>                                       
   </button>
   { role == 'SUPER_ADMIN' && (
      <button type="button">

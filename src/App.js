@@ -36,6 +36,7 @@ import UserProfile from './component/user/UserProfile'
 import EditUserProfileById from './component/user/EditUserProfileById'
 import RegularUpdates from './component/updates/RegularUpdates'
 import ShowRegularUpdates from './component/updates/ShowRegularUpdates'
+import EditRegularUpdates from './component/updates/EditRegularUpdates'
 
 
 
@@ -88,7 +89,8 @@ function App() {
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           <Route  path='/edit-user/:userId' element={< EditUserProfileById/>} />
           <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} />
-          <Route path='/show-regular-updates/:studentId/ruId' element={< ShowRegularUpdates/>} />   
+          <Route path='/show-regular-updates/:studentId/ruId' element={< ShowRegularUpdates/>} />
+          <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} />    
           </>
         )}
         { role == 'ADMIN' && (
@@ -112,6 +114,7 @@ function App() {
             <Route path='/classroom/:classroomId' element={< Classroom/>} /> 
             <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} /> 
             <Route path='/show-regular-updates/:studentId/:ruId' element={< ShowRegularUpdates/>} /> 
+            <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
           </>
         )}
       </Route>  

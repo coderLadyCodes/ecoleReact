@@ -107,9 +107,7 @@ const StudentByClassroom = () => {
   </div>
   </div>
   <hr />*/}
-   <button type="button">
-    {/*<Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link> */}                                      
-  </button>
+
   <button type="button">
     <Link to={`/classroom/${classroomId}/students`}>Retour</Link>                                      
   </button>
