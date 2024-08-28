@@ -20,9 +20,12 @@ const StudentProfile = () => {
   useEffect(() =>{
     if (!user){
      navigate('/connexion')
-    }
-    loadStudent()
+    } else{
+      loadStudent()
+    } 
+    
   }, [user,id])
+
 
   const loadStudent = async () =>{
     try{
@@ -33,9 +36,10 @@ const StudentProfile = () => {
       console.error('Error: ', error)
     }
   }
+
   return (
     <>
-    <button type='button'><Link to={`/regular-updates/${studentDTO.id}`} state ={{name: studentDTO.name}}>Absence, Cantine, Garderie</Link></button>
+    
   <section>
     <h2>Enfant : {studentDTO.name}</h2>
   <div>
@@ -97,7 +101,7 @@ const StudentProfile = () => {
 
   { role == 'PARENT' && (
     <button type="button">
-    <Link to={'/kids-parent'}>annuler</Link>   {/*TO BE CHECKED */}                                   
+    <Link to={'/kids-parent'}>annuler</Link>                                  
   </button>
   )}
   
@@ -108,6 +112,9 @@ const StudentProfile = () => {
   </div>
   </div>
   </section>
+  <div>
+  <button type='button'><Link to={`/regular-updates/${studentDTO.id}`} state ={{name: studentDTO.name}}>Absence, Cantine, Garderie</Link></button>
+  </div>
   </>
 
   )

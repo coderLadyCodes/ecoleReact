@@ -20,11 +20,13 @@ const ShowRegularUpdates = () => {
   })
 
   useEffect(() => {
-    loadRegularUpdates()
-  }, [studentId, ruId])
+    if (ruId) {
+      loadRegularUpdates()
+    }
+  }, [ruId])
   const loadRegularUpdates = async () => {
     try{
-      const response = await axios.get(`http://localhost:8080/updates/${ruId}`, {withCredentials: true}) //`http://localhost:8080/updates/${id}`
+      const response = await axios.get(`http://localhost:8080/updates/${ruId}`, {withCredentials: true})
       
       setRegularUpdatesDTO(response.data)
 
@@ -36,9 +38,9 @@ const ShowRegularUpdates = () => {
     navigate('/connexion')
     return <p>Vous devez etre connecter a votre compte</p>
   }
+
   return (
     <section>
-    <h2>Enfant : </h2>
   <div>
   <h5>Absence</h5>
   </div>
@@ -83,7 +85,7 @@ const ShowRegularUpdates = () => {
   </div>
 
    <button type="button">
-    <Link to={`/regular-updates/${studentId}/${ruId}`}><FaEdit />Modifier</Link>                                       
+    <Link to={`/regular-updates/${regularUpdatesDTO.studentId}/${regularUpdatesDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
   { role == 'SUPER_ADMIN' && (
      <button type="button">
@@ -93,7 +95,7 @@ const ShowRegularUpdates = () => {
 
   { role == 'PARENT' && (
     <button type="button">
-    <Link to={`/student-profile/${studentId}`}>Retour</Link>                               
+    <Link to={`/student-profile/${regularUpdatesDTO.studentId}`}>Retour</Link>                               
   </button>
   )}
   

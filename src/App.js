@@ -37,6 +37,7 @@ import EditUserProfileById from './component/user/EditUserProfileById'
 import RegularUpdates from './component/updates/RegularUpdates'
 import ShowRegularUpdates from './component/updates/ShowRegularUpdates'
 import EditRegularUpdates from './component/updates/EditRegularUpdates'
+import RegularUpdatesList from './component/updates/RegularUpdatesList'
 
 
 
@@ -90,7 +91,8 @@ function App() {
           <Route  path='/edit-user/:userId' element={< EditUserProfileById/>} />
           <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} />
           <Route path='/show-regular-updates/:studentId/ruId' element={< ShowRegularUpdates/>} />
-          <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} />    
+          <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
+          <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} />    
           </>
         )}
         { role == 'ADMIN' && (
@@ -115,6 +117,7 @@ function App() {
             <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} /> 
             <Route path='/show-regular-updates/:studentId/:ruId' element={< ShowRegularUpdates/>} /> 
             <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
+            <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} /> 
           </>
         )}
       </Route>  

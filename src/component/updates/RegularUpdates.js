@@ -25,12 +25,14 @@ const RegularUpdates = () => {
 
     const handleInputChange = (e) => {
     const {name, value, type} = e.target
-    const newValue = e.target.type === 'radio' ? (value === 'true') : value
+    const newValue = type === 'radio' ? (value === 'true') : value
     setRegularUpdatesDTO({... regularUpdatesDTO, [name]: newValue})
  }
+
  const handleDayChange = (date) => {
   setRegularUpdatesDTO({ ...regularUpdatesDTO, local_date: date })
 }
+
     const handleSubmit = async (e) => {
       e.preventDefault()
       const currentDateTime =  new Date().toLocaleString('fr-FR')
@@ -44,7 +46,7 @@ const RegularUpdates = () => {
     withCredentials : true
     })
     const ruId = response.data.id
-   navigate(`/show-regular-updates/${studentId}/${ruId}`)
+   navigate(`/show-list-updates/${studentId}/${ruId}`)
 
       }catch (error) {
         console.error('Error:', error)

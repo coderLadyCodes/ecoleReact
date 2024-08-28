@@ -17,7 +17,7 @@ const loadStudents = async () =>{
         const result = await axios.get('http://localhost:8080/students',{withCredentials: true})
         setStudentDTO(result.data)
     } catch (error) {
-        console.error("error : ", error)
+        console.error('error : ', error)
     }}
 
 const handleDelete = async(id) => {
@@ -42,8 +42,6 @@ const handleDelete = async(id) => {
             <th>Nom et Prénom</th>
             <th>Date de naissance</th>
             <th>classe</th>
-            {/*<th>Présence</th>
-            <th>Cantine</th>*/}
             <th>Photo</th>
             <th>Actions</th>
         </tr>
@@ -56,8 +54,6 @@ const handleDelete = async(id) => {
            <td>{student.name}</td>
            <td>{student.birthday}</td>
            <td>{student.grade}</td>
-          {/* <td>{student.presence.toString()}</td>
-           <td>{student.cantine.toString()}</td>*/}
            <td>{student.profileImage ? (
             <img
             src={`http://localhost:8080/images/${student.id}/${student.profileImage}`}
