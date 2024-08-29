@@ -1,20 +1,21 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import ReactDatePicker from 'react-datepicker'
+import RegularUpdatesList from './RegularUpdatesList'
 
 const RegularUpdates = () => {
-  const {user} = useAuth()
+  const {user, userId} = useAuth()
   const {role} = useAuth()
   const navigate = useNavigate()
   const {studentId} = useParams()
   const location = useLocation()
   const {name} = location.state || {}
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
-      studentId:'',
-      userId:'',
+      studentId:studentId,
+      userId:userId,
       local_date_time:'',
       modified_at:null,
       local_date:new Date(), 
@@ -45,8 +46,8 @@ const RegularUpdates = () => {
     },
     withCredentials : true
     })
-    const ruId = response.data.id
-   navigate(`/show-list-updates/${studentId}/${ruId}`)
+ 
+   navigate(`/show-list-updates/${studentId}`)
 
       }catch (error) {
         console.error('Error:', error)
@@ -60,6 +61,13 @@ const RegularUpdates = () => {
   return (
     <div>
       <h2> Absence, Cantine, Garderie pour : {name}</h2>
+      <div>
+  
+          <button type='button'>
+           <Link to={`/show-list-updates/${studentId}`}>Voir les précédents Absences / cantine / garderie</Link>                                
+          </button>
+
+      </div>
     <form onSubmit={handleSubmit}>
     <div>
       <label htmlFor="local_date" >Date :</label>
@@ -107,9 +115,9 @@ const RegularUpdates = () => {
           <option value='SOIR'>Soir</option>
           <option value='MATIN_ET_SOIR'>Matin et Soir</option>
         </select>
-        <button type='submit' disabled={!formValid}>Save</button>
+        <button type='submit' disabled={!formValid}>Ok</button>
         { role == 'PARENT' && (
-    <button type="button">
+    <button type='button'>
     <Link to={`/student-profile/${studentId}`}>annuler</Link>                                
   </button>
   )}

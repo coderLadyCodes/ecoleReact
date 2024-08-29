@@ -5,12 +5,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 
 const ShowRegularUpdates = () => {
-  const {user, role} = useAuth()
+  const {user, role, userId} = useAuth()
   const navigate = useNavigate()
   const {studentId, ruId} = useParams()
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
-    studentId:'',
-    userId:'',
+    studentId:studentId,
+    userId:userId,
     local_date_time:'', 
     modified_at:'',
     local_date:null, 
@@ -38,6 +38,17 @@ const ShowRegularUpdates = () => {
     navigate('/connexion')
     return <p>Vous devez etre connecter a votre compte</p>
   }
+  const handleDelete = async (id) =>{
+    let superAdminChoice = window.confirm('Etes vous sure de supprimer ce UPDATE?')
+    if (superAdminChoice){
+      try{
+         await axios.delete(`http://localhost:8080/updates/${id}`,{withCredentials: true})
+         loadRegularUpdates()
+      } catch(error){
+        console.error('error deleting the UPDATE : ', error)
+      }
+    }
+  }
 
   return (
     <section>
@@ -45,7 +56,7 @@ const ShowRegularUpdates = () => {
   <h5>Absence</h5>
   </div>
   <div>
-   <p>{regularUpdatesDTO.isAbsent.toString()}</p>
+   <p>{regularUpdatesDTO.isAbsent?  'Absent(e)' : 'Présent(e)'}</p>
   </div>
 
 
@@ -54,7 +65,7 @@ const ShowRegularUpdates = () => {
   <h5>Cantine</h5>
   </div>
   <div>
-   <p>{regularUpdatesDTO.hasCantine.toString()}</p>
+   <p>{regularUpdatesDTO.hasCantine? 'Cantine' : 'Pas Cantine'}</p>
   </div>
   </div>
 
@@ -84,21 +95,21 @@ const ShowRegularUpdates = () => {
 
   </div>
 
-   <button type="button">
+   <button type='button'>
     <Link to={`/regular-updates/${regularUpdatesDTO.studentId}/${regularUpdatesDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
   { role == 'SUPER_ADMIN' && (
-     <button type="button">
-     <Link to={'/students-view'}>annuler</Link>                                  
+     <button type='button'>
+     <Link to={'/students-view'}>annuler</Link>  
+     <button onClick={()=> handleDelete(regularUpdatesDTO.id)}><FaTrashAlt /></button>                                
    </button>
   )}
 
   { role == 'PARENT' && (
-    <button type="button">
-    <Link to={`/student-profile/${regularUpdatesDTO.studentId}`}>Retour</Link>                               
+    <button type='button'>
+    <Link to={`/show-list-updates/${regularUpdatesDTO.studentId}`}>Retour</Link>                               
   </button>
   )}
-  
   </section>
   )
 }

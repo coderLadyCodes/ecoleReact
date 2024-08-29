@@ -55,7 +55,7 @@ const EditRegularUpdates = () => {
                   }, withCredentials: true
             })
             setRegularUpdatesDetails(response.data)
-            navigate(`/show-regular-updates/${studentId}/${ruId}`)
+            navigate(`/show-list-updates/${studentId}`)
         } catch(error){
             console.error('Error:', error)
           }

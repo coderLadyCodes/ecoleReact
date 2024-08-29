@@ -117,7 +117,7 @@ function App() {
             <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} /> 
             <Route path='/show-regular-updates/:studentId/:ruId' element={< ShowRegularUpdates/>} /> 
             <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
-            <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} /> 
+            <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} /> 
           </>
         )}
       </Route>  
