@@ -9,6 +9,7 @@ const StudentByClassroom = () => {
     const {user} = useAuth()
     const navigate = useNavigate()
     const[studentDTO, setStudentDTO] = useState({
+      id:id,
         name : '',
         birthday : null,
         grade:'',
@@ -88,27 +89,7 @@ const StudentByClassroom = () => {
   </div>
   <hr />
 
-{/*  <div>
-  <div>
-  <h5>Présence</h5>
-  </div>
-  <div>
-   <p>{studentDTO.presence.toString()}</p>
-  </div>
-  </div>
-  <hr />
-
-  <div>
-  <div>
-  <h5>Cantine</h5>
-  </div>
-  <div>
-   <p>{studentDTO.cantine.toString()}</p>
-  </div>
-  </div>
-  <hr />*/}
-
-  <button type="button">
+  <button type='button'>
     <Link to={`/classroom/${classroomId}/students`}>Retour</Link>                                      
   </button>
 
@@ -117,6 +98,11 @@ const StudentByClassroom = () => {
   </div>
   </div>
   </div>
+  </div>
+  <div>
+  <button type='button'>
+    <Link to={`/show-list-updates/${id}`}>Absence, cantine, Garderie</Link>                                      
+  </button>
   </div>
   </section>
   )

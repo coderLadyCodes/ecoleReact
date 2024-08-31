@@ -68,13 +68,7 @@ const [userDTO, setUserDTO] = useState([])
                          />
                            ) : (
                                  <span>No image</span>
-                           )}</td>
-                    <td>
-                       {/*<Link to={'/dashboard'}><FaEye /></Link>*/}
-                       </td>
-                    <td>
-                    {/*<Link to={'/edit-user'}><FaEdit /></Link>*/}
-                    </td>                 
+                           )}</td>               
                      <td>
                       { user.role !== 'SUPER_ADMIN' && (
                         <button onClick={()=> handleDelete(user.id)}><FaTrashAlt /></button>

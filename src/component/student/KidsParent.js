@@ -42,8 +42,6 @@ const KidsParent = ({ onSelectKid }) => {
           <th>Nom et Prénom</th>
           <th>Date de naissance</th>
           <th>classe</th>
-          {/*<th>Présence</th>
-          <th>Cantine</th>*/}
           <th>Photo</th>
         </tr>
       </thead>
@@ -77,12 +75,6 @@ const KidsParent = ({ onSelectKid }) => {
               ) : (
                 <span>No Image</span>
               )}
-            </td>
-            <td>
-            {/*<Link to={`/student-profile/${student.id}`}><FaEye /></Link>*/}
-            </td>
-            <td>
-              {/*<Link to={`/edit-student/${student.id}`}><FaEdit /></Link>*/}
             </td>
           </tr>
         ))}

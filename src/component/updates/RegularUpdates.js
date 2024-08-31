@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import ReactDatePicker from 'react-datepicker'
-import RegularUpdatesList from './RegularUpdatesList'
 
 const RegularUpdates = () => {
   const {user, userId} = useAuth()
@@ -15,7 +14,7 @@ const RegularUpdates = () => {
   const {name} = location.state || {}
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
       studentId:studentId,
-      userId:userId,
+      userId:'',
       local_date_time:'',
       modified_at:null,
       local_date:new Date(), 
@@ -23,6 +22,12 @@ const RegularUpdates = () => {
       hasCantine:'', 
       garderie:'PAS_DE_GARDERIE', 
     })
+
+    useEffect(() => {
+      if (!user) {
+        navigate('/connexion')
+      }
+    }, [user, navigate])
 
     const handleInputChange = (e) => {
     const {name, value, type} = e.target
@@ -47,16 +52,13 @@ const RegularUpdates = () => {
     withCredentials : true
     })
  
-   navigate(`/show-list-updates/${studentId}`)
+   navigate(`/show-list-updates/${studentId}`, { state:{name}})
 
       }catch (error) {
         console.error('Error:', error)
       }
     }
-    if (!user) {
-      navigate('/connexion')
-      return <p>Vous devez etre connecter a votre compte</p>
-    }
+ 
  const formValid = regularUpdatesDTO.isAbsent !== '' && regularUpdatesDTO.hasCantine !== '' && regularUpdatesDTO.garderie !== '' &&  regularUpdatesDTO.local_date !== ''
   return (
     <div>
@@ -64,7 +66,7 @@ const RegularUpdates = () => {
       <div>
   
           <button type='button'>
-           <Link to={`/show-list-updates/${studentId}`}>Voir les précédents Absences / cantine / garderie</Link>                                
+           <Link to={`/show-list-updates/${studentId}`} state={{name}}>Voir les précédents Absences / cantine / garderie</Link>                                
           </button>
 
       </div>

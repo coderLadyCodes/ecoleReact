@@ -33,8 +33,6 @@ const StudentsByClassroom = () => {
           <th>Nom et Prénom</th>
           <th>Date de naissance</th>
           <th>Classe</th>
-          {/*<th>Présence</th>
-          <th>Cantine</th>*/}
           <th>Photo</th>
         </tr>
       </thead>
@@ -43,11 +41,8 @@ const StudentsByClassroom = () => {
           <tr key={student.id} onClick={() => navigate(`/classroom/${classroomId}/student/${student.id}`)} style={{ cursor: 'pointer' }}>
             <th scope='row'>{index + 1}</th>
             <td>{student.name}</td>
-           {/* <td><Link to={`classroom/${classroomId}/student/${student.id}`}>{student.name}</Link></td>*/}
             <td>{student.birthday}</td>
             <td>{student.grade}</td>
-            {/*<td>{student.presence.toString()}</td>
-            <td>{student.cantine.toString()}</td>*/}
             <td>
               {student.profileImage ? (
                 <img

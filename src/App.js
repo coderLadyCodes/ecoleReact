@@ -106,6 +106,7 @@ function App() {
           <Route  path='/classroom/:classroomId' element={< Classroom/>} /> 
           <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} /> 
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
+          <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} /> 
           </>
         )}
         { role == 'PARENT' && (
