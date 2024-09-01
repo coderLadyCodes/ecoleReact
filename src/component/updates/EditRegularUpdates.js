@@ -8,12 +8,17 @@ const EditRegularUpdates = () => {
     const {role, user, userId} = useAuth()
     let navigate = useNavigate()
     const {ruId, studentId} = useParams()
+
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const formatedDate = tomorrow.toLocaleDateString('fr-FR')
+    
     const [regularUpdatesDetails, setRegularUpdatesDetails] = useState({
         studentId:'',
         userId:'',
         local_date_time:'',
         modified_at:'',
-        local_date:new Date(), 
+        local_date:formatedDate, 
         isAbsent:'', 
         hasCantine:'', 
         garderie:'PAS_DE_GARDERIE', 
@@ -38,15 +43,15 @@ const EditRegularUpdates = () => {
         setRegularUpdatesDetails({...regularUpdatesDetails, [name]: newValue})
       }
 
-      const handleDateChange = (date) => {
+     {/* const handleDateChange = (date) => {
         setRegularUpdatesDetails({...regularUpdatesDetails, local_date : date})
-      }
+      }*/}
 
       const updateRegularUpdate= async (e) =>{
         e.preventDefault()
-        const formattedDate = regularUpdatesDetails.local_date.toLocaleDateString('fr-FR') 
+        //const formattedDate = regularUpdatesDetails.local_date.toLocaleDateString('fr-FR') 
         const modifiedDate = new Date().toLocaleString('fr-FR')
-        const updatedUpdate = {...regularUpdatesDetails, local_date: formattedDate, modified_at: modifiedDate}
+        const updatedUpdate = {...regularUpdatesDetails, local_date: formatedDate, modified_at: modifiedDate}
 
         try{
             const response = await axios.put(`http://localhost:8080/updates/${ruId}`, updatedUpdate, {
@@ -71,9 +76,17 @@ const EditRegularUpdates = () => {
         <h2> Absence, Cantine, Garderie</h2>
       <form onSubmit={updateRegularUpdate}>
       <div>
+      <label htmlFor="local_date">Date :</label>
+      <input
+          type="text"
+          id="local_date"
+          value={regularUpdatesDetails.local_date}
+          readOnly/>
+    </div>
+      {/*<div>
         <label htmlFor="local_date" >Date :</label>
-        <DatePicker id='local_date'  selected={regularUpdatesDetails.local_date} onChange={handleDateChange} dateFormat='dd/MM/yyyy'  showYearDropdown scrollableMonthYearDropdown required />
-      </div>
+        <DatePicker id='local_date'  selected={regularUpdatesDetails.local_date} onChange={handleDateChange} dateFormat='dd/MM/yyyy'  minDate={tomorrow}  maxDate={tomorrow}   showYearDropdown scrollableMonthYearDropdown required />
+      </div>*/}
       <fieldset>
                 <legend>Absence</legend>
                 <div>

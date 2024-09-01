@@ -31,6 +31,7 @@ const RegularUpdatesList = () => {
       <thead>
         <tr>
             <th>ID</th>
+            <th>Enfant</th>
             <th>Date</th>
             <th>Fait le</th>
             <th>Modifié le</th>
@@ -41,10 +42,11 @@ const RegularUpdatesList = () => {
       </thead>
       <tbody>
         {regularUpdatesDTO.map((regularUpdates, index)=>(
-        <tr key={regularUpdates.id}   onClick={ role == 'PARENT' ? () => navigate(`/show-regular-updates/${studentId}/${regularUpdates.id}`) : null }
+        <tr key={regularUpdates.id} onClick={ role == 'PARENT' ? () => navigate(`/show-regular-updates/${studentId}/${regularUpdates.id}`, {state:{name}}) : null }
          style={{ cursor: role =='PARENT' ? 'pointer' : 'default',
           opacity: role =='PARENT' ? 1 : 0.6 }}>
            <th scope='row' key={index}>{index + 1}</th>
+           <td>{name}</td>
            <td>{regularUpdates.local_date}</td>
            <td>{regularUpdates.local_date_time}</td>
            <td>{regularUpdates.modified_at}</td>

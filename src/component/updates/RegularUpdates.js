@@ -12,12 +12,19 @@ const RegularUpdates = () => {
   const {studentId} = useParams()
   const location = useLocation()
   const {name} = location.state || {}
+
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const formatedDate = tomorrow.toLocaleDateString('fr-FR')
+
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
       studentId:studentId,
       userId:'',
+      student_name:name || '',
       local_date_time:'',
       modified_at:null,
-      local_date:new Date(), 
+      local_date:formatedDate, 
       isAbsent:'', 
       hasCantine:'', 
       garderie:'PAS_DE_GARDERIE', 
@@ -35,14 +42,14 @@ const RegularUpdates = () => {
     setRegularUpdatesDTO({... regularUpdatesDTO, [name]: newValue})
  }
 
- const handleDayChange = (date) => {
+ {/*const handleDayChange = (date) => { 
   setRegularUpdatesDTO({ ...regularUpdatesDTO, local_date: date })
-}
+}*/}
 
     const handleSubmit = async (e) => {
       e.preventDefault()
       const currentDateTime =  new Date().toLocaleString('fr-FR')
-      const formatedDate = regularUpdatesDTO.local_date.toLocaleDateString('fr-FR')
+      //const formatedDate = regularUpdatesDTO.local_date.toLocaleDateString('fr-FR')
       const createdRegularUpdates = {...regularUpdatesDTO,local_date_time: currentDateTime, local_date: formatedDate}
       try{
         const response = await axios.post(`http://localhost:8080/updates/${studentId}`, createdRegularUpdates,{
@@ -55,14 +62,18 @@ const RegularUpdates = () => {
    navigate(`/show-list-updates/${studentId}`, { state:{name}})
 
       }catch (error) {
-        console.error('Error:', error)
+        if (error.response && error.response.status === 409) {
+          alert('Les infos ont été mis à jour pour ce jour ci.')
+        } else {
+          console.error('Error:', error)
+        }
       }
     }
  
  const formValid = regularUpdatesDTO.isAbsent !== '' && regularUpdatesDTO.hasCantine !== '' && regularUpdatesDTO.garderie !== '' &&  regularUpdatesDTO.local_date !== ''
   return (
     <div>
-      <h2> Absence, Cantine, Garderie pour : {name}</h2>
+      <h2> Absence, Cantine, Garderie pour : {name}, Date : {formatedDate}</h2>
       <div>
   
           <button type='button'>
@@ -72,9 +83,17 @@ const RegularUpdates = () => {
       </div>
     <form onSubmit={handleSubmit}>
     <div>
-      <label htmlFor="local_date" >Date :</label>
-      <DatePicker id='local_date'  selected={regularUpdatesDTO.local_date} onChange={handleDayChange} dateFormat='dd/MM/yyyy'  showYearDropdown scrollableMonthYearDropdown required />
+      <label htmlFor="local_date">Date :</label>
+      <input
+          type="text"
+          id="local_date"
+          value={regularUpdatesDTO.local_date}
+          readOnly/>
     </div>
+    {/*<div>
+      <label htmlFor="local_date" >Date :</label>
+      <DatePicker id='local_date'  selected={regularUpdatesDTO.local_date} onChange={handleDayChange} dateFormat='dd/MM/yyyy' minDate={tomorrow}  maxDate={tomorrow}  showYearDropdown scrollableMonthYearDropdown required />
+    </div>*/}
     <fieldset>
               <legend>Absence</legend>
               <div>

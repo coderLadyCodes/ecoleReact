@@ -38,6 +38,7 @@ import RegularUpdates from './component/updates/RegularUpdates'
 import ShowRegularUpdates from './component/updates/ShowRegularUpdates'
 import EditRegularUpdates from './component/updates/EditRegularUpdates'
 import RegularUpdatesList from './component/updates/RegularUpdatesList'
+import ClassroomUpdates from './component/classroom/ClassroomUpdates'
 
 
 
@@ -107,6 +108,7 @@ function App() {
           <Route  path='/classroom/:classroomId/students' element={< StudentsByClassroom/>} /> 
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} /> 
+          <Route path='/updates/classroom/:classroomId' element={< ClassroomUpdates/>} /> 
           </>
         )}
         { role == 'PARENT' && (

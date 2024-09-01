@@ -1,16 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 
 const ShowRegularUpdates = () => {
   const {user, role, userId} = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const {name} = location.state || {}
   const {studentId, ruId} = useParams()
   const [regularUpdatesDTO, setRegularUpdatesDTO] = useState({
     studentId:studentId,
     userId:userId,
+    student_name:'',
     local_date_time:'', 
     modified_at:'',
     local_date:null, 
@@ -52,6 +55,13 @@ const ShowRegularUpdates = () => {
 
   return (
     <section>
+      <div>
+  <h5>Enfant</h5>
+  </div>
+  <div>
+   <p>{name}</p>
+  </div>
+
   <div>
   <h5>Absence</h5>
   </div>

@@ -88,42 +88,6 @@ const AddStudent = () => {
               <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDTO.name} />
             </div>
 
-           {/* <fieldset>
-              <legend>Présence</legend>
-              <div>
-                <div>
-                  <input type='radio' name='presence' id='presence-true' value='true' checked={studentDTO.presence === true} onChange={handleInputChange} />
-                  <label htmlFor='presence-true'>
-                    Présent
-                  </label>
-                </div>
-                <div>
-                  <input type='radio' name='presence' id='presence-false' value='false' checked={studentDTO.presence === false} onChange={handleInputChange} />
-                  <label htmlFor='presence-false'>
-                    Absent
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Cantine</legend>
-              <div>
-                <div>
-                  <input type='radio' name='cantine' id='cantine-true' value='true' checked={studentDTO.cantine === true} onChange={handleInputChange} />
-                  <label  htmlFor='cantine-true'>
-                    Oui
-                  </label>
-                </div>
-                <div>
-                  <input type='radio' name='cantine' id='cantine-false' value='false' checked={studentDTO.cantine === false} onChange={handleInputChange} />
-                  <label htmlFor='cantine-false'>
-                    Non
-                  </label>
-                </div>
-              </div>
-            </fieldset> */}
-
             <div>
               <label htmlFor="birthday" >Date De Naissance</label>
               <DatePicker id='birthday'  selected={studentDTO.birthday} onChange={handleBirthdayChange} dateFormat='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown required />

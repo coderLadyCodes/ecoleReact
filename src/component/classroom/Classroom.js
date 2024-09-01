@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import Posts from '../post/Posts'
+import ClassroomUpdates from './ClassroomUpdates'
 
 
 const Classroom = () => {
@@ -43,15 +44,16 @@ const Classroom = () => {
     <div>
       <h1>Classe : {classroom.grade}</h1>
       <h2>Bienvenue Dans La Classe de : {classroom.teacher}</h2>
+      
       <p>Le Code de la classe : {classroom.classroomCode}</p>
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
-      { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
-      { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
-    
-      <Posts />
+      { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
+      { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<ClassroomUpdates classroomId={classroomId} />)}
+      <Posts classroomId={classroomId}/>
+      
       <p>**User ID** :  {userId}</p>
     </div>
   )
