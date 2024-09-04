@@ -53,7 +53,7 @@ if (!user) {
           <option value='CM1'>CM1</option>
           <option value='CM2'>CM2</option>
         </select>
-        <button type='submit'>Save</button>
+        <button type='submit'>Ok</button>
     </form>
          
       )}
@@ -70,7 +70,7 @@ if (!user) {
           <option value='CM1'>CM1</option>
           <option value='CM2'>CM2</option>
         </select>
-        <button type='submit'>Save</button>
+        <button type='submit'>Ok</button>
     </form>
          
       )}

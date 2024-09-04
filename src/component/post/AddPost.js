@@ -94,10 +94,10 @@ const AddPost = () => {
       </div>
         <p>taille max du fichier : 500KB</p>
       <div>
-         <button type='submit'>Save</button>
+         <button type='submit'>Ok</button>
       </div>
       <div>
-          <Link to={`/classroom/${classroomId}`}  type='button'>Cancel</Link>
+          <Link to={`/classroom/${classroomId}`}  type='button'>Annuler</Link>
       </div>
       </form>
             

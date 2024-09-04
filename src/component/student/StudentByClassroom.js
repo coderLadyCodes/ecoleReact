@@ -103,6 +103,9 @@ const StudentByClassroom = () => {
   <button type='button'>
     <Link to={`/show-list-updates/${id}`}>Absence, cantine, Garderie</Link>                                      
   </button>
+  <button type='button'>
+    <Link to={`/cahier-de-liaison/${id}`}>Absence, cantine, Garderie</Link>                                      
+  </button>
   </div>
   </section>
   )

@@ -39,6 +39,8 @@ import ShowRegularUpdates from './component/updates/ShowRegularUpdates'
 import EditRegularUpdates from './component/updates/EditRegularUpdates'
 import RegularUpdatesList from './component/updates/RegularUpdatesList'
 import ClassroomUpdates from './component/classroom/ClassroomUpdates'
+import AddCahierDeLiaison from './component/cahierdeliaison/AddCahierDeLiaison'
+import ListCahiersLiaison from './component/cahierdeliaison/ListCahiersLiaison'
 
 
 
@@ -93,7 +95,9 @@ function App() {
           <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} />
           <Route path='/show-regular-updates/:studentId/ruId' element={< ShowRegularUpdates/>} />
           <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
-          <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} />    
+          <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} />
+          <Route path='/cahier-de-liaison/:studentId' element={< AddCahierDeLiaison/>} />     
+          <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />     
           </>
         )}
         { role == 'ADMIN' && (
@@ -109,6 +113,8 @@ function App() {
           <Route  path='/classroom/:classroomId/student/:id' element={< StudentByClassroom/>} /> 
           <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} /> 
           <Route path='/updates/classroom/:classroomId' element={< ClassroomUpdates/>} /> 
+          <Route path='/cahier-de-liaison/:studentId' element={< AddCahierDeLiaison/>} /> 
+          <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />
           </>
         )}
         { role == 'PARENT' && (
