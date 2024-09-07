@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 
 const AddCahierDeLiaison = () => {
+  const location = useLocation()
+  const {name} = location.state || {}
   const {user, userId, role, userName} = useAuth()
   const navigate = useNavigate()
   const {studentId, classroomId} =  useParams()
@@ -39,7 +41,8 @@ const AddCahierDeLiaison = () => {
     },
     withCredentials : true 
        }) 
-       navigate(`/list-cahiers-liaison/${studentId}`)
+    
+       navigate(`/list-cahiers-liaison/${studentId}`, {state:{name}})
     } catch (error){
       console.error('Error:', error)
     }
@@ -48,6 +51,10 @@ const AddCahierDeLiaison = () => {
   return (
     <>
     <h2>Cahier de Liaison</h2>
+    <button type='button'>
+      <Link to={`/list-cahiers-liaison/${studentId}`} state={{name}}>Voir les cahiers de liaison</Link>
+    </button>
+    
     { role == ('ADMIN' || 'SUPER_ADMIN') && (
       
       <form onSubmit={handleSubmit} method='post'>
@@ -57,16 +64,16 @@ const AddCahierDeLiaison = () => {
         </div>
 
         <div>
-        <label htmlFor='content'>Titre</label>
-          <input placeholder="Votre Texte Ici" type="text" name='content' id='content' onChange={handleInputChange} value={cahierDeLiaisonDTO.content} required/>
+        <label htmlFor='content'>Contenu</label>
+          <textarea placeholder="Votre Texte Ici" type="text" name='content' id='content' onChange={handleInputChange} value={cahierDeLiaisonDTO.content} required></textarea>
         </div>
 
         <div>
          <button type='submit'>Ok</button>
       </div>
-      <div>
+      {/*<div>
           <Link to={`/classroom/${classroomId}/student/${studentId}`}  type='button'>Annuler</Link>
-      </div>
+      </div>*/}
       </form>
     )}
   </>)

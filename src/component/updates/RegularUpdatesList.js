@@ -16,6 +16,7 @@ const RegularUpdatesList = () => {
   }, [studentId])
 
   const loadRegularUpdatesList = async () => {
+
     try {
       const response = await axios.get(`http://localhost:8080/updates/regular/${studentId}`,{withCredentials: true})
       setRegularUpdatesDTO(response.data)

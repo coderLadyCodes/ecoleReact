@@ -41,6 +41,8 @@ import RegularUpdatesList from './component/updates/RegularUpdatesList'
 import ClassroomUpdates from './component/classroom/ClassroomUpdates'
 import AddCahierDeLiaison from './component/cahierdeliaison/AddCahierDeLiaison'
 import ListCahiersLiaison from './component/cahierdeliaison/ListCahiersLiaison'
+import ShowCahierDeLiaison from './component/cahierdeliaison/ShowCahierDeLiaison'
+import EditCahierDeLiaison from './component/cahierdeliaison/EditCahierDeLiaison'
 
 
 
@@ -97,7 +99,9 @@ function App() {
           <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
           <Route path='/show-list-updates/:studentId/:ruId' element={< RegularUpdatesList/>} />
           <Route path='/cahier-de-liaison/:studentId' element={< AddCahierDeLiaison/>} />     
-          <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />     
+          <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />
+          <Route path='/show-cahier-de-liaison/:studentId/:id' element={< ShowCahierDeLiaison/>} />     
+          <Route path='/edit-cahier-de-liaison/:studentId/:id' element={< EditCahierDeLiaison/>} />     
           </>
         )}
         { role == 'ADMIN' && (
@@ -115,6 +119,8 @@ function App() {
           <Route path='/updates/classroom/:classroomId' element={< ClassroomUpdates/>} /> 
           <Route path='/cahier-de-liaison/:studentId' element={< AddCahierDeLiaison/>} /> 
           <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />
+          <Route path='/show-cahier-de-liaison/:studentId/:id' element={< ShowCahierDeLiaison/>} />
+          <Route path='/edit-cahier-de-liaison/:studentId/:id' element={< EditCahierDeLiaison/>} /> 
           </>
         )}
         { role == 'PARENT' && (
@@ -126,7 +132,9 @@ function App() {
             <Route path='/regular-updates/:studentId' element={< RegularUpdates/>} /> 
             <Route path='/show-regular-updates/:studentId/:ruId' element={< ShowRegularUpdates/>} /> 
             <Route path='/regular-updates/:studentId/:ruId' element={< EditRegularUpdates/>} /> 
-            <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} /> 
+            <Route path='/show-list-updates/:studentId' element={< RegularUpdatesList/>} />
+            <Route path='/list-cahiers-liaison/:studentId' element={< ListCahiersLiaison/>} />
+            <Route path='/show-cahier-de-liaison/:studentId' element={< ShowCahierDeLiaison/>} /> 
           </>
         )}
       </Route>  

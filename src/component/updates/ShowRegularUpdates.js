@@ -27,6 +27,7 @@ const ShowRegularUpdates = () => {
       loadRegularUpdates()
     }
   }, [ruId])
+
   const loadRegularUpdates = async () => {
     try{
       const response = await axios.get(`http://localhost:8080/updates/${ruId}`, {withCredentials: true})
@@ -37,10 +38,12 @@ const ShowRegularUpdates = () => {
       console.error('Error: ', error)
     }
   }
+  
   if (!user) {
     navigate('/connexion')
     return <p>Vous devez etre connecter a votre compte</p>
   }
+
   const handleDelete = async (id) =>{
     let superAdminChoice = window.confirm('Etes vous sure de supprimer ce UPDATE?')
     if (superAdminChoice){

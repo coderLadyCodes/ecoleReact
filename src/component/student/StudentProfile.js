@@ -115,6 +115,10 @@ const StudentProfile = () => {
   <div>
   <button type='button'><Link to={`/regular-updates/${studentDTO.id}`} state ={{name: studentDTO.name}}>Absence, Cantine, Garderie</Link></button>
   </div>
+
+  <div>
+  <button type='button'><Link to={`/list-cahiers-liaison/${studentDTO.id}`} state ={{name: studentDTO.name}}>Cahiers de Liaison</Link></button>
+  </div>
   </>
 
   )
