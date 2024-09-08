@@ -28,7 +28,32 @@ const RegularUpdatesList = () => {
   return (
     <section>
        <h2>Les Informations récurrentes pour : {name}</h2>
-    <table>
+       {regularUpdatesDTO.map((regularUpdates, index)=>(
+         <div 
+         key={regularUpdates.id} 
+         onClick={role === 'PARENT' ? () => navigate(`/show-regular-updates/${studentId}/${regularUpdates.id}`, { state: { name } }) : null}
+         style={{
+           cursor: role === 'PARENT' ? 'pointer' : 'default',
+           opacity: role === 'PARENT' ? 1 : 0.8,
+           border: '1px solid #ccc',
+           borderRadius: '8px',
+           padding: '16px',
+           marginBottom: '20px',
+           backgroundColor: '#f9f9f9',
+         }}
+         >
+
+         <p><strong>Enfant:</strong> {name}</p>
+         <p><strong>Date:</strong> {regularUpdates.local_date}</p>
+         <p><strong>Fait le:</strong> {regularUpdates.local_date_time}</p>
+         {regularUpdates.modified_at && <p><strong>Modifié le:</strong> {regularUpdates.modified_at}</p>}
+         <p><strong>Absence:</strong> {regularUpdates.isAbsent ? 'Absent(e)' : 'Présent(e)'}</p>
+         <p><strong>Cantine:</strong> {regularUpdates.hasCantine ? 'Cantine' : 'Pas Cantine'}</p>
+         <p><strong>Garderie:</strong> {regularUpdates.garderie}</p>
+       </div>
+     ))}
+       
+   {/* <table>
       <thead>
         <tr>
             <th>ID</th>
@@ -57,7 +82,7 @@ const RegularUpdatesList = () => {
         </tr>
         ))}
       </tbody> 
-    </table>
+    </table>*/}
     { role == 'PARENT' && (
     <button type='button'>
     <Link to={`/regular-updates/${studentId}`} state={{name}}>Retour</Link>                               

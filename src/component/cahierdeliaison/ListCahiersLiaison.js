@@ -19,7 +19,8 @@ const ListCahiersLiaison = () => {
   
     try{
       const response = await axios.get(`http://localhost:8080/cahierDeLiaison/all/${studentId}`,{withCredentials: true})
-      setCahierDeLiaisonDTO(response.data)
+      const orderCahier = response.data.sort((a,b) => new Date(b.local_date_time) - new Date(a.local_date_time))
+      setCahierDeLiaisonDTO(orderCahier)
     } catch(error){
       console.error('error : ', error)
     }
@@ -27,32 +28,30 @@ const ListCahiersLiaison = () => {
   return (
     <section>
     <h2>Cahier de Liaison de : {name}</h2>
- <table>
- <thead>
-   <tr>
-       <th>ID</th>
-       <th>Nom de L'Enseignant</th>
-       <th>Titre</th>
-       <th>Contenu</th>
-       <th>Fait Le:</th>
-       <th>Modifié Le:</th>
-   </tr>
- </thead>
- <tbody>
-   {cahierDeLiaisonDTO.map((cahierDeLiaison, index)=>(
-   <tr key={cahierDeLiaison.id} onClick={ role =='ADMIN' ? () => navigate(`/show-cahier-de-liaison/${studentId}/${cahierDeLiaison.id}`, {state:{name}}) : null}
-    style={{ cursor: role =='ADMIN' ? 'pointer' : 'default',
-      opacity: role =='ADMIN' ? 1 : 0.8 }}>
-      <th scope='row' key={index}>{index + 1}</th>
-      <td>{userName}</td>
-      <td>{cahierDeLiaison.title}</td>
-      <td>{cahierDeLiaison.content}</td>
-      <td>{cahierDeLiaison.local_date_time}</td>     
-      <td>{cahierDeLiaison.modified_at}</td>     
-   </tr>
-   ))}
- </tbody> 
-</table>
+    {cahierDeLiaisonDTO.map((cahierDeLiaison, index) => (
+        <div 
+          key={cahierDeLiaison.id}
+          className="cahier-post"
+          onClick={role === 'ADMIN' ? () => navigate(`/show-cahier-de-liaison/${studentId}/${cahierDeLiaison.id}`, { state: { name } }) : null}
+          style={{ 
+            cursor: role === 'ADMIN' ? 'pointer' : 'default',
+            opacity: role === 'ADMIN' ? 1 : 0.8,
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '20px',
+            backgroundColor: '#f9f9f9',
+          }}
+        >
+          <h3 style={{ marginBottom: '8px' }}>{cahierDeLiaison.title}</h3>
+          <p style={{ marginBottom: '16px' }}>{cahierDeLiaison.content}</p>
+          <div style={{ fontSize: '0.9em', color: '#666' }}>
+            <p>Fait le: {cahierDeLiaison.local_date_time}</p>
+            {cahierDeLiaison.modified_at && <p>Modifié le: {cahierDeLiaison.modified_at}</p>}
+          </div>
+        </div>
+      ))}
+
  {/*<button type='button'>
    <Link to={`/cahier-de-liaison/${studentId}`} state={{name}}>Retour</Link>                             
   </button>*/}  
