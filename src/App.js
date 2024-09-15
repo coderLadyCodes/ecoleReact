@@ -43,6 +43,8 @@ import AddCahierDeLiaison from './component/cahierdeliaison/AddCahierDeLiaison'
 import ListCahiersLiaison from './component/cahierdeliaison/ListCahiersLiaison'
 import ShowCahierDeLiaison from './component/cahierdeliaison/ShowCahierDeLiaison'
 import EditCahierDeLiaison from './component/cahierdeliaison/EditCahierDeLiaison'
+import Chat from './component/websocket/Chat'
+import WebSocketProvider from './component/websocket/WebSocketProvider'
 
 
 
@@ -51,13 +53,12 @@ function App() {
   return (
  
     <main> 
-     
        
     <HideShowComponents>
     <NavBar />                 
     </HideShowComponents> 
       <Routes> 
-  
+     
         <Route  path='/' element={<Home />} />
         <Route  path='/signup' element={<Signup />}/>
         <Route  path='/activation' element={<Activation />}/>
@@ -78,6 +79,8 @@ function App() {
         <Route  path='/posts/classroom/:classroomId' element={< Posts/>} />
         <Route  path='/post-view/:id' element={< PostView/>} />
         <Route  path='/accesscode' element={< AccessCode/>} />
+        <Route  path='/chat/:classroomId' element={< Chat/>} />
+
         
        { role == 'SUPER_ADMIN' && (
           <> 
@@ -138,10 +141,9 @@ function App() {
           </>
         )}
       </Route>  
+      
       </Routes>
 
-
-  
     </main>
     
   )

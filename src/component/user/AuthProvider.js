@@ -17,6 +17,18 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate()
 
      useEffect(() => {
+      //! websocket block
+      axios.interceptors.request.use((config) => {
+        const token = cookies.get('token')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
+    }, (error) => {
+        return Promise.reject(error)
+    })
+    //! the above is added for websocket
+
         const requestInterceptor = axios.interceptors.request.use(
           (config) => {
             config.withCredentials = true

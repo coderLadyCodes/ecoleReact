@@ -4,6 +4,7 @@ import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import Posts from '../post/Posts'
 import ClassroomUpdates from './ClassroomUpdates'
+import Chat from '../websocket/Chat'
 
 
 const Classroom = () => {
@@ -40,11 +41,12 @@ const Classroom = () => {
       return <p>Vous devez etre connecter a votre compte</p>
     }
 
+
   return (
     <div>
       <h1>Classe : {classroom.grade}</h1>
       <h2>Bienvenue Dans La Classe de : {classroom.teacher}</h2>
-      
+      <Link to={`/chat/${classroomId}`}><h1>Chat</h1></Link> {/*<Chat classroomId={classroomId}/>*/}
       <p>Le Code de la classe : {classroom.classroomCode}</p>
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
@@ -53,6 +55,7 @@ const Classroom = () => {
       { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
       { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<ClassroomUpdates classroomId={classroomId} />)}
       <Posts classroomId={classroomId}/>
+     
       
       <p>**User ID** :  {userId}</p>
     </div>
