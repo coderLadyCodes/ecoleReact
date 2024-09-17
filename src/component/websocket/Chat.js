@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWebSocket } from './WebSocketProvider'
+import { useParams } from 'react-router-dom'
 
-const Chat = ({classroomId}) => {
+const Chat = () => {
+
+    const {classroomId} =  useParams()
     const {messages, sendMessage} = useWebSocket()
     const[input, setInput] = useState("")
 
+    useEffect(() => {
+        if (!classroomId) {
+            console.error("No classroomId found!")
+        }
+    }, [classroomId])
+
     const handleSendMessage = () => {
         if (input.trim()){
-            sendMessage(classroomId, {content: input} )
+            sendMessage(Number(classroomId), {content: input} )
             setInput('')
         }
     }

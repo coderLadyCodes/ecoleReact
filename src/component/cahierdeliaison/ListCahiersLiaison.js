@@ -35,12 +35,12 @@ const ListCahiersLiaison = () => {
           onClick={role === 'ADMIN' ? () => navigate(`/show-cahier-de-liaison/${studentId}/${cahierDeLiaison.id}`, { state: { name } }) : null}
           style={{ 
             cursor: role === 'ADMIN' ? 'pointer' : 'default',
-            opacity: role === 'ADMIN' ? 1 : 0.8,
+            opacity: role === 'ADMIN' ? 1 : 0.99,
             border: '1px solid #ccc',
             borderRadius: '8px',
             padding: '16px',
             marginBottom: '20px',
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#d7c1f5',
           }}
         >
           <h3 style={{ marginBottom: '8px' }}>{cahierDeLiaison.title}</h3>

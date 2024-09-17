@@ -1,73 +1,130 @@
-import { Stomp } from '@stomp/stompjs'
+import { Client, Stomp } from '@stomp/stompjs'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import SockJS from 'sockjs-client'
-import Cookies from 'universal-cookie'
+
 import { useAuth } from '../user/AuthProvider'
+import axios from 'axios'
 
 const WebSocketContext = createContext()
-const cookies = new Cookies()
+
 
 export const WebSocketProvider = ({children}) => {
     const {user, refreshToken} =  useAuth()
     const [stompClient, setStompClient] = useState(null)
     const[messages, setMessages]= useState([])
 
+    const fetchToken = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/get-token', {
+                withCredentials: true 
+            })
+        
+            return response.data.token   
+
+        } catch (err) {
+            console.error('Token fetch failed:', err)
+            throw err
+        }
+    }
+
     useEffect(()=> {
         const connectWebSocket = async () =>{
             if (!user) {
-                console.log('User not authenticated, skipping WebSocket connection')
+            
                 return
               }
-            let token = cookies.get('token')
-            console.log('Token before connection:', token)
 
-            if(!token){
-                token = await refreshToken()
-                console.log('Token after refresh:', token)
+            let token
+            try {
+             token = await fetchToken()
+
+            } catch (err) {
+                console.error('Token fetch failed:', err)
+                return
             }
-            if (token){
-              const socket = new SockJS('http://localhost:8080/ws')
-              const client = Stomp.over(socket)             
 
-            client.connect({
-                Authorization: `Bearer ${token}`, 
-            }, () =>{
-                console.log('Connected to WebSocket') 
+            {/*if(!token){
 
-                client.subscribe('/topic/classroom', (message) => {
-                    const parsedMessage = JSON.parse(message.body)
-                    const {classroomId, content, userName} = parsedMessage
-
-                    setMessages((prevMessages)=> ({
-                        ...parsedMessage,[classroomId]: [...(prevMessages[classroomId] || []), {content, userName},],
-                    }))
-                })
-            },async (error) =>{
-                console.error('WebSocket connection error: ', error)
-           
-
-            if  (error.headers && error.headers['message'] === 'Access Denied') {
-                console.log('Token expired, refreshing...')
-                const newToken = await refreshToken()
-                if (newToken) {
-                    connectWebSocket() 
+                try {
+                    token = await refreshToken()
+                    console.log('Token after refresh:', token)
+                    
+                } catch (err) {
+                    console.error('Token refresh failed:', err)
                 }
+            } */}
+           
+            if (!token) {
+                console.warn('No token available for WebSocket connection')
+                return
             }
-            })
-            setStompClient(client)
+
+              const socket = new SockJS('http://localhost:8080/ws', null, {
+                           transports: ['websocket', 'xhr-streaming'],
+                           })
+
+              const client = new Client({
+                webSocketFactory: () => socket,
+                connectHeaders: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                reconnectDelay: 5000,  
+                heartbeatIncoming: 4000,
+                heartbeatOutgoing: 4000,
+                onConnect: () => {
+
+                    const classroomId = user.classroomId
+                    if (classroomId){
+
+                    client.subscribe('/topic/classroom', (message) => {
+                        const parsedMessage = JSON.parse(message.body)
+                        const { classroomId, content, userName } = parsedMessage   
+
+                        setMessages((prevMessages) => ({ 
+                            ...parsedMessage,
+                            [classroomId]: [
+                                ...(prevMessages[classroomId] || []),
+                                { content, userName },
+                            ],
+                        }))
+                    })
+                } else{
+                    console.warn('Classroom ID is not available for subscription')
+                }
+                },
+                onStompError: (frame) => {
+                    console.error('Broker reported error: ' + frame.headers['message'])
+                    console.error('Additional details: ' + frame.body)
+                },
+              })   
+
+              client.activate()        
+              setStompClient(client) 
+            }
+
+        if (user) {
+            connectWebSocket()
+          }
        
         return () => {
-            if (client) client.disconnect()
+            if (stompClient) stompClient.deactivate()
+        
         }
-    }
-    }
-    connectWebSocket()
 
     }, [user, refreshToken])
 
     const sendMessage = (classroomId, message) => {
         if(stompClient && stompClient.connected) {
-            stompClient.send(`/app/chat.sendMessage/${classroomId}`, {}, JSON.stringify({ classroomId, ...message }))
+            if (!classroomId || classroomId === "undefined") {
+                console.error('classroomId is undefined or null.')
+                return
+            }
+
+            stompClient.publish({destination: `/app/chat.sendMessage/${classroomId}`,
+                body: JSON.stringify({ classroomId, ...message }),
+            })
+        }else {
+            console.warn('Stomp client is not connected')
         }
     }
 

@@ -17,17 +17,6 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate()
 
      useEffect(() => {
-      //! websocket block
-      axios.interceptors.request.use((config) => {
-        const token = cookies.get('token')
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`
-        }
-        return config
-    }, (error) => {
-        return Promise.reject(error)
-    })
-    //! the above is added for websocket
 
         const requestInterceptor = axios.interceptors.request.use(
           (config) => {
@@ -45,7 +34,8 @@ export const AuthProvider = ({children}) => {
             if (error.response.status === 401 && !originalRequest._retry) {
               originalRequest._retry = true
               try{
-                await refreshToken()
+                const newAccessToken = await refreshToken()
+                 originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
                 return axios(originalRequest)
               }catch (err) {
                 console.error('Token refresh failed:', err)
@@ -101,7 +91,7 @@ export const AuthProvider = ({children}) => {
                   'Content-Type': 'application/json',
                    
                 },
-                withCredentials: true
+                withCredentials: true,
               })
               
               const user = JSON.parse(response.config.data).username
@@ -136,8 +126,10 @@ export const AuthProvider = ({children}) => {
             const response = await axios.post('http://localhost:8080/refresh-token',{}, {
               withCredentials: true,
             }) 
-            cookies.set('token', response.data.refresh, { path: '/' })
-            return response.data.refresh
+            const newAccessToken  = response.data.bearer
+            cookies.set('token', newAccessToken, { path: '/', expires: new Date(Date.now() + 3600 * 1000) })
+  
+            return newAccessToken
           }catch (error) {
             console.error("Error refreshing access token:", error)
             throw error
