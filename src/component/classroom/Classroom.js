@@ -19,9 +19,11 @@ const Classroom = () => {
       classroomCode: classroomCode || '',
       teacher: teacher,
     })
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
       loadClassroom()
+      loadUsers()
     }, [classroomId])
 
     const loadClassroom = async () => {
@@ -36,6 +38,17 @@ const Classroom = () => {
         console.error('Error: ', error)
       }
     }
+
+  
+  const loadUsers = async () => {
+    try {
+      const result = await axios.get(`http://localhost:8080/classroom/${classroomId}/users`, { withCredentials: true })
+      setUsers(result.data) 
+    } catch (error) {
+      console.error('Error fetching users: ', error)
+    }
+  }
+
     if (!user) {
       navigate('/connexion')
       return <p>Vous devez etre connecter a votre compte</p>
@@ -46,7 +59,7 @@ const Classroom = () => {
     <div>
       <h1>Classe : {classroom.grade}</h1>
       <h2>Bienvenue Dans La Classe de : {classroom.teacher}</h2>
-      <Link to={`/chat/${classroomId}`}><h1>Chat</h1></Link> {/*<Chat classroomId={classroomId}/>*/}
+      <h1><Link to={`/chat/${classroomId}`} state={{users}} >Chat</Link></h1> {/*<Chat classroomId={classroomId}/>*/}
       <p>Le Code de la classe : {classroom.classroomCode}</p>
       { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
       { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
@@ -55,7 +68,6 @@ const Classroom = () => {
       { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
       { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<ClassroomUpdates classroomId={classroomId} />)}
       <Posts classroomId={classroomId}/>
-     
       
       <p>**User ID** :  {userId}</p>
     </div>

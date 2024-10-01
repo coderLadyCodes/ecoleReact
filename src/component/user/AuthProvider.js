@@ -14,6 +14,7 @@ export const AuthProvider = ({children}) => {
     const [role, setRole] = useState('')
     const [userName, setUserName] = useState(null)
     const [userId, setUserId] = useState('')
+    const [classroomId, setClassroomId] = useState(null)
     const navigate = useNavigate()
 
      useEffect(() => {
@@ -93,7 +94,7 @@ export const AuthProvider = ({children}) => {
                 },
                 withCredentials: true,
               })
-              
+            
               const user = JSON.parse(response.config.data).username
               setUser(user)
 
@@ -106,13 +107,11 @@ export const AuthProvider = ({children}) => {
               const userName = response.data.userName
               setUserName(userName)
 
-             {/* const userData = {
-                username: user,
-                role,
-                userId,
-                userName,
-              }
-              localStorage.setItem('user', JSON.stringify(userData))*/}
+              const classroomId = response.data.classroomId
+              setClassroomId(classroomId)
+
+              localStorage.setItem('classroomId', classroomId)
+              localStorage.setItem('user', JSON.stringify({userName, role, classroomId}))
               navigate('/dashboard')     
            
         } catch (error){
@@ -155,7 +154,7 @@ export const AuthProvider = ({children}) => {
         
 
         return (
-        <AuthContext.Provider value={{user, setUser, login, logout, handleInputChange, authentificationDTO, setAuthentificationDTO, refreshToken, userName, setUserName, role, setRole, userId, setUserId}}>
+        <AuthContext.Provider value={{user, setUser, login, logout, handleInputChange, authentificationDTO, setAuthentificationDTO, refreshToken, userName, setUserName, role, setRole, userId, setUserId, classroomId}}>
             {children}
         </AuthContext.Provider> )
    

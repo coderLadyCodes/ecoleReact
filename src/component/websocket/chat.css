@@ -1,0 +1,66 @@
+ ul> li{
+  list-style-type: none;
+}
+.chat-container {
+  display: flex;
+}
+
+.user-list {
+  width: 20%;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.chat-content {
+  width: 80%;
+  padding: 10px;
+}
+
+.messages {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message-input {
+  display: flex;
+  gap: 10px;
+}
+
+.message-input textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;  
+  resize: none;  /* Disable resizing */
+  height: 50px;  /* Set a fixed height initially, can be adjusted */
+  max-height: 120px;  /* Max height, after which it should scroll */
+  overflow-y: auto;  /* Allow vertical scrolling if content exceeds max height */
+}
+
+.message-input button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%; 
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.timestamp {
+  font-size: 5px;
+  color: rgb(213, 213, 213);
+  margin-top: 5px;
+}
