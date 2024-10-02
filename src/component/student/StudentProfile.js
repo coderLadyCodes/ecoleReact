@@ -93,13 +93,13 @@ const StudentProfile = () => {
    <button type="button">
     <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
   </button>
-  { role == 'SUPER_ADMIN' && (
+  { role === 'SUPER_ADMIN' && (
      <button type="button">
      <Link to={'/students-view'}>annuler</Link>                                  
    </button>
   )}
 
-  { role == 'PARENT' && (
+  { role === 'PARENT' && (
     <button type="button">
     <Link to={'/kids-parent'}>annuler</Link>                                  
   </button>

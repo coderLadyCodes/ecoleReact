@@ -52,7 +52,7 @@ const EditClassroom = () => {
       
   return (
     <>
-    { role == 'ADMIN' && (  
+    { role === 'ADMIN' && (  
   <form onSubmit={updateClassroom}>
       <label htmlFor='grade'>Classe</label>
       <select name='grade' id='grade' value={classroom.classe} onChange={handleChange}>
@@ -72,7 +72,7 @@ const EditClassroom = () => {
   </form>
        
     )}
-    { role == 'SUPER_ADMIN' && (  
+    { role === 'SUPER_ADMIN' && (  
   <form onSubmit={updateClassroom}>
       <label htmlFor='grade'>Classe</label>
       <select name='grade' id='grade' value={classroom.classe} onChange={handleChange}>

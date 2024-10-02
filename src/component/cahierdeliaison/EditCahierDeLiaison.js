@@ -63,7 +63,7 @@ const EditCahierDeLiaison = () => {
   return (
     <div>
     <h2>Cahier de Liaison</h2>
-    { role == ('ADMIN' || 'SUPER_ADMIN') && (
+    { role === ('ADMIN' || 'SUPER_ADMIN') && (
       
       <form onSubmit={updateCahierDeLiaison}>
         <div>

@@ -81,7 +81,7 @@ export const AccessCode = () => {
     <div>
         <h1>Acceder à la classe</h1>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        { role == 'PARENT' && (
+        { role === 'PARENT' && (
           <>
           < KidsParent onSelectKid={handleKidSelect}/>
         
@@ -110,7 +110,7 @@ export const AccessCode = () => {
           </form>
           </>
         )}
-        { (role == 'ADMIN' || role =='SUPER_ADMIN') && (
+        { (role === 'ADMIN' || role =='SUPER_ADMIN') && (
         
         <form onSubmit={handleSubmit}>
         <label htmlFor='classroomCode'>Code</label>

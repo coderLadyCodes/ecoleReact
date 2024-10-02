@@ -71,8 +71,6 @@ const Dashboard = () => {
         <p>{userDTO.phone}</p>
       </div>
       <button onClick={handleLogout}>Deconnexion</button> 
-{/*      <Link to={'/cahier-de-liaison'}><img src={cahierdeliaison} alt="cahier de liaison" style={{width: 120, height: 120}}/></Link>
-      <Link to={'/discussion'}><img src={discussion} alt="discussion" style={{width: 140, height: 120}}/></Link>*/}
 
       <button><Link to={'/edit-user'}>Modifier profile</Link></button> 
       <button><Link to={'/add-student'}>Ajouter un Enfant</Link></button> 

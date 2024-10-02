@@ -87,14 +87,14 @@ const handleDelete = async (id) => {
  <button type='button'>
   <Link to={`/edit-cahier-de-liaison/${cahierDeLiaisonDTO.studentId}/${cahierDeLiaisonDTO.id}`}  state={{name}}><FaEdit />Modifier</Link>                                       
 </button>
-{ role == 'SUPER_ADMIN' && ( // ! NOT SURE
+{ role === 'SUPER_ADMIN' && ( // ! NOT SURE
    <button type='button'>
    <Link to={'/students-view'}>annuler</Link>  
    <button onClick={()=> handleDelete(cahierDeLiaisonDTO.id)}><FaTrashAlt /></button>                                 
  </button>
 )}
 
-{ role == 'PARENT' && (  // ! NOT SURE
+{ role === 'PARENT' && (  // ! NOT SURE
   <button type='button'>
   <Link to={`/student-profile/${cahierDeLiaisonDTO.studentId}`}>Retour</Link>                               
 </button>

@@ -55,7 +55,7 @@ const AddCahierDeLiaison = () => {
       <Link to={`/list-cahiers-liaison/${studentId}`} state={{name}}>Voir les cahiers de liaison</Link>
     </button>
     
-    { role == ('ADMIN' || 'SUPER_ADMIN') && (
+    { role === ('ADMIN' || 'SUPER_ADMIN') && (
       
       <form onSubmit={handleSubmit} method='post'>
         <div>

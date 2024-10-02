@@ -34,7 +34,7 @@ const [userDTO, setUserDTO] = useState([])
 
   return (
     <>
-      {role == 'SUPER_ADMIN' && (
+      {role === 'SUPER_ADMIN' && (
        <section>
        <h2>Liste des utilisateurs</h2>
        <table>

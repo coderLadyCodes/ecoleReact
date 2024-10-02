@@ -87,24 +87,24 @@ const loadUser = async () =>{
         <form onSubmit={updateUser} encType="multipart/form-data" method='post'>
   
           <div>
-            <label className='input-group-text' htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' className='form-control col-sm-6' type='text' name='name' id='name' onChange={handleInputChange} value={userDetails.name} required/>
+            <label htmlFor='name'>Nom et Prénom</label>
+            <input autoComplete="name" placeholder='Nom et Prénom' type='text' name='name' id='name' onChange={handleInputChange} value={userDetails.name} required/>
           </div>
   
           <div>
-            <label className='input-group-text' htmlFor='email'>Email</label>
-            <input autoComplete="email" placeholder='Email' className='form-control col-sm-6' type='email' name='email' id='email' onChange={handleInputChange} value={userDetails.email} required/>
+            <label htmlFor='email'>Email</label>
+            <input autoComplete="email" placeholder='Email' type='email' name='email' id='email' onChange={handleInputChange} value={userDetails.email} required/>
           </div>
   
           <div>
-            <label className='input-group-text' htmlFor='phone'>Numéro de Téléphone</label>
-            <input autoComplete="tel" placeholder='Numero de Telephone' className='form-control col-sm-6' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDetails.phone} required/>
+            <label htmlFor='phone'>Numéro de Téléphone</label>
+            <input autoComplete="tel" placeholder='Numero de Telephone' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDetails.phone} required/>
           </div>
   
           
           <div>
-            <label className='input-group-text' htmlFor='multipartFile'>Choisir une Photo</label>
-            <input className='form-control col-sm-6' type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange}/>
+            <label htmlFor='multipartFile'>Choisir une Photo</label>
+            <input type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange}/>
           </div>
           <p>taille max du fichier : 500KB</p>
   

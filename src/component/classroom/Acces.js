@@ -40,7 +40,7 @@ if (!user) {
 }
   return (
     <>
-      { role == 'ADMIN' && (  
+      { role === 'ADMIN' && (  
     <form onSubmit={handleSubmit}>
         <label htmlFor='grade'>Classe</label>
         <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>
@@ -57,7 +57,7 @@ if (!user) {
     </form>
          
       )}
-      { role == 'SUPER_ADMIN' && (  
+      { role === 'SUPER_ADMIN' && (  
     <form onSubmit={handleSubmit}>
         <label htmlFor='grade'>Classe</label>
         <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>

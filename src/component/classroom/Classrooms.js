@@ -36,7 +36,7 @@ if (!user) {
 }
   return (
     <>
-    { role == 'SUPER_ADMIN' && (
+    { role === 'SUPER_ADMIN' && (
     <section>
     <h2>Liste des Eleves</h2>
     <table>

@@ -36,7 +36,7 @@ const [userDTO, setUserDTO] = useState([])
 
   return (
     <>
-      { role == 'ADMIN' && (
+      { role === 'ADMIN' && (
         <section>
         <h2>Liste des Parent d'élèves</h2>
         <h3>L'enseignant(e) : {teacher} </h3>
@@ -78,7 +78,7 @@ const [userDTO, setUserDTO] = useState([])
         </table>
         </section>
       ) }
-      {role == 'SUPER_ADMIN' && (
+      {role === 'SUPER_ADMIN' && (
        <section>
        <h2>Liste des Parent d'élèves</h2>
        <h3>L'enseignant(e) : {teacher} </h3>

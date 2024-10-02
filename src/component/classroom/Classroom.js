@@ -38,16 +38,18 @@ const Classroom = () => {
         console.error('Error: ', error)
       }
     }
-
+    
   
-  const loadUsers = async () => {
+  const loadUsers = async () => { 
+    if (role === 'ADMIN' || role === 'SUPER_ADMIN'){
     try {
       const result = await axios.get(`http://localhost:8080/classroom/${classroomId}/users`, { withCredentials: true })
-      setUsers(result.data) 
-    } catch (error) {
+      setUsers(result.data)  
+    }catch (error) {
       console.error('Error fetching users: ', error)
     }
-  }
+    
+  }}
 
     if (!user) {
       navigate('/connexion')
@@ -61,12 +63,10 @@ const Classroom = () => {
       <h2>Bienvenue Dans La Classe de : {classroom.teacher}</h2>
       <h1><Link to={`/chat/${classroomId}`} state={{users}} >Chat</Link></h1> {/*<Chat classroomId={classroomId}/>*/}
       <p>Le Code de la classe : {classroom.classroomCode}</p>
-      { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
-      { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>)}
-      { role == 'ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
-      { role == 'SUPER_ADMIN' && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
-      { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
-      { role == ('ADMIN' || 'SUPER_ADMIN' ) && (<ClassroomUpdates classroomId={classroomId} />)}
+      { role === 'ADMIN' || role === 'SUPER_ADMIN' ? (<h2><Link to={`/classroom/${classroomId}/users`} state={{ teacher: classroom.teacher}}>Liste des Parents d'élèves</Link></h2>): (<p>not for parents</p>)}
+      { role === ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/students`}>Liste Elèves</Link></h2>)}
+      { role === ('ADMIN' || 'SUPER_ADMIN' ) && (<h2><Link to={`/classroom/${classroomId}/add-post`}>Créer un article</Link></h2>)}
+      { role === ('ADMIN' || 'SUPER_ADMIN' ) && (<ClassroomUpdates classroomId={classroomId} />)}
       <Posts classroomId={classroomId}/>
       
       <p>**User ID** :  {userId}</p>

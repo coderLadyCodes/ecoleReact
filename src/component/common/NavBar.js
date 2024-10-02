@@ -6,15 +6,15 @@ const NavBar = () => {
   const {role} = useAuth()
   return (
   <nav>
-    <div className='mainNave'>
     <div>
-      { role == 'ADMIN' && (
+    <div>
+      { role === 'ADMIN' && (
         <ul>
           <li><Link to='/dashboard'>Profil</Link></li>
           <li><Link to='/accesscode'>Acceder à la classe</Link></li>
         </ul>
       )}
-            { role == 'SUPER_ADMIN' && (
+            { role === 'SUPER_ADMIN' && (
         <ul>
           <li><Link to='/dashboard'>Profil</Link></li>
           <li><Link  to='/users-view'>Liste des Utilisateurs</Link></li>
@@ -23,7 +23,7 @@ const NavBar = () => {
           <li><Link to='/classrooms'>Acceder aux Classes</Link></li>
         </ul>
       )}
-            { role == 'PARENT' && (
+            { role === 'PARENT' && (
         <ul>
           <li><Link to='/kids-parent'>Mes enfants</Link></li>
           <li><Link to='/dashboard'>Profil</Link></li>

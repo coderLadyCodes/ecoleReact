@@ -82,7 +82,7 @@ function App() {
         <Route  path='/chat/:classroomId' element={< Chat/>} />
 
         
-       { role == 'SUPER_ADMIN' && (
+       { role === 'SUPER_ADMIN' && (
           <> 
           <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} />     
           <Route path='/users-view' element={<UsersView />} /> 
@@ -107,7 +107,7 @@ function App() {
           <Route path='/edit-cahier-de-liaison/:studentId/:id' element={< EditCahierDeLiaison/>} />     
           </>
         )}
-        { role == 'ADMIN' && (
+        { role === 'ADMIN' && (
           <>
           <Route path='/classroom/:classroomId/users' element={<UsersByClassroomId />} /> 
           <Route path='/user-profile/:userId' element={<UserProfile />} />
@@ -126,7 +126,7 @@ function App() {
           <Route path='/edit-cahier-de-liaison/:studentId/:id' element={< EditCahierDeLiaison/>} /> 
           </>
         )}
-        { role == 'PARENT' && (
+        { role === 'PARENT' && (
           <>
             <Route path='/student-profile/:id' element={<StudentProfile />} />
             <Route path='/kids-parent' element={<KidsParent />} />
