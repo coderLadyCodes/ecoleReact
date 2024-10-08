@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './ChangePassword.css'
 
 const ChangePassword = () => {
   let navigate = useNavigate()
@@ -33,18 +34,31 @@ const ChangePassword = () => {
     }
   }
   return (
-    <div>
-    <h1>Réinitialisez votre mot de passe</h1>
-    <h2>Entrez votre Email</h2>
-    <p>**Consultez aussi vos courriers indésirables**</p>
-    {message && <p>{message}</p>}
-    {error && <p>{error}</p>}
-    <form onSubmit={handleSubmit}>
-    <label htmlFor='email'>Email</label>
-        <input placeholder='email' type="email"  name='email' id='email' onChange={handleChange} value={activation.email} required/> 
-    <button type='submit'>Envoyer</button>
+    <div className='change-password-container'>
+    <h1 className='change-password-title'>Réinitialisez votre mot de passe</h1>
+    <h2 className='change-password-subtitle'>Entrez votre Email</h2>
+    <p className='change-password-note'>**Consultez aussi vos courriers indésirables**</p>
+    {message && <p className='change-password-message'>{message}</p>}
+    {error && <p className='change-password-error'>{error}</p>}
+
+    <form onSubmit={handleSubmit} className='change-password-form'>
+      <div className='change-password-input'>
+        <label htmlFor='email' className='change-password-label'>Email</label>
+        <input
+          placeholder='Email'
+          type="email"
+          name='email'
+          id='email'
+          onChange={handleChange}
+          value={activation.email}
+          required
+          className='change-password-text-input'
+        />
+      </div>
+
+      <button type='submit' className='change-password-submit-btn'>Envoyer</button>
     </form>
-</div>
+  </div>
   )
 }
 

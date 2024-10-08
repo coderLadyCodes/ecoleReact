@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './NewPassword.css'
 
 
 const NewPassword = () => {
@@ -39,29 +40,59 @@ const NewPassword = () => {
         }
     }
   return (
-    <div>
-    <h1>Réinitialisez votre mot de passe</h1>
-    <h2>Entrez votre Email</h2>
-    <p>**Consultez aussi vos courriers indésirables**</p>
-    {message && <p>{message}</p>}
-    {error && <p>{error}</p>}
-    <form onSubmit={handleSubmit}>
-    <div>
-    <label htmlFor='email'>Email</label>
-        <input placeholder='email' type='email'  name='email' id='email' onChange={handleChange} value={activation.email} required/> 
-    </div>    
-    <div>
-        <label htmlFor='code'>Code</label>
-        <input placeholder='code' type='text'  name='code' id='code' onChange={handleChange} value={activation.code} required/> 
-    </div>
-         
-    <div>
-        <label htmlFor='password'>Mot de Passe</label>
-        <input placeholder='mot de passe' type='password'  name='password' id='password' onChange={handleChange} value={activation.password} required/>
-    </div>
-    <button type='submit'>Envoyer</button>
+    <div className='reset-container'>
+    <h1 className='reset-title'>Réinitialisez votre mot de passe</h1>
+    <h2 className='reset-subtitle'>Entrez votre Email</h2>
+    <p className='reset-note'>**Consultez aussi vos courriers indésirables**</p>
+    {message && <p className='reset-message'>{message}</p>}
+    {error && <p className='reset-error'>{error}</p>}
+    
+    <form onSubmit={handleSubmit} className='reset-form'>
+      <div className='reset-input'>
+        <label htmlFor='email' className='reset-label'>Email</label>
+        <input
+          placeholder='Email'
+          type='email'
+          name='email'
+          id='email'
+          onChange={handleChange}
+          value={activation.email}
+          required
+          className='reset-text-input'
+        />
+      </div>
+      
+      <div className='reset-input'>
+        <label htmlFor='code' className='reset-label'>Code</label>
+        <input
+          placeholder='Code'
+          type='text'
+          name='code'
+          id='code'
+          onChange={handleChange}
+          value={activation.code}
+          required
+          className='reset-text-input'
+        />
+      </div>
+      
+      <div className='reset-input'>
+        <label htmlFor='password' className='reset-label'>Mot de Passe</label>
+        <input
+          placeholder='Mot de passe'
+          type='password'
+          name='password'
+          id='password'
+          onChange={handleChange}
+          value={activation.password}
+          required
+          className='reset-text-input'
+        />
+      </div>
+      
+      <button type='submit' className='reset-submit-btn'>Envoyer</button>
     </form>
-</div>
+  </div>
   )}
 
 export default NewPassword

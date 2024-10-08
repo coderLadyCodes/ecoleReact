@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {Link, useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import profil from '../../images/profil.jpg'
+import './Signup.css'
 
 const Signup = () => {
 let navigate = useNavigate()
-const {userId} = useParams()
+//const {userId} = useParams()
 const [userDTO, setUserDTO] = useState({
     name: '',
     email: '',
@@ -14,11 +15,11 @@ const [userDTO, setUserDTO] = useState({
   })
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  useEffect(() => {
+  {/*useEffect(() => {
     if (userId) {
       setUserDTO(prevUserDTO => ({ ...prevUserDTO, userId }))
     } 
-  }, [])
+  }, [])*/}
  
 
   const [file, setFile] = useState(null)
@@ -29,10 +30,10 @@ const [userDTO, setUserDTO] = useState({
     const maxSizeInBytes = 0.5 * 1024 * 1024
 
     if (selectedFile && selectedFile.size > maxSizeInBytes) {
-      alert("La taille du fichier excede 500KB, veuillez reduire le volume svp")
+      alert('La taille du fichier excede 500KB, veuillez reduire le volume svp')
       setFile(null)
     }else if (!selectedFile){
-      console.log("no file selected")
+      console.log('Selectionnez une photo')
     } else {
       setFile(selectedFile)
       setPreviewImage(URL.createObjectURL(selectedFile))
@@ -44,7 +45,7 @@ const [userDTO, setUserDTO] = useState({
         URL.revokeObjectURL(previewImage)
       }
     }
-  }, [previewImage]);
+  }, [previewImage])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -87,60 +88,66 @@ const [userDTO, setUserDTO] = useState({
       navigate('/activation')
       
     } catch (error) {
+      if(error.response && error.response.status === 409){
+        alert(error.response.data.error)
+      }
+      alert('une erreur est survenue, veillez réesayer.')
       console.error('Error:', error)
     }
   }
 
  
   return (
-    <div>
-        <h2>Inscription</h2>
-        <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
+  <div className='signup-container'>
+  <h2 className='signup-title'>Inscription</h2>
+  <form className='signup-form' onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
+    <div className='signup-inputs'>
 
-          <div className='inputs'>
+      <div className='signup-avatar'>
+        <label htmlFor='multipartFile' className='signup-avatar-input'> 
+          {previewImage ? <img src={previewImage} alt='profile image' /> 
+                        : <img src={profil} alt='profile image' className='signup-profileImage' />}
+          <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange} style={{display: 'none'}} />
+        </label>
+        <p className='signup-avatar-text'>Téléchargez la photo</p>
+      </div>
 
-          <div>
-          <label htmlFor='multipartFile' className='avatar-input'> 
-            {previewImage?<img src={previewImage}  alt='profile image' className='profileImage' /> :<img src={profil} alt='profile image' className='profileImage'/>}
-            <input type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange} style={{display:'none'}}/>
-          </label>
-          <p>Telechargez la photo</p>
-          </div>
+      <div className='signup-input-field'>
+        <label htmlFor='name'>Nom et Prénom</label>
+        <input placeholder='Nom et Prénom' type='text' name='name' id='name' onChange={handleInputChange} value={userDTO.name} required />
+      </div>
 
-           
-          <div>
-            <label htmlFor='name'>Nom et Prénom</label>
-            <input placeholder='Nom et Prénom' type="text"  name='name' id='name' onChange={handleInputChange} value={userDTO.name} required/>   
-          </div>
+      <div className='signup-input-field'>
+        <label htmlFor='email'>Email</label>
+        <input placeholder='Email' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required />
+      </div>
 
-          <div>
-            <label htmlFor='email'>Email</label>
-            <input placeholder='Email' type='email' name='email' id='email' onChange={handleInputChange} value={userDTO.email} required/>
-          </div>
+      <div className='signup-input-field'>
+        <label htmlFor='password'>Mot de Passe</label>
+        <input placeholder='mot de passe' type='password' name='password' id='password' onChange={handleInputChange} value={userDTO.password} required />
+      </div>
 
-          <div>
-            <label htmlFor='password'>Mot de Passe</label>
-            <input placeholder='mot de passe' type='password' name='password' id='password' onChange={handleInputChange} value={userDTO.password}  required/>
-          </div>
+      <div className='signup-input-field'>
+        <label htmlFor='confirmPassword'>Confirmer le mot de passe</label>
+        <input placeholder='Confirmer le mot de passe' type='password' name='password' id='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required />
+      </div>
 
-          <div>
-            <label htmlFor='password'>Confirmer le mot de passe</label>
-            <input placeholder='Confirmer le mot de passe' type='password' name='password' id='confirmPassword' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} required/>
-          </div>
-          
-          <div>
-            <label htmlFor='phone'>Numéro de Téléphone</label>
-            <input placeholder='Téléphone' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required/>
-          </div>
+      <div className='signup-input-field'>
+        <label htmlFor='phone'>Numéro de Téléphone</label>
+        <input placeholder='Téléphone' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDTO.phone} required />
+      </div>
 
-          </div>
-
-        <div>
-          <button  type='submit'>Inscription</button>
-          Vous avez un compte? <Link to={'/connexion'}  type='submit'>Connectez Vous </Link>
-        </div>
-        </form>
     </div>
+
+    <div className='signup-footer'>
+      <button className='signup-submit' type='submit'>Inscription</button>
+      <p className='signup-link'>
+        Vous avez un compte? <Link to='/connexion'>Connectez Vous</Link>
+      </p>
+    </div>
+  </form>
+</div>
+
   )
 }
 
