@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
+import './NavBar.css'
 
 const NavBar = () => {
   const {role} = useAuth()

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../user/AuthProvider'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import './Access.css'
 
 const Acces = () => {
   let navigate = useNavigate()
@@ -40,8 +41,9 @@ if (!user) {
 }
   return (
     <>
-      { role === 'ADMIN' && (  
-    <form onSubmit={handleSubmit}>
+        {role === 'ADMIN' && (  
+    <div className='form-container'>
+      <form onSubmit={handleSubmit} className='form-wrapper'>
         <label htmlFor='grade'>Classe</label>
         <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>
           <option value='PETITE_SECTION'>Petite Section</option>
@@ -54,11 +56,12 @@ if (!user) {
           <option value='CM2'>CM2</option>
         </select>
         <button type='submit'>Ok</button>
-    </form>
-         
-      )}
-      { role === 'SUPER_ADMIN' && (  
-    <form onSubmit={handleSubmit}>
+      </form>
+    </div>
+  )}
+  {role === 'SUPER_ADMIN' && (  
+    <div className='form-container'>
+      <form onSubmit={handleSubmit} className='form-wrapper'>
         <label htmlFor='grade'>Classe</label>
         <select name='grade' id='grade' value={classroom.grade} onChange={handleChange}>
           <option value='PETITE_SECTION'>Petite Section</option>
@@ -71,10 +74,9 @@ if (!user) {
           <option value='CM2'>CM2</option>
         </select>
         <button type='submit'>Ok</button>
-    </form>
-         
-      )}
-  
+      </form>
+    </div>
+  )}
   </>    
     
   )

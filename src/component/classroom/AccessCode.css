@@ -1,0 +1,88 @@
+.accesscode-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    background-color: #f8f8f8; 
+  }
+  
+  .accesscode-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #6a0dad; 
+  }
+  
+  .accesscode-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 28rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .accesscode-form label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #6a0dad; 
+  }
+  
+  .accesscode-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+  }
+  
+  .accesscode-form button {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    background-color: #f0c808;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .accesscode-form button:disabled {
+    background-color: #ccc;
+  }
+  
+  .accesscode-form button:hover:not(:disabled) {
+    background-color: #f4a926; 
+  }
+  
+  .accesscode-error {
+    color: red;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .accesscode-form {
+      padding: 1.5rem;
+      max-width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .accesscode-form {
+      padding: 1rem;
+      max-width: 100%;
+    }
+  
+    .accesscode-container h1 {
+      font-size: 1.5rem;
+    }
+  }
+  

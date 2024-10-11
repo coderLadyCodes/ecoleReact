@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import './ClassroomUpdates.css'
 
 const ClassroomUpdates = ({classroomId}) => {
 
@@ -18,8 +19,8 @@ const ClassroomUpdates = ({classroomId}) => {
         getUpdates()
     }, [classroomId])
   return (
-    <div>
-    <h2>Absences / Cantine / Garderie Pour Aujourd'hui</h2>
+    <div className='classroom-updates'>
+    <h2>Actualié des élèves</h2>
     <table>
         <thead>
             <tr>
@@ -28,8 +29,8 @@ const ClassroomUpdates = ({classroomId}) => {
                 <th>Absence</th>
                 <th>Cantine</th>
                 <th>Garderie</th>
-                <th>Date & Time</th>
-                <th>Last Modified</th>
+                <th>Fait le</th>
+                <th>Modifié le</th>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +42,7 @@ const ClassroomUpdates = ({classroomId}) => {
                     <td>{update.hasCantine ? 'Cantine' : 'No Cantine'}</td>
                     <td>{update.garderie}</td>
                     <td>{update.local_date_time}</td>
-                    <td>{update.modified_at}</td>
+                    <td >{update.modified_at}</td>
                 </tr>
             ))}
         </tbody>

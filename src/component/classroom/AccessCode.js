@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import KidsParent from '../student/KidsParent'
+import './AccessCode.css'
 
 export const AccessCode = () => {
     const {userId, user, role} = useAuth()
@@ -78,54 +79,57 @@ export const AccessCode = () => {
     }
 
   return (
-    <div>
-        <h1>Acceder à la classe</h1>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        { role === 'PARENT' && (
-          <>
-          < KidsParent onSelectKid={handleKidSelect}/>
-        
-          <form onSubmit={handleSubmit}>
-          <label htmlFor='classroomCode'>Code</label>
-              <input 
-              placeholder='code' 
-              type="text"  
-              name='classroomCode' 
-              id='classroomCode' 
-              onChange={handleChange} 
-              value={activation.classroomCode} 
-              required/> 
-  
-              <label htmlFor='teacher'>Nom de l'enseignant</label>
-                  <input
-                      placeholder="Nom de l'enseignant"
-                      type="text"
-                      name='teacher'
-                      id='teacher'
-                      onChange={handleChange}
-                      value={activation.teacher}
-                      required
-                  />
-          <button type='submit' disabled={!activation.kidId}>Activer</button>
-          </form>
-          </>
-        )}
-        { (role === 'ADMIN' || role =='SUPER_ADMIN') && (
-        
-        <form onSubmit={handleSubmit}>
+    <div className='accesscode-container'>
+  <h1>Acceder à la classe</h1>
+  {error && <p className='accesscode-error'>{error}</p>}
+
+  {role === 'PARENT' && (
+    <>
+      <KidsParent onSelectKid={handleKidSelect} />
+
+      <form onSubmit={handleSubmit} className='accesscode-form'>
         <label htmlFor='classroomCode'>Code</label>
-            <input 
-            placeholder='code' 
-            type="text"  
-            name='classroomCode' 
-            id='classroomCode' 
-            onChange={handleChange} 
-            value={activation.classroomCode} 
-            required/>         
-        <button type='submit'>Activer</button>
-        </form> 
-        )}
-     
-    </div>
+        <input
+          placeholder='code'
+          type='text'
+          name='classroomCode'
+          id='classroomCode'
+          onChange={handleChange}
+          value={activation.classroomCode}
+          required
+        />
+
+        <label htmlFor='teacher'>Nom de l'enseignant</label>
+        <input
+          placeholder="Nom de l'enseignant"
+          type='text'
+          name='teacher'
+          id='teacher'
+          onChange={handleChange}
+          value={activation.teacher}
+          required
+        />
+
+        <button type='submit' disabled={!activation.kidId}>Activer</button>
+      </form>
+    </>
+  )}
+
+  {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
+    <form onSubmit={handleSubmit} className='accesscode-form'>
+      <label htmlFor='classroomCode'>Code</label>
+      <input
+        placeholder='code'
+        type='text'
+        name='classroomCode'
+        id='classroomCode'
+        onChange={handleChange}
+        value={activation.classroomCode}
+        required
+      />
+      <button type='submit'>Activer</button>
+    </form>
+  )}
+</div>
   )
 }

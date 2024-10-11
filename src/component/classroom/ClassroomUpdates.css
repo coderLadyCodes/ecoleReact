@@ -1,0 +1,50 @@
+.classroom-updates {
+    padding: 2rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+
+.classroom-updates table {
+    width: 80%; 
+    border-collapse: collapse; 
+    margin-top: 1.5rem; 
+}
+
+
+.classroom-updates th, 
+.classroom-updates td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ccc; 
+}
+
+
+.classroom-updates thead {
+    background-color: #5a189a;
+    color: #fff; 
+}
+
+
+@media (max-width: 768px) {
+
+    .classroom-updates {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .classroom-updates table{
+        flex-wrap: wrap;
+    }
+
+    .classroom-updates th, 
+    .classroom-updates td {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+    }
+}

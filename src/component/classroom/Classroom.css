@@ -1,0 +1,86 @@
+.classroom-container {
+    padding: 1.2rem;
+  }
+  
+  .classroom-nav {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+  }
+  
+  .classroom-nav a {
+    padding: 1rem;
+    background-color: #5a189a; 
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .classroom-nav a:hover {
+    background-color: #3a0ca3; 
+  }
+  
+
+  .classroom-info {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .classroom-info h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #5a189a; 
+  }
+  
+  .classroom-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #9d4edd; 
+  }
+  
+  .classroom-info p {
+    font-size: 1.2rem;
+    color: #000; 
+  }
+  
+
+  .classroom-posts {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+  
+
+  @media (max-width: 768px) {
+    .classroom-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .classroom-nav a {
+      width: 60%;
+      margin-bottom: 1rem;
+    }
+  
+    .classroom-info h1,
+    .classroom-info h2,
+    .classroom-info p {
+      text-align: center;
+    }
+  
+    .classroom-posts {
+      margin-top: 2rem;
+    }
+  }
+  
