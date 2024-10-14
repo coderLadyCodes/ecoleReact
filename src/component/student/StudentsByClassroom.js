@@ -3,6 +3,7 @@ import {FaEdit, FaEye} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import './StudentsByClassroom.css'
 
 const StudentsByClassroom = () => {
   const navigate = useNavigate()
@@ -24,47 +25,41 @@ const StudentsByClassroom = () => {
         }
     }
   return (
-    <section>
-    <h2>Les Eleves</h2> 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom et Prénom</th>
-          <th>Date de naissance</th>
-          <th>Classe</th>
-          <th>Photo</th>
-        </tr>
-      </thead>
-      <tbody>
-        {studentDTO.map((student, index) => (
-          <tr key={student.id} onClick={() => navigate(`/classroom/${classroomId}/student/${student.id}`)} style={{ cursor: 'pointer' }}>
-            <th scope='row'>{index + 1}</th>
-            <td>{student.name}</td>
-            <td>{student.birthday}</td>
-            <td>{student.grade}</td>
-            <td>
-              {student.profileImage ? (
-                <img
-                  src={`http://localhost:8080/images/${student.id}/${student.profileImage}`}
-                  alt="profile image"
-                  style={{ width: '100px', height: '100px' }}
-                />
-              ) : (
-                <span>No Image</span>
-              )}
-            </td>
-            <td>
-              {/*<Link to={`/student-profile/${student.id}`}><FaEye /></Link>*/}
-            </td>
-            <td>
-              {/*<Link to={`/edit-student/${student.id}`}><FaEdit /></Link>*/}
-            </td>
+    <section className='students-by-classroom'>
+      <h2>Les Eleves</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom et Prénom</th>
+            <th>Date de naissance</th>
+            <th>Classe</th>
+            <th>Photo</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </section>
+        </thead>
+        <tbody>
+          {studentDTO.map((student, index) => (
+            <tr key={student.id} onClick={() => navigate(`/classroom/${classroomId}/student/${student.id}`)} style={{ cursor: 'pointer' }}>
+              <th scope='row' data-label="ID">{index + 1}</th>
+              <td data-label="Nom et Prénom">{student.name}</td>
+              <td data-label="Date de naissance">{student.birthday}</td>
+              <td data-label="Classe">{student.grade}</td>
+              <td data-label="Photo">
+                {student.profileImage ? (
+                  <img
+                    src={`http://localhost:8080/images/${student.id}/${student.profileImage}`}
+                    alt="profile image"
+                    className='student-photo'
+                  />
+                ) : (
+                  <span>No Image</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
   )
 }
 

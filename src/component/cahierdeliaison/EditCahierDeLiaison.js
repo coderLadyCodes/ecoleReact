@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../user/AuthProvider'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import './EditCahierDeLiaison.css'
 
 const EditCahierDeLiaison = () => {
     const {user, userId, userName, role} = useAuth()
@@ -61,30 +62,44 @@ const EditCahierDeLiaison = () => {
       }
   
   return (
-    <div>
-    <h2>Cahier de Liaison</h2>
-    { role === ('ADMIN' || 'SUPER_ADMIN') && (
-      
-      <form onSubmit={updateCahierDeLiaison}>
-        <div>
-        <label htmlFor='title'>Titre</label>
-          <input placeholder="Titre" type="text" name='title' id='title' onChange={handleInputChange} value={cahierDeLiaisonDetails.title} required/>
-        </div>
+    <div className='edit-cahier-de-liaison'>
+      <h2 className='edit-cahier-de-liaison-title'>Cahier de Liaison</h2>
+      {role === ('ADMIN' || 'SUPER_ADMIN') && (
+        <form className='edit-cahier-de-liaison-form' onSubmit={updateCahierDeLiaison}>
+          <div className='edit-cahier-de-liaison-field'>
+            <label htmlFor='title' className='edit-cahier-de-liaison-label'>Titre</label>
+            <input
+              className='edit-cahier-de-liaison-input'
+              placeholder='Titre'
+              type='text'
+              name='title'
+              id='title'
+              maxLength='50'
+              onChange={handleInputChange}
+              value={cahierDeLiaisonDetails.title}
+              required
+            />
+          </div>
 
-        <div>
-        <label htmlFor='content'>Contenu</label>
-          <textarea placeholder="Votre Texte Ici" type="text" name='content' id='content' onChange={handleInputChange} value={cahierDeLiaisonDetails.content} required></textarea>
-        </div>
+          <div className='edit-cahier-de-liaison-field'>
+            <label htmlFor='content' className='edit-cahier-de-liaison-label'>Contenu</label>
+            <textarea
+              className='edit-cahier-de-liaison-textarea'
+              placeholder='Votre Texte Ici'
+              name='content'
+              id='content'
+              onChange={handleInputChange}
+              value={cahierDeLiaisonDetails.content}
+              required
+            ></textarea>
+          </div>
 
-        <div>
-         <button type='submit'>Ok</button>
-      </div>
-      <div>
-          
-      </div>
-      </form>
-    )}
-  </div>
+          <div className='edit-cahier-de-liaison-actions'>
+            <button className='edit-cahier-de-liaison-button' type='submit'>Sauvegarder</button>
+          </div>
+        </form>
+      )}
+    </div>
   )
 }
 

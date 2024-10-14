@@ -3,6 +3,7 @@ import {FaEdit, FaTrashAlt} from 'react-icons/fa'
 import { useAuth } from '../user/AuthProvider'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import './ShowCahierDeLiaison.css'
 
 const ShowCahierDeLiaison = () => {
 const {role} = useAuth()
@@ -32,6 +33,7 @@ const loadShowCahierDeLiaison = async(e) => {
 
     try{
         const response = await axios.get(`http://localhost:8080/cahierDeLiaison/${id}`, {withCredentials: true})
+        //navigate(`/list-cahiers-liaison/${studentId}`, { state: { name } })
         setCahierDeLiaisonDTO(response.data)
     }catch (error) {
         console.error('Error: ', error)
@@ -50,56 +52,51 @@ const handleDelete = async (id) => {
 }
 }
   return (
-    <section>
-      <h2>{name}</h2>
-    <div>
-<h5>Enseignant</h5>
-</div>
-<div>
- <p>{userName}</p>
-</div>
+    <section className="show-cahier-de-liaison">
+    <h2>{name}</h2>
+    <div className="show-cahier-de-liaison__teacher">
+      <h5>Enseignant</h5>
+      <p>{userName}</p>
+    </div>
 
-<div>
-<h5>Titre</h5>
-</div>
-<div>
- <p>{cahierDeLiaisonDTO.title}</p>
-</div>
+    <div className="show-cahier-de-liaison__title">
+      <h5>Titre</h5>
+      <p>{cahierDeLiaisonDTO.title}</p>
+    </div>
 
+    <div className="show-cahier-de-liaison__content">
+      <h5>Contenu</h5>
+      <p>{cahierDeLiaisonDTO.content}</p>
+    </div>
 
-<div>
-<div>
-<h5>Contenu</h5>
-</div>
-<div>
- <p>{cahierDeLiaisonDTO.content}</p>
-</div>
-</div>
+    <div className="show-cahier-de-liaison__dates">
+      <p>Créé le : {cahierDeLiaisonDTO.local_date_time}</p>
+      <p>Modifié le : {cahierDeLiaisonDTO.modified_at}</p>
+    </div>
 
-<div>
+    <div className="show-cahier-de-liaison__buttons">
+      <button type="button">
+        <Link to={`/edit-cahier-de-liaison/${cahierDeLiaisonDTO.studentId}/${cahierDeLiaisonDTO.id}`} state={{ name }}>
+          <FaEdit /> Modifier
+        </Link>
+      </button>
 
- <p>crée le :{cahierDeLiaisonDTO.local_date_time}</p>
+      {role === 'SUPER_ADMIN' && (
+        <div>
+          <button type="button" onClick={() => handleDelete(cahierDeLiaisonDTO.id)}>
+            <FaTrashAlt /> Supprimer
+          </button>
+          <Link to={'/students-view'}>Annuler</Link>
+        </div>
+      )}
 
- <p>modifié le:{cahierDeLiaisonDTO.modified_at}</p>
-
-</div>
-
- <button type='button'>
-  <Link to={`/edit-cahier-de-liaison/${cahierDeLiaisonDTO.studentId}/${cahierDeLiaisonDTO.id}`}  state={{name}}><FaEdit />Modifier</Link>                                       
-</button>
-{ role === 'SUPER_ADMIN' && ( // ! NOT SURE
-   <button type='button'>
-   <Link to={'/students-view'}>annuler</Link>  
-   <button onClick={()=> handleDelete(cahierDeLiaisonDTO.id)}><FaTrashAlt /></button>                                 
- </button>
-)}
-
-{ role === 'PARENT' && (  // ! NOT SURE
-  <button type='button'>
-  <Link to={`/student-profile/${cahierDeLiaisonDTO.studentId}`}>Retour</Link>                               
-</button>
-)}
-</section>
+      {role === 'PARENT' && (
+        <button type="button">
+          <Link to={`/student-profile/${cahierDeLiaisonDTO.studentId}`}>Retour</Link>
+        </button>
+      )}
+    </div>
+  </section>
   )
 }
 

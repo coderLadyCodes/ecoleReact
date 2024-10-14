@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import profil from '../../images/profil.jpg'
 import axios from 'axios'
+import './StudentByClassroom.css'
 
 const StudentByClassroom = () => {
     const {id, classroomId} = useParams()  
@@ -39,75 +40,45 @@ const StudentByClassroom = () => {
         }
     }
   return (
-    <section>
-    <h2>Enfant : {studentDTO.name}</h2>
-  <div>
-    <div>
-  <div style={{width: '40rem'}}>
-  <div>
-    {studentDTO.profileImage?
-  <img
-    src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
-    alt="photo"
-    style={{ width: 120, height: 120}}
-    /> : <img src={profil} style={{width: 60, height: 60}}/> }
-               
-  <div>
- 
-  <div>
+    <section className="student-by-classroom">
+            <h2>Enfant : {studentDTO.name}</h2>
+            <div className="student-info">
+                {studentDTO.profileImage ? (
+                    <img
+                        src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
+                        alt="photo"
+                    />
+                ) : (
+                    <img src={profil} alt="profil" />
+                )}
+                <div className="student-details">
+                    <div>
+                        <h5>Nom et Prénom</h5>
+                        <p>{studentDTO.name}</p>
+                    </div>
+                    <div>
+                        <h5>Date de Naissance</h5>
+                        <p>{studentDTO.birthday}</p>
+                    </div>
+                    <div>
+                        <h5>Classe</h5>
+                        <p>{studentDTO.grade}</p>
+                    </div>
+                </div>
+            </div>
 
-  <hr />
-
-  <div>
-  <div>
-  <h5>Nom et Prénom</h5>
-  </div>
-  <div>
-   <p>{studentDTO.name}</p>
-  </div>
-  </div>
-
-  <hr />
-
-  <div>
-  <div>
-  <h5>Date de Naissance</h5>
-  </div>
-  <div>
-   <p>{studentDTO.birthday}</p>
-  </div>
-  </div>
-  <hr />
-
-  <div>
-  <div>
-  <h5>Classe</h5>
-  </div>
-  <div>
-   <p>{studentDTO.grade}</p>
-  </div>
-  </div>
-  <hr />
-
-  <button type='button'>
-    <Link to={`/classroom/${classroomId}/students`}>Retour</Link>                                      
-  </button>
-
-  </div> 
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <div>
-  <button type='button'>
-    <Link to={`/show-list-updates/${id}`}>Absence, cantine, Garderie</Link>                                      
-  </button>
-  <button type='button'>
-    <Link to={`/cahier-de-liaison/${id}`} state={{name: studentDTO.name}}>Cahier De Liaison</Link>                                      
-  </button>
-  </div>
-  </section>
+            <div className="button-container">
+                <button type="button">
+                    <Link to={`/classroom/${classroomId}/students`}>Retour</Link>
+                </button>
+                <button type="button">
+                    <Link to={`/show-list-updates/${id}`}>Absence, cantine, Garderie</Link>
+                </button>
+                <button type="button">
+                    <Link to={`/cahier-de-liaison/${id}`} state={{ name: studentDTO.name }}>Cahier De Liaison</Link>
+                </button>
+            </div>
+        </section>
   )
 }
 

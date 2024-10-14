@@ -21,8 +21,7 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -82,7 +81,7 @@
     color: #555;
   }
   
-  /* Input fields */
+
   .signup-input-field {
     display: flex;
     flex-direction: column;

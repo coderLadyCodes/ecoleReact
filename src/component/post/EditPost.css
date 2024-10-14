@@ -1,0 +1,130 @@
+/* Container for the Edit Post form */
+.edit-post-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 40rem;
+}
+
+.edit-post-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.edit-post-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-post-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.edit-post-form-group label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.edit-post-form-group input,
+.edit-post-form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.edit-post-form-group textarea {
+    height: 8rem;
+    resize: vertical;
+}
+
+.edit-post-file-upload {
+    margin-bottom: 0.5rem;
+}
+
+.edit-post-file-size {
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.edit-post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.edit-post-actions button,
+.edit-post-actions a {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit-post-actions a {
+    background-color: #6c757d;
+}
+
+.edit-post-actions button:hover,
+.edit-post-actions a:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .edit-post-container {
+        padding: 1.5rem;
+        max-width: 35rem;
+    }
+
+    .edit-post-title {
+        font-size: 1.75rem;
+    }
+
+    .edit-post-form-group input,
+    .edit-post-form-group textarea {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    .edit-post-actions button,
+    .edit-post-actions a {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-post-container {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .edit-post-title {
+        font-size: 1.5rem;
+    }
+
+    .edit-post-form-group input,
+    .edit-post-form-group textarea {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .edit-post-actions button,
+    .edit-post-actions a {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+}

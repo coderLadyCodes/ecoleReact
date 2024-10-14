@@ -1,0 +1,118 @@
+.add-cahier-de-liaison {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem; 
+    margin: 1rem auto;
+    max-width: 80%; 
+  }
+  
+  .add-cahier-de-liaison-title {
+    color: #6a0dad; 
+    margin-bottom: 1rem; 
+  }
+  
+  .add-cahier-de-liaison-form {
+    width: 100%;
+  }
+  
+  .add-cahier-de-liaison-input-container {
+    width: 100%; 
+    margin-bottom: 1rem; 
+  }
+  
+  .add-cahier-de-liaison-label {
+    display: block; 
+    margin-bottom: 0.25rem; 
+    color: #333; 
+  }
+  
+  .add-cahier-de-liaison-input,
+  .add-cahier-de-liaison-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc; 
+    border-radius: 0.25rem; 
+  }
+  
+  .add-cahier-de-liaison-input:focus,
+  .add-cahier-de-liaison-textarea:focus {
+    outline: none; 
+    border-color: #6a0dad;
+  }
+  
+  .add-cahier-de-liaison-button-container {
+    display: flex;
+    margin-top: 1rem; 
+    max-width: 100%;
+  }
+  
+  .add-cahier-de-liaison-submit-button {
+    display: block;
+    background-color: #f0c808; 
+    color: #6a0dad; 
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center; 
+    max-width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-cahier-de-liaison-submit-button:hover {
+    background-color: #6a0dad;
+    color: white; 
+  }
+  
+  .add-cahier-de-liaison-view-button {
+    background-color: #f0c808;
+    color: #6a0dad;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    max-width: 100%; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-cahier-de-liaison-view-button:hover {
+    background-color: #6a0dad;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .add-cahier-de-liaison {
+      padding: 0.5rem; 
+    }
+  
+    .add-cahier-de-liaison-title {
+      font-size: 1.5rem; 
+    }
+  
+    .add-cahier-de-liaison-input,
+    .add-cahier-de-liaison-textarea {
+      font-size: 0.9rem;
+    }
+  
+    .add-cahier-de-liaison-submit-button,
+    .add-cahier-de-liaison-view-button {
+      padding: 0.5rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .add-cahier-de-liaison-title {
+      font-size: 1.2rem;
+    }
+  
+    .add-cahier-de-liaison-input,
+    .add-cahier-de-liaison-textarea {
+      font-size: 0.8rem;
+    }
+  }
+  

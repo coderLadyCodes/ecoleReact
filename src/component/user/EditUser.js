@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthProvider'
+import './EditUser.css'
 
 const EditUser = () => {
 
@@ -67,62 +68,81 @@ const loadUser = async () =>{
           'Content-Type': 'multipart/form-data',
         }, withCredentials: true
       })
+
       setUserDetails(response.data)  
       navigate('/dashboard')
+
     } catch (error) {
       console.error('Error:', error)
     }
   }
 
     return (
-      <div>
-        <div>
-      <div>
-      <div>
-        <div>
-        <div>
-  
-        <h2>Modifier</h2>
-  
-        <form onSubmit={updateUser} encType="multipart/form-data" method='post'>
-  
-          <div>
-            <label htmlFor='name'>Nom et Prénom</label>
-            <input autoComplete="name" placeholder='Nom et Prénom' type='text' name='name' id='name' onChange={handleInputChange} value={userDetails.name} required/>
-          </div>
-  
-          <div>
-            <label htmlFor='email'>Email</label>
-            <input autoComplete="email" placeholder='Email' type='email' name='email' id='email' onChange={handleInputChange} value={userDetails.email} required/>
-          </div>
-  
-          <div>
-            <label htmlFor='phone'>Numéro de Téléphone</label>
-            <input autoComplete="tel" placeholder='Numero de Telephone' type='number' name='phone' id='phone' onChange={handleInputChange} value={userDetails.phone} required/>
-          </div>
-  
-          
-          <div>
-            <label htmlFor='multipartFile'>Choisir une Photo</label>
-            <input type='file' name='multipartFile' id='multipartFile' accept=".jpeg, .jpg, .png" onChange={handleFileChange}/>
-          </div>
-          <p>taille max du fichier : 500KB</p>
-  
-          <div>
-            <div>
-              <button type='submit'>Save</button>
-            </div>
-            <div>
-              <Link to={'/dashboard'}  type='submit'>Cancel</Link> 
-            </div>
-          </div>
-        </form>   
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
+      <div className="edit-user-container">
+      <h2 className="edit-user-title">Modifier</h2>
+
+      <form className="edit-user-form" onSubmit={updateUser} encType="multipart/form-data" method="post">
+        <div className="edit-user-form-group">
+          <label htmlFor="name">Nom et Prénom</label>
+          <input
+            autoComplete="name"
+            placeholder="Nom et Prénom"
+            type="text"
+            name="name"
+            id="name"
+            onChange={handleInputChange}
+            value={userDetails.name}
+            required
+          />
+        </div>
+
+        <div className="edit-user-form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            autoComplete="email"
+            placeholder="Email"
+            type="email"
+            name="email"
+            id="email"
+            onChange={handleInputChange}
+            value={userDetails.email}
+            required
+          />
+        </div>
+
+        <div className="edit-user-form-group">
+          <label htmlFor="phone">Numéro de Téléphone</label>
+          <input
+            autoComplete="tel"
+            placeholder="Numéro de Téléphone"
+            type="number"
+            name="phone"
+            id="phone"
+            onChange={handleInputChange}
+            value={userDetails.phone}
+            required
+          />
+        </div>
+
+        <div className="edit-user-file-upload">
+          <label htmlFor="multipartFile">Choisir une Photo</label>
+          <input
+            type="file"
+            name="multipartFile"
+            id="multipartFile"
+            accept=".jpeg, .jpg, .png"
+            onChange={handleFileChange}
+          />
+        </div>
+
+        <p className="edit-user-file-size">Taille max du fichier : 500KB</p>
+
+        <div className="edit-user-actions">
+          <button type="submit">Sauvegarder</button>
+          <Link to="/dashboard">Annuler</Link>
+        </div>
+      </form>
+    </div>
     )
   }
   

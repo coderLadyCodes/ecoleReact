@@ -4,6 +4,7 @@ import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import { Link, useLocation, useNavigate, useParams} from 'react-router-dom'
 import profil from '../../images/profil.jpg'
 import { useAuth } from '../user/AuthProvider'
+import './StudentProfile.css'
 
 
 const StudentProfile = () => {
@@ -40,85 +41,79 @@ const StudentProfile = () => {
   return (
     <>
     
-  <section>
-    <h2>Enfant : {studentDTO.name}</h2>
-  <div>
-    <div>
-  <div style={{width: '40rem'}}>
-  <div>
-    {studentDTO.profileImage?
-  <img
-    src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
-    alt="photo"
-    style={{ width: 120, height: 120}}
-    /> : <img src={profil} style={{width: 60, height: 60}}/> }
-               
-  <div>
- 
-  <div>
+    <section className="student-profile-container">
+        <h2 className="student-profile-header">Enfant : {studentDTO.name}</h2>
+        <div className="student-profile-card">
+          <div>
+            {studentDTO.profileImage ? (
+              <img
+                src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
+                alt="profile"
+                className="student-profile-image"
+              />
+            ) : (
+              <img src={profil} alt="default profile" className="student-profile-image" />
+            )}
+          </div>
 
-  <hr />
+          <div className="student-profile-info">
+            <div>
+              <h5>Nom et Prénom</h5>
+              <p>{studentDTO.name}</p>
+            </div>
 
-  <div>
-  <div>
-  <h5>Nom et Prénom</h5>
-  </div>
-  <div>
-   <p>{studentDTO.name}</p>
-  </div>
-  </div>
+            <hr />
 
-  <hr />
+            <div>
+              <h5>Date de Naissance</h5>
+              <p>{studentDTO.birthday}</p>
+            </div>
 
-  <div>
-  <div>
-  <h5>Date de Naissance</h5>
-  </div>
-  <div>
-   <p>{studentDTO.birthday}</p>
-  </div>
-  </div>
-  <hr />
+            <hr />
 
-  <div>
-  <div>
-  <h5>Classe</h5>
-  </div>
-  <div>
-   <p>{studentDTO.grade}</p>
-  </div>
-  </div>
-  <hr />
+            <div>
+              <h5>Classe</h5>
+              <p>{studentDTO.grade}</p>
+            </div>
 
-   <button type="button">
-    <Link to={`/edit-student/${studentDTO.id}`}><FaEdit />Modifier</Link>                                       
-  </button>
-  { role === 'SUPER_ADMIN' && (
-     <button type="button">
-     <Link to={'/students-view'}>annuler</Link>                                  
-   </button>
-  )}
+            <div className="student-profile-btn-group">
+              <button type="button">
+                <Link to={`/edit-student/${studentDTO.id}`}>
+                  <FaEdit /> Modifier
+                </Link>
+              </button>
 
-  { role === 'PARENT' && (
-    <button type="button">
-    <Link to={'/kids-parent'}>annuler</Link>                                  
-  </button>
-  )}
-  
-  </div> 
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </section>
-  <div>
-  <button type='button'><Link to={`/regular-updates/${studentDTO.id}`} state ={{name: studentDTO.name}}>Absence, Cantine, Garderie</Link></button>
-  </div>
+              {role === 'SUPER_ADMIN' && (
+                <button type="button">
+                  <Link to={'/students-view'}>Annuler</Link>
+                </button>
+              )}
 
-  <div>
-  <button type='button'><Link to={`/list-cahiers-liaison/${studentDTO.id}`} state ={{name: studentDTO.name}}>Cahiers de Liaison</Link></button>
-  </div>
+              {role === 'PARENT' && (
+                <button type="button">
+                  <Link to={'/kids-parent'}>Annuler</Link>
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="student-profile-btn-group">
+          <button type="button">
+            <Link to={`/regular-updates/${studentDTO.id}`} state={{ name: studentDTO.name }}>
+              Absence, Cantine, Garderie
+            </Link>
+          </button>
+        </div>
+
+        <div className="student-profile-btn-group">
+          <button type="button">
+            <Link to={`/list-cahiers-liaison/${studentDTO.id}`} state={{ name: studentDTO.name }}>
+              Cahiers de Liaison
+            </Link>
+          </button>
+        </div>
+      </section>
   </>
 
   )

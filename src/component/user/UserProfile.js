@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import profil from '../../images/profil.jpg'
 import { Link, useLocation, useParams } from 'react-router-dom'
+import './UserProfile.css'
 
 const UserProfile = () => {
   const location = useLocation()
@@ -26,40 +27,42 @@ const UserProfile = () => {
         fetchData()
     }, [userId])
   return (
-    <section>
-    <h2>Le profil de {userDTO.name}</h2>
-    <div style={{width: '8rem'}}>
-      {userDTO.profileImage?<img src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
-      alt="profil image" 
-      style={{width: 60, height: 60}}/> : <img src={profil} style={{width: 60, height: 60}}/> }   
-    </div>
+    <section className='user-profile'>
+      <h2 className='user-profile-title'>Le profil de {userDTO.name}</h2>
+      <div className='user-profile-image-container'>
+        {userDTO.profileImage ? (
+          <img
+            src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
+            alt='profil image'
+            className='user-profile-image'
+          />
+        ) : (
+          <img src={profil} alt='default profile' className='user-profile-image' />
+        )}
+      </div>
 
-    <div>
-      <h5>Nom et Prénom</h5>
-    </div>
-    <div>
-      <p>{userDTO.name}</p>
-    </div>
-    <div>
-      <h5>Email</h5>
-    </div>
-    <div>
-       <p>{userDTO.email}</p>
-    </div>
-      
-    <div>
-      <h5> Numéro de télephone</h5>
-    </div>
+      <div className='user-profile-info'>
+        <h5 className='user-profile-label'>Nom et Prénom</h5>
+        <p className='user-profile-value'>{userDTO.name}</p>
 
-    <div>
-      <p>{userDTO.phone}</p>
-    </div>
-    {!classroomId && (
-      <div > 
-    <button><Link to={`/edit-user/${userId}`}>Modifier profile</Link></button> 
-    <button><Link to={'/users-view'}>Annuler</Link></button> 
-    </div> )}
-  </section>
+        <h5 className='user-profile-label'>Email</h5>
+        <p className='user-profile-value'>{userDTO.email}</p>
+
+        <h5 className='user-profile-label'>Numéro de téléphone</h5>
+        <p className='user-profile-value'>{userDTO.phone}</p>
+      </div>
+
+      {!classroomId && (
+        <div className='user-profile-button-container'>
+          <button className='user-profile-button'>
+            <Link to={`/edit-user/${userId}`} className='user-profile-link'>Modifier profile</Link>
+          </button>
+          <button className='user-profile-button'>
+            <Link to={'/users-view'} className='user-profile-link'>Annuler</Link>
+          </button>
+        </div>
+      )}
+    </section>
   )
 }
 

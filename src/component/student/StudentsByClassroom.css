@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .students-by-classroom {
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto; 
+  }
+  
+  .students-by-classroom h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #6a0dad; 
+  }
+  
+  .students-by-classroom table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  .students-by-classroom th,
+  .students-by-classroom td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .students-by-classroom th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .students-by-classroom td img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .students-by-classroom tbody tr {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .students-by-classroom tbody tr:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .students-by-classroom {
+      padding: 1rem;
+    }
+  
+    .students-by-classroom table {
+      width: 100%;
+      overflow-x: auto;
+    }
+  
+    .students-by-classroom th,
+    .students-by-classroom td {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+  
+    .students-by-classroom td img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .students-by-classroom {
+      padding: 0.5rem;
+    }
+  
+    .students-by-classroom table {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+    }
+  
+    .students-by-classroom thead {
+      display: none; /* Hide the table headers on very small screens */
+    }
+  
+    .students-by-classroom tbody tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+    }
+  
+    .students-by-classroom tbody td {
+      display: block;
+      text-align: right;
+      font-size: 0.9rem;
+      border: none;
+      padding: 0.5rem 0;
+    }
+  
+    .students-by-classroom tbody td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+  
+    .students-by-classroom td img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  

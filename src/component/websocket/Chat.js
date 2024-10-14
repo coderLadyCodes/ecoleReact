@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useWebSocket } from './WebSocketProvider'
 import { useLocation, useParams } from 'react-router-dom'
+import './Chat.css'
 
 const Chat = () => {
     const location = useLocation()
@@ -41,7 +42,7 @@ const Chat = () => {
   return (
     <div className="chat-container">
     
-    <div className="user-list">
+    {/*<div className="user-list">
       <h3>Users</h3>
       <ul>
     {users && users.length > 0 ? (
@@ -49,10 +50,10 @@ const Chat = () => {
         <li key={index} className="user-item">{user.userName}</li>
       ))
     ) : (
-      <div></div>//No users available
+      <div></div>
     )}
   </ul>
-    </div>
+    </div>*/}
 
     <div className='chat-content'>
       <div className='messages'>

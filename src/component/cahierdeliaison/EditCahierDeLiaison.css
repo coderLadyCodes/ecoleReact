@@ -1,0 +1,84 @@
+.edit-cahier-de-liaison {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-cahier-de-liaison-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .edit-cahier-de-liaison-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-cahier-de-liaison-field {
+    margin-bottom: 15px;
+  }
+  
+  .edit-cahier-de-liaison-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .edit-cahier-de-liaison-input,
+  .edit-cahier-de-liaison-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .edit-cahier-de-liaison-input {
+    height: 40px;
+  }
+  
+  .edit-cahier-de-liaison-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .edit-cahier-de-liaison-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .edit-cahier-de-liaison-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .edit-cahier-de-liaison-button:hover {
+    background-color: #45a049;
+  }
+  
+  @media (max-width: 768px) {
+    .edit-cahier-de-liaison {
+      padding: 15px;
+    }
+  
+    .edit-cahier-de-liaison-title {
+      font-size: 20px;
+    }
+  
+    .edit-cahier-de-liaison-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

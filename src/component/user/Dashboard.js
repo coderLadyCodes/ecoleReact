@@ -17,9 +17,9 @@ const Dashboard = () => {
     multipartFile:'',
   })
 
-  const toggleInfo = () => {
+  {/*const toggleInfo = () => {
     setShowInfo(!showInfo)
-  }
+  }*/}
   
   const handleLogout = async () => {
     try{
@@ -48,7 +48,7 @@ const Dashboard = () => {
   return (
     <section className='dashboard-container'>
 
-      <div className='dashboard-profile-image' onClick={toggleInfo}>
+      <div className='dashboard-profile-image' > {/*onClick={toggleInfo}*/}
         {userDTO.profileImage ? (
           <img
             src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
@@ -59,7 +59,7 @@ const Dashboard = () => {
         )}
       </div>
 
-      {showInfo && (
+      {/*{showInfo && (*/}
         <div className='dashboard-info-container'>
 
           <div className='dashboard-info'>
@@ -96,7 +96,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      )}
+      {/*)}*/}
     </section>
   )
 }

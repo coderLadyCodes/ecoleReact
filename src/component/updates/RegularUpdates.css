@@ -1,0 +1,112 @@
+.regular-updates {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .regular-updates-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .regular-updates-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .regular-updates-field {
+    margin-bottom: 20px;
+  }
+  
+  .regular-updates-label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .regular-updates-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .regular-updates-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .regular-updates-fieldset {
+    margin-bottom: 20px;
+    border: none;
+  }
+  
+  .regular-updates-legend {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .regular-updates-field-radio {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .regular-updates-radio-label {
+    margin-left: 5px;
+  }
+  
+  .regular-updates-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .regular-updates-btn,
+  .regular-updates-submit-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .regular-updates-btn:hover,
+  .regular-updates-submit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .regular-updates-btn a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  @media (max-width: 768px) {
+    .regular-updates {
+      padding: 15px;
+    }
+  
+    .regular-updates-title {
+      font-size: 20px;
+    }
+  
+    .regular-updates-btn,
+    .regular-updates-submit-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .regular-updates-actions {
+      flex-direction: column;
+    }
+  }
+  

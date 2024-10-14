@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
+import './EditPost.css'
 
 const EditPost = () => {
   const {id} = useParams()
@@ -52,8 +53,12 @@ const [file, setFile] = useState(null)
 
           try {
             const formData = new FormData()
-            formData.append('postDetails', JSON.stringify(modifiedPost))
-            formData.append('multipartFile', file)
+            //formData.append('postDetails', JSON.stringify(modifiedPost))
+            //formData.append('multipartFile', file)
+            formData.append('postDetails', new Blob([JSON.stringify(modifiedPost)], { type: 'application/json' }))
+            if (file) {
+              formData.append('multipartFile', file)
+             }
             const response = await axios.put(`http://localhost:8080/posts/${id}`, formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
@@ -70,36 +75,49 @@ const [file, setFile] = useState(null)
           return <p>Vous devez etre connecter a votre compte</p>
         }
   return (
-    <div>
-      <div>
-      <div style={{width:'50%'}}>
-      <h2>Rédiger un article</h2>
-      <form onSubmit={updatePost} encType='multipart/form-data' method='post'>
+    <div className="edit-post-container">
+      <h2 className="edit-post-title">Modifier l'article</h2>
+      <form className="edit-post-form" onSubmit={updatePost} encType="multipart/form-data" method="post">
+        <div className="edit-post-form-group">
+          <label htmlFor="title">Titre</label>
+          <input
+            autoComplete="title"
+            type="text"
+            name="title"
+            id="title"
+            required
+            onChange={handleInputChange}
+            value={postDetails.title}
+          />
+        </div>
 
-      <div>
-     <label htmlFor='title'>Titre</label>
-     <input autoComplete='title' type='text' name='title' id='title' required onChange={handleInputChange} value={postDetails.title}/>
-      </div>
+        <div className="edit-post-form-group">
+          <label htmlFor="postContent">Message</label>
+          <textarea
+            id="postContent"
+            name="postContent"
+            required
+            onChange={handleInputChange}
+            value={postDetails.postContent}
+          ></textarea>
+        </div>
 
-      <div>
-       <label htmlFor='postContent'>Message</label>
-       <textarea id='postContent'  name='postContent' required onChange={handleInputChange} value={postDetails.postContent}></textarea>
-      </div>
+        <div className="edit-post-file-upload">
+          <input
+            type="file"
+            name="multipartFile"
+            id="multipartFile"
+            accept=".jpeg, .jpg, .png"
+            onChange={handleFileChange}
+          />
+        </div>
+        <p className="edit-post-file-size">Taille max du fichier : 500KB</p>
 
-      <div> 
-       <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>
-      </div>
-        <p>taille max du fichier : 500KB</p>
-      <div>
-         <button type='submit'>Save</button>
-      </div>
-      <div>
-          <Link to={`/classroom/${postDetails.classroomId}`}  type='button'>Cancel</Link>
-      </div>
+        <div className="edit-post-actions">
+          <button type="submit">Sauvegarder</button>
+          <Link to={`/classroom/${postDetails.classroomId}`} type="button">Annuler</Link>
+        </div>
       </form>
-            
-    </div>
-    </div>
     </div>
   )
 }

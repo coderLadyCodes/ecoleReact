@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import axios from 'axios'
+import './AddCahierDeLiaison.css'
 
 const AddCahierDeLiaison = () => {
   const location = useLocation()
@@ -49,34 +50,54 @@ const AddCahierDeLiaison = () => {
     }
   
   return (
-    <>
-    <h2>Cahier de Liaison</h2>
-    <button type='button'>
-      <Link to={`/list-cahiers-liaison/${studentId}`} state={{name}}>Voir les cahiers de liaison</Link>
-    </button>
-    
-    { role === ('ADMIN' || 'SUPER_ADMIN') && (
+    <div className='add-cahier-de-liaison'>
+      <h2 className='add-cahier-de-liaison-title'>Cahier de Liaison</h2>
+
+      {role === ('ADMIN' || 'SUPER_ADMIN') && (
+        <form onSubmit={handleSubmit} method='post' className='add-cahier-de-liaison-form'>
+          <div className='add-cahier-de-liaison-input-container'>
+            <label htmlFor='title' className='add-cahier-de-liaison-label'>Titre</label>
+            <input
+              placeholder="Titre"
+              type="text"
+              name='title'
+              id='title'
+              onChange={handleInputChange}
+              value={cahierDeLiaisonDTO.title}
+              required
+              maxLength='50'
+              className='add-cahier-de-liaison-input'
+            />
+          </div>
+
+          <div className='add-cahier-de-liaison-input-container'>
+            <label htmlFor='content' className='add-cahier-de-liaison-label'>Contenu</label>
+            <textarea
+              placeholder="Votre Texte Ici"
+              name='content'
+              id='content'
+              onChange={handleInputChange}
+              value={cahierDeLiaisonDTO.content}
+              required
+              className='add-cahier-de-liaison-textarea'
+            ></textarea>
+          </div>
+
+          <div className='add-cahier-de-liaison-button-container'>
+            <button type='submit' className='add-cahier-de-liaison-submit-button'>Ok</button>
+          </div>
+        </form>
+      )}
       
-      <form onSubmit={handleSubmit} method='post'>
-        <div>
-        <label htmlFor='title'>Titre</label>
-          <input placeholder="Titre" type="text" name='title' id='title' onChange={handleInputChange} value={cahierDeLiaisonDTO.title} required/>
-        </div>
-
-        <div>
-        <label htmlFor='content'>Contenu</label>
-          <textarea placeholder="Votre Texte Ici" type="text" name='content' id='content' onChange={handleInputChange} value={cahierDeLiaisonDTO.content} required></textarea>
-        </div>
-
-        <div>
-         <button type='submit'>Ok</button>
+      <div className='add-cahier-de-liaison-button-container'>
+        <button type='button' className='add-cahier-de-liaison-view-button'>
+          <Link to={`/list-cahiers-liaison/${studentId}`} state={{ name }} style={{ textDecoration: 'none', color: 'inherit' }}>
+            Voir les cahiers de liaison
+          </Link>
+        </button>
       </div>
-      {/*<div>
-          <Link to={`/classroom/${classroomId}/student/${studentId}`}  type='button'>Annuler</Link>
-      </div>*/}
-      </form>
-    )}
-  </>)
+    </div>
+  )
 }
 
 export default AddCahierDeLiaison

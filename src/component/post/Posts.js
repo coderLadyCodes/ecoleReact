@@ -18,7 +18,6 @@ const Posts = () => {
    
     try{
       const results = await axios.get(`http://localhost:8080/posts/classroom/${classroomId}`,{withCredentials: true})
-      console.log(results.data)
       const sortedPosts = results.data.sort((a, b) => new Date(b.local_date_time) - new Date(a.local_date_time))
       setPostDTO(sortedPosts)
 

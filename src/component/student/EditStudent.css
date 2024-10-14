@@ -1,0 +1,118 @@
+.edit-student-container {
+    padding: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .edit-student-form-container {
+    max-width: 50%;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-student-form-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .edit-student-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  
+  .edit-student-form-group label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .edit-student-form-group input,
+  .edit-student-form-group select {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+  }
+  
+  .edit-student-form-group input[type="file"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .edit-student-file-info {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 0.5rem;
+  }
+  
+  .edit-student-btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  
+  .edit-student-btn-group button,
+  .edit-student-btn-group a {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .edit-student-btn-group button:hover,
+  .edit-student-btn-group a:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .edit-student-form-container {
+      max-width: 100%;
+      padding: 1.5rem;
+    }
+  
+    .edit-student-form-container h2 {
+      font-size: 1.8rem;
+    }
+  
+    .edit-student-form-group input,
+    .edit-student-form-group select {
+      font-size: 1rem;
+      padding: 0.7rem;
+    }
+  
+    .edit-student-btn-group button,
+    .edit-student-btn-group a {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .edit-student-form-container {
+      padding: 1rem;
+    }
+  
+    .edit-student-form-container h2 {
+      font-size: 1.6rem;
+    }
+  
+    .edit-student-form-group input,
+    .edit-student-form-group select {
+      font-size: 0.9rem;
+      padding: 0.6rem;
+    }
+  
+    .edit-student-btn-group button,
+    .edit-student-btn-group a {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  

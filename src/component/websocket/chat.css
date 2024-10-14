@@ -1,66 +1,107 @@
- ul> li{
-  list-style-type: none;
-}
 .chat-container {
   display: flex;
-}
-
-.user-list {
-  width: 20%;
-  background-color: #f0f0f0;
-  padding: 10px;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+  padding: 1rem;
 }
 
 .chat-content {
-  width: 80%;
-  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .messages {
-  height: 300px;
+  flex: 1;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 1rem;
 }
+
+.message {
+  padding: 0.5rem 1rem;
+  border-bottom: 0.1rem solid #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.message strong {
+  color: #6a0dad; 
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
 
 .message-input {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  border-top: 0.2rem solid #f0c808;
+  padding: 1rem;
+  background-color: #f8f8f8;
 }
 
 .message-input textarea {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;  
-  resize: none;  /* Disable resizing */
-  height: 50px;  /* Set a fixed height initially, can be adjusted */
-  max-height: 120px;  /* Max height, after which it should scroll */
-  overflow-y: auto;  /* Allow vertical scrolling if content exceeds max height */
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+.message-input textarea:focus {
+  outline: none;
+  border-color: #6a0dad; 
 }
 
 .message-input button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+  margin-left: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #f0c808; 
+  color: #6a0dad;
   border: none;
+  border-radius: 0.4rem;
   cursor: pointer;
-  border-radius: 50%; 
+  transition: background-color 0.3s ease;
 }
 
-.message {
-  margin-bottom: 10px;
+.message-input button:hover {
+  background-color: #f4a926; 
 }
 
-.message strong {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+@media (max-width: 768px) {
+  .chat-container {
+    padding: 0.5rem;
+  }
+
+  .chat-content {
+    padding: 0.5rem;
+  }
+
+  .message-input {
+    padding: 0.5rem;
+  }
+
+  .message-input button {
+    padding: 0.5rem 1rem;
+  }
 }
 
-.timestamp {
-  font-size: 5px;
-  color: rgb(213, 213, 213);
-  margin-top: 5px;
+@media (max-width: 480px) {
+  .message-input textarea {
+    font-size: 0.9rem;
+  }
+
+  .message-input button {
+    font-size: 0.9rem;
+  }
 }

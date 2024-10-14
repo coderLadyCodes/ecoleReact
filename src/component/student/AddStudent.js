@@ -4,6 +4,7 @@ import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useAuth } from '../user/AuthProvider'
+import './AddStudent.css'
 
 const AddStudent = () => {
   const {user} =  useAuth()
@@ -76,53 +77,64 @@ const AddStudent = () => {
   }
 
   return (
-    <div>
-      <div>
-        <div style={{ width: '50%' }}>
-          <h2>Ajouter L'Enfant</h2>
+    <div className="addstudent-container">
+      <h2 className="addstudent-title">Ajouter L'Enfant</h2>
 
-          <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
-
-            <div>
-              <label htmlFor='name'>Nom et Prénom</label>
-              <input autoComplete="name" type='text' className='form-control' name='name' id='name' required onChange={handleInputChange} value={studentDTO.name} />
-            </div>
-
-            <div>
-              <label htmlFor="birthday" >Date De Naissance</label>
-              <DatePicker id='birthday'  selected={studentDTO.birthday} onChange={handleBirthdayChange} dateFormat='dd/MM/yyyy' maxDate={new Date()} showYearDropdown scrollableMonthYearDropdown required />
-            </div>
-
-            <div>
-              <label htmlFor='grade'>Classe</label>
-              <select name='grade' id='grade' value={studentDTO.grade} onChange={handleInputChange}>
-                <option value='PETITE_SECTION'>Petite Section</option>
-                <option value='MOYENNE_SECTION'>Moyenne Section</option>
-                <option value='GRANDE_SECTION'>Grande Section</option>
-                <option value='CP'>CP</option>
-                <option value='CE1'>CE1</option>
-                <option value='CE2'>CE2</option>
-                <option value='CM1'>CM1</option>
-                <option value='CM2'>CM2</option>
-              </select>
-            </div>
-
-            <div>
-              <input type='file' name='multipartFile' id='multipartFile' accept='.jpeg, .jpg, .png' onChange={handleFileChange}/>
-            </div>
-            <p>taille max du fichier : 500KB</p>
-
-            <div>
-              <div>
-                <button type='submit'>Save</button>
-              </div>
-              <div>
-                <Link to={'/dashboard'} type='submit'>Cancel</Link>
-              </div>
-            </div>
-          </form>
+      <form className="addstudent-form" onSubmit={handleSubmit} encType="multipart/form-data" method="post">
+        <div className="addstudent-form-group">
+          <label htmlFor="name">Nom et Prénom</label>
+          <input
+            autoComplete="name"
+            type="text"
+            className="form-control"
+            name="name"
+            id="name"
+            required
+            onChange={handleInputChange}
+            value={studentDTO.name}
+          />
         </div>
-      </div>
+
+        <div className="addstudent-form-group">
+          <label htmlFor="birthday">Date De Naissance</label>
+          <DatePicker
+            id="birthday"
+            selected={studentDTO.birthday}
+            onChange={handleBirthdayChange}
+            dateFormat="dd/MM/yyyy"
+            maxDate={new Date()}
+            showYearDropdown
+            scrollableMonthYearDropdown
+            required
+          />
+        </div>
+
+        <div className="addstudent-form-group">
+          <label htmlFor="grade">Classe</label>
+          <select name="grade" id="grade" value={studentDTO.grade} onChange={handleInputChange}>
+            <option value="PETITE_SECTION">Petite Section</option>
+            <option value="MOYENNE_SECTION">Moyenne Section</option>
+            <option value="GRANDE_SECTION">Grande Section</option>
+            <option value="CP">CP</option>
+            <option value="CE1">CE1</option>
+            <option value="CE2">CE2</option>
+            <option value="CM1">CM1</option>
+            <option value="CM2">CM2</option>
+          </select>
+        </div>
+
+        <div className="addstudent-file-upload">
+          <input type="file" name="multipartFile" id="multipartFile" accept=".jpeg, .jpg, .png" onChange={handleFileChange} />
+        </div>
+        <p className="addstudent-file-size">Taille max du fichier : 500KB</p>
+
+        <div className="addstudent-actions">
+          <button type="submit">Sauvegarder</button>
+          <Link to="/dashboard" type="submit">
+            Annuler
+          </Link>
+        </div>
+      </form>
     </div>
   )
 }

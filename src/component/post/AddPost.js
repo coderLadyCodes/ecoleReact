@@ -85,7 +85,7 @@ const AddPost = () => {
     <form onSubmit={handleSubmit} encType='multipart/form-data' method='post'>
         <div className='form-group'>
             <label htmlFor='title'>Titre</label>
-            <input autoComplete="title" type='text' name='title' id='title' required onChange={handleInputChange} value={postDTO.title} />
+            <input autoComplete="title" type='text' name='title' id='title' maxLength='40' required onChange={handleInputChange} value={postDTO.title} />
         </div>
 
         <div className='form-group'>

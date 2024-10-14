@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
+import './EditRegularUpdates.css'
 
 const EditRegularUpdates = () => {
     const {role, user, userId} = useAuth()
@@ -72,71 +73,75 @@ const EditRegularUpdates = () => {
 
     const formValid = regularUpdatesDetails.isAbsent !== '' && regularUpdatesDetails.hasCantine !== '' && regularUpdatesDetails.garderie !== '' &&  regularUpdatesDetails.local_date !== ''
     return (
-      <div>
-        <h2> Absence, Cantine, Garderie</h2>
-      <form onSubmit={updateRegularUpdate}>
-      <div>
-      <label htmlFor="local_date">Date :</label>
-      <input
-          type="text"
-          id="local_date"
-          value={regularUpdatesDetails.local_date}
-          readOnly/>
-    </div>
-      {/*<div>
-        <label htmlFor="local_date" >Date :</label>
-        <DatePicker id='local_date'  selected={regularUpdatesDetails.local_date} onChange={handleDateChange} dateFormat='dd/MM/yyyy'  minDate={tomorrow}  maxDate={tomorrow}   showYearDropdown scrollableMonthYearDropdown required />
-      </div>*/}
-      <fieldset>
-                <legend>Absence</legend>
-                <div>
-                  <div>
-                    <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDetails.isAbsent === true} onChange={handleInputChange} required/>
-                    <label htmlFor='isAbsent-true'>
-                      Absent
-                    </label>
-                  </div>
-                  <div>
-                    <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDetails.isAbsent === false} onChange={handleInputChange} required/>
-                    <label htmlFor='isAbsent-false'>
-                      Present
-                    </label>
-                  </div>
+      <div className="edit-regular-updates">
+            <h2> Absence, Cantine, Garderie</h2>
+            <form onSubmit={updateRegularUpdate} className="edit-regular-updates-form">
+                <div className="form-group">
+                    <label htmlFor="local_date">Date :</label>
+                    <input
+                        type="text"
+                        id="local_date"
+                        value={regularUpdatesDetails.local_date}
+                        readOnly
+                    />
                 </div>
-              </fieldset>
-  
-              <fieldset>
-                <legend>Cantine</legend>
-                <div>
-                  <div>
-                    <input type='radio' name='hasCantine' id='hasCantine-true' value='true' checked={regularUpdatesDetails.hasCantine === true} onChange={handleInputChange} required/>
-                    <label  htmlFor='hasCantine-true'>
-                      Oui
-                    </label>
-                  </div>
-                  <div>
-                    <input type='radio' name='hasCantine' id='hasCantine-false' value='false' checked={regularUpdatesDetails.hasCantine === false} onChange={handleInputChange} required/>
-                    <label htmlFor='hasCantine-false'>
-                      Non
-                    </label>
-                  </div>
+
+                <fieldset>
+                    <legend>Absence</legend>
+                    <div className="radio-group">
+                        <div>
+                            <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDetails.isAbsent === true} onChange={handleInputChange} required />
+                            <label htmlFor='isAbsent-true'>
+                                Absent
+                            </label>
+                        </div>
+                        <div>
+                            <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDetails.isAbsent === false} onChange={handleInputChange} required />
+                            <label htmlFor='isAbsent-false'>
+                                Présent
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Cantine</legend>
+                    <div className="radio-group">
+                        <div>
+                            <input type='radio' name='hasCantine' id='hasCantine-true' value='true' checked={regularUpdatesDetails.hasCantine === true} onChange={handleInputChange} required />
+                            <label htmlFor='hasCantine-true'>
+                                Oui
+                            </label>
+                        </div>
+                        <div>
+                            <input type='radio' name='hasCantine' id='hasCantine-false' value='false' checked={regularUpdatesDetails.hasCantine === false} onChange={handleInputChange} required />
+                            <label htmlFor='hasCantine-false'>
+                                Non
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div className="form-group">
+                    <label htmlFor='garderie'>Garderie</label>
+                    <select name='garderie' id='garderie' value={regularUpdatesDetails.garderie} onChange={handleInputChange} required>
+                        <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
+                        <option value='MATIN'>Matin</option>
+                        <option value='SOIR'>Soir</option>
+                        <option value='MATIN_ET_SOIR'>Matin et Soir</option>
+                    </select>
                 </div>
-              </fieldset>
-          <label htmlFor='garderie'>Garderie</label>
-          <select name='garderie' id='garderie' value={regularUpdatesDetails.garderie} onChange={handleInputChange} required>
-            <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
-            <option value='MATIN'>Matin</option>
-            <option value='SOIR'>Soir</option>
-            <option value='MATIN_ET_SOIR'>Matin et Soir</option>
-          </select>
-          <button type='submit' disabled={!formValid}>Save</button>
-          { role == 'PARENT' && (
-      <button type="button">
-      <Link to={`/student-profile/${studentId}`}>annuler</Link>                                
-    </button>
-    )}
-      </form>
-      </div>
+
+                <div className="edit-regular-updates-actions">
+                    <button type='submit' disabled={!formValid}>Sauvegarder</button>
+                    {role === 'PARENT' && (
+                        <button type="button">
+                            <Link to={`/student-profile/${studentId}`}>Annuler</Link>
+                        </button>
+                    )}
+                </div>
+            </form>
+        </div>
     )
  
 }

@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
 import ReactDatePicker from 'react-datepicker'
+import './RegularUpdates.css'
 
 const RegularUpdates = () => {
   const {user, userId} = useAuth()
@@ -72,77 +73,68 @@ const RegularUpdates = () => {
  
  const formValid = regularUpdatesDTO.isAbsent !== '' && regularUpdatesDTO.hasCantine !== '' && regularUpdatesDTO.garderie !== '' &&  regularUpdatesDTO.local_date !== ''
   return (
-    <div>
-      <h2> Absence, Cantine, Garderie pour : {name}, Date : {formatedDate}</h2>
-      <div>
-  
-          <button type='button'>
-           <Link to={`/show-list-updates/${studentId}`} state={{name}}>Voir les précédents Absences / cantine / garderie</Link>                                
-          </button>
+    <div className="regular-updates">
+      <h2 className="regular-updates-title">Absence, Cantine, Garderie pour : {name}, Date : {formatedDate}</h2>
 
+      <div className="regular-updates-actions">
+        <button type="button" className="regular-updates-btn">
+          <Link to={`/show-list-updates/${studentId}`} state={{ name }}>Voir les précédents Absences / cantine / garderie</Link>
+        </button>
       </div>
-    <form onSubmit={handleSubmit}>
-    <div>
-      <label htmlFor="local_date">Date :</label>
-      <input
-          type="text"
-          id="local_date"
-          value={regularUpdatesDTO.local_date}
-          readOnly/>
-    </div>
-    {/*<div>
-      <label htmlFor="local_date" >Date :</label>
-      <DatePicker id='local_date'  selected={regularUpdatesDTO.local_date} onChange={handleDayChange} dateFormat='dd/MM/yyyy' minDate={tomorrow}  maxDate={tomorrow}  showYearDropdown scrollableMonthYearDropdown required />
-    </div>*/}
-    <fieldset>
-              <legend>Absence</legend>
-              <div>
-                <div>
-                  <input type='radio' name='isAbsent' id='isAbsent-true' value='true' checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} required/>
-                  <label htmlFor='isAbsent-true'>
-                    Absent
-                  </label>
-                </div>
-                <div>
-                  <input type='radio' name='isAbsent' id='isAbsent-false' value='false' checked={regularUpdatesDTO.isAbsent === false} onChange={handleInputChange} required/>
-                  <label htmlFor='isAbsent-false'>
-                    Present
-                  </label>
-                </div>
-              </div>
-            </fieldset>
 
-            <fieldset>
-              <legend>Cantine</legend>
-              <div>
-                <div>
-                  <input type='radio' name='hasCantine' id='hasCantine-true' value='true' checked={regularUpdatesDTO.hasCantine === true} onChange={handleInputChange} required/>
-                  <label  htmlFor='hasCantine-true'>
-                    Oui
-                  </label>
-                </div>
-                <div>
-                  <input type='radio' name='hasCantine' id='hasCantine-false' value='false' checked={regularUpdatesDTO.hasCantine === false} onChange={handleInputChange} required/>
-                  <label htmlFor='hasCantine-false'>
-                    Non
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-        <label htmlFor='garderie'>Garderie</label>
-        <select name='garderie' id='garderie' value={regularUpdatesDTO.garderie} onChange={handleInputChange} required>
-          <option value='PAS_DE_GARDERIE'>Pas de garderie</option>
-          <option value='MATIN'>Matin</option>
-          <option value='SOIR'>Soir</option>
-          <option value='MATIN_ET_SOIR'>Matin et Soir</option>
-        </select>
-        <button type='submit' disabled={!formValid}>Ok</button>
-        { role == 'PARENT' && (
-    <button type='button'>
-    <Link to={`/student-profile/${studentId}`}>annuler</Link>                                
-  </button>
-  )}
-    </form>
+      <form className="regular-updates-form" onSubmit={handleSubmit}>
+        <div className="regular-updates-field">
+          <label htmlFor="local_date" className="regular-updates-label">Date :</label>
+          <input
+            className="regular-updates-input"
+            type="text"
+            id="local_date"
+            value={regularUpdatesDTO.local_date}
+            readOnly
+          />
+        </div>
+
+        <fieldset className="regular-updates-fieldset">
+          <legend className="regular-updates-legend">Absence</legend>
+          <div className="regular-updates-field-radio">
+            <input type="radio" name="isAbsent" id="isAbsent-true" value="true" checked={regularUpdatesDTO.isAbsent === true} onChange={handleInputChange} required />
+            <label htmlFor="isAbsent-true" className="regular-updates-radio-label">Absent</label>
+
+            <input type="radio" name="isAbsent" id="isAbsent-false" value="false" checked={regularUpdatesDTO.isAbsent === false} onChange={handleInputChange} required />
+            <label htmlFor="isAbsent-false" className="regular-updates-radio-label">Present</label>
+          </div>
+        </fieldset>
+
+        <fieldset className="regular-updates-fieldset">
+          <legend className="regular-updates-legend">Cantine</legend>
+          <div className="regular-updates-field-radio">
+            <input type="radio" name="hasCantine" id="hasCantine-true" value="true" checked={regularUpdatesDTO.hasCantine === true} onChange={handleInputChange} required />
+            <label htmlFor="hasCantine-true" className="regular-updates-radio-label">Oui</label>
+
+            <input type="radio" name="hasCantine" id="hasCantine-false" value="false" checked={regularUpdatesDTO.hasCantine === false} onChange={handleInputChange} required />
+            <label htmlFor="hasCantine-false" className="regular-updates-radio-label">Non</label>
+          </div>
+        </fieldset>
+
+        <div className="regular-updates-field">
+          <label htmlFor="garderie" className="regular-updates-label">Garderie</label>
+          <select name="garderie" id="garderie" className="regular-updates-select" value={regularUpdatesDTO.garderie} onChange={handleInputChange} required>
+            <option value="PAS_DE_GARDERIE">Pas de garderie</option>
+            <option value="MATIN">Matin</option>
+            <option value="SOIR">Soir</option>
+            <option value="MATIN_ET_SOIR">Matin et Soir</option>
+          </select>
+        </div>
+
+        <div className="regular-updates-actions">
+          <button className="regular-updates-submit-btn" type="submit" disabled={!formValid}>Ok</button>
+          {role === 'PARENT' && (
+            <button type="button" className="regular-updates-btn">
+              <Link to={`/student-profile/${studentId}`}>Annuler</Link>
+            </button>
+          )}
+        </div>
+      </form>
     </div>
   )
 }

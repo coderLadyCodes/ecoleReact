@@ -1,0 +1,129 @@
+.student-profile-container {
+    padding: 1.8rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .student-profile-header {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .student-profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  
+  .student-profile-image {
+    width: 12rem;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .student-profile-info {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  .student-profile-info h5 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .student-profile-info p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .student-profile-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .student-profile-btn-group button,
+  .student-profile-btn-group a {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .student-profile-btn-group button:hover,
+  .student-profile-btn-group a:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .student-profile-header {
+      font-size: 2rem;
+    }
+  
+    .student-profile-card {
+      padding: 1.5rem;
+      max-width: 100%;
+    }
+  
+    .student-profile-image {
+      width: 10rem;
+      height: 10rem;
+    }
+  
+    .student-profile-info {
+      font-size: 1.2rem;
+    }
+  
+    .student-profile-info h5 {
+      font-size: 1.4rem;
+    }
+  
+    .student-profile-info p {
+      font-size: 1.1rem;
+    }
+  
+    .student-profile-btn-group button,
+    .student-profile-btn-group a {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .student-profile-header {
+      font-size: 1.8rem;
+    }
+  
+    .student-profile-card {
+      padding: 1rem;
+    }
+  
+    .student-profile-image {
+      width: 8rem;
+      height: 8rem;
+    }
+  
+    .student-profile-info {
+      font-size: 1rem;
+    }
+  
+    .student-profile-btn-group button,
+    .student-profile-btn-group a {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  

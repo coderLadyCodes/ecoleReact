@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {FaEdit, FaEye, FaTrashAlt} from 'react-icons/fa'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../user/AuthProvider'
+import './ShowRegularUpdates.css'
 
 const ShowRegularUpdates = () => {
   const {user, role, userId} = useAuth()
@@ -57,73 +58,63 @@ const ShowRegularUpdates = () => {
   }
 
   return (
-    <section>
-      <div>
-  <h5>Enfant</h5>
-  </div>
-  <div>
-   <p>{name}</p>
-  </div>
+    <section className="show-regular-updates">
+      <div className="show-regular-updates-section">
+        <h5>Enfant</h5>
+        <p>{name}</p>
+      </div>
 
-  <div>
-  <h5>Absence</h5>
-  </div>
-  <div>
-   <p>{regularUpdatesDTO.isAbsent?  'Absent(e)' : 'Présent(e)'}</p>
-  </div>
+      <div className="show-regular-updates-section">
+        <h5>Absence</h5>
+        <p>{regularUpdatesDTO.isAbsent ? 'Absent(e)' : 'Présent(e)'}</p>
+      </div>
 
+      <div className="show-regular-updates-section">
+        <h5>Cantine</h5>
+        <p>{regularUpdatesDTO.hasCantine ? 'Cantine' : 'Pas Cantine'}</p>
+      </div>
 
-  <div>
-  <div>
-  <h5>Cantine</h5>
-  </div>
-  <div>
-   <p>{regularUpdatesDTO.hasCantine? 'Cantine' : 'Pas Cantine'}</p>
-  </div>
-  </div>
+      <div className="show-regular-updates-section">
+        <h5>Garderie</h5>
+        <p>{regularUpdatesDTO.garderie}</p>
+      </div>
 
-  <div>
-  <h5>Garderie</h5>
-  </div>
-  <div>
-   <p>{regularUpdatesDTO.garderie}</p>
-  </div>
+      <div className="show-regular-updates-section">
+        <h5>Date</h5>
+        <p>{regularUpdatesDTO.local_date}</p>
+      </div>
 
-  <div>
-  <h5>Date</h5>
-  </div>
-  <div>
-   <p>{regularUpdatesDTO.local_date}</p>
-  </div>
+      <div className="show-regular-updates-section">
+        <h5>Date et Heure :</h5>
+        <p>Créé le : {regularUpdatesDTO.local_date_time}</p>
+        <p>Modifié le : {regularUpdatesDTO.modified_at}</p>
+      </div>
 
+      <div className="show-regular-updates-actions">
+        <button type="button">
+          <Link to={`/regular-updates/${regularUpdatesDTO.studentId}/${regularUpdatesDTO.id}`}>
+            <FaEdit /> Modifier
+          </Link>
+        </button>
 
-  <div>
-  <h5>Date et Heure :</h5>
-  </div>
-  <div>
+        {role === 'SUPER_ADMIN' && (
+          <div>
+            <button type="button">
+              <Link to="/students-view">Annuler</Link>
+            </button>
+            <button onClick={() => handleDelete(regularUpdatesDTO.id)}>
+              <FaTrashAlt /> Supprimer
+            </button>
+          </div>
+        )}
 
-   <p>crée le :{regularUpdatesDTO.local_date_time}</p>
-
-   <p>modifié le:{regularUpdatesDTO.modified_at}</p>
-
-  </div>
-
-   <button type='button'>
-    <Link to={`/regular-updates/${regularUpdatesDTO.studentId}/${regularUpdatesDTO.id}`}><FaEdit />Modifier</Link>                                       
-  </button>
-  { role == 'SUPER_ADMIN' && (
-     <button type='button'>
-     <Link to={'/students-view'}>annuler</Link>  
-     <button onClick={()=> handleDelete(regularUpdatesDTO.id)}><FaTrashAlt /></button>                                
-   </button>
-  )}
-
-  { role == 'PARENT' && (
-    <button type='button'>
-    <Link to={`/show-list-updates/${regularUpdatesDTO.studentId}`}>Retour</Link>                               
-  </button>
-  )}
-  </section>
+        {role === 'PARENT' && (
+          <button type="button">
+            <Link to={`/show-list-updates/${regularUpdatesDTO.studentId}`}>Retour</Link>
+          </button>
+        )}
+      </div>
+    </section>
   )
 }
 

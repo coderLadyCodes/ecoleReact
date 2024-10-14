@@ -1,0 +1,43 @@
+.list-cahiers-liaison {
+    padding: 20px; 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+
+  .list-cahiers-liaison h2{
+    text-align: center;
+  }
+  
+  .cahier-post {
+    cursor: pointer;
+    opacity: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background-color: #d7c1f5;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cahier-post:hover {
+    background-color: #d2aef1;
+  }
+  
+  .cahier-title {
+    margin-bottom: 8px; 
+    font-size: 1.5em;
+    color: #333; 
+  }
+  
+  .cahier-content {
+    margin-bottom: 16px; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal;
+    max-width: 100%;
+  }
+  
+  .cahier-meta {
+    font-size: 0.9em; 
+    color: #666; 
+  }
