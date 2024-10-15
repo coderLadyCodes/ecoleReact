@@ -1,107 +1,107 @@
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f8f8f8;
-  padding: 1rem;
-}
-
 .chat-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  height: 90vh;
+  padding: 10px;
+  max-width: 100%;
 }
 
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 1rem;
+  padding-right: 1rem; 
+  max-width: 100%;
 }
 
 .message {
-  padding: 0.5rem 1rem;
-  border-bottom: 0.1rem solid #ccc;
-  margin-bottom: 0.5rem;
-}
-
-.message strong {
-  color: #6a0dad; 
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
 }
 
 .timestamp {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #888;
-  margin-top: 0.2rem;
+  margin-top: 5px;
 }
-
 
 .message-input {
   display: flex;
   align-items: center;
-  border-top: 0.2rem solid #f0c808;
-  padding: 1rem;
-  background-color: #f8f8f8;
-}
-
-.message-input textarea {
-  flex: 1;
-  border: 0.1rem solid #ccc;
-  border-radius: 0.4rem;
-  padding: 0.75rem;
-  font-size: 1rem;
-  resize: none;
+  gap: 10px;
+  padding: 10px 0;
 }
 
 .message-input textarea:focus {
+  border-color: #6a0dad;
   outline: none;
-  border-color: #6a0dad; 
+  box-shadow: 0 0 1px;
+}
+
+.message-input textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  height: auto;
+  padding: 10px;
+  resize: none; 
+  border-radius: 5px;
+  font-size: 1rem;
+  overflow: hidden;
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
 .message-input button {
-  margin-left: 1rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  background-color: #f0c808; 
-  color: #6a0dad;
+  padding: 10px 15px;
+  background-color: #6a0dad;
+  color: white;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 .message-input button:hover {
-  background-color: #f4a926; 
+  background-color: #ff1493;
 }
 
+/* Responsive for smaller screens */
 @media (max-width: 768px) {
-  .chat-container {
-    padding: 0.5rem;
+  .chat-content {
+    padding: 8px;
   }
 
-  .chat-content {
-    padding: 0.5rem;
+  .message {
+    padding: 8px;
+    font-size: 0.95rem;
   }
 
   .message-input {
-    padding: 0.5rem;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .message-input textarea {
+    min-height: 50px;
   }
 
   .message-input button {
-    padding: 0.5rem 1rem;
+    width: 100%;
+    padding: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .message-input textarea {
-    font-size: 0.9rem;
+  .message {
+    font-size: 0.85rem;
   }
 
-  .message-input button {
-    font-size: 0.9rem;
+  .message-input textarea {
+    min-height: 60px;
   }
 }

@@ -18,7 +18,12 @@ const Posts = () => {
    
     try{
       const results = await axios.get(`http://localhost:8080/posts/classroom/${classroomId}`,{withCredentials: true})
-      const sortedPosts = results.data.sort((a, b) => new Date(b.local_date_time) - new Date(a.local_date_time))
+      //const sortedPosts = results.data.sort((a, b) => new Date(b.local_date_time) - new Date(a.local_date_time))
+      const sortedPosts = results.data.sort((a,b) => {
+        const dateA = parseDate(a.local_date_time)
+        const dateB = parseDate(b.local_date_time)
+        return dateB - dateA
+      })
       setPostDTO(sortedPosts)
 
     }catch (error) {
@@ -38,6 +43,14 @@ const Posts = () => {
       
     }
   }
+
+  const parseDate = (dateStr) => {
+
+    const [datePart, timePart] = dateStr.split(' ')
+    const [day, month, year] = datePart.split('/')
+    return new Date(`${year}-${month}-${day}T${timePart}`)
+  }
+
   return (
     <section className='post-list'>
     <h2 className='post-list-title'>Les Posts</h2>

@@ -75,7 +75,7 @@ const Chat = () => {
           placeholder='Votre message ici...'
            rows='1'
         />
-        <button onClick={handleSendMessage}>Send</button>
+        <button onClick={handleSendMessage}>Envoyer</button>
       </div>
     </div>
   </div>

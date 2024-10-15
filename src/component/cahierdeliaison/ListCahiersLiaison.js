@@ -35,9 +35,9 @@ const ListCahiersLiaison = () => {
   }
   const parseDate = (dateStr) => {
     // Split date and time
-    const [datePart, timePart] = dateStr.split(' ');
-    const [day, month, year] = datePart.split('/');
-    return new Date(`${year}-${month}-${day}T${timePart}`);
+    const [datePart, timePart] = dateStr.split(' ')
+    const [day, month, year] = datePart.split('/')
+    return new Date(`${year}-${month}-${day}T${timePart}`)
   }
 
   return (

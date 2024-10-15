@@ -85,10 +85,11 @@ const Dashboard = () => {
             <Link to='/edit-user' className='dashboard-link'>
               Modifier profil
             </Link>
+            {/*
             <Link to='/add-student' className='dashboard-link'>
               Ajouter un Enfant
             </Link>
-
+            */}
             {role !== 'PARENT' && (
               <Link to='/acces' className='dashboard-link'>
                 Créer une classe

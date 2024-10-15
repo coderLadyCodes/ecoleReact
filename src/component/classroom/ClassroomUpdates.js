@@ -10,7 +10,9 @@ const ClassroomUpdates = ({classroomId}) => {
         const getUpdates = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/updates/classroom/${classroomId}`, { withCredentials: true })
-                setUpdates(response.data)
+                const today = new Date().toISOString().split('T')[0]
+                const todaysUpdates = response.data.filter(update => update.local_date === today)
+                setUpdates(todaysUpdates)
 
             }catch (error) {
                 console.error('Error fetching classroom updates:', error)

@@ -48,8 +48,15 @@ const AddStudent = () => {
 
     try {
       const formData = new FormData()
-      formData.append('studentDTO', JSON.stringify({ ...studentDTO, birthday: formattedBirthday }))
-      formData.append('multipartFile', file)
+      //formData.append('studentDTO', JSON.stringify({ ...studentDTO, birthday: formattedBirthday }))
+      //formData.append('multipartFile', file)
+
+      formData.append('studentDTO', new Blob([JSON.stringify({ ...studentDTO, birthday: formattedBirthday })], { type: 'application/json' }))
+      
+      if (file) {
+        formData.append('multipartFile', file)
+      }
+
       const response = await axios.post('http://localhost:8080/students', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

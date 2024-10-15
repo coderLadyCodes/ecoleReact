@@ -29,16 +29,25 @@ const Activation = () => {
     }
     }
   return (
-    <div>
-        <h1>Activer votre compte</h1>
-        <h2>Vous allez recevoir un Email avec le code de vérification</h2>
-        <p>Consultez aussi vos courriers indésirables</p>
-        <form onSubmit={handleSubmit}>
-        <label htmlFor='code'>Code</label>
-            <input placeholder='code' type="text"  name='code' id='code' onChange={handleChange} value={activation.code} required/> 
-        <button type='submit'>Activer</button>
-        </form>
-    </div>
+    <div className="activation-container">
+    <h1 className="activation-title">Activer votre compte</h1>
+    <h2 className="activation-subtitle">Vous allez recevoir un Email avec le code de vérification</h2>
+    <p className="activation-note">Consultez aussi vos courriers indésirables</p>
+    <form className="activation-form" onSubmit={handleSubmit}>
+        <label htmlFor='code' className="activation-label">Code</label>
+        <input 
+            className="activation-text-input" 
+            placeholder='code' 
+            type="text"  
+            name='code' 
+            id='code' 
+            onChange={handleChange} 
+            value={activation.code} 
+            required
+        /> 
+        <button className="activation-submit-btn" type='submit'>Activer</button>
+    </form>
+</div>
   )
 }
 
