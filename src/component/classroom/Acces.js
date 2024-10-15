@@ -22,7 +22,7 @@ const Acces = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-      const response = await axios.post('http://localhost:8080/classroom', classroom,{
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/classroom`, classroom,{
       headers: {
               'Content-Type': 'application/json'
     },

@@ -20,7 +20,7 @@ const EditClassroom = () => {
 
       const loadClassroom = async () => {
         try{
-            const result = await axios.get(`http://localhost:8080/classroom/${id}`, { withCredentials: true })
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/classroom/${id}`, { withCredentials: true })
             setClassroom(result.data)
         }catch (error) {
             console.error('Error loading post details:', error)
@@ -35,7 +35,7 @@ const EditClassroom = () => {
       const updateClassroom = async (e) => {
         e.preventDefault()
         try{
-            const response = await axios.put(`http://localhost:8080/classroom/${id}`, classroom,{
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/classroom/${id}`, classroom,{
                 headers: {
                         'Content-Type': 'application/json'
               },

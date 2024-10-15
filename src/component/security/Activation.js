@@ -18,7 +18,7 @@ const Activation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-        const response = await axios.post('http://localhost:8080/activation', activation,{
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/activation`, activation,{
             headers: {
               'Content-Type': 'application/json',
             },

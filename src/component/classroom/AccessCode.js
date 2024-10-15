@@ -40,7 +40,7 @@ export const AccessCode = () => {
         e.preventDefault()
         setError('')
         try {
-        const response = await axios.post('http://localhost:8080/classroom/activation', activation,{
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/classroom/activation`, activation,{
             headers: {
               'Content-Type': 'application/json',
             },

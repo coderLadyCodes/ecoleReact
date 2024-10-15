@@ -30,7 +30,7 @@ const StudentProfile = () => {
 
   const loadStudent = async () =>{
     try{
-      const result = await axios.get(`http://localhost:8080/students/student/${id}`, {withCredentials: true})
+      const result = await axios.get(`${process.env.REACT_APP_API_URL}/students/student/${id}`, {withCredentials: true})
       setStudentDTO(result.data)
   
     }catch (error) {
@@ -47,7 +47,7 @@ const StudentProfile = () => {
           <div>
             {studentDTO.profileImage ? (
               <img
-                src={`http://localhost:8080/images/${studentDTO.id}/${studentDTO.profileImage}`}
+                src={`${process.env.REACT_APP_API_URL}/images/${studentDTO.id}/${studentDTO.profileImage}`}
                 alt="profile"
                 className="student-profile-image"
               />

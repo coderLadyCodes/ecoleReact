@@ -32,7 +32,7 @@ const EditCahierDeLiaison = () => {
       const loadCahierDeLiaisonEdit = async (e) =>{
        
         try{
-            const result = await axios.get(`http://localhost:8080/cahierDeLiaison/${id}`, { withCredentials: true })
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/${id}`, { withCredentials: true })
             setCahierDeLiaisonDetails(result.data)
         }catch (error) {
             console.error('Error loading cahierDeLiaison details:', error)
@@ -49,7 +49,7 @@ const EditCahierDeLiaison = () => {
         const modifiedDate = new Date().toLocaleString('fr-FR') 
         const updatedDate = {... cahierDeLiaisonDetails, modified_at: modifiedDate}
         try{
-            const response = await axios.put(`http://localhost:8080/cahierDeLiaison/update/${id}`, updatedDate,{
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/update/${id}`, updatedDate,{
                 headers: {
                     'Content-Type': 'application/json',
                   }, withCredentials: true   

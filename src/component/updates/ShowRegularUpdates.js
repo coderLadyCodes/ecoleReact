@@ -31,7 +31,7 @@ const ShowRegularUpdates = () => {
 
   const loadRegularUpdates = async () => {
     try{
-      const response = await axios.get(`http://localhost:8080/updates/${ruId}`, {withCredentials: true})
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/updates/${ruId}`, {withCredentials: true})
       
       setRegularUpdatesDTO(response.data)
 
@@ -49,7 +49,7 @@ const ShowRegularUpdates = () => {
     let superAdminChoice = window.confirm('Etes vous sure de supprimer ce UPDATE?')
     if (superAdminChoice){
       try{
-         await axios.delete(`http://localhost:8080/updates/${id}`,{withCredentials: true})
+         await axios.delete(`${process.env.REACT_APP_API_URL}/updates/${id}`,{withCredentials: true})
          loadRegularUpdates()
       } catch(error){
         console.error('error deleting the UPDATE : ', error)

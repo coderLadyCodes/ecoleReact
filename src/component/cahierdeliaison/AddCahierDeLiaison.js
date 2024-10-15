@@ -36,7 +36,7 @@ const AddCahierDeLiaison = () => {
     const currentDateTime =  new Date().toLocaleString('fr-FR')
     const addCahierDeLiaisonDateTime = {...cahierDeLiaisonDTO, local_date_time : currentDateTime}
     try{
-      const response = await axios.post(`http://localhost:8080/cahierDeLiaison/${studentId}`, addCahierDeLiaisonDateTime, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/${studentId}`, addCahierDeLiaisonDateTime, {
         headers: {
           'Content-Type': 'application/json'
     },

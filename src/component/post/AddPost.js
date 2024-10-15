@@ -57,7 +57,7 @@ const AddPost = () => {
             formData.append('multipartFile', file)
            }
 
-          const response = await axios.post('http://localhost:8080/posts', formData, {
+          const response = await axios.post(`${process.env.REACT_APP_API_URL}/posts`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             }, withCredentials: true

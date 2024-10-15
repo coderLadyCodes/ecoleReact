@@ -17,7 +17,7 @@ const Posts = () => {
   const loadPosts = async () => {
    
     try{
-      const results = await axios.get(`http://localhost:8080/posts/classroom/${classroomId}`,{withCredentials: true})
+      const results = await axios.get(`${process.env.REACT_APP_API_URL}/posts/classroom/${classroomId}`,{withCredentials: true})
       //const sortedPosts = results.data.sort((a, b) => new Date(b.local_date_time) - new Date(a.local_date_time))
       const sortedPosts = results.data.sort((a,b) => {
         const dateA = parseDate(a.local_date_time)
@@ -35,7 +35,7 @@ const Posts = () => {
     let userChoice = window.confirm('Voulez vous supprimer cet article?')
     if(userChoice){
       try{
-      await axios.delete(`http://localhost:8080/posts/${id}`, {withCredentials: true})
+      await axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, {withCredentials: true})
       loadPosts()
       }catch (error){
          console.error("Error deleting Post:", error)
@@ -60,7 +60,7 @@ const Posts = () => {
             <h3 className='post-list-item-title'>{post.title}</h3>
             {post.imagePost ? (
                 <img
-                    src={`http://localhost:8080/images/${post.id}/${post.imagePost}`}
+                    src={`${process.env.REACT_APP_API_URL}/images/${post.id}/${post.imagePost}`}
                     alt='post image content'
                     className='post-list-item-image'
                 />

@@ -17,7 +17,7 @@ export const WebSocketProvider = ({children}) => {
 
     const fetchToken = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/get-token', {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/get-token`, {
                 withCredentials: true 
             })
 
@@ -46,8 +46,7 @@ export const WebSocketProvider = ({children}) => {
 
     //useEffect(()=> {
         const connectWebSocket = async (classroomId) =>{
-            if (webSocketConnected || stompClientRef.current?.connected) {
-                console.log('Already connected or currently connecting')
+            if (webSocketConnected || stompClientRef.current?.connected) {               
                 return 
               }
             if (!user || !classroomId) {
@@ -63,7 +62,6 @@ export const WebSocketProvider = ({children}) => {
                 //console.log('WebSocket is already in the process of connecting')
                 //return
              //}
-             console.log("Connecting WebSocket...")
              webSocketConnected = true
              //setConnecting(true)
 
@@ -85,7 +83,7 @@ export const WebSocketProvider = ({children}) => {
                 return
             }
 
-              const socket = new SockJS('http://localhost:8080/ws', null, {
+              const socket = new SockJS(`${process.env.REACT_APP_API_URL}/ws`, null, {
                            transports: ['websocket', 'xhr-streaming'],
                            })
 
@@ -98,13 +96,10 @@ export const WebSocketProvider = ({children}) => {
                 heartbeatIncoming: 4000,
                 heartbeatOutgoing: 4000,
                 onConnect: () => {
-                    console.log('WebSocket connected')
 
                     client.subscribe(`/topic/classroom/${classroomId}`, (message) => {
-                        console.log(`Subscribing to classroom ${classroomId}`)
                         try{
                            const parsedMessage = JSON.parse(message.body)
-                           console.log('Received message:', parsedMessage) 
 
                            const messageContent = parsedMessage.message || parsedMessage.content || 'No message'
                            const userName = parsedMessage.user ? parsedMessage.user.name : 'Unknown'
@@ -123,9 +118,7 @@ export const WebSocketProvider = ({children}) => {
                                 { content: messageContent, userName: userName, timestamp: timestamp },
                             ],
                         }
-                        
-                        console.log('Received message:', parsedMessage)
-                        console.log('Updating messages for classroom::', updatedMessages)
+
                         return updatedMessages
                         })
                         }catch (err) {
@@ -144,7 +137,6 @@ export const WebSocketProvider = ({children}) => {
                     console.error('Token expired, attempting reconnection...')
                    try{
                     const newToken = await fetchToken()
-                    console.log('Reconnecting with new token:', newToken)
                     client.connectHeaders.Authorization = `Bearer ${newToken}`
                     client.activate()
                    }  catch(err) {
@@ -169,7 +161,6 @@ export const WebSocketProvider = ({children}) => {
                 stompClientRef.current.deactivate()
                 stompClientRef.current = null
                 webSocketConnected = false
-                console.log('WebSocket disconnected')
             } 
         }
 

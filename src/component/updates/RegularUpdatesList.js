@@ -19,7 +19,7 @@ const RegularUpdatesList = () => {
   const loadRegularUpdatesList = async () => {
 
     try {
-      const response = await axios.get(`http://localhost:8080/updates/regular/${studentId}`,{withCredentials: true})
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/updates/regular/${studentId}`,{withCredentials: true})
       setRegularUpdatesDTO(response.data)
     } catch(error){
       console.error('error : ', error)

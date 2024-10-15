@@ -53,7 +53,7 @@ const RegularUpdates = () => {
       //const formatedDate = regularUpdatesDTO.local_date.toLocaleDateString('fr-FR')
       const createdRegularUpdates = {...regularUpdatesDTO,local_date_time: currentDateTime, local_date: formatedDate}
       try{
-        const response = await axios.post(`http://localhost:8080/updates/${studentId}`, createdRegularUpdates,{
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/updates/${studentId}`, createdRegularUpdates,{
       headers: {
               'Content-Type': 'application/json'
     },

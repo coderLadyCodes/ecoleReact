@@ -19,7 +19,7 @@ const ListCahiersLiaison = () => {
   const loadCahierDeLiaison = async (e) =>{
   
     try{
-      const response = await axios.get(`http://localhost:8080/cahierDeLiaison/all/${studentId}`,{withCredentials: true})
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/all/${studentId}`,{withCredentials: true})
      
       const orderCahier = response.data.sort((a, b) => {
         const dateA = parseDate(a.local_date_time)

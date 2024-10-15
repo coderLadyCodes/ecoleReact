@@ -18,7 +18,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const response = await axios.get(`http://localhost:8080/users/${userId}`, {withCredentials: true})
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`, {withCredentials: true})
                 setUserDTO(response.data)
             }catch (error) {
               console.error('Error fetching user data:', error)
@@ -32,7 +32,7 @@ const UserProfile = () => {
       <div className='user-profile-image-container'>
         {userDTO.profileImage ? (
           <img
-            src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
+            src={`${process.env.REACT_APP_API_URL}/images/${userDTO.id}/${userDTO.profileImage}`}
             alt='profil image'
             className='user-profile-image'
           />

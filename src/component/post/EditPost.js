@@ -21,7 +21,7 @@ useEffect(() => {
 
 const loadPost = async () => {
   try{
-    const result = await axios.get(`http://localhost:8080/posts/post/${id}`, { withCredentials: true })
+    const result = await axios.get(`${process.env.REACT_APP_API_URL}/posts/post/${id}`, { withCredentials: true })
     setPostDetails(result.data)
   }catch (error) {
     console.error('Error loading post details:', error)
@@ -59,7 +59,7 @@ const [file, setFile] = useState(null)
             if (file) {
               formData.append('multipartFile', file)
              }
-            const response = await axios.put(`http://localhost:8080/posts/${id}`, formData, {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/posts/${id}`, formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
               }, withCredentials: true

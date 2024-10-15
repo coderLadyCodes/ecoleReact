@@ -9,17 +9,12 @@ import './Dashboard.css'
 
 const Dashboard = () => {
   const {logout, user, role, userId} = useAuth()
- const [showInfo, setShowInfo] = useState(false)
   const [userDTO, setUserDTO] = useState({
     name:'',
     email:'',
     phone:'',
     multipartFile:'',
   })
-
-  {/*const toggleInfo = () => {
-    setShowInfo(!showInfo)
-  }*/}
   
   const handleLogout = async () => {
     try{
@@ -36,7 +31,7 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try{
-        const response = await axios.get(`http://localhost:8080/users/${userId}`)
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`)
         setUserDTO(response.data)
       }catch (error) {
         console.log('Error: ', error)
@@ -48,10 +43,10 @@ const Dashboard = () => {
   return (
     <section className='dashboard-container'>
 
-      <div className='dashboard-profile-image' > {/*onClick={toggleInfo}*/}
+      <div className='dashboard-profile-image' > 
         {userDTO.profileImage ? (
           <img
-            src={`http://localhost:8080/images/${userDTO.id}/${userDTO.profileImage}`}
+            src={`${process.env.REACT_APP_API_URL}/images/${userDTO.id}/${userDTO.profileImage}`}
             alt='profil image'
           />
         ) : (
@@ -59,7 +54,6 @@ const Dashboard = () => {
         )}
       </div>
 
-      {/*{showInfo && (*/}
         <div className='dashboard-info-container'>
 
           <div className='dashboard-info'>

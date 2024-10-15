@@ -28,7 +28,7 @@ const Classroom = () => {
 
     const loadClassroom = async () => {
       try {
-        const result = await axios.get(`http://localhost:8080/classroom/${classroomId}`, {withCredentials: true})
+        const result = await axios.get(`${process.env.REACT_APP_API_URL}/classroom/${classroomId}`, {withCredentials: true})
         setClassroom(prevState => ({
           ...prevState,
           ...result.data,
@@ -43,7 +43,7 @@ const Classroom = () => {
   const loadUsers = async () => { 
     if (role === 'ADMIN' || role === 'SUPER_ADMIN'){
     try {
-      const result = await axios.get(`http://localhost:8080/classroom/${classroomId}/users`, { withCredentials: true })
+      const result = await axios.get(`${process.env.REACT_APP_API_URL}/classroom/${classroomId}/users`, { withCredentials: true })
       setUsers(result.data)  
     }catch (error) {
       console.error('Error fetching users: ', error)

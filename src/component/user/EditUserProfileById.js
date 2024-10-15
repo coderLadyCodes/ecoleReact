@@ -16,7 +16,7 @@ const EditUserProfileById = () => {
       }, [])
       const loadUser = async () => {
         try{
-            const result = await axios.get(`http://localhost:8080/users/${userId}`,{withCredentials: true})
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`,{withCredentials: true})
             setUserDetails(result.data)
         }catch (error) {
             console.error('Error fetching user data:', error)
@@ -62,7 +62,7 @@ const EditUserProfileById = () => {
       formData.append('userDetails', JSON.stringify(userDetails))
       formData.append('multipartFile', file)
       
-      const response = await axios.put(`http://localhost:8080/users/${userId}`,formData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }, withCredentials: true

@@ -20,7 +20,7 @@ const EditStudent = () => {
     
     const loadStudent = async () =>{
       try{
-      const result = await axios.get(`http://localhost:8080/students/student/${id}`, { withCredentials: true })
+      const result = await axios.get(`${process.env.REACT_APP_API_URL}/students/student/${id}`, { withCredentials: true })
       setStudentDetails({...result.data, birthday: new Date()})
    } catch (error) {
       console.error('Error loading student details:', error)
@@ -60,7 +60,7 @@ const EditStudent = () => {
       formData.append('studentDetails', JSON.stringify({ ...studentDetails, birthday: formattedBirthday }))
       formData.append('studentDetails', studentDetails)
       formData.append('multipartFile', file)    
-      const response = await axios.put(`http://localhost:8080/students/${id}`, formData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/students/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           }, withCredentials: true

@@ -31,7 +31,7 @@ const EditRegularUpdates = () => {
       
       const loadRegularUpdate = async () => {
       try{
-      const result = await axios.get(`http://localhost:8080/updates/${ruId}`, { withCredentials: true })
+      const result = await axios.get(`${process.env.REACT_APP_API_URL}/updates/${ruId}`, { withCredentials: true })
       setRegularUpdatesDetails({...result.data, local_date: new Date()})
    } catch (error) {
       console.error('Error loading update details:', error)
@@ -55,7 +55,7 @@ const EditRegularUpdates = () => {
         const updatedUpdate = {...regularUpdatesDetails, local_date: formatedDate, modified_at: modifiedDate}
 
         try{
-            const response = await axios.put(`http://localhost:8080/updates/${ruId}`, updatedUpdate, {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/updates/${ruId}`, updatedUpdate, {
                 headers: {
                     'Content-Type': 'application/json',
                   }, withCredentials: true

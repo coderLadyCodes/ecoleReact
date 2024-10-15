@@ -15,7 +15,7 @@ const [userDTO, setUserDTO] = useState([])
 
     const loadUsers = async () =>{
         try{
-        const result = await axios.get('http://localhost:8080/users',{withCredentials: true})
+        const result = await axios.get(`${process.env.REACT_APP_API_URL}/users`,{withCredentials: true})
         
         setUserDTO(result.data)
 
@@ -26,7 +26,7 @@ const [userDTO, setUserDTO] = useState([])
     const handleDelete = async(id) => {
       let userChoice = window.confirm('Voulez vous supprimer ce contacte?')
       if(userChoice){
-        await axios.delete(`http://localhost:8080/users/${id}`,{withCredentials: true})
+        await axios.delete(`${process.env.REACT_APP_API_URL}/users/${id}`,{withCredentials: true})
         loadUsers()
       }
     }
@@ -62,7 +62,7 @@ const [userDTO, setUserDTO] = useState([])
                     <td>{user.phone}</td>
                     <td> {user.profileImage ? (
                          <img
-                         src={`http://localhost:8080/images/${user.id}/${user.profileImage}`}
+                         src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
                          alt="profile image"
                          style={{ width: '100px', height: '100px' }}
                          />

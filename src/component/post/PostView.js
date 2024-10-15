@@ -25,7 +25,7 @@ const PostView = () => {
 
     const loadPost = async () => {
         try {
-            const result = await axios.get(`http://localhost:8080/posts/post/${id}`, {withCredentials: true})
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/posts/post/${id}`, {withCredentials: true})
             setPostDTO(result.data)
         }catch (error){
             console.error('Error: ', error)
@@ -37,7 +37,7 @@ const PostView = () => {
             <div className='post-view-content'>
                 {postDTO.imagePost && (
                     <img
-                        src={`http://localhost:8080/images/${id}/${postDTO.imagePost}`}
+                        src={`${process.env.REACT_APP_API_URL}/images/${id}/${postDTO.imagePost}`}
                         alt='photo'
                         className='post-view-image'
                     />

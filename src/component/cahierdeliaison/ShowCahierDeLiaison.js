@@ -32,7 +32,7 @@ useEffect(() => {
 const loadShowCahierDeLiaison = async(e) => {
 
     try{
-        const response = await axios.get(`http://localhost:8080/cahierDeLiaison/${id}`, {withCredentials: true})
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/${id}`, {withCredentials: true})
         //navigate(`/list-cahiers-liaison/${studentId}`, { state: { name } })
         setCahierDeLiaisonDTO(response.data)
     }catch (error) {
@@ -44,7 +44,7 @@ const handleDelete = async (id) => {
     let SuperChoice = window.confirm('Etes vous sure de supprimer ce Cahier de Texte?')
     if (SuperChoice){
         try{
-            await axios.delete(`http://localhost:8080/cahierDeLiaison/${id}`,{withCredentials: true})
+            await axios.delete(`${process.env.REACT_APP_API_URL}/cahierDeLiaison/${id}`,{withCredentials: true})
             loadShowCahierDeLiaison()
     }catch(error){
         console.error('erreur survenue lors de la suppression du cahier de liaison : ', error)

@@ -17,7 +17,7 @@ const StudentsByClassroom = () => {
 
     const loadStudentsByClassroom = async () => {
         try{
-            const result = await axios.get(`http://localhost:8080/students/classroom/${classroomId}`, { withCredentials: true })
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/students/classroom/${classroomId}`, { withCredentials: true })
             setStudentDTO(result.data)
 
         } catch(error) {
@@ -47,7 +47,7 @@ const StudentsByClassroom = () => {
               <td data-label="Photo">
                 {student.profileImage ? (
                   <img
-                    src={`http://localhost:8080/images/${student.id}/${student.profileImage}`}
+                    src={`${process.env.REACT_APP_API_URL}/images/${student.id}/${student.profileImage}`}
                     alt="profile image"
                     className='student-photo'
                   />

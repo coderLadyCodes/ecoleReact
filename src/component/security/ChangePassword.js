@@ -19,7 +19,7 @@ const ChangePassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-      const response = await axios.post('http://localhost:8080/change-password', activation, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/change-password`, activation, {
         headers: {
           'Content-Type': 'application/json',
         },

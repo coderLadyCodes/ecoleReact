@@ -14,7 +14,7 @@ const Classrooms = () => {
 
    const loadRooms =  async () => {
     try{
-      const result = await axios.get('http://localhost:8080/classroom',{withCredentials: true})
+      const result = await axios.get(`${process.env.REACT_APP_API_URL}/classroom`,{withCredentials: true})
       setClassroom(result.data)
     }catch (error) {
       console.error("error : ", error)
@@ -23,7 +23,7 @@ const Classrooms = () => {
     let userChoice = window.confirm('Voulez vous supprimer cette Classe ?')
     if (userChoice){
       try {
-        await axios.delete(`http://localhost:8080/classroom/${id}`,{withCredentials: true})
+        await axios.delete(`${process.env.REACT_APP_API_URL}/classroom/${id}`,{withCredentials: true})
         loadRooms()
       } catch (error){
          console.error("Error deleting classroom:", error)

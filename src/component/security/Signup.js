@@ -94,28 +94,7 @@ const [userDTO, setUserDTO] = useState({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    {/*if(!userDTO.name || !userDTO.email || !userDTO.phone || !userDTO.password || !confirmPassword)  {
-      alert('Completez tout les champs')
-      return
-    }
-
-    if (!userDTO.password.trim()) {
-      alert('Le mot de passe ne peut pas être vide');
-      return;
-    }
-
-    if (userDTO.password !== confirmPassword){
-      alert('Le mot de passe ne correspond pas')
-    }
-    if (!userDTO.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-      alert('Adresse mail invalide')
-      return
-    }
-    if (!userDTO.phone.match(/^\d{10}$/)) {
-      alert('Please enter a valid phone number')
-      return
-    }*/}
-
+   
     if (!validateForm()){
       return
     }
@@ -128,7 +107,7 @@ const [userDTO, setUserDTO] = useState({
       if (file) {
         formData.append('multipartFile', file)
        }
-      const response = await axios.post('http://localhost:8080/signup', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

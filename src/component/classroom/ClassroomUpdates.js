@@ -9,7 +9,7 @@ const ClassroomUpdates = ({classroomId}) => {
     useEffect(() => {
         const getUpdates = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/updates/classroom/${classroomId}`, { withCredentials: true })
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/updates/classroom/${classroomId}`, { withCredentials: true })
                 const today = new Date().toISOString().split('T')[0]
                 const todaysUpdates = response.data.filter(update => update.local_date === today)
                 setUpdates(todaysUpdates)

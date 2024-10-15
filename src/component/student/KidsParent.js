@@ -17,7 +17,7 @@ const KidsParent = ({ onSelectKid }) => {
 
     const loadParentStudents =  async () => {
         try {
-            const result = await axios.get(`http://localhost:8080/students/user/${userId}`, { withCredentials: true })
+            const result = await axios.get(`${process.env.REACT_APP_API_URL}/students/user/${userId}`, { withCredentials: true })
             setStudentDTO(result.data)
         } catch (error) {
         console.error("Error:", error)
@@ -70,7 +70,7 @@ const KidsParent = ({ onSelectKid }) => {
               <td>
                 {student.profileImage ? (
                   <img
-                    src={`http://localhost:8080/images/${student.id}/${student.profileImage}`}
+                    src={`${process.env.REACT_APP_API_URL}/images/${student.id}/${student.profileImage}`}
                     alt="profile image"
                     className="kids-parent-img"
                   />
