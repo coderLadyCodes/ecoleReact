@@ -87,7 +87,7 @@ export const AuthProvider = ({children}) => {
             return;
           }
         try {
-            const response = await axios.post('http://localhost:8080/connexion',authentificationDTO,{
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/connexion`,authentificationDTO,{
                 headers: {
                   'Content-Type': 'application/json',
                    
@@ -122,7 +122,7 @@ export const AuthProvider = ({children}) => {
 
         const refreshToken = async () => {
           try {
-            const response = await axios.post('http://localhost:8080/refresh-token',{}, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/refresh-token`,{}, {
               withCredentials: true,
             }) 
             const newAccessToken  = response.data.bearer
@@ -137,7 +137,7 @@ export const AuthProvider = ({children}) => {
      
         const logout = async () => {
             try{
-                const res = await axios.post('http://localhost:8080/deconnexion',{},{withCredentials: true})
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}/deconnexion`,{},{withCredentials: true})
                 setUser(null) 
                 localStorage.removeItem('user')  
                 cookies.remove('token', { path: '/' })
