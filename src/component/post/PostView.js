@@ -37,7 +37,8 @@ const PostView = () => {
             <div className='post-view-content'>
                 {postDTO.imagePost && (
                     <img
-                        src={`${process.env.REACT_APP_API_URL}/images/${id}/${postDTO.imagePost}`}
+                        //src={`${process.env.REACT_APP_API_URL}/images/${id}/${postDTO.imagePost}`}
+                        src={postDTO.imagePost}
                         alt='photo'
                         className='post-view-image'
                     />

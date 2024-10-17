@@ -62,7 +62,8 @@ const [userDTO, setUserDTO] = useState([])
                     <td>{user.phone}</td>
                     <td> {user.profileImage ? (
                          <img
-                         src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                         //src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                         src={user.profileImage}
                          alt="profile image"
                          style={{ width: '100px', height: '100px' }}
                          />

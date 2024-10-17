@@ -66,7 +66,8 @@ const [userDTO, setUserDTO] = useState([])
                   <td data-label="Photo">
                     {user.profileImage ? (
                       <img
-                        src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                        //src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                        src={user.profileImage}
                         alt="profile"
                         style={{ width: '100px', height: '100px' }}
                       />
@@ -115,7 +116,8 @@ const [userDTO, setUserDTO] = useState([])
                   <td data-label="Photo">
                     {user.profileImage ? (
                       <img
-                        src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                        //src={`${process.env.REACT_APP_API_URL}/images/${user.id}/${user.profileImage}`}
+                        src={user.profileImage}
                         alt="profile"
                         style={{ width: '100px', height: '100px' }}
                       />

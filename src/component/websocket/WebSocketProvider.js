@@ -72,7 +72,7 @@ export const WebSocketProvider = ({children}) => {
 
             } catch (err) {
                 console.error('Token fetch failed:', err)
-                setConnecting(false)
+                //setConnecting(false)
                 return
             }
            

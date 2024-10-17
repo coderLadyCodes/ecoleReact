@@ -46,7 +46,8 @@ const Dashboard = () => {
       <div className='dashboard-profile-image' > 
         {userDTO.profileImage ? (
           <img
-            src={`${process.env.REACT_APP_API_URL}/images/${userDTO.id}/${userDTO.profileImage}`}
+            //src={`${process.env.REACT_APP_API_URL}/images/${userDTO.id}/${userDTO.profileImage}`}
+            src={userDTO.profileImage}
             alt='profil image'
           />
         ) : (
@@ -79,11 +80,12 @@ const Dashboard = () => {
             <Link to='/edit-user' className='dashboard-link'>
               Modifier profil
             </Link>
-            {/*
-            <Link to='/add-student' className='dashboard-link'>
+            {role === 'PARENT' && (
+              <Link to='/add-student' className='dashboard-link'>
               Ajouter un Enfant
             </Link>
-            */}
+            )}
+
             {role !== 'PARENT' && (
               <Link to='/acces' className='dashboard-link'>
                 Créer une classe
@@ -91,7 +93,6 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      {/*)}*/}
     </section>
   )
 }

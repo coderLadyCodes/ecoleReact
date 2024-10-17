@@ -47,7 +47,8 @@ const StudentProfile = () => {
           <div>
             {studentDTO.profileImage ? (
               <img
-                src={`${process.env.REACT_APP_API_URL}/images/${studentDTO.id}/${studentDTO.profileImage}`}
+                //src={`${process.env.REACT_APP_API_URL}/images/${studentDTO.id}/${studentDTO.profileImage}`}
+                src={studentDTO.profileImage}
                 alt="profile"
                 className="student-profile-image"
               />

@@ -60,7 +60,8 @@ const Posts = () => {
             <h3 className='post-list-item-title'>{post.title}</h3>
             {post.imagePost ? (
                 <img
-                    src={`${process.env.REACT_APP_API_URL}/images/${post.id}/${post.imagePost}`}
+                    //src={`${process.env.REACT_APP_API_URL}/images/${post.id}/${post.imagePost}`}
+                    src={post.imagePost}
                     alt='post image content'
                     className='post-list-item-image'
                 />

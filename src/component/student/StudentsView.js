@@ -56,7 +56,8 @@ const handleDelete = async(id) => {
            <td>{student.grade}</td>
            <td>{student.profileImage ? (
             <img
-            src={`${process.env.REACT_APP_API_URL}/images/${student.id}/${student.profileImage}`}
+            //src={`${process.env.REACT_APP_API_URL}/images/${student.id}/${student.profileImage}`}
+            src={student.profileImage}
             alt="profile image"
             style={{ width: '100px', height: '100px' }}
             />

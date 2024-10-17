@@ -42,7 +42,7 @@ if (!user) {
     <table>
       <thead>
         <tr>
-            <th>ID</th>
+            <th>ID</th>   {/* !delete*/ }
             <th>Grade</th>
             <th>La maitresse/le maitre</th>
             <th>le code d'accés</th>
